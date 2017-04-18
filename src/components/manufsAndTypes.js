@@ -10,11 +10,11 @@ export default class ManufsAndTypes extends Component {
 
     render() {
 
-        const a = this.props.a;
+        const test = this.props.mfList;
         return <div>
 
 
-            <p>manufs and types ---- {a} </p>
+            <p>manufs and types ---- {test.a} </p>
 
 
 
