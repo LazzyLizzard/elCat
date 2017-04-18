@@ -10,7 +10,7 @@ class App extends Component {
         return <div className='row'>
             Elcat
 
-            <ManufsAndTypes />
+            <ManufsAndTypes mfList={{a:1}} />
         </div>
     }
 }
