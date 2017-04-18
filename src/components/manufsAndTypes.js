@@ -14,7 +14,7 @@ export default class ManufsAndTypes extends Component {
         return <div>
 
 
-            <p>manufs and types ---- {test.a} </p>
+            <p>manufs and types ---- {test[1].name} </p>
 
 
 

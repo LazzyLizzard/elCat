@@ -7,10 +7,21 @@ class App extends Component {
 
     render() {
 
+        console.log(this.props);
+
+
+
+
+
+
+        const  ml  = this.props.ml.manufacturers[1];
+
+
+
         return <div className='row'>
             Elcat
 
-            <ManufsAndTypes mfList={{a:1}}/>
+            <ManufsAndTypes mfList={ml}/>
         </div>
     }
 
@@ -19,7 +30,7 @@ class App extends Component {
 
 function mapStateToProps(state) {
     return {
-        ml: state.ManufAndTypesList
+        ml: state.manufsAndTypesList
     }
 
 
