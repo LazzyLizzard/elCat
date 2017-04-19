@@ -1,11 +1,6 @@
 export function getManufsAndTypes() {
 
     return (dispatch) => {
-        dispatch({
-            type: 'GET_MANUFS_AND_TYPES'
-
-
-        })
 
         setTimeout(() => {
             dispatch({

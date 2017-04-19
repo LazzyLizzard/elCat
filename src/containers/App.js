@@ -3,6 +3,9 @@ import ManufsAndTypes from '../components/manufsAndTypes'
 //import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
+
+//import * as getManufsAndTypes from '../actions/getManufsAndTypes'
+
 class App extends Component {
 
     render() {

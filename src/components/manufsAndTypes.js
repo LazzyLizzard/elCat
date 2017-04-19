@@ -5,17 +5,17 @@
 
 import React, { PropTypes, Component } from 'react'
 
-import * as getManufsAndTypes from '../actions/getManufsAndTypes'
-
 export default class ManufsAndTypes extends Component {
+
+
 
     render() {
 
-        const test = this.props.mfList;
+        const { mfList } = this.props;
 
         return <div>
 
-            <p>manufs and types ---- {test[1].name} </p>
+            <p>manufs and types ---- {mfList[1].name},  {mfList[2].name} </p>
 
         </div>
     }
