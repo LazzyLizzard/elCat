@@ -4,34 +4,41 @@ import ManufsAndTypes from '../components/manufsAndTypes'
 import { connect } from 'react-redux'
 
 
-//import * as getManufsAndTypes from '../actions/getManufsAndTypes'
+import * as Actions from '../actions/getManufsAndTypes'
 
 class App extends Component {
 
     render() {
 
-        console.log(this.props);
 
-        const  ml  = this.props.ml.manufacturers;
-
+//        const ml = this.props.ml.manufacturers;
+        const { load, ml, isLoading } = this.props;
         return <div className='row'>
             Elcat
 
-            <ManufsAndTypes mfList={ml}/>
+            <ManufsAndTypes mfList={ml} load={load} isLoading={isLoading} />
         </div>
     }
 
 
 }
 
-function mapStateToProps(state) {
+function mapStateToProps({manufsAndTypesList}) {
     return {
-        ml: state.manufsAndTypesList
+        ml: manufsAndTypesList.manufacturers,
+        isLoading: manufsAndTypesList.loading
     }
+}
 
-
+function mapDispatchToProps(dispatch) {
+    //return bindActionCreators({
+    //    loadListStep1: getManufsAndTypes
+    //});
+    return {
+        load: () => dispatch(Actions.getManufsAndTypes())
+    }
 }
 
 //export default App
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)
 

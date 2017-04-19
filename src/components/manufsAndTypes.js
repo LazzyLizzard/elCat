@@ -13,39 +13,33 @@ export default class ManufsAndTypes extends Component {
 
     constructor(props) {
         super(props);
-
-        //const { getManufsAndTypes } = this.props.getManufsAndTypes;
-
-        this.state = {
-            rotator: true
-        }
-
-        setTimeout(() => {
-            this.setState(
-                {
-                    rotator: false
-                }
-            )
-        }, 1000)
     }
 
 
+    componentDidMount() {
+
+
+        const {load, isLoading, mfList } = this.props;
+
+        if (!mfList && !isLoading) {
+            load();
+        }
+
+    }
+
     render() {
 
-        const { mfList } = this.props;
+        const { mfList, isLoading } = this.props;
+
+        if (!mfList && !isLoading) {
+            return <span>I'm empty</span>;
+        } else if (isLoading) {
+            return <span>I'm loading</span>
+        }
 
         return <div>
 
             <p>manufs and types ---- {mfList[1].name}, {mfList[2].name} </p>
-
-            {this.state.rotator ?
-                (
-                    <div>please wait</div>
-                )
-                :
-                null
-            }
-
 
         </div>
     }
