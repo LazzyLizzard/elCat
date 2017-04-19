@@ -10,6 +10,7 @@ export function getManufsAndTypes() {
 
     return (dispatch) => {
         dispatch(manufReq());
+        //fetch({});
         setTimeout(() => {
             dispatch(manufSucc({
                     manufacturers: {
