@@ -5,7 +5,7 @@
 
 import React, { PropTypes, Component } from 'react'
 
-//import * as getManufsAndTypes from '../actions/getManufsAndTypes'
+import ManifList from './ManufList'
 
 
 export default class ManufsAndTypes extends Component {
@@ -40,6 +40,8 @@ export default class ManufsAndTypes extends Component {
         return <div>
 
             <p>manufs and types ---- {mfList[1].name}, {mfList[2].name} </p>
+
+            <ManifList completeManufList={mfList} />
 
         </div>
     }

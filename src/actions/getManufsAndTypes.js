@@ -21,6 +21,10 @@ export function getManufsAndTypes() {
                         2: {
                             id: 2,
                             name: 'Kawa'
+                        },
+                        3: {
+                            id: 3,
+                            name: 'suz'
                         }
                     }
                 })
