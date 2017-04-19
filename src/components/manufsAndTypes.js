@@ -5,6 +5,8 @@
 
 import React, { PropTypes, Component } from 'react'
 
+import * as getManufsAndTypes from '../actions/getManufsAndTypes'
+
 export default class ManufsAndTypes extends Component {
 
     render() {
