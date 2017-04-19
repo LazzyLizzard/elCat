@@ -9,14 +9,7 @@ class App extends Component {
 
         console.log(this.props);
 
-
-
-
-
-
-        const  ml  = this.props.ml.manufacturers[1];
-
-
+        const  ml  = this.props.ml.manufacturers;
 
         return <div className='row'>
             Elcat
