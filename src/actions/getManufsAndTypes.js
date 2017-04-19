@@ -20,7 +20,6 @@ export function getManufsAndTypes() {
             })
         }, 1000)
     }
-
 }
 
 

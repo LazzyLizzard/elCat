@@ -5,35 +5,47 @@
 
 import React, { PropTypes, Component } from 'react'
 
+//import * as getManufsAndTypes from '../actions/getManufsAndTypes'
+
+
 export default class ManufsAndTypes extends Component {
 
 
     constructor(props) {
         super(props);
 
+        //const { getManufsAndTypes } = this.props.getManufsAndTypes;
+
         this.state = {
-            a: 'swerwer'
+            rotator: true
         }
 
         setTimeout(() => {
             this.setState(
                 {
-                    a: 'done'
+                    rotator: false
                 }
             )
-        }, 5000)
+        }, 1000)
     }
 
 
     render() {
 
         const { mfList } = this.props;
-        //getInitialState();
+
         return <div>
 
             <p>manufs and types ---- {mfList[1].name}, {mfList[2].name} </p>
 
-            <p>{this.state.a}</p>
+            {this.state.rotator ?
+                (
+                    <div>please wait</div>
+                )
+                :
+                null
+            }
+
 
         </div>
     }
