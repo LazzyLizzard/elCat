@@ -8,7 +8,7 @@ const manufSucc = (data) => ({
     type: MANUF_AND_TYPES_SUCC,
     payload: {
         manufacturers: data.manufacturers,
-        transportTypes: data.transportTypes
+        transportTypesData: data.transportTypesData
     }
 });
 
@@ -29,7 +29,10 @@ export function getManufsAndTypes() {
                         },
                         2: {
                             id: 2,
-                            name: 'Kawa'
+                            name: 'Kawa',
+                            transportTypes: [
+                                1, 3
+                            ]
                         },
                         3: {
                             id: 3,
@@ -40,14 +43,18 @@ export function getManufsAndTypes() {
                             name: 'Yamaha'
                         }
                     },
-                    transportTypes: {
+                    transportTypesData: {
                         1: {
                             id: 1,
                             name: 'moto'
                         },
                         2: {
-                            id:2,
+                            id: 2,
                             name: 'ATV'
+                        },
+                        3: {
+                            id: 3,
+                            name: 'scooter'
                         }
                     }
                 })

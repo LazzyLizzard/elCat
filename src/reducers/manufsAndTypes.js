@@ -15,7 +15,7 @@ export default function manufsAndTypes(state = initialState, action) {
             return Object.assign({}, state, {
                 loading: false,
                 manufacturers: action.payload.manufacturers,
-                transportTypes: action.payload.transportTypes
+                transportTypesData: action.payload.transportTypesData
             });
 
         default:

@@ -2,8 +2,16 @@ import React, { Component } from 'react';
 
 class TransportTypes extends Component {
     render() {
-        return(
-            <li>123</li>
+        //let trReady = {};
+        const trRaw = this.props.transportTypesRaw;
+
+        console.log(trRaw);
+        return (
+
+            <div>
+
+            </div>
+
         );
     }
 }

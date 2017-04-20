@@ -5,7 +5,7 @@
 
 import React, { PropTypes, Component } from 'react'
 
-import ManifList from './ManufList'
+import ManufList from './ManufList'
 
 
 export default class ManufsAndTypes extends Component {
@@ -22,6 +22,8 @@ export default class ManufsAndTypes extends Component {
         const {load, isLoading, mfList } = this.props;
 
         if (!mfList && !isLoading) {
+
+            // see App.js
             load();
         }
 
@@ -39,7 +41,9 @@ export default class ManufsAndTypes extends Component {
 
         return <div>
 
-            <ManifList completeManufList={mfList} />
+            <h4>step1</h4>
+
+            <ManufList completeManufList={mfList} />
 
         </div>
     }
@@ -47,4 +51,4 @@ export default class ManufsAndTypes extends Component {
 
 ManufsAndTypes.propTypes = {
     mfList: PropTypes.object.isRequired
-}
+};

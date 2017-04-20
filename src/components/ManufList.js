@@ -6,21 +6,22 @@ export default class ManufList extends Component {
 
     render() {
 
-        const modelsList = this.props.completeManufList;
+        const manufList = this.props.completeManufList;
 
         return (
 
             <div>
-                {Object.keys(modelsList).map((key) => {
-                    //let k = key;
-                    return <ManufListItem
-                        key={key}
-                        manufName={modelsList[key].name}
-                        manufId={modelsList[key].id}
-                        transportTypes={modelsList[key].transportTypes}
-                    />
-                })}
+                <ul>
+                    {Object.keys(manufList).map((key) => {
 
+                        return <ManufListItem
+                            key={key}
+                            manufName={manufList[key].name}
+                            manufId={manufList[key].id}
+                            transportTypes={manufList[key].transportTypes}
+                        />
+                    })}
+                </ul>
             </div>
         )
     }
