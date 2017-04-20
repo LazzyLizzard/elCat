@@ -12,6 +12,7 @@ class App extends Component {
 
 
 //        const ml = this.props.ml.manufacturers;
+        console.log(this.props);
         const { load, ml, isLoading } = this.props;
         return <div className='row'>
             Elcat
@@ -26,6 +27,7 @@ class App extends Component {
 function mapStateToProps({manufsAndTypesList}) {
     return {
         ml: manufsAndTypesList.manufacturers,
+        trTypesData: manufsAndTypesList.transportTypesData,
         isLoading: manufsAndTypesList.loading
     }
 }
