@@ -12,12 +12,12 @@ class App extends Component {
 
 
 //        const ml = this.props.ml.manufacturers;
-        console.log(this.props);
-        const { load, ml, isLoading } = this.props;
+//        console.log(this.props);
+        const { load, ml, isLoading, trTypesData } = this.props;
         return <div className='row'>
             Elcat
 
-            <ManufsAndTypes mfList={ml} load={load} isLoading={isLoading} />
+            <ManufsAndTypes mfList={ml} load={load} isLoading={isLoading} trTypesData={trTypesData}  />
         </div>
     }
 

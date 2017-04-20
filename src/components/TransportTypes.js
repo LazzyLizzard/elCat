@@ -2,10 +2,21 @@ import React, { Component } from 'react';
 
 class TransportTypes extends Component {
     render() {
-        //let trReady = {};
+        let trReady = {};
         const trRaw = this.props.transportTypesRaw;
 
-        console.log(trRaw);
+        trRaw.forEach((element, index)=> {
+            trReady[element] = {
+                el: element,
+                index: index
+            }
+        });
+
+
+
+        //console.log(trRaw);
+
+        //console.log(trRaw);
         return (
 
             <div>

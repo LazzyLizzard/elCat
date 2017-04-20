@@ -6,7 +6,7 @@ class ManufListItem extends Component {
 
 
     render() {
-        console.log(this.props);
+        //console.log(this.props);
         const { manufName, manufId, transportTypes } = this.props;
         const transportTypesPresent = Array.isArray(transportTypes) === true && transportTypes.length > 0 ? true : false;
 

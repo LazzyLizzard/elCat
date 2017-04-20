@@ -31,7 +31,7 @@ export default class ManufsAndTypes extends Component {
 
     render() {
 
-        const { mfList, isLoading } = this.props;
+        const { mfList, isLoading, trTypesData } = this.props;
 
         if (!mfList && !isLoading) {
             return <div>I'm empty</div>;
@@ -43,7 +43,7 @@ export default class ManufsAndTypes extends Component {
 
             <h4>step1</h4>
 
-            <ManufList completeManufList={mfList} />
+            <ManufList completeManufList={mfList} transportTypesData={trTypesData} />
 
         </div>
     }
