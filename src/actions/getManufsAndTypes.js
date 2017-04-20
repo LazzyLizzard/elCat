@@ -7,7 +7,8 @@ const manufReq = () => ({type: MANUF_AND_TYPES_REQ});
 const manufSucc = (data) => ({
     type: MANUF_AND_TYPES_SUCC,
     payload: {
-        manufacturers: data.manufacturers
+        manufacturers: data.manufacturers,
+        transportTypes: data.transportTypes
     }
 });
 

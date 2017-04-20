@@ -12,7 +12,11 @@ export default function manufsAndTypes(state = initialState, action) {
             return Object.assign({}, state, {loading: true});
 
         case Actions.MANUF_AND_TYPES_SUCC:
-            return Object.assign({}, state, {loading: false, manufacturers: action.payload.manufacturers});
+            return Object.assign({}, state, {
+                loading: false,
+                manufacturers: action.payload.manufacturers,
+                transportTypes: action.payload.transportTypes
+            });
 
         default:
             return state;
