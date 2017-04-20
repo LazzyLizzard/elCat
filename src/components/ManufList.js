@@ -1,20 +1,22 @@
 import React, { PropTypes, Component } from 'react'
 
+import ManufListItem from './ManufListItem';
+
 export default class ManufList extends Component {
 
     render() {
+
+        let modelsList = this.props.completeManufList;
+
         return (
 
             <div>
-
-                {Object.keys(usersList).map((key) => {
+                {Object.keys(modelsList).map((key) => {
                     //let k = key;
-                    return <UserListItem
+                    return <ManufListItem
                         key={key}
-                        name={usersList[key].name}
-                        lastName={usersList[key].lastName}
-                        userId={key}
-                        setEditMode={this.props.setEditMode}
+                        manufName={modelsList[key].name}
+                        manufId={modelsList[key].id}
                     />
                 })}
 
