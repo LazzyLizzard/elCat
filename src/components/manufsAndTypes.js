@@ -32,14 +32,12 @@ export default class ManufsAndTypes extends Component {
         const { mfList, isLoading } = this.props;
 
         if (!mfList && !isLoading) {
-            return <span>I'm empty</span>;
+            return <div>I'm empty</div>;
         } else if (isLoading) {
-            return <span>I'm loading</span>
+            return <div>I'm loading</div>
         }
 
         return <div>
-
-            <p>manufs and types ---- {mfList[1].name}, {mfList[2].name} </p>
 
             <ManifList completeManufList={mfList} />
 
