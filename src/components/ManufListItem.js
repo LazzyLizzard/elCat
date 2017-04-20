@@ -5,10 +5,10 @@ class ManufListItem extends Component {
 
 
     render() {
-        const {manufName, manufId} = this.props;
+        const {manufName, manufId, transportTypes} = this.props;
         return (
             <li>
-                {manufName} (id {manufId})
+                {manufName} (id {manufId}, {Array.isArray(transportTypes) === true ? transportTypes.length : 'nope'})
             </li>
         )
 

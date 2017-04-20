@@ -6,7 +6,7 @@ export default class ManufList extends Component {
 
     render() {
 
-        let modelsList = this.props.completeManufList;
+        const modelsList = this.props.completeManufList;
 
         return (
 
@@ -17,6 +17,7 @@ export default class ManufList extends Component {
                         key={key}
                         manufName={modelsList[key].name}
                         manufId={modelsList[key].id}
+                        transportTypes={modelsList[key].transportTypes}
                     />
                 })}
 

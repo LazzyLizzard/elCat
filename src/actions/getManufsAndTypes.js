@@ -4,7 +4,12 @@ export const MANUF_AND_TYPES_SUCC = 'MANUF_AND_TYPES_SUCC'
 
 const manufReq = () => ({type: MANUF_AND_TYPES_REQ});
 //const manufFail = () => ({type: MANUF_AND_TYPES_FAIL});
-const manufSucc = (data) => ({type: MANUF_AND_TYPES_SUCC, payload: { manufacturers: data.manufacturers}});
+const manufSucc = (data) => ({
+    type: MANUF_AND_TYPES_SUCC,
+    payload: {
+        manufacturers: data.manufacturers
+    }
+});
 
 export function getManufsAndTypes() {
 
@@ -16,7 +21,10 @@ export function getManufsAndTypes() {
                     manufacturers: {
                         1: {
                             id: 1,
-                            name: 'Honda'
+                            name: 'Honda',
+                            transportTypes: [
+                                1, 2
+                            ]
                         },
                         2: {
                             id: 2,
@@ -25,6 +33,20 @@ export function getManufsAndTypes() {
                         3: {
                             id: 3,
                             name: 'suz'
+                        },
+                        4: {
+                            id: 4,
+                            name: 'Yamaha'
+                        }
+                    },
+                    transportTypes: {
+                        1: {
+                            id: 1,
+                            name: 'moto'
+                        },
+                        2: {
+                            id:2,
+                            name: 'ATV'
                         }
                     }
                 })
