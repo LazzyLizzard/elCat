@@ -3,11 +3,12 @@ import React, { PropTypes, Component } from 'react';
 class ManufListItem extends Component {
 
 
-    render() {
 
+    render() {
+        const {manufName, manufId} = this.props;
         return (
             <li>
-                {this.props.manufName} (id {this.props.manufId})
+                {manufName} (id {manufId})
             </li>
         )
 
@@ -16,5 +17,6 @@ class ManufListItem extends Component {
 export default ManufListItem;
 
 ManufListItem.propTypes = {
-    modelsList: PropTypes.object.isRequired
+    manufName: PropTypes.string.isRequired,
+    manufId: PropTypes.number.isRequired
 }
