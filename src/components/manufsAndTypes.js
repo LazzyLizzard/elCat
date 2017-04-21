@@ -20,7 +20,6 @@ class ManufsAndTypes extends Component {
 
     componentDidMount() {
 
-
         const {load, isLoading, mfList } = this.props;
 
         if (!mfList && !isLoading) {

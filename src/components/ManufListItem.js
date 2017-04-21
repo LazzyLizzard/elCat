@@ -14,9 +14,9 @@ class ManufListItem extends Component {
             <li>
                 {manufName} (id {manufId}, {transportTypesPresent ? transportTypes.length : 'nope'})
                 {transportTypesPresent ? (
-                    <ul>
-                        <TransportTypes transportTypesRaw={transportTypes}/>
-                    </ul>
+
+                    <TransportTypes transportTypesRaw={transportTypes}/>
+
                 ) : (
                     <div>no transport</div>
                 )}
