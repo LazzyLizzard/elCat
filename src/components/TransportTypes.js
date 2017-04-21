@@ -7,20 +7,17 @@ class TransportTypes extends Component {
     //}
 
 
-
     onTransportTypeClick(event) {
-
-        console.log(this);
+        console.log('click');
         event.preventDefault();
-
     }
 
     render() {
         //let trReady = {};
         const trRaw = this.props.transportTypesRaw;
+        const transportTypesData = this.props.transportTypesData;
 
-        console.log(this.props);
-
+        console.log(transportTypesData);
 
         return (
             <ul>
@@ -29,7 +26,9 @@ class TransportTypes extends Component {
                     return <li><a
                         href='#'
                         onClick={this.onTransportTypeClick.bind(this)}
-                        key={listValue}>{listValue}</a></li>;
+                        key={listValue}>
+                         --- {listValue}
+                    </a></li>;
                 })}
 
             </ul>
