@@ -7,7 +7,7 @@ class ManufListItem extends Component {
 
     render() {
         //console.log(this.props);
-        const { manufName, manufId, transportTypes } = this.props;
+        const { manufName, manufId, transportTypes, transportTypesData } = this.props;
         const transportTypesPresent = Array.isArray(transportTypes) === true && transportTypes.length > 0 ? true : false;
 
         return (
@@ -15,7 +15,7 @@ class ManufListItem extends Component {
                 {manufName} (id {manufId}, {transportTypesPresent ? transportTypes.length : 'nope'})
                 {transportTypesPresent ? (
 
-                    <TransportTypes transportTypesRaw={transportTypes}/>
+                    <TransportTypes transportTypesRaw={transportTypes} transportTypesData={transportTypesData}/>
 
                 ) : (
                     <div>no transport</div>

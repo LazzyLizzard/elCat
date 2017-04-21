@@ -2,30 +2,33 @@ import React, { Component } from 'react';
 
 class TransportTypes extends Component {
 
-    constructor(props) {
-        super(props);
-        this.onTransportTypeClick = this.onTransportTypeClick.bind(this);
-    }
+    //constructor(props) {
+    //    super(props);
+    //}
+
+
 
     onTransportTypeClick(event) {
-        console.log(event);
+
+        console.log(this);
         event.preventDefault();
+
     }
 
     render() {
         //let trReady = {};
         const trRaw = this.props.transportTypesRaw;
 
-        console.log(trRaw);
+        console.log(this.props);
 
-        //console.log(trRaw);
+
         return (
             <ul>
 
                 {trRaw.map((listValue) => {
                     return <li><a
-                        href="#"
-                        onlCick={this.onTransportTypeClick}
+                        href='#'
+                        onClick={this.onTransportTypeClick.bind(this)}
                         key={listValue}>{listValue}</a></li>;
                 })}
 
