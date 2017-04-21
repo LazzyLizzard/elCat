@@ -4,11 +4,13 @@
  */
 
 import React, { PropTypes, Component } from 'react'
-
+import { connect } from 'react-redux'
+import * as Actions from '../actions/getManufsAndTypes'
 import ManufList from './ManufList'
 
 
-export default class ManufsAndTypes extends Component {
+//export default
+class ManufsAndTypes extends Component {
 
 
     constructor(props) {
@@ -43,11 +45,27 @@ export default class ManufsAndTypes extends Component {
 
             <h4>step1</h4>
 
-            <ManufList completeManufList={mfList} transportTypesData={trTypesData} />
+            <ManufList completeManufList={mfList} transportTypesData={trTypesData}/>
 
         </div>
     }
 }
+
+function mapStateToProps(state) {
+    return state;
+}
+
+function mapDispatchToProps(dispatch) {
+    //return bindActionCreators({
+    //    loadListStep1: getManufsAndTypes
+    //});
+    return {
+        load: () => dispatch(Actions.getManufsAndTypes())
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ManufsAndTypes);
 
 ManufsAndTypes.propTypes = {
     mfList: PropTypes.object.isRequired

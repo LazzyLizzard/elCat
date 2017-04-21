@@ -4,8 +4,6 @@ import ManufsAndTypes from '../components/manufsAndTypes'
 import { connect } from 'react-redux'
 
 
-import * as Actions from '../actions/getManufsAndTypes'
-
 class App extends Component {
 
     render() {
@@ -13,11 +11,11 @@ class App extends Component {
 
 //        const ml = this.props.ml.manufacturers;
 //        console.log(this.props);
-        const { load, ml, isLoading, trTypesData } = this.props;
+        const { ml, isLoading, trTypesData } = this.props;
         return <div className='row'>
             Elcat
 
-            <ManufsAndTypes mfList={ml} load={load} isLoading={isLoading} trTypesData={trTypesData}  />
+            <ManufsAndTypes mfList={ml} isLoading={isLoading} trTypesData={trTypesData}  />
         </div>
     }
 
@@ -32,15 +30,15 @@ function mapStateToProps({manufsAndTypesList}) {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    //return bindActionCreators({
-    //    loadListStep1: getManufsAndTypes
-    //});
-    return {
-        load: () => dispatch(Actions.getManufsAndTypes())
-    }
-}
+//function mapDispatchToProps(dispatch) {
+//    //return bindActionCreators({
+//    //    loadListStep1: getManufsAndTypes
+//    //});
+//    return {
+//        load: () => dispatch(Actions.getManufsAndTypes())
+//    }
+//}
 
 //export default App
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps)(App)
 
