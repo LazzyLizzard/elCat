@@ -9,7 +9,9 @@ export default function manufsAndTypes(state = initialState, action) {
     switch (action.type) {
 
         case Actions.MANUF_AND_TYPES_REQ:
-            return Object.assign({}, state, {loading: true});
+            return Object.assign({}, state, {
+                loading: true
+            });
 
         case Actions.MANUF_AND_TYPES_SUCC:
             return Object.assign({}, state, {

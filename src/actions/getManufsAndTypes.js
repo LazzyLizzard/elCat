@@ -4,6 +4,7 @@ export const MANUF_AND_TYPES_SUCC = 'MANUF_AND_TYPES_SUCC'
 
 const manufReq = () => ({type: MANUF_AND_TYPES_REQ});
 //const manufFail = () => ({type: MANUF_AND_TYPES_FAIL});
+
 const manufSucc = (data) => ({
     type: MANUF_AND_TYPES_SUCC,
     payload: {
@@ -12,6 +13,7 @@ const manufSucc = (data) => ({
     }
 });
 
+// action generator
 export function getManufsAndTypes() {
 
     return (dispatch) => {
