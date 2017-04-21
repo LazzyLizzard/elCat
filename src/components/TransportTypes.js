@@ -16,18 +16,19 @@ class TransportTypes extends Component {
         //let trReady = {};
         const trRaw = this.props.transportTypesRaw;
         const transportTypesData = this.props.transportTypesData;
+        const manufId = this.props.manufId;
 
         console.log(transportTypesData);
 
         return (
             <ul>
 
-                {trRaw.map((listValue) => {
+                {trRaw.map((transportTypeId) => {
                     return <li><a
                         href='#'
                         onClick={this.onTransportTypeClick.bind(this)}
-                        key={listValue}>
-                         --- {listValue}
+                        key={transportTypeId}>
+                        --- transportTypeId {transportTypeId}, manufId {manufId}
                     </a></li>;
                 })}
 

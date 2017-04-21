@@ -15,7 +15,7 @@ class ManufListItem extends Component {
                 {manufName} (id {manufId}, {transportTypesPresent ? transportTypes.length : 'nope'})
                 {transportTypesPresent ? (
 
-                    <TransportTypes transportTypesRaw={transportTypes} transportTypesData={transportTypesData}/>
+                    <TransportTypes transportTypesRaw={transportTypes} transportTypesData={transportTypesData} manufId={manufId} />
 
                 ) : (
                     <div>no transport</div>
