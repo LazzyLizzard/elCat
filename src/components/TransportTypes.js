@@ -7,10 +7,11 @@ class TransportTypes extends Component {
     //}
 
 
-    onTransportTypeClick(event) {
-        console.log('click');
+    onTransportTypeClick(manufId, transportTypeId) {
+        console.log('click, m: %s, t: %s, ', manufId, transportTypeId);
         event.preventDefault();
     }
+
 
     render() {
         //let trReady = {};
@@ -26,7 +27,10 @@ class TransportTypes extends Component {
                 {trRaw.map((transportTypeId) => {
                     return <li><a
                         href='#'
-                        onClick={this.onTransportTypeClick.bind(this)}
+                        data-manuf-id={manufId}
+                        data-transport-id={transportTypeId}
+                        //onClick={this.onTransportTypeClick.bind(this)}
+                        onClick={() => this.onTransportTypeClick(manufId, transportTypeId)}
                         key={transportTypeId}>
                         --- transportTypeId {transportTypeId}, manufId {manufId}
                     </a></li>;
