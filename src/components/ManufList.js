@@ -1,8 +1,12 @@
 import React, { PropTypes, Component } from 'react'
+//import { connect } from 'react-redux'
 
 import ManufListItem from './ManufListItem';
 
-export default class ManufList extends Component {
+class ManufList extends Component {
+
+
+
 
     render() {
 
@@ -29,6 +33,15 @@ export default class ManufList extends Component {
         )
     }
 }
+
+//function mapStateToProps(store) {
+//    return {
+//        loading: store.loading
+//    }
+//}
+
+//export default connect(mapStateToProps)(ManufList)
+export default ManufList;
 
 ManufList.propTypes = {
     completeManufList: PropTypes.object.isRequired

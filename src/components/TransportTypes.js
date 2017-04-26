@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
+//import { connect } from 'react-redux';
 
 class TransportTypes extends Component {
+
+
+
 
     onTransportTypeClick(manufId, transportTypeId) {
         console.log('click, m: %s, t: %s, ', manufId, transportTypeId);
         event.preventDefault();
+        console.log(this.props.loading);
     }
 
 
@@ -35,5 +40,7 @@ class TransportTypes extends Component {
         )
     }
 }
+
+
 
 export default TransportTypes;
