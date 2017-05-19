@@ -1,3 +1,7 @@
+const ROUTE = {
+    makeYear: {}
+}
+
 export default routes = {
     path: '/',
     component: Layout,
@@ -10,8 +14,8 @@ export default routes = {
     },
     childRoutes: [
         {
-            path: ROUTE.DASHBOARD,
-            component: Dashboard
+            path: ROUTE.makeYear,
+            component: null
         },
         {
             path: ROUTE.PAYMENTS,
