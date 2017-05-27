@@ -1,6 +1,6 @@
 const ROUTE = {
-    makeYear: {}
-}
+    my: {}
+};
 
 export default routes = {
     path: '/',
@@ -8,13 +8,13 @@ export default routes = {
     indexRoute: {
         component: () => {
             return (
-                <div></div>
+                <div>*</div>
             )
         }
     },
     childRoutes: [
         {
-            path: ROUTE.makeYear,
+            path: ROUTE.my,
             component: null
         },
         {
