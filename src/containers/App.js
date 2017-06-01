@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import ManufsAndTypes from '../components/manufsAndTypes'
+//import ManufsAndTypes from '../components/manufsAndTypes'
 //import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+//import { connect } from 'react-redux'
 
 
 class App extends Component {
@@ -9,24 +9,22 @@ class App extends Component {
     render() {
 //        const ml = this.props.ml.manufacturers;
 //        console.log(this.props);
-        const { ml, isLoading, trTypesData } = this.props;
+//        const { ml, isLoading, trTypesData } = this.props;
         return <div className='row'>
             Elcat
-
-            <ManufsAndTypes mfList={ml} isLoading={isLoading} trTypesData={trTypesData}  />
-        </div>
+      </div>
     }
 
 
 }
 
-function mapStateToProps({manufsAndTypesList}) {
-    return {
-        ml: manufsAndTypesList.manufacturers,
-        trTypesData: manufsAndTypesList.transportTypesData,
-        isLoading: manufsAndTypesList.loading
-    }
-}
+//function mapStateToProps({manufsAndTypesList}) {
+//    return {
+//        ml: manufsAndTypesList.manufacturers,
+//        trTypesData: manufsAndTypesList.transportTypesData,
+//        isLoading: manufsAndTypesList.loading
+//    }
+//}
 
 //function mapDispatchToProps(dispatch) {
 //    //return bindActionCreators({
@@ -37,6 +35,6 @@ function mapStateToProps({manufsAndTypesList}) {
 //    }
 //}
 
-//export default App
-export default connect(mapStateToProps)(App)
+export default App
+//export default connect(mapStateToProps)(App)
 
