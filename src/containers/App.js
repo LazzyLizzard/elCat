@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+
 //import ManufsAndTypes from '../components/manufsAndTypes'
 //import { bindActionCreators } from 'redux'
 //import { connect } from 'react-redux'
@@ -10,8 +11,12 @@ class App extends Component {
 //        const ml = this.props.ml.manufacturers;
 //        console.log(this.props);
 //        const { ml, isLoading, trTypesData } = this.props;
-        return <div className='row'>
-            Elcat
+        return <div>
+
+            <h4>Elcat</h4>
+
+
+
       </div>
     }
 
