@@ -7,7 +7,8 @@ import { redirect } from '../middleware/redirect'
 export default function configureStore(initialState) {
 
     const logger = createLogger()
-    const store = createStore(
+
+    const store = compose(
         rootReducer,
         initialState,
         compose(
