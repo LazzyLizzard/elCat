@@ -11,8 +11,8 @@ export const routes = (
     <div>
         <Route path='/' component={App}>
             <IndexRoute component={Home}/>
-            <Route path='my/:make/:year' component={MakeYear}/>
-            <Route path='myt/:make/:year/:transport' component={MakeYearTransport}/>
+            <Route path='/my/:make/:year' component={MakeYear}/>
+            <Route path='/myt/:make/:year/:transport' component={MakeYearTransport}/>
         </Route>
         <Route path='*' component={NotFound} />
     </div>

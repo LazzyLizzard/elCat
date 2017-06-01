@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import manufsAndTypesList from './manufsAndTypes'
-export default combineReducers({
+
+export const rootReducer = combineReducers({
     manufsAndTypesList
 })
