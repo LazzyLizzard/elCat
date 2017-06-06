@@ -13,9 +13,7 @@ class Home extends Component {
 
                 <div>
                     <div>
-                        <h5>hon</h5>
-                        <div><Link to='/my/1/2'>moto</Link></div>
-                        <div><Link to='/my/1/2'>ATV</Link></div>
+                        hon <Link to='/mt/1/2'>moto</Link>, <Link to='/mt/1/2'>ATV</Link>
                     </div>
                     <hr/>
                     <div>kaw</div>
