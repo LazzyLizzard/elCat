@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router';
+import { Link } from 'react-router';
 
 //import ManufsAndTypes from '../components/manufsAndTypes'
 //import { bindActionCreators } from 'redux'
@@ -14,7 +14,7 @@ class App extends Component {
 //        const { ml, isLoading, trTypesData } = this.props;
         return <div>
 
-            <h3>Elcat app</h3>
+            <h3>Elcat app (<Link to='/'>go</Link>)</h3>
 
             {this.props.children}
 

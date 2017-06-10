@@ -1,7 +1,6 @@
-import React, {PropTypes, Component} from 'react';
+import React, {Component} from 'react';
 import { Link } from 'react-router';
 // import style from './home.scss';
-
 
 
 class Home extends Component {
@@ -26,7 +25,8 @@ class Home extends Component {
 }
 
 export default Home;
-
+/*
 Home.PropTypes = {
     myProp: PropTypes.number
 };
+    */
