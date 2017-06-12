@@ -1,4 +1,5 @@
 import React, {PropTypes, Component} from 'react';
+import {ModelInfo} from './ModelInfo';
 // import {Link} from 'react-router';
 
 class Model extends Component {
@@ -7,10 +8,7 @@ class Model extends Component {
 		return (
 			<div>
 				<h4>model (detail groups)</h4>
-
-				<div>
-					details list
-				</div>
+				<ModelInfo modelId={777}/>
 			</div>
 		)
 	}
