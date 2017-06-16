@@ -7,10 +7,6 @@ import * as modelAction from './actions';
 
 class Model extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
 	render() {
 		return (
 			<div>
@@ -34,7 +30,7 @@ function mapStateToProps(state) {
     return state;
 }
 
-export default connect(mapDispatchToProps, mapStateToProps)(Model);
+export default connect(mapStateToProps, mapDispatchToProps)(Model);
 
 Model.PropTypes = {
 	myProp: PropTypes.number

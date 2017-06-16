@@ -14,7 +14,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import configureStore from './store/configureStore'
 import { routes } from './routes'
 
-//import storeStructure from './store/sStruct'
+import storeStructure from './store/storeStructure';
 
 //
 
@@ -23,7 +23,7 @@ import { routes } from './routes'
 //        isLoading: false
 //    }
 //}
-const store = configureStore();
+const store = configureStore(storeStructure);
 
 render(
     <Provider store={store} >
