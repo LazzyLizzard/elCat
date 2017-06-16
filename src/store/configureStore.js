@@ -1,11 +1,13 @@
-import { applyMiddleware, compose } from 'redux'
-import { createLogger } from 'redux-logger'
+import {applyMiddleware, compose} from 'redux'
+import {createLogger} from 'redux-logger'
 import thunk from 'redux-thunk'
-import { redirect } from '../middleware/redirect'
+import {redirect} from '../middleware/redirect'
 
-export default function configureStore() {
+export default function configureStore(storeStructure) {
 
     const logger = createLogger();
+
+    // console.log(storeStructure);
 
     const store = compose(
         applyMiddleware(thunk, logger, redirect),
@@ -18,6 +20,6 @@ export default function configureStore() {
             store.replaceReducer(nextRootReducer)
         })
     }
-    console.log('123123',store);
+    console.log('123123', store);
     return store
 }
