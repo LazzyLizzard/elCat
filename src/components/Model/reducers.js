@@ -1,4 +1,3 @@
-import {combineReducers} from 'redux';
 import * as modelAction from './actions';
 
 const initialState = {
@@ -7,7 +6,6 @@ const initialState = {
 };
 
 export default function modelDataReducer(state = initialState, action) {
-
 	switch (action.type) {
 
 		case modelAction.MODEL_INFO_REQUEST:
@@ -21,6 +19,9 @@ export default function modelDataReducer(state = initialState, action) {
 				// manufacturers: action.payload.manufacturers,
 				// transportTypesData: action.payload.transportTypesData
 			});
+
+        default:
+            return state;
 	}
 }
 
