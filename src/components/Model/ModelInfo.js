@@ -1,4 +1,5 @@
 import React, {PropTypes, Component} from 'react';
+
 // import styles from './styles.scss';
 
 export class ModelInfo extends Component {
@@ -8,8 +9,10 @@ export class ModelInfo extends Component {
 	}
 
 	componentDidMount() {
+        const {load} = this.props;
 		const modelId = this.props.modelId;
 		console.log('model id %s', modelId);
+		load();
 	}
 
 	render() {
@@ -20,8 +23,6 @@ export class ModelInfo extends Component {
 		)
 	}
 }
-
-
 
 ModelInfo.propTypes = {
 	modelId: PropTypes.number

@@ -21,7 +21,7 @@ export const modelDataSuccess = (data) => {
 export const getModelData = (id) => {
 	return (dispatch) => {
 		dispatch(modelDataRequest());
-		return fetch('model.php')
+		return fetch(`model.php?id=${id}`)
 			.then(response => response.json())
 			.then(modelData => dispatch(modelDataSuccess(modelData)))
 

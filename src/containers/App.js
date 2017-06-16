@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-
 //import ManufsAndTypes from '../components/manufsAndTypes'
 //import { bindActionCreators } from 'redux'
 //import { connect } from 'react-redux'
