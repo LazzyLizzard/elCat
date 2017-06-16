@@ -7,6 +7,7 @@ const initialState = {
 };
 
 export default function modelDataReducer(state = initialState, action) {
+
 	switch (action.type) {
 
 		case modelAction.MODEL_INFO_REQUEST:
