@@ -1,20 +1,15 @@
-import { createStore, applyMiddleware, compose } from 'redux'
-import { rootReducer } from '../reducers'
+import { applyMiddleware, compose } from 'redux'
 import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk'
 import { redirect } from '../middleware/redirect'
 
-export default function configureStore(initialState) {
+export default function configureStore() {
 
     const logger = createLogger();
 
     const store = compose(
-        rootReducer,
-        initialState,
-        compose(
-            applyMiddleware(thunk, logger, redirect),
-            window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-        )(createStore)(rootReducer)
+        applyMiddleware(thunk, logger, redirect),
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     );
 
     if (module.hot) {
@@ -23,6 +18,6 @@ export default function configureStore(initialState) {
             store.replaceReducer(nextRootReducer)
         })
     }
-
+    console.log('123123',store);
     return store
 }
