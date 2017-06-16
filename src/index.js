@@ -14,7 +14,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import configureStore from './store/configureStore'
 import { routes } from './routes'
 
-import storeStructure from './store/storeStructure';
+import storeStructure from './store/storeStructure'
 
 //
 

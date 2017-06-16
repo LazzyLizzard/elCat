@@ -24,8 +24,8 @@ export default function modelDataReducer(state = initialState, action) {
 	}
 }
 
-const rootReducer = combineReducers({
-	modelDataReducer
-});
+// const rootReducer = combineReducers({
+// 	modelDataReducer
+// });
 
-export default rootReducer;
+// export default modelDataReducer;
