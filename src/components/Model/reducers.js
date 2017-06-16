@@ -2,7 +2,7 @@ import {combineReducers} from 'redux';
 import * as modelAction from './actions';
 
 const initialState = {
-	manufacturers: null,
+	modelData: null,
 	loading: false
 };
 
