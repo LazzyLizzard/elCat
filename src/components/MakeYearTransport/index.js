@@ -8,7 +8,10 @@ class MakeYearTransport extends Component {
             <div>
                 <h4>make year transport</h4>
 
-                <div> c : <Link to='/model/465'>cr500</Link> <Link to='/model/4657'>cb700</Link></div>
+                <div> c :
+                    <Link to='/model/465' modelId={500}>cr500</Link> 500 |
+                    <Link to='/model/4657' modelId={700}>cb700</Link> 700
+                </div>
 
             </div>
         )
