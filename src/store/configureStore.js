@@ -3,7 +3,7 @@ import {createLogger} from 'redux-logger'
 import thunk from 'redux-thunk'
 import {redirect} from '../middleware/redirect'
 
-export default function configureStore(storeStructure) {
+export default function configureStore() {
 
     const logger = createLogger();
 

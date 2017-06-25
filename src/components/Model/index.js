@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import {ModelInfo} from './ModelInfo';
 import * as modelAction from './actions';
 
@@ -7,14 +7,21 @@ import * as modelAction from './actions';
 
 class Model extends Component {
 
-	render() {
-		return (
-			<div>
-				<h4>model (detail groups)</h4>
-				<ModelInfo modelId={777} load />
-			</div>
-		)
-	}
+    load = () => this.props.load;
+
+    render() {
+
+//        const {modelId} = this.props;
+
+        console.dir(this.props);
+
+        return (
+            <div>
+                <h4>model (detail groups)</h4>
+                <ModelInfo modelId={555} load={this.load}/>
+            </div>
+        )
+    }
 }
 
 function mapDispatchToProps(dispatch) {
@@ -33,5 +40,5 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, mapDispatchToProps)(Model);
 
 Model.PropTypes = {
-	myProp: PropTypes.number
+    myProp: PropTypes.number
 };

@@ -9,10 +9,11 @@ export class ModelInfo extends Component {
 	}
 
 	componentDidMount() {
-        const {load} = this.props;
-		const modelId = this.props.modelId;
+        const {load, modelId} = this.props;
 		console.log('model id %s', modelId);
-		load();
+		console.log('mount');
+		console.log(typeof load)
+		load(modelId)
 	}
 
 	render() {
