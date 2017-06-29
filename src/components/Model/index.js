@@ -9,8 +9,6 @@ const modelId = 555;
 class Model extends Component {
 
     render() {
-        console.dir(this.props);
-
         return (
             <div>
                 <h4>model (detail groups)</h4>
