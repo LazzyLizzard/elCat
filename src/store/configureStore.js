@@ -20,6 +20,6 @@ export default function configureStore() {
             store.replaceReducer(nextRootReducer)
         })
     }
-    console.log('123123', store);
+
     return store
 }

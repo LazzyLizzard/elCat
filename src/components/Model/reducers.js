@@ -1,4 +1,4 @@
-import * as modelAction from './actions';
+import {MODEL_INFO_REQUEST, MODEL_INFO_SUCCESS} from './actions';
 
 const initialState = {
 	modelData: null,
@@ -8,12 +8,12 @@ const initialState = {
 export default function modelDataReducer(state = initialState, action) {
 	switch (action.type) {
 
-		case modelAction.MODEL_INFO_REQUEST:
+		case MODEL_INFO_REQUEST:
 			return Object.assign({}, state, {
 				loading: true
 			});
 
-		case modelAction.MODEL_INFO_SUCCESS:
+		case MODEL_INFO_SUCCESS:
 			return Object.assign({}, state, {
 				loading: false
 				// manufacturers: action.payload.manufacturers,
@@ -24,9 +24,3 @@ export default function modelDataReducer(state = initialState, action) {
             return state;
 	}
 }
-
-// const rootReducer = combineReducers({
-// 	modelDataReducer
-// });
-
-// export default modelDataReducer;
