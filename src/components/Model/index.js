@@ -4,32 +4,25 @@ import {ModelInfo} from './ModelInfo';
 import * as modelAction from './actions';
 
 // import {Link} from 'react-router';
+const modelId = 555;
 
 class Model extends Component {
 
-    load = () => this.props.load;
-
     render() {
-
-//        const {modelId} = this.props;
-
         console.dir(this.props);
 
         return (
             <div>
                 <h4>model (detail groups)</h4>
-                <ModelInfo modelId={555} load={this.load}/>
+                <ModelInfo modelId={modelId} load={this.props.loadModelData}/>
             </div>
         )
     }
 }
 
 function mapDispatchToProps(dispatch) {
-    //return bindActionCreators({
-    //    loadListStep1: getManufsAndTypes
-    //});
     return {
-        load: () => dispatch(modelAction.getModelData(this.props.modelId))
+        loadModelData: () => dispatch(modelAction.getModelData(modelId))
     }
 }
 
