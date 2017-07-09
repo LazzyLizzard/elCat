@@ -20,9 +20,9 @@ import {rootReducer} from './reducers'
 const store = createStore(rootReducer, configureStore(storeStructure));
 
 render(
-    <Provider store={store} >
-        <Router history={browserHistory} routes={routes} />
-    </Provider>,
-    document.getElementById('root')
+	<Provider store={store} >
+		<Router history={browserHistory} routes={routes} />
+	</Provider>,
+	document.getElementById('root')
 );
 

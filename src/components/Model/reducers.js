@@ -15,7 +15,11 @@ export default function modelDataReducer(state = initialState, action) {
 
 		case MODEL_INFO_SUCCESS:
 			return Object.assign({}, state, {
-				loading: false
+				loading: false,
+				data: {
+					ttt: 11,
+					zzz: 22
+				}
 				// manufacturers: action.payload.manufacturers,
 				// transportTypesData: action.payload.transportTypesData
 			});
