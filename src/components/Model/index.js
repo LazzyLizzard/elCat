@@ -1,6 +1,6 @@
 import React, {PropTypes, Component} from 'react';
 import {connect} from 'react-redux';
-import {ModelInfo} from './ModelInfo';
+import ModelInfo from './ModelInfo';
 import * as modelAction from './actions';
 
 // import {Link} from 'react-router';
@@ -12,7 +12,7 @@ class Model extends Component {
         return (
             <div>
                 <h4>model (detail groups)</h4>
-                <ModelInfo modelId={modelId} load={this.props.loadModelData}/>
+                <ModelInfo modelId={modelId} load={this.props.loadModelData} />
             </div>
         )
     }

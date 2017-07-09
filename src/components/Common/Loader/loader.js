@@ -8,7 +8,7 @@ export default function Loader({
     const vs = visible ? 'block' : 'none';
     return (
         <div style={{display: vs}}>
-            `LOADING ${model}`
+            LOADING {model}
         </div>
     );
 }
