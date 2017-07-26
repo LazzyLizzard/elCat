@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 //import { connect } from 'react-redux';
 
 class TransportTypes extends Component {
-
-
 
 
     onTransportTypeClick(manufId, transportTypeId) {
@@ -23,7 +21,6 @@ class TransportTypes extends Component {
 
         return (
             <ul>
-
                 {trRaw.map((transportTypeId) => {
                     return <li><a
                         //href={'#' + manufId}
@@ -40,7 +37,6 @@ class TransportTypes extends Component {
         )
     }
 }
-
 
 
 export default TransportTypes;
