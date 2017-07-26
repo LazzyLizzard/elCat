@@ -12,7 +12,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
 //import storeStructure from './store/sStruct'
 import configureStore from './store/configureStore'
-import { routes } from './routes'
+import { routes } from './routes/index'
 
 import storeStructure from './store/storeStructure'
 

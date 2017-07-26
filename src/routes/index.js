@@ -1,26 +1,26 @@
 import React from 'react'
-import { render } from 'react-dom'
-import { Provider } from 'react-redux'
+import { Route, IndexRoute } from 'react-router'
 
-import * as C from './constants'
+import App from './../containers/App'
+import Home from './../components/Home';
+import MakeYear from './../components/MakelYear';
+import MakeType from './../components/MakeType';
+import MakeYearTransport from './../components/MakeYearTransport';
+import Model from './../components/Model';
+import NotFound from './../components/NotFound';
 
-import App from './containers/App'
-
-import Home from './components/Home';
-import MakeYear from './components/MakelYear';
-import MakeYearTransport from './components/MakeYearTransport';
-
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
-
-const ROUTE = {
-    makeYear: {}
-}
-
-<Route path='/' component={Home}>
-    <IndexRoute component={App} />
-    <Route path='my' component={MakeYear} />
-    <Route path='myt' component={MakeYearTransport} />
-</Route>
+export const routes = (
+    <div>
+        <Route path='/' component={App}>
+            <IndexRoute component={Home}/>
+            <Route path='/mt/:make/:typeId' component={MakeType}/>
+            <Route path='/my/:make/:year' component={MakeYear}/>
+            <Route path='/myt/:make/:year/:transport' component={MakeYearTransport}/>
+            <Route path='/model/:modelId' component={Model}/>
+        </Route>
+        <Route path='*' component={NotFound} />
+    </div>
+);
 
 
 export const routes = {
