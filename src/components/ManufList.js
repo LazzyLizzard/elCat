@@ -1,11 +1,9 @@
-import React, { PropTypes, Component } from 'react'
+import React, {PropTypes, Component} from 'react'
 //import { connect } from 'react-redux'
 
 import ManufListItem from './ManufListItem';
 
 class ManufList extends Component {
-
-
 
 
     render() {

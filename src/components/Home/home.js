@@ -25,7 +25,7 @@ class Home extends Component {
 
 export default Home;
 /*
-Home.PropTypes = {
-    myProp: PropTypes.number
-};
-    */
+ Home.PropTypes = {
+ myProp: PropTypes.number
+ };
+ */

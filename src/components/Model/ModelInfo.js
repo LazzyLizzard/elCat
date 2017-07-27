@@ -8,37 +8,37 @@ import {Loader} from './../../components/Common/Loader'
 
 class ModelInfo extends Component {
 
-	constructor(props) {
-		super(props);
-	}
+    constructor(props) {
+        super(props);
+    }
 
-	componentDidMount() {
-		const {load, modelId} = this.props;
-		load(modelId)
-	}
+    componentDidMount() {
+        const {load, modelId} = this.props;
+        load(modelId)
+    }
 
-	render() {
-		console.log(this.props.modelData);
-		const {modelData} = this.props;
-		return (
-			<div>
-				<h3>model id {this.props.modelId}</h3>
+    render() {
+        console.log(this.props.modelData);
+        const {modelData} = this.props;
+        return (
+            <div>
+                <h3>model id {this.props.modelId}</h3>
 
-				<Loader model={this.props.modelId} visible={modelData.loading}/>
+                <Loader model={this.props.modelId} visible={modelData.loading} />
 
-				<ModelGroups modelGroups={get(modelData, 'modelData.modelGroupsList', false)}/>
+                <ModelGroups modelGroups={get(modelData, 'modelData.modelGroupsList', false)} />
 
-			</div>
-		)
-	}
+            </div>
+        )
+    }
 }
 
 function mapStateToProps(state) {
-	return state;
+    return state;
 }
 
 export default connect(mapStateToProps)(ModelInfo);
 
 ModelInfo.propTypes = {
-	modelId: PropTypes.number
+    modelId: PropTypes.number
 };

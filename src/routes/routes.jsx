@@ -8,16 +8,21 @@ import MakeYearTransport from './../components/MakeYearTransport';
 import Model from './../components/Model';
 import NotFound from './../components/NotFound';
 
-export const routes = (
+const Routes = (
     <div>
         <Route path="/" component={App}>
             <IndexRoute component={Home} />
             <Route path="/mt/:make/:typeId" component={MakeType} />
             <Route path="/my/:make/:year" component={MakeYear} />
-            npm install --save eslint-config-airbnb <Route path="/myt/:make/:year/:transport" component={MakeYearTransport} />
+            npm install --save eslint-config-airbnb
+            <Route
+                path="/myt/:make/:year/:transport"
+                component={MakeYearTransport}
+            />
             <Route path="/model/:modelId" component={Model} />
         </Route>
         <Route path="*" component={NotFound} />
     </div>
 );
 
+export default Routes;

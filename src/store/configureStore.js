@@ -1,10 +1,9 @@
-import {applyMiddleware, compose} from 'redux'
-import {createLogger} from 'redux-logger'
-import thunk from 'redux-thunk'
-import {redirect} from '../middleware/redirect'
+import {applyMiddleware, compose} from 'redux';
+import {createLogger} from 'redux-logger';
+import thunk from 'redux-thunk';
+import {redirect} from '../middleware/redirect';
 
 export default function configureStore() {
-
     const logger = createLogger();
 
     // console.log(storeStructure);
@@ -17,9 +16,9 @@ export default function configureStore() {
     if (module.hot) {
         module.hot.accept('../reducers', () => {
             const nextRootReducer = require('../reducers')
-            store.replaceReducer(nextRootReducer)
-        })
+            store.replaceReducer(nextRootReducer);
+        });
     }
 
-    return store
+    return store;
 }
