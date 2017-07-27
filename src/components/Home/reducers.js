@@ -6,6 +6,6 @@ const initialState = {
     makeInfo: {}
 };
 
-export default function HomeReducers (state = initialState) {
+export default function HomeReducers(state = initialState) {
     return state;
 }
