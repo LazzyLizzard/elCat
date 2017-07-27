@@ -1,0 +1,8 @@
+# Autodetect text files
+* text=auto
+
+*.css     text eol=lf
+*.js      text eol=lf
+*.jsx     text eol=lf
+*.scss    text eol=lf
+*.path    text eol=lf
