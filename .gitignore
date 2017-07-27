@@ -6,7 +6,11 @@
 Icon?
 ehthumbs.db
 Thumbs.db
-
+/.idea
+/.idea/
+.idea
+.idea/
+idea/
 node_modules
 npm-debug.log
 book_img
