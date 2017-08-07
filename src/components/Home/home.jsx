@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 // import style from './home.scss';
 
 
-class Home extends Component {
+export class Home extends Component {
     render() {
         return (
             <div>
@@ -23,7 +23,6 @@ class Home extends Component {
     }
 }
 
-export default Home;
 /*
  Home.PropTypes = {
  myProp: PropTypes.number

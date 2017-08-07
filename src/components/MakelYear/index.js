@@ -6,7 +6,6 @@ class MakeYear extends Component {
     render() {
         return (
             <div>
-
                 <div><Link to='/'>home</Link></div>
 
                 <h4>make year</h4>
@@ -16,7 +15,7 @@ class MakeYear extends Component {
                 <Link to='/myt/1/1991/'>1991</Link>
 
             </div>
-        )
+        );
     }
 }
 

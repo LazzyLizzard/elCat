@@ -7,14 +7,12 @@ import {Loader} from './../../components/Common/Loader'
 // import styles from './styles.scss';
 
 class ModelInfo extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
+    // constructor(props) {
+    //     super(props);
+    // }
     componentDidMount() {
         const {load, modelId} = this.props;
-        load(modelId)
+        load(modelId);
     }
 
     render() {
@@ -24,12 +22,12 @@ class ModelInfo extends Component {
             <div>
                 <h3>model id {this.props.modelId}</h3>
 
-                <Loader model={this.props.modelId} visible={modelData.loading} />
+                <Loader model={this.props.modelId} visible={modelData.loading}/>
 
-                <ModelGroups modelGroups={get(modelData, 'modelData.modelGroupsList', false)} />
+                <ModelGroups modelGroups={get(modelData, 'modelData.modelGroupsList', false)}/>
 
             </div>
-        )
+        );
     }
 }
 

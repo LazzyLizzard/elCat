@@ -1,5 +1,5 @@
 import 'whatwg-fetch';
-import {REQUEST_URL_FICHE} from '../../routes/constants';
+import {REQUEST_URL_FICHE} from '../../AppRoutes/constants';
 
 // export const MODEL_INFO = 'MODEL_INFO';
 export const MODEL_INFO_REQUEST = 'MODEL_INFO_REQUEST';
