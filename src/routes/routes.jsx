@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route, IndexRoute} from 'react-router';
 import App from './../containers/App';
-import Home from '../components/Home/home';
+import Home from '../components/Home';
 import MakeYear from './../components/MakelYear';
 import MakeType from './../components/MakeType';
 import MakeYearTransport from './../components/MakeYearTransport';
