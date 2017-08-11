@@ -1,7 +1,7 @@
 import React, {PropTypes, Component} from 'react';
 import {Link} from 'react-router';
 
-class MakeYear extends Component {
+export class MakeYear extends Component {
     render() {
         return (
             <div>
@@ -17,8 +17,6 @@ class MakeYear extends Component {
         );
     }
 }
-
-export default MakeYear;
 
 MakeYear.PropTypes = {
     makeId: PropTypes.number,
