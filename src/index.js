@@ -11,7 +11,7 @@ import configureStore from './store/configureStore';
 import storeStructure from './store/storeStructure';
 import {rootReducer} from './reducers';
 
-import App from './containers/App';
+import App from './containers/app';
 import Home from './components/Home';
 import MakeYear from './components/MakelYear';
 import MakeType from './components/MakeType';

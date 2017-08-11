@@ -5,7 +5,7 @@ import {Link} from 'react-router';
 // import { connect } from 'react-redux'
 
 
-class App extends Component {
+export class App extends Component {
     render() {
         // const ml = this.props.ml.manufacturers;
         // console.log(this.props);
@@ -35,6 +35,5 @@ class App extends Component {
 //     }
 // }
 
-export default App;
 // export default connect(mapStateToProps)(App)
 
