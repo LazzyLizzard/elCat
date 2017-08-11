@@ -14,7 +14,7 @@ import {rootReducer} from './reducers';
 import App from './containers/app';
 import Home from './components/Home';
 import MakeYear from './components/MakelYear';
-import MakeType from './components/MakeType';
+import MakeType from './pages/fiche/make-type';
 import MakeYearTransport from './components/MakeYearTransport';
 import Model from './components/Model';
 import NotFound from './components/not-found';
