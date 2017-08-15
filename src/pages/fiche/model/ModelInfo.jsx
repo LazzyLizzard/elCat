@@ -1,8 +1,8 @@
-import React, {PropTypes, Component} from 'react';
-import {connect} from 'react-redux'
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import get from 'lodash/get';
 import ModelGroups from './ModelGroups';
-import {Loader} from './../../components/Common/Loader'
+import {Loader} from '../../../components/Common/Loader';
 
 // import styles from './styles.scss';
 
@@ -16,15 +16,15 @@ class ModelInfo extends Component {
     }
 
     render() {
-        console.log(this.props.modelData);
+        // console.log(this.props.modelData);
         const {modelData} = this.props;
         return (
             <div>
                 <h3>model id {this.props.modelId}</h3>
 
-                <Loader model={this.props.modelId} visible={modelData.loading}/>
+                <Loader model={this.props.modelId} visible={modelData.loading} />
 
-                <ModelGroups modelGroups={get(modelData, 'modelData.modelGroupsList', false)}/>
+                <ModelGroups modelGroups={get(modelData, 'modelData.modelGroupsList', false)} />
 
             </div>
         );
@@ -37,6 +37,6 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps)(ModelInfo);
 
-ModelInfo.propTypes = {
-    modelId: PropTypes.number
-};
+// ModelInfo.propTypes = {
+//     modelId: PropTypes.number
+// };

@@ -6,22 +6,21 @@ import * as modelAction from './actions';
 // import {Link} from 'react-router';
 const modelId = 555;
 
-class Model extends Component {
-
+export class Model extends Component {
     render() {
         return (
             <div>
                 <h4>model (detail groups)</h4>
                 <ModelInfo modelId={modelId} load={this.props.loadModelData} />
             </div>
-        )
+        );
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         loadModelData: () => dispatch(modelAction.getModelData(modelId))
-    }
+    };
 }
 
 function mapStateToProps(state) {
