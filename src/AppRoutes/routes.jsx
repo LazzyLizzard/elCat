@@ -1,14 +1,14 @@
 import React from 'react';
 import {Route, IndexRoute} from 'react-router';
-import App from '../containers/app';
-import Home from '../components/Home';
-import MakeYear from './../components/MakelYear';
-import MakeType from '../pages/fiche/make-type/make-type';
-import MakeYearTransport from './../components/MakeYearTransport';
-import Model from './../components/Model';
-import NotFound from './../components/not-found';
+import {App} from '../containers/app';
+import {Home} from '../components/Home/home';
+import {MakeYear} from '../pages/fiche/make-year/make-year';
+import {MakeType} from '../pages/fiche/make-type/make-type';
+import {MakeYearTransport} from '../pages/fiche/make-year-transport/make-year-transport';
+import {Model} from '../pages/fiche/model/model';
+import {NotFound} from '../components/not-found/not-found';
 
-export default function RoutesList() {
+export function AppRoutes() {
     return (
         <div>
             <Route path="/" component={App}>
