@@ -21,9 +21,9 @@ export const modelDataSuccess = data => ({
 });
 
 // action generator itself
-export function getModelData(id) {
+export const getModelData = id => (
     // console.log('id %s', id);
-    return (dispatch) => {
+    (dispatch) => {
         dispatch(modelDataRequest());
         return fetch(
             `${REQUEST_URL_FICHE}?async=1&action=model&modelId=${id}`, {
@@ -32,5 +32,5 @@ export function getModelData(id) {
             })
             .then(response => response.json())
             .then(modelData => dispatch(modelDataSuccess(modelData)));
-    };
-}
+    }
+);

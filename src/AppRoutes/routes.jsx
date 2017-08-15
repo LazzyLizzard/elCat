@@ -8,20 +8,18 @@ import {MakeYearTransport} from '../pages/fiche/make-year-transport/make-year-tr
 import {Model} from '../pages/fiche/model/model';
 import {NotFound} from '../components/not-found/not-found';
 
-export function AppRoutes() {
-    return (
-        <div>
-            <Route path="/" component={App}>
-                <IndexRoute component={Home} />
-                <Route path="/mt/:make/:typeId" component={MakeType} />
-                <Route path="/my/:make/:year" component={MakeYear} />
-                <Route
-                    path="/myt/:make/:year/:transport"
-                    component={MakeYearTransport}
-                />
-                <Route path="/model/:modelId" component={Model} />
-            </Route>
-            <Route path="*" component={NotFound} />
-        </div>
-    );
-}
+export default (
+    <div>
+        <Route path="/" component={App}>
+            <IndexRoute component={Home} />
+            <Route path="/mt/:make/:typeId" component={MakeType} />
+            <Route path="/my/:make/:year" component={MakeYear} />
+            <Route
+                path="/myt/:make/:year/:transport"
+                component={MakeYearTransport}
+            />
+            <Route path="/model/:modelId" component={Model} />
+        </Route>
+        <Route path="*" component={NotFound} />
+    </div>
+);
