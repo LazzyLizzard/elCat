@@ -1,7 +1,8 @@
 import React, {PropTypes, Component} from 'react';
 import {connect} from 'react-redux';
+import noop from 'lodash/noop';
 import ModelInfo from './ModelInfo';
-import * as modelAction from './actions';
+import {getModelData} from './actions';
 
 // import {Link} from 'react-router';
 const modelId = 555;
@@ -17,11 +18,11 @@ export class Model extends Component {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        loadModelData: () => dispatch(modelAction.getModelData(modelId))
-    };
-}
+const mapDispatchToProps = dispatch => ({
+    loadModelData: () => {
+        dispatch(getModelData(modelId));
+    }
+});
 
 function mapStateToProps(state) {
     return state;
@@ -29,6 +30,10 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, mapDispatchToProps)(Model);
 
-Model.PropTypes = {
-    myProp: PropTypes.number
+Model.propTypes = {
+    loadModelData: PropTypes.func
+};
+
+Model.defaultProps = {
+    loadModelData: noop
 };
