@@ -18,11 +18,13 @@ export class Model extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    loadModelData: () => {
-        dispatch(getModelData(modelId));
-    }
-});
+const mapDispatchToProps = (dispatch) => {
+    return ({
+        loadModelData: () => {
+            dispatch(getModelData(modelId));
+        }
+    });
+};
 
 function mapStateToProps(state) {
     return state;
