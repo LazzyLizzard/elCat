@@ -7,7 +7,7 @@ import {getModelData} from './actions';
 // import {Link} from 'react-router';
 const modelId = 555;
 
-export class Model extends Component {
+class Model extends Component {
     render() {
         return (
             <div>
@@ -18,13 +18,9 @@ export class Model extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return ({
-        loadModelData: () => {
-            dispatch(getModelData(modelId));
-        }
-    });
-};
+const mapDispatchToProps = dispatch => ({
+    loadModelData: () => dispatch(getModelData(modelId))
+});
 
 function mapStateToProps(state) {
     return state;
