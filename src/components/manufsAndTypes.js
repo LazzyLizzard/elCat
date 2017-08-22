@@ -3,8 +3,8 @@
  * включается в App
  */
 
-import React, { PropTypes, Component } from 'react'
-import { connect } from 'react-redux'
+import React, {PropTypes, Component} from 'react'
+import {connect} from 'react-redux'
 import * as Actions from '../actions/getManufsAndTypes'
 import ManufList from './ManufList'
 
@@ -20,7 +20,7 @@ class ManufsAndTypes extends Component {
 
     componentDidMount() {
 
-        const {load, isLoading, mfList } = this.props;
+        const {load, isLoading, mfList} = this.props;
 
         if (!mfList && !isLoading) {
 
@@ -32,7 +32,7 @@ class ManufsAndTypes extends Component {
 
     render() {
 
-        const { mfList, isLoading, trTypesData } = this.props;
+        const {mfList, isLoading, trTypesData} = this.props;
 
         if (!mfList && !isLoading) {
             return <div>I'm empty</div>;
@@ -44,7 +44,7 @@ class ManufsAndTypes extends Component {
 
             <h4>step1</h4>
 
-            <ManufList completeManufList={mfList} transportTypesData={trTypesData}/>
+            <ManufList completeManufList={mfList} transportTypesData={trTypesData} />
 
         </div>
     }

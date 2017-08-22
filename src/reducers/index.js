@@ -1,5 +1,10 @@
-import { combineReducers } from 'redux'
-import manufsAndTypesList from './manufsAndTypes'
-export default combineReducers({
-    manufsAndTypesList
-})
+import {combineReducers} from 'redux';
+// import manufsAndTypesList from './manufsAndTypes';
+import HomeReducer from '../components/Home/reducers';
+import modelDataReducer from '../pages/fiche/model/reducers';
+
+export const rootReducer = combineReducers({
+    // manufsAndTypesList,
+    homeData: HomeReducer,
+    modelData: modelDataReducer
+});
