@@ -14,6 +14,7 @@ export default class ModelInfo extends Component {
     }
 
     componentWillReceiveProps() {
+        console.warn('CWRP');
         const {load, modelId} = this.props;
         load(modelId);
     }
