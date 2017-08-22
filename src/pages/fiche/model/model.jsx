@@ -7,7 +7,7 @@ import {getModelData} from './actions';
 // import {Link} from 'react-router';
 const modelId = 555;
 
-class Model extends Component {
+export class Model extends Component {
     render() {
         return (
             <div>
@@ -32,6 +32,6 @@ Model.propTypes = {
     loadModelData: PropTypes.func
 };
 
-Model.defaultProps = {
-    loadModelData: noop
-};
+// Model.defaultProps = {
+//     loadModelData: noop
+// };
