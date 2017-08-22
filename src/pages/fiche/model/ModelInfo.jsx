@@ -8,11 +8,13 @@ import Loader from '../../../components/Common/loader';
 
 class ModelInfo extends Component {
     componentDidMount() {
+        console.warn('CDM');
         const {load, modelId} = this.props;
         load(modelId);
     }
 
     componentWillReceiveProps() {
+        console.warn('CWRP');
         const {load, modelId} = this.props;
         load(modelId);
     }
