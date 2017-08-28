@@ -27,6 +27,7 @@ class ManufListItem extends Component {
 
     }
 }
+
 export default ManufListItem;
 
 ManufListItem.propTypes = {

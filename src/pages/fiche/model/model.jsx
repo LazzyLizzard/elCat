@@ -9,6 +9,11 @@ const modelId = 555;
 
 @connect(mapStateToProps, mapDispatchToProps)
 export class Model extends Component {
+    componentDidMount() {
+        console.log('CDM');
+        this.props.loadModelData();
+    }
+
     render() {
         return (
             <ModelInfo modelId={modelId} load={this.props.loadModelData} />
