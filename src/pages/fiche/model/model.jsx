@@ -7,7 +7,21 @@ import {getModelData} from './actions';
 // import {Link} from 'react-router';
 const modelId = 555;
 
+const mapDispatchToProps = dispatch => ({
+    loadModelData: () => dispatch(getModelData(modelId))
+});
+
+function mapStateToProps(state) {
+    return state;
+}
+
+@connect(mapStateToProps, mapDispatchToProps)
 export class Model extends Component {
+    componentDidMount() {
+        console.log('CDM');
+        this.props.loadModelData();
+    }
+
     render() {
         return (
             <div>
@@ -18,19 +32,10 @@ export class Model extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    loadModelData: () => dispatch(getModelData(modelId))
-});
 
-function mapStateToProps(state) {
-    return state;
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Model);
-
-Model.propTypes = {
-    loadModelData: PropTypes.func
-};
+// Model.propTypes = {
+//      : PropTypes.func
+// };
 
 // Model.defaultProps = {
 //     loadModelData: noop
