@@ -8,9 +8,9 @@ import ModelGroups from '../model-groups/ModelGroups';
 
 export default class ModelInfo extends Component {
     componentDidMount() {
-        // const {load, modelId} = this.props;
-        // load(modelId);
-        console.log(this.props);
+        console.warn('CDM');
+        const {load, modelId} = this.props;
+        load(modelId);
     }
 
     componentWillReceiveProps() {
