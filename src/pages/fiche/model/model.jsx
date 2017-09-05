@@ -8,8 +8,16 @@ import {getModelData} from './actions';
 const modelId = 555;
 
 const mapDispatchToProps = dispatch => ({
-    loadModelData: () => dispatch(getModelData(modelId))
+    loadModelData: () => {
+        dispatch(getModelData(modelId));
+    }
 });
+
+// const mapDispatchToProps = dispatch => ({
+//     onTodoClick: (id) => {
+//         dispatch(toggleTodo(id));
+//     }
+// });
 
 function mapStateToProps(state) {
     return state;
