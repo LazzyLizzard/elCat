@@ -21,16 +21,18 @@ export const modelDataSuccess = data => ({
 });
 
 // action generator itself
-export const getModelData = id => (
-    // console.log('id %s', id);
-    (dispatch) => {
-        dispatch(modelDataRequest());
-        return fetch(
-            `${REQUEST_URL_FICHE}?async=1&action=model&modelId=${id}`, {
-                method: 'get',
-                mode: 'cors'
-            })
-            .then(response => response.json())
-            .then(modelData => dispatch(modelDataSuccess(modelData)));
-    }
-);
+export const getModelData = (id) => {
+    console.log('id %s', id);
+    return (
+        (dispatch) => {
+            dispatch(modelDataRequest());
+            return fetch(
+                `${REQUEST_URL_FICHE}?async=1&action=model&modelId=${id}`, {
+                    method: 'get',
+                    mode: 'cors'
+                })
+                .then(response => response.json())
+                .then(modelData => dispatch(modelDataSuccess(modelData)));
+        }
+    );
+};

@@ -1,10 +1,9 @@
 import {combineReducers} from 'redux';
-// import manufsAndTypesList from './manufsAndTypes';
-import HomeReducer from '../components/Home/reducers';
-import modelDataReducer from '../pages/fiche/model/reducers';
+import {
+    ficheReducer,
+    NAMESPACE as FICHE_NAMESPACE
+} from '../pages/fiche/reducer';
 
 export const rootReducer = combineReducers({
-    // manufsAndTypesList,
-    homeData: HomeReducer,
-    modelData: modelDataReducer
+    [FICHE_NAMESPACE]: ficheReducer
 });

@@ -1,11 +1,12 @@
 import {MODEL_INFO_REQUEST, MODEL_INFO_SUCCESS} from './actions';
 
 const initialState = {
+    modelId: null,
     modelData: null,
     loading: false
 };
 
-export default function modelDataReducer(state = initialState, action) {
+export function modelDataReducer(state = initialState, action) {
     switch (action.type) {
         case MODEL_INFO_REQUEST:
             return Object.assign({}, state, {
