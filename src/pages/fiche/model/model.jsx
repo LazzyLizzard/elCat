@@ -8,9 +8,7 @@ import {getModelData} from './actions';
 const modelId = 555;
 
 const mapDispatchToProps = dispatch => ({
-    loadModelData: () => {
-        dispatch(getModelData(modelId));
-    }
+    loadModelData: () => dispatch({type: 'MODEL_INFO_REQUEST'})
 });
 
 // const mapDispatchToProps = dispatch => ({
@@ -25,14 +23,10 @@ function mapStateToProps(state) {
 
 @connect(mapStateToProps, mapDispatchToProps)
 export class Model extends Component {
-    componentDidMount() {
-        console.log('CDM');
-        this.props.loadModelData();
-    }
 
     render() {
         return (
-            <ModelInfo modelId={modelId} load={this.props.loadModelData} />
+            <ModelInfo modelId={modelId} load={this.loadModelData} />
         );
     }
 }
