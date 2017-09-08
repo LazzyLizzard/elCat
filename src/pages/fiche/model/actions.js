@@ -20,6 +20,8 @@ export const modelDataSuccess = data => ({
     }
 });
 
+// export const modelDataStart  =
+
 // action generator itself
 export const getModelData = (id) => {
     console.log('id %s', id);

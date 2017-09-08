@@ -1,14 +1,14 @@
 import React, {PropTypes, Component} from 'react';
 import {connect} from 'react-redux';
-import noop from 'lodash/noop';
+import * as actions from './actions';
 import ModelInfo from './model-info';
-import {getModelData} from './actions';
 
-// import {Link} from 'react-router';
 const modelId = 555;
 
 const mapDispatchToProps = dispatch => ({
-    loadModelData: () => dispatch({type: 'MODEL_INFO_REQUEST'})
+    loadModelData: dispatch(
+        {type: actions.MODEL_INFO_REQUEST}
+    )
 });
 
 // const mapDispatchToProps = dispatch => ({
@@ -23,10 +23,10 @@ function mapStateToProps(state) {
 
 @connect(mapStateToProps, mapDispatchToProps)
 export class Model extends Component {
-
     render() {
+        console.log(this.props);
         return (
-            <ModelInfo modelId={modelId} load={this.loadModelData} />
+            <ModelInfo modelId={modelId} />
         );
     }
 }
