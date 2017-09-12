@@ -2,7 +2,8 @@ import React from 'react';
 import {Link} from 'react-router';
 import noop from 'lodash/noop';
 
-export default function ModelGroups({modelGroups, onClick = noop}) {
+export default function ModelGroups({modelGroups, onClick = noop, ...props}) {
+    console.log(props);
     return (
         <div>
             {modelGroups && modelGroups.map(data => (

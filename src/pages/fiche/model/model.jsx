@@ -1,4 +1,4 @@
-import React, {PropTypes, Component} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from './actions';
 import ModelInfo from './model-info';
@@ -6,36 +6,32 @@ import ModelInfo from './model-info';
 const modelId = 555;
 
 const mapDispatchToProps = dispatch => ({
-    loadModelData: dispatch(
-        {type: actions.MODEL_INFO_REQUEST}
+    loadModelData: () => dispatch(
+        actions.getModelData(modelId)
     )
 });
 
-// const mapDispatchToProps = dispatch => ({
-//     onTodoClick: (id) => {
-//         dispatch(toggleTodo(id));
-//     }
-// });
-
-function mapStateToProps(state) {
-    return state;
-}
+const mapStateToProps = state => (state);
 
 @connect(mapStateToProps, mapDispatchToProps)
-export class Model extends Component {
+export default class Model extends Component {
+    // componentDidMount() {
+    //     this.props.loadModelData();
+    // }
     render() {
         console.log(this.props);
         return (
-            <ModelInfo modelId={modelId} />
+            <ModelInfo modelId={modelId} actor={this.props.loadModelData} />
         );
     }
 }
 
+// function mapStateToProps(state) {
+//     return state;
+// }
 
-// Model.propTypes = {
-//      : PropTypes.func
-// };
+// export default connect(mapStateToProps)(ModelInfo);
 
-// Model.defaultProps = {
-//     loadModelData: noop
+// ModelInfo.propTypes = {
+//     modelId: PropTypes.number
 // };

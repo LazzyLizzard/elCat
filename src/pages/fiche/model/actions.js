@@ -5,12 +5,15 @@ import {REQUEST_URL_FICHE} from './../../../AppRoutes/constants';
 export const MODEL_INFO_REQUEST = 'MODEL_INFO_REQUEST';
 export const MODEL_INFO_SUCCESS = 'MODEL_INFO_SUCCESS';
 
-export const modelDataRequest = () => ({
-    type: MODEL_INFO_REQUEST,
-    payload: {
-        loader: true
-    }
-});
+export const modelDataRequest = () => {
+    console.log('reducer mdr');
+    return ({
+        type: MODEL_INFO_REQUEST,
+        payload: {
+            loader: true
+        }
+    });
+};
 
 export const modelDataSuccess = data => ({
     type: MODEL_INFO_SUCCESS,
