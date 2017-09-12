@@ -1,9 +1,11 @@
 import {combineReducers} from 'redux';
 import {
-    modelDataReducer,
+    // modelDataReducer,
+    // это reducer
+    reqRed,
     NAMESPACE as FICHE_NAMESPACE
 } from '../pages/fiche/reducer';
 
 export const rootReducer = combineReducers({
-    [FICHE_NAMESPACE]: modelDataReducer
+    [FICHE_NAMESPACE]: reqRed
 });

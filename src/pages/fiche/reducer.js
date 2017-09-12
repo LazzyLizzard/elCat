@@ -40,7 +40,7 @@ export function modelDataReducer(state = initialState, action) {
     }
 }
 
-const reqRed = (state = {}, action) => {
+export const reqRed = (state = {}, action) => {
     switch (action.type) {
         case 'REQ':
             return {
@@ -51,7 +51,6 @@ const reqRed = (state = {}, action) => {
             return {
                 ...state,
                 req: false
-            }
-
+            };
     }
-}
+};

@@ -3,18 +3,23 @@ import {connect} from 'react-redux';
 import * as actions from './actions';
 // import ModelInfo from './model-info';
 
-const modelId = 555;
+// const modelId = 555;
 
 function mapDispatchToProps(dispatch) {
-    return {dispatch};
+    return {
+        wtf: () => dispatch('REQ')
+    };
 }
 
 
 class Model extends Component {
-
     componentDidMount() {
-        this.prop.dispatch(actions.reqModel());
+        this.sendAlert();
     }
+
+    sendAlert = () => {
+        this.props.wtf();
+    };
 
     render() {
         console.log(this.props);
