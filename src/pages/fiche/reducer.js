@@ -39,3 +39,19 @@ export function modelDataReducer(state = initialState, action) {
             return state;
     }
 }
+
+const reqRed = (state = {}, action) => {
+    switch (action.type) {
+        case 'REQ':
+            return {
+                ...state,
+                req: true
+            };
+        default:
+            return {
+                ...state,
+                req: false
+            }
+
+    }
+}

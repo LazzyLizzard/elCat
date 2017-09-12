@@ -41,3 +41,7 @@ export const getModelData = (id) => {
         }
     );
 };
+
+export const reqModel = () => ({
+    type: 'REQ'
+});

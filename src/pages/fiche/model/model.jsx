@@ -1,37 +1,30 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from './actions';
-import ModelInfo from './model-info';
+// import ModelInfo from './model-info';
 
 const modelId = 555;
 
-const mapDispatchToProps = dispatch => ({
-    loadModelData: () => dispatch(
-        actions.getModelData(modelId)
-    )
-});
+function mapDispatchToProps(dispatch) {
+    return {dispatch};
+}
 
-const mapStateToProps = state => (state);
 
-@connect(mapStateToProps, mapDispatchToProps)
-export default class Model extends Component {
-    // componentDidMount() {
-    //     this.props.loadModelData();
-    // }
+class Model extends Component {
+
+    componentDidMount() {
+        this.prop.dispatch(actions.reqModel());
+    }
+
     render() {
         console.log(this.props);
         return (
-            <ModelInfo modelId={modelId} actor={this.props.loadModelData} />
+            <div>
+                hallo
+                {/* <ModelInfo modelId={modelId} actor={this.props.loadModelData} /> */}
+            </div>
         );
     }
 }
 
-// function mapStateToProps(state) {
-//     return state;
-// }
-
-// export default connect(mapStateToProps)(ModelInfo);
-
-// ModelInfo.propTypes = {
-//     modelId: PropTypes.number
-// };
+connect(mapDispatchToProps)(Model);
