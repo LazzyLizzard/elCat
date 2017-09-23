@@ -26,8 +26,9 @@ export const modelDataSuccess = data => ({
 // export const modelDataStart  =
 
 // action generator itself
-export const getModelData = (id) => {
+export const reqModel = (id) => {
     console.log('id %s', id);
+    console.log(id);
     return (
         (dispatch) => {
             dispatch(modelDataRequest());
@@ -42,7 +43,7 @@ export const getModelData = (id) => {
     );
 };
 
-export const reqModel = () => ({
+export const _reqModel = () => ({
     type: 'REQ',
     payload: {
         hello: 'hallo'
