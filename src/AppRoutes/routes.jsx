@@ -6,7 +6,7 @@ import {MakeYear} from '../pages/fiche/make-year/make-year';
 import {MakeType} from '../pages/fiche/make-type/make-type';
 import {MakeYearTransport} from '../pages/fiche/make-year-transport/make-year-transport';
 // TODO разобраться с export default в Model
-import Model from '../pages/fiche/model/model';
+import {Model} from '../pages/fiche/model';
 import {NotFound} from '../components/not-found/not-found';
 
 export default (

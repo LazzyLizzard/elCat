@@ -1,28 +1,12 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import * as actions from './actions';
+// import {connect} from 'react-redux';
+// import * as actions from './actions';
 // import ModelInfo from './model-info';
 
 // const modelId = 555;
 
-function mapDispatchToProps(dispatch) {
-    return {
-        wtf: () => dispatch('REQ')
-    };
-}
-
-
-class Model extends Component {
-    componentDidMount() {
-        this.sendAlert();
-    }
-
-    sendAlert = () => {
-        this.props.wtf();
-    };
-
+export class Model extends Component {
     render() {
-        console.log(this.props);
         return (
             <div>
                 hallo
@@ -31,5 +15,3 @@ class Model extends Component {
         );
     }
 }
-
-connect(mapDispatchToProps)(Model);

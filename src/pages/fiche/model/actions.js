@@ -43,5 +43,8 @@ export const getModelData = (id) => {
 };
 
 export const reqModel = () => ({
-    type: 'REQ'
+    type: 'REQ',
+    payload: {
+        hello: 'hallo'
+    }
 });
