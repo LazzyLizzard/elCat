@@ -1,21 +1,21 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from './actions';
-import {Clicker} from './clicker'
+import {Clicker} from './clicker';
 
 const modelId = 837;
 
 function mapDispatchToProps(dispatch) {
     return {
-        onClicker: id => dispatch(actions.reqModel(id))
+        onClicker: () => dispatch(actions.reqModel(modelId))
     };
 }
 
 class Model extends Component {
 
-    componentDidMount() {
-        // this.props.onClick()
-    }
+    // componentDidMount() {
+    //     // this.props.onClick()
+    // }
 
     render() {
         return (
