@@ -6,7 +6,7 @@ import ModelGroups from '../model-groups/ModelGroups';
 
 // import styles from './styles.scss';
 
-export default class ModelInfo extends Component {
+export class ModelInfo extends Component {
     componentDidMount() {
         console.warn('CDM');
         console.warn(this.props);
@@ -19,6 +19,7 @@ export default class ModelInfo extends Component {
     }
 
     render() {
+        console.warn(this.props);
         const {modelData} = this.props;
         return (
             <div>

@@ -21,7 +21,7 @@ const initialState = {
 //     return assign({}, state);
 // }
 
-export function modelDataReducer(state = initialState, action) {
+export function reqRed(state = initialState, action) {
     console.warn(action.type);
     switch (action.type) {
         case MODEL_INFO_REQUEST:
@@ -40,7 +40,7 @@ export function modelDataReducer(state = initialState, action) {
     }
 }
 
-export const reqRed = (state = initialState, action) => {
+export const _reqRed = (state = initialState, action) => {
     switch (action.type) {
         case 'REQ':
             return {

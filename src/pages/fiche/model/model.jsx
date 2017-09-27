@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from './actions';
 import {Clicker} from './clicker';
+import {ModelInfo} from '../model-info';
 
 const modelId = 837;
 
@@ -10,6 +11,10 @@ function mapDispatchToProps(dispatch) {
         onClicker: () => dispatch(actions.reqModel(modelId))
     };
 }
+function mapStateToProps(state){
+    return state;
+}
+
 
 class Model extends Component {
 
@@ -23,9 +28,12 @@ class Model extends Component {
                 hallo
                 {/* <ModelInfo modelId={modelId} actor={this.props.loadModelData} /> */}
                 <Clicker onClick={() => this.props.onClicker} modelId={modelId} />
+
+                <ModelInfo modelInfo={this.props} />
+
             </div>
         );
     }
 }
 
-export default connect(null, mapDispatchToProps)(Model);
+export default connect(mapStateToProps, mapDispatchToProps)(Model);
