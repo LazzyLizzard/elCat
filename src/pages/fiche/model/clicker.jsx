@@ -16,7 +16,7 @@ export class Clicker extends Component {
 
     render() {
         const {modelLoader, modelId} = this.props;
-        const myClick = modelLoader(modelId);
+        const myClick = () => modelLoader(modelId);
         // console.log(modelId)
         return (
             <div>
