@@ -1,4 +1,4 @@
-// import {assign} from 'lodash';
+import {assign} from 'lodash';
 import {MODEL_INFO_REQUEST, MODEL_INFO_SUCCESS, MODEL_INFO_ERROR} from './model/actions';
 
 export const NAMESPACE = 'fiche';
@@ -8,6 +8,7 @@ const initialState = {
     transportTypes: null,
     years: null,
     modelInfo: null,
+    error: null,
     current: {
         modelId: null,
         makeId: null,
@@ -25,39 +26,16 @@ export function reqRed(state = initialState, action) {
     console.warn(action.type);
     switch (action.type) {
         case MODEL_INFO_REQUEST:
-            return Object.assign({}, state, {
-                loading: true
-            });
+            return Object.assign({}, state, action.payload);
 
         case MODEL_INFO_SUCCESS:
-            return Object.assign({}, state, {
-                loading: false,
-                modelData: action.payload.modelData
-            });
+            return Object.assign({}, state, action.payload);
 
         case MODEL_INFO_ERROR:
-            return {
-                ...state,
-                error: action.payload
-            };
+            return assign({}, state, action.payload);
 
         default:
             return state;
     }
 }
 
-export const _reqRed = (state = initialState, action) => {
-    switch (action.type) {
-        case 'REQ':
-            return {
-                ...state,
-                // req: 'req clicked'
-                req: action.payload
-            };
-        default:
-            return {
-                ...state,
-                req: null
-            };
-    }
-};

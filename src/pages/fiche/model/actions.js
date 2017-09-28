@@ -32,36 +32,18 @@ export const modelDataError = error => ({
     }
 });
 
-// export const modelDataStart  =
-
 // action generator itself
-export const reqModel = (id) => {
-    console.log('id %s', id);
-    console.log(id);
-    return (
-        (dispatch) => {
-            dispatch(modelDataRequest());
-            return fetch(
-                `${REQUEST_URL_FICHE}?async=1&action=model&modelId=${id}`, {
-                    method: 'get',
-                    mode: 'cors'
-                })
-                .then((response) => {
-                // TODO [sf] 28.09.2017 check what's in response
-                    if (!response.ok) {
-                        throw Error(response.statusText);
-                    }
-                    return response;
-                })
-                .then(modelData => dispatch(modelDataSuccess(modelData)))
-                .catch(error => dispatch(modelDataError(error)));
-        }
-    );
-};
-
-export const _reqModel = () => ({
-    type: 'REQ',
-    payload: {
-        hello: 'hallo'
+export const reqModel = id => (
+    (dispatch) => {
+        dispatch(modelDataRequest());
+        return fetch(
+            `${REQUEST_URL_FICHE}?async=1&action=model&modelId=${id}`, {
+                method: 'get',
+                mode: 'cors'
+            })
+            .then(response => response.json())
+            .then(modelData => dispatch(modelDataSuccess(modelData)))
+            .catch(error => dispatch(modelDataError(error)));
     }
-});
+);
+

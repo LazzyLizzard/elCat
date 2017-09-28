@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 // import {connect} from 'react-redux';
 import get from 'lodash/get';
 import ModelGroups from '../model-groups/ModelGroups';
-// import Loader from '../../../components/Common/loader';
 
 // import styles from './styles.scss';
 
