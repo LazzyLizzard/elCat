@@ -32,6 +32,8 @@ export const modelDataError = error => ({
     }
 });
 
+// export const modelDataStart  =
+
 // action generator itself
 export const reqModel = id => (
     (dispatch) => {
@@ -46,4 +48,3 @@ export const reqModel = id => (
             .catch(error => dispatch(modelDataError(error)));
     }
 );
-
