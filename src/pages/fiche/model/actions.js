@@ -4,6 +4,7 @@ import {REQUEST_URL_FICHE} from './../../../AppRoutes/constants';
 // export const MODEL_INFO = 'MODEL_INFO';
 export const MODEL_INFO_REQUEST = 'MODEL_INFO_REQUEST';
 export const MODEL_INFO_SUCCESS = 'MODEL_INFO_SUCCESS';
+export const MODEL_INFO_ERROR = 'MODEL_INFO_ERROR';
 
 export const modelDataRequest = () => {
     console.log('reducer mdr');
@@ -23,6 +24,14 @@ export const modelDataSuccess = data => ({
     }
 });
 
+export const modelDataError = error => ({
+    type: MODEL_INFO_ERROR,
+    payload: {
+        loader: false,
+        error
+    }
+});
+
 // export const modelDataStart  =
 
 // action generator itself
@@ -37,8 +46,15 @@ export const reqModel = (id) => {
                     method: 'get',
                     mode: 'cors'
                 })
-                .then(response => response.json())
-                .then(modelData => dispatch(modelDataSuccess(modelData)));
+                .then((response) => {
+                // TODO [sf] 28.09.2017 check what's in response
+                    if (!response.ok) {
+                        throw Error(response.statusText);
+                    }
+                    return response;
+                })
+                .then(modelData => dispatch(modelDataSuccess(modelData)))
+                .catch(error => dispatch(modelDataError(error)));
         }
     );
 };

@@ -1,5 +1,5 @@
 // import {assign} from 'lodash';
-import {MODEL_INFO_REQUEST, MODEL_INFO_SUCCESS} from './model/actions';
+import {MODEL_INFO_REQUEST, MODEL_INFO_SUCCESS, MODEL_INFO_ERROR} from './model/actions';
 
 export const NAMESPACE = 'fiche';
 
@@ -34,6 +34,12 @@ export function reqRed(state = initialState, action) {
                 loading: false,
                 modelData: action.payload.modelData
             });
+
+        case MODEL_INFO_ERROR:
+            return {
+                ...state,
+                error: action.payload
+            };
 
         default:
             return state;
