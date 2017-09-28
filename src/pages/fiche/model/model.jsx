@@ -27,10 +27,9 @@ class Model extends Component {
             <div>
                 hallo
                 {/* <ModelInfo modelId={modelId} actor={this.props.loadModelData} /> */}
-                <Clicker onClick={() => this.props.onClicker} modelId={modelId} />
+                <Clicker modelLoader={() => this.props.onClicker} modelId={modelId} />
 
                 <ModelInfo modelInfo={this.props} />
-
             </div>
         );
     }
