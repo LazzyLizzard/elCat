@@ -2,6 +2,7 @@ import React from 'react';
 import {Route, IndexRoute} from 'react-router';
 import {App} from '../containers/app';
 import {Home} from '../components/Home/home';
+import {FicheHome} from '../pages/fiche/home/home';
 import {MakeYear} from '../pages/fiche/make-year/make-year';
 import {MakeType} from '../pages/fiche/make-type/make-type';
 import {MakeYearTransport} from '../pages/fiche/make-year-transport/make-year-transport';
@@ -15,6 +16,9 @@ export default (
     <div>
         <Route path="/" component={App}>
             <IndexRoute component={Home} />
+
+            {/* fiche - elcat */}
+            <Route path={`/${FICHE_NAMESPACE}`} component={FicheHome} />
             <Route path={`/${FICHE_NAMESPACE}/mt/:make/:typeId`} component={MakeType} />
             <Route path={`/${FICHE_NAMESPACE}/my/:make/:year`} component={MakeYear} />
             <Route
@@ -22,6 +26,8 @@ export default (
                 component={MakeYearTransport}
             />
             <Route path={`/${FICHE_NAMESPACE}/model/:modelId`} component={Model} />
+
+            {/* cart */}
             <Route path={`/${CART_NAMESPACE}`} component={Cart} />
         </Route>
         <Route path="*" component={NotFound} />
