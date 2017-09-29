@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
-// import style from './home.scss';
-
+import {NAMESPACE as FICHE_NAMESPACE} from './../../pages/fiche/reducer';
 
 export class Home extends Component {
     render() {
@@ -11,7 +10,7 @@ export class Home extends Component {
 
                 <div>
                     <div>
-                        hon <Link to="/mt/1/2">moto</Link>, <Link to="/mt/1/2">ATV</Link>
+                        hon <Link to={`${FICHE_NAMESPACE}/mt/1/2`}>moto</Link>, <Link to={`${FICHE_NAMESPACE}/mt/1/2`}>ATV</Link>
                     </div>
                     <hr />
                     <div>kaw</div>

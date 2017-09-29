@@ -1,3 +1,5 @@
+// https://stackoverflow.com/questions/5998694/how-to-create-an-https-server-in-node-js/5998795#5998795
+
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
@@ -6,6 +8,7 @@ const config = require('./webpack.config');
 const app = new (require('express'))();
 
 const port = 3003;
+
 
 const compiler = webpack(config);
 app.use(webpackDevMiddleware(compiler, {noInfo: true, publicPath: config.output.publicPath}));

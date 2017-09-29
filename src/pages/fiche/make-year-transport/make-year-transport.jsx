@@ -1,5 +1,6 @@
 import React, {PropTypes, Component} from 'react';
 import {Link} from 'react-router';
+import {NAMESPACE as FICHE_NAMESPACE} from './../../../pages/fiche/reducer';
 
 export class MakeYearTransport extends Component {
     render() {
@@ -8,8 +9,8 @@ export class MakeYearTransport extends Component {
                 <h4>make year transport</h4>
 
                 <div> c :
-                    <Link to="/model/465" modelId={500}>cr500</Link> 500 |
-                    <Link to="/model/4657" modelId={700}>cb700</Link> 700
+                    <Link to={`/${FICHE_NAMESPACE}/model/465`} modelId={500}>cr500</Link> 500 |
+                    <Link to={`/${FICHE_NAMESPACE}/model/4657`} modelId={700}>cb700</Link> 700
                 </div>
             </div>
         );
