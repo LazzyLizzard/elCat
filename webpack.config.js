@@ -1,5 +1,4 @@
 var path = require('path')
-var path = require('path')
 var webpack = require('webpack')
 var NpmInstallPlugin = require('npm-install-webpack-plugin')
 var autoprefixer = require('autoprefixer');
@@ -8,6 +7,7 @@ var precss = require('precss');
 module.exports = {
     devtool: 'cheap-module-eval-source-map',
     resolve: {
+        // root: [path.resolve(__dirname, 'src'), path.resolve(__dirname, 'node_modules')],
         extensions: ['', '.js', '.jsx']
     },
     entry: [

@@ -5,9 +5,10 @@ import {noop} from 'lodash';
 export class Clicker extends Component {
     render() {
         const {modelLoader, modelId} = this.props;
+        const loadModelOnClick = () => modelLoader(modelId);
         return (
             <div>
-                <div onClick={() => modelLoader(modelId)}>click</div>
+                <div onClick={loadModelOnClick}>click</div>
             </div>
         );
     }
