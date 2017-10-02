@@ -8,7 +8,7 @@ import {
 export const NAMESPACE = 'fiche';
 
 const initialState = {
-    modelInfo: null,
+    // modelInfo: null,
     manufacturers: null,
     transportTypes: null,
     years: null,

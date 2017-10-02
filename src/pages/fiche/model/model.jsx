@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import * as actions from './actions';
 // import {Clicker} from './clicker';
@@ -26,8 +27,8 @@ class Model extends Component {
 
     render() {
         const modelId = 837;
-        console.log(this.props, 'props model');
-        const {loader, error} = this.props[NAMESPACE];
+        console.log(this.props[NAMESPACE], 'props model');
+        const {loader, error, modelData} = this.props[NAMESPACE];
         return (
             <div>
                 hallo
@@ -35,10 +36,17 @@ class Model extends Component {
                 {/* <Clicker modelLoader={this.props.onClicker} modelId={modelId} /> */}
                 {loader && <Loader />}
                 {error && <div>error!</div>}
-                <ModelInfo modelInfo={this.props} />
+                {modelData && <ModelInfo modelData={modelData} />}
+
             </div>
         );
     }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Model);
+
+// ModelInfo.propTypes = {
+//     loader: PropTypes.bool,
+//     error: PropTypes.object,
+//     modelData: PropTypes.object
+// };
