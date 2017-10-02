@@ -1,14 +1,15 @@
 import {combineReducers} from 'redux';
 import {
-    ficheReducer,
     NAMESPACE as FICHE_NAMESPACE
-} from '../pages/fiche/reducer';
+} from '../pages/fiche/model/reducer';
 import {
     cartReducer,
     NAMESPACE as CART_NAMESPACE
 } from '../pages/cart/reducer';
 
+import {ficheReducers} from '../pages/fiche/reducer';
+
 export const rootReducer = combineReducers({
-    [FICHE_NAMESPACE]: ficheReducer,
+    [FICHE_NAMESPACE]: ficheReducers,
     [CART_NAMESPACE]: cartReducer
 });

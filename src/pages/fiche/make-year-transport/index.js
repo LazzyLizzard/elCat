@@ -1,1 +1,1 @@
-export {MakeYearTransport as default} from './make-year-transport';
+export {MakeYearTransport} from './make-year-transport';

@@ -32,8 +32,6 @@ export const modelDataError = error => ({
     }
 });
 
-// export const modelDataStart  =
-
 // action generator itself
 export const reqModel = id => (
     (dispatch) => {
@@ -43,7 +41,10 @@ export const reqModel = id => (
                 method: 'get',
                 mode: 'cors'
             })
-            .then(response => response.json())
+            .then(response =>
+                // console.warn(response);
+                response.json()
+            )
             .then(modelData => dispatch(modelDataSuccess(modelData)))
             .catch(error => dispatch(modelDataError(error)));
     }

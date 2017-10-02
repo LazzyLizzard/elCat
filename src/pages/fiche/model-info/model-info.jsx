@@ -1,31 +1,20 @@
 import React, {Component} from 'react';
 // import {connect} from 'react-redux';
-import get from 'lodash/get';
-import ModelGroups from '../model-groups/ModelGroups';
+// import get from 'lodash/get';
+import ModelGroups from '../model-groups/model-groups';
 
 // import styles from './styles.scss';
 
 export class ModelInfo extends Component {
-    componentDidMount() {
-        console.warn('CDM');
-        console.warn(this.props);
-    }
-
-    componentWillReceiveProps() {
-        console.warn('CWRP');
-        // const {load, modelId} = this.props;
-        // load(modelId);
-    }
-
     render() {
-        console.warn(this.props);
         const {modelData} = this.props;
+        const {modelInfo, modelGroupsList} = modelData;
         return (
             <div>
-                <h4>model (detail groups)</h4>
-                <h3>model id {this.props.modelId}</h3>
+                <h4>model {modelInfo.manuf_name} {modelInfo.model_name} (detail groups)</h4>
+                {/*<h3>model id {modelInfo.model_id}</h3>*/}
                 {/* {modelData.loading && <Loader model={this.props.modelId} />} */}
-                <ModelGroups modelGroups={get(modelData, 'modelData.modelGroupsList', false)} />
+                <ModelGroups modelGroups={modelGroupsList} />
             </div>
         );
     }

@@ -7,9 +7,10 @@ import {MakeYear} from '../pages/fiche/make-year/make-year';
 import {MakeType} from '../pages/fiche/make-type/make-type';
 import {MakeYearTransport} from '../pages/fiche/make-year-transport/make-year-transport';
 import {Model} from '../pages/fiche/model';
+import {GroupDetails} from '../pages/fiche/group-details';
 import {NotFound} from '../components/not-found/not-found';
 import {Cart} from '../pages/cart';
-import {NAMESPACE as FICHE_NAMESPACE} from '../pages/fiche/reducer';
+import {NAMESPACE as FICHE_NAMESPACE} from '../pages/fiche/model/reducer';
 import {NAMESPACE as CART_NAMESPACE} from '../pages/cart/reducer';
 
 export default (
@@ -26,6 +27,7 @@ export default (
                 component={MakeYearTransport}
             />
             <Route path={`/${FICHE_NAMESPACE}/model/:modelId`} component={Model} />
+            <Route path={`/${FICHE_NAMESPACE}/group/:groupId`} component={GroupDetails} />
 
             {/* cart */}
             <Route path={`/${CART_NAMESPACE}`} component={Cart} />

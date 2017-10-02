@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
-import {NAMESPACE as FICHE_NAMESPACE} from './../../../pages/fiche/reducer';
+import {NAMESPACE as FICHE_NAMESPACE} from '../model/reducer';
 
 export class FicheHome extends React.Component {
     render() {
