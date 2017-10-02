@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import * as actions from './actions';
 import {Loader} from '../../../components/Common/loader';
-import {NAMESPACE} from '../model/reducer';
+import {NAMESPACE} from '../reducer';
 
 function mapDispatchToProps(dispatch) {
     return {
