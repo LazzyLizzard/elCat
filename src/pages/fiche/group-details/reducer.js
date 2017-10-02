@@ -2,7 +2,9 @@ import {assign} from 'lodash';
 
 import {GROUP_INFO_REQUEST, GROUP_INFO_ERROR, GROUP_INFO_SUCCESS} from './actions';
 
-const initialState = {};
+const initialState = {
+    gr: 1
+};
 
 export function groupDetailsReducer(state = initialState, action) {
     switch (action.type) {
