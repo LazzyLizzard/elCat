@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import * as actions from './actions';
 import {Loader} from '../../../components/Common/loader';
-import {NAMESPACE} from '../model/reducer';
+
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -20,7 +20,8 @@ class GroupDetails extends React.Component {
     }
 
     render() {
-        const {loader} = this.props[NAMESPACE];
+        // TODO [sf] 02.10.2017 use NAMESPACE
+        const {loader} = this.props.fiche;
         return (
             <div>
                 <div>details in group</div>
