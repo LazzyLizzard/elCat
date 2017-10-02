@@ -4,7 +4,7 @@ import {GROUP_INFO_REQUEST, GROUP_INFO_ERROR, GROUP_INFO_SUCCESS} from './action
 
 const initialState = {};
 
-export function groupDaetailsReducer(state = initialState, action) {
+export function groupDetailsReducer(state = initialState, action) {
     switch (action.type) {
         case GROUP_INFO_REQUEST:
             return assign({}, state, action.payload);
