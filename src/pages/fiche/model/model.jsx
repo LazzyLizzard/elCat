@@ -5,11 +5,13 @@ import * as actions from './actions';
 // import {Clicker} from './clicker';
 import {ModelInfo} from '../model-info';
 import {Loader} from '../../../components/Common/loader';
+// import {getModelData} from './../../../utils/get-model-info';
 import {NAMESPACE} from './reducer';
 
 function mapDispatchToProps(dispatch) {
     return {
         onClicker: modelId => dispatch(actions.reqModel(modelId))
+        // onClicker: dispatch => modelId => getModelData(modelId)
     };
 }
 
@@ -28,7 +30,7 @@ class Model extends Component {
     render() {
         const modelId = 837;
         console.log(this.props[NAMESPACE], 'props model');
-        const {loader, error, modelData} = this.props[NAMESPACE];
+        const {[NAMESPACE]: {loader, error, modelData}} = this.props;
         return (
             <div>
                 hallo
@@ -45,8 +47,8 @@ class Model extends Component {
 
 export default connect(mapStateToProps, mapDispatchToProps)(Model);
 
-// ModelInfo.propTypes = {
-//     loader: PropTypes.bool,
-//     error: PropTypes.object,
-//     modelData: PropTypes.object
-// };
+ModelInfo.propTypes = {
+    loader: PropTypes.bool,
+    error: PropTypes.object,
+    modelData: PropTypes.object
+};

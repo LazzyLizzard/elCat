@@ -1,8 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {get} from 'lodash';
 import * as actions from './actions';
 import {Loader} from '../../../components/Common/loader';
-
+import {NAMESPACE} from './../model/reducer';
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -15,13 +16,19 @@ function mapStateToProps(state) {
 }
 
 class GroupDetails extends React.Component {
+
     componentDidMount() {
         this.props.getGroupData(40741);
+        let x = get(this.props, 'fiche.modelData.modelInfo.model_id', 'no');
+        console.log(x);
     }
 
+    componentWillReceiveProps() {
+    }
+
+
     render() {
-        // TODO [sf] 02.10.2017 use NAMESPACE
-        const {loader} = this.props.fiche;
+        const {[NAMESPACE]: {loader}} = this.props;
         return (
             <div>
                 <div>details in group</div>
