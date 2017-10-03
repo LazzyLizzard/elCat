@@ -1,37 +1,54 @@
-import React, {PropTypes, Component} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import noop from 'lodash/noop';
-import ModelInfo from './ModelInfo';
-import {getModelData} from './actions';
+import * as actions from './actions';
+// import {Clicker} from './clicker';
+import {ModelInfo} from '../model-info';
+import {Loader} from '../../../components/Common/loader';
+// import {getModelData} from './../../../utils/get-model-info';
+import {NAMESPACE} from './reducer';
 
-// import {Link} from 'react-router';
-const modelId = 555;
-
-class Model extends Component {
-    render() {
-        return (
-            <div>
-                <h4>model (detail groups)</h4>
-                <ModelInfo modelId={modelId} load={this.props.loadModelData} />
-            </div>
-        );
-    }
+function mapDispatchToProps(dispatch) {
+    return {
+        onClicker: modelId => dispatch(actions.reqModel(modelId))
+        // onClicker: dispatch => modelId => getModelData(modelId)
+    };
 }
-
-const mapDispatchToProps = dispatch => ({
-    loadModelData: () => dispatch(getModelData(modelId))
-});
 
 function mapStateToProps(state) {
     return state;
 }
 
+class Model extends Component {
+
+    componentDidMount() {
+        // TODO [sf] 29.09.2017 get from props
+        const modelId = 839;
+        this.props.onClicker(modelId);
+    }
+
+    render() {
+        const modelId = 837;
+        console.log(this.props[NAMESPACE], 'props model');
+        const {[NAMESPACE]: {loader, error, modelData}} = this.props;
+        return (
+            <div>
+                hallo
+                {/* <ModelInfo modelId={modelId} actor={this.props.loadModelData} /> */}
+                {/* <Clicker modelLoader={this.props.onClicker} modelId={modelId} /> */}
+                {loader && <Loader />}
+                {error && <div>error!</div>}
+                {modelData && <ModelInfo modelData={modelData} />}
+
+            </div>
+        );
+    }
+}
+
 export default connect(mapStateToProps, mapDispatchToProps)(Model);
 
-Model.propTypes = {
-    loadModelData: PropTypes.func
-};
-
-Model.defaultProps = {
-    loadModelData: noop
+ModelInfo.propTypes = {
+    loader: PropTypes.bool,
+    error: PropTypes.object,
+    modelData: PropTypes.object
 };

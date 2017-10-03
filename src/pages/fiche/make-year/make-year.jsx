@@ -1,5 +1,6 @@
 import React, {PropTypes, Component} from 'react';
 import {Link} from 'react-router';
+import {NAMESPACE as FICHE_NAMESPACE} from '../model/reducer';
 
 export class MakeYear extends Component {
     render() {
@@ -10,8 +11,8 @@ export class MakeYear extends Component {
                 <h4>make year</h4>
 
                 honda &nbsp;
-                <Link to="/myt/1/1990/">1990</Link> &nbsp;
-                <Link to="/myt/1/1991/">1991</Link>
+                <Link to={`/${FICHE_NAMESPACE}/myt/1/1990/`}>1990</Link> &nbsp;
+                <Link to={`/${FICHE_NAMESPACE}/myt/1/1991/`}>1991</Link>
 
             </div>
         );

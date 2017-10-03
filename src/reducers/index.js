@@ -1,10 +1,23 @@
 import {combineReducers} from 'redux';
-// import manufsAndTypesList from './manufsAndTypes';
-import HomeReducer from '../components/Home/reducers';
-import modelDataReducer from '../pages/fiche/model/reducers';
+import queueReducers from './../utils/queue-reducers';
+import {
+    ficheModelReducer,
+    NAMESPACE as FICHE_NAMESPACE
+} from '../pages/fiche/model/reducer';
+import {
+    cartReducer,
+    NAMESPACE as CART_NAMESPACE
+} from '../pages/cart/reducer';
+import {
+    groupDetailsReducer
+} from '../pages/fiche/group-details/reducer';
+
+// import {ficheReducers} from '../pages/fiche/reducer';
 
 export const rootReducer = combineReducers({
-    // manufsAndTypesList,
-    homeData: HomeReducer,
-    modelData: modelDataReducer
+    [FICHE_NAMESPACE]: queueReducers(
+        ficheModelReducer,
+        groupDetailsReducer
+    ),
+    [CART_NAMESPACE]: cartReducer
 });

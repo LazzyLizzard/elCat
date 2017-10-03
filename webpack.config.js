@@ -7,6 +7,7 @@ var precss = require('precss');
 module.exports = {
     devtool: 'cheap-module-eval-source-map',
     resolve: {
+        // root: [path.resolve(__dirname, 'src'), path.resolve(__dirname, 'node_modules')],
         extensions: ['', '.js', '.jsx']
     },
     entry: [
@@ -31,7 +32,7 @@ module.exports = {
                 loader: 'babel-loader',
                 exclude: /node_modules/,
                 query: {
-                    presets: ['react', 'es2015']
+                    presets: ['es2015', 'react', 'stage-0']
                 }
             },
             {

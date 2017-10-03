@@ -1,4 +1,4 @@
-import  * as Actions from '../actions/getManufsAndTypes';
+import * as Actions from '../actions/getManufsAndTypes';
 
 const initialState = {
     manufacturers: null,

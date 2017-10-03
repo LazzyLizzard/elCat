@@ -1,7 +1,9 @@
 import React from 'react';
 
-export const Loader = ({model}) => (
-    <div>
-        LOADING {model}
-    </div>
-);
+export function Loader() {
+    return (
+        <div>
+            LOADING ...
+        </div>
+    );
+}

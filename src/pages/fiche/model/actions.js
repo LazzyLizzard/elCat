@@ -4,13 +4,17 @@ import {REQUEST_URL_FICHE} from './../../../AppRoutes/constants';
 // export const MODEL_INFO = 'MODEL_INFO';
 export const MODEL_INFO_REQUEST = 'MODEL_INFO_REQUEST';
 export const MODEL_INFO_SUCCESS = 'MODEL_INFO_SUCCESS';
+export const MODEL_INFO_ERROR = 'MODEL_INFO_ERROR';
 
-export const modelDataRequest = () => ({
-    type: MODEL_INFO_REQUEST,
-    payload: {
-        loader: true
-    }
-});
+export const modelDataRequest = () => {
+    console.log('reducer mdr');
+    return ({
+        type: MODEL_INFO_REQUEST,
+        payload: {
+            loader: true
+        }
+    });
+};
 
 export const modelDataSuccess = data => ({
     type: MODEL_INFO_SUCCESS,
@@ -20,9 +24,16 @@ export const modelDataSuccess = data => ({
     }
 });
 
+export const modelDataError = error => ({
+    type: MODEL_INFO_ERROR,
+    payload: {
+        loader: false,
+        error
+    }
+});
+
 // action generator itself
-export const getModelData = id => (
-    // console.log('id %s', id);
+export const reqModel = id => (
     (dispatch) => {
         dispatch(modelDataRequest());
         return fetch(
@@ -30,7 +41,11 @@ export const getModelData = id => (
                 method: 'get',
                 mode: 'cors'
             })
-            .then(response => response.json())
-            .then(modelData => dispatch(modelDataSuccess(modelData)));
+            .then(response =>
+                // console.warn(response);
+                response.json()
+            )
+            .then(modelData => dispatch(modelDataSuccess(modelData)))
+            .catch(error => dispatch(modelDataError(error)));
     }
 );
