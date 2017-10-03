@@ -1,11 +1,11 @@
 import React from 'react';
 import {Route, IndexRoute} from 'react-router';
-import {App} from '../containers/app';
-import {Home} from '../components/Home/home';
-import {FicheHome} from '../pages/fiche/home/home';
-import {MakeYear} from '../pages/fiche/make-year/make-year';
-import {MakeType} from '../pages/fiche/make-type/make-type';
-import {MakeYearTransport} from '../pages/fiche/make-year-transport/make-year-transport';
+import {App} from '../containers';
+import {Home} from '../components/Home';
+import {FicheHome} from '../pages/fiche/home';
+import {MakeYear} from '../pages/fiche/make-year';
+import {MakeType} from '../pages/fiche/make-type';
+import {MakeYearTransport} from '../pages/fiche/make-year-transport';
 import {Model} from '../pages/fiche/model';
 import {GroupDetails} from '../pages/fiche/group-details';
 import {NotFound} from '../components/not-found/not-found';
