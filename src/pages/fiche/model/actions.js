@@ -33,18 +33,21 @@ export const modelDataError = error => ({
 });
 
 // action generator itself
-export const reqModel = id => (
+export const requestModelData = id => (
     (dispatch) => {
         dispatch(modelDataRequest());
         return fetch(
             `${REQUEST_URL_FICHE}?async=1&action=model&modelId=${id}`, {
                 method: 'get',
-                mode: 'cors'
+                mode: 'no-cors'
             })
-            .then(response =>
-                // console.warn(response);
-                response.json()
-            )
+            .then((response) => {
+                console.warn(response);
+                if (response.status === 200) {
+                    return response.json();
+                }
+                return response.json();
+            })
             .then(modelData => dispatch(modelDataSuccess(modelData)))
             .catch(error => dispatch(modelDataError(error)));
     }
