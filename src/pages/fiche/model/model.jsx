@@ -37,7 +37,10 @@ class Model extends Component {
                 {/* <ModelInfo modelId={modelId} actor={this.props.loadModelData} /> */}
                 {/* <Clicker modelLoader={this.props.onClicker} modelId={modelId} /> */}
                 {loader && <Loader />}
-                {error && <div>error!</div>}
+                {error && <div>
+                    error!
+                    <div>{error.message}</div>
+                </div>}
                 {modelData && <ModelInfo modelData={modelData} />}
 
             </div>

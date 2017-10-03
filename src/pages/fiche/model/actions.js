@@ -39,12 +39,15 @@ export const reqModel = id => (
         return fetch(
             `${REQUEST_URL_FICHE}?async=1&action=model&modelId=${id}`, {
                 method: 'get',
-                mode: 'cors'
+                mode: 'no-cors'
             })
-            .then(response =>
-                // console.warn(response);
-                response.json()
-            )
+            .then((response) => {
+                console.warn(response);
+                if (response.status === 200) {
+                    return response.json();
+                }
+                return response.json();
+            })
             .then(modelData => dispatch(modelDataSuccess(modelData)))
             .catch(error => dispatch(modelDataError(error)));
     }
