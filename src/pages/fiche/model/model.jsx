@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {get} from 'lodash';
 import * as actions from './actions';
 // import {Clicker} from './clicker';
 import {ModelInfo} from '../model-info';
@@ -24,7 +25,10 @@ class Model extends Component {
     componentDidMount() {
         // TODO [sf] 29.09.2017 get from props
         const modelId = 839;
-        this.props.onClicker(modelId);
+        const {[NAMESPACE]: {modelData}} = this.props;
+        if (!get(modelData, 'modelInfo.model_id', null)) {
+            this.props.onClicker(modelId);
+        }
     }
 
     render() {
