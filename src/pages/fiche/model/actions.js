@@ -38,8 +38,8 @@ export const requestModelData = id => (
         dispatch(modelDataRequest());
         return fetch(
             `${REQUEST_URL_FICHE}?async=1&action=model&modelId=${id}`, {
-                method: 'get',
-                mode: 'no-cors'
+                method: 'get'
+                // mode: 'no-cors'
             })
             .then((response) => {
                 console.warn(response);

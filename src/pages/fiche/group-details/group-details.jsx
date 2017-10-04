@@ -18,7 +18,7 @@ function mapStateToProps(state) {
 class GroupDetails extends React.Component {
 
     componentDidMount() {
-        this.props.getGroupData(40741);
+        this.props.getGroupData(4548);
         let x = get(this.props, 'fiche.modelData.modelInfo.model_id', 'no');
         console.log(x);
     }
