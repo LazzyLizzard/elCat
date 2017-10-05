@@ -17,19 +17,23 @@ function mapStateToProps(state) {
 }
 
 class FicheHome extends React.Component {
+
     componentDidMount() {
         const {[NAMESPACE]: {manufacturers}} = this.props;
         if (!manufacturers) {
             this.props.manufRequest();
         }
     }
-
     render() {
         const {[NAMESPACE]: {manufacturers, homeViewMode}} = this.props;
         return (
             <div>
                 <div>
                     <ViewModes currentViewMode={homeViewMode} />
+                    <div>
+                        <button type="button">производитель + тип</button>
+                        <button type="button" disabled>тип + производитель</button>
+                    </div>
                     <div>
                         hon <Link to={`${NAMESPACE}/mt/1/2`}>moto</Link>, <Link to={`${NAMESPACE}/mt/1/2`}>ATV</Link>
                     </div>
