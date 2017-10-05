@@ -31,16 +31,10 @@ class FicheHome extends React.Component {
                 <div>
                     <ViewModes currentViewMode={homeViewMode} />
                     <div>
-                        <button type="button">производитель + тип</button>
-                        <button type="button" disabled>тип + производитель</button>
-                    </div>
-                    <div>
                         hon <Link to={`${NAMESPACE}/mt/1/2`}>moto</Link>, <Link to={`${NAMESPACE}/mt/1/2`}>ATV</Link>
                     </div>
                     <hr />
-                    {manufacturers &&
-                    <ManufLister list={manufacturers} />
-                    }
+                    {manufacturers && <ManufLister list={manufacturers} />}
 
                 </div>
             </div>
