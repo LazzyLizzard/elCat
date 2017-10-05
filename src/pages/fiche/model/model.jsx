@@ -21,18 +21,16 @@ function mapStateToProps(state) {
 }
 
 class Model extends Component {
-
     componentDidMount() {
         // TODO [sf] 29.09.2017 get from props
-        const modelId = 839;
-        const {[NAMESPACE]: {modelData}} = this.props;
+        // const modelId = 839;
+        const {[NAMESPACE]: {modelData}, routeParams: {modelId}} = this.props;
         if (!get(modelData, 'modelInfo.model_id', null)) {
             this.props.onClicker(modelId);
         }
     }
 
     render() {
-        const modelId = 837;
         console.log(this.props[NAMESPACE], 'props model');
         const {[NAMESPACE]: {loader, error, modelData}} = this.props;
         return (
@@ -57,5 +55,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(Model);
 ModelInfo.propTypes = {
     loader: PropTypes.bool,
     error: PropTypes.object,
-    modelData: PropTypes.object
+    modelData: PropTypes.object,
+    routeParams: PropTypes.object
 };

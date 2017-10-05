@@ -1,21 +1,51 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {Link} from 'react-router';
-import {NAMESPACE as FICHE_NAMESPACE} from '../model/reducer';
+import * as actions from './actions';
+import {ManufLister} from './manuf-list';
+import {NAMESPACE} from '../model/reducer';
 
-export class FicheHome extends React.Component {
+
+function mapDispatchToProps(dispatch) {
+    return {
+        manufRequest: () => dispatch(actions.requestManufacturers())
+    };
+}
+
+function mapStateToProps(state) {
+    return state;
+}
+
+class FicheHome extends React.Component {
+
+    componentDidMount() {
+        const {[NAMESPACE]: {manufacturers}} = this.props;
+        if (!manufacturers) {
+            this.props.manufRequest();
+        }
+    }
+
     render() {
+        const {[NAMESPACE]: {manufacturers}} = this.props;
         return (
             <div>
                 <div>
                     <div>
-                        hon <Link to={`${FICHE_NAMESPACE}/mt/1/2`}>moto</Link>, <Link to={`${FICHE_NAMESPACE}/mt/1/2`}>ATV</Link>
+                        <button type="button">производитель + тип</button>
+                        <button type="button" disabled>тип + производитель</button>
+                    </div>
+                    <div>
+                        hon <Link to={`${NAMESPACE}/mt/1/2`}>moto</Link>, <Link to={`${NAMESPACE}/mt/1/2`}>ATV</Link>
                     </div>
                     <hr />
-                    <div>kaw</div>
-                    <div>suz</div>
-                    <div>yam</div>
+                    {manufacturers &&
+                    <ManufLister list={manufacturers} />
+                    }
+
                 </div>
             </div>
         );
     }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(FicheHome);
