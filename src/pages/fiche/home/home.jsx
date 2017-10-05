@@ -14,12 +14,16 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
     return state;
-} class FicheHome extends React.Component {componentDidMount() {
+}
+
+class FicheHome extends React.Component {
+    componentDidMount() {
         const {[NAMESPACE]: {manufacturers}} = this.props;
         if (!manufacturers) {
             this.props.manufRequest();
         }
     }
+
     render() {
         const {[NAMESPACE]: {manufacturers, homeViewMode}} = this.props;
         return (
