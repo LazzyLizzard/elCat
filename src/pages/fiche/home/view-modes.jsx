@@ -18,6 +18,7 @@ export class ViewModes extends React.Component {
         return (
             <div>
                 {
+                    // TODO [sf] 05.10.2017 check if use this function
                     map(VIEW_MODES, (modeItem) => {
                         const active = modeItem.id === this.viewMode;
                         const btnStyle = active ? {color: '#0f0'} : {};
