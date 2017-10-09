@@ -1,5 +1,8 @@
 import 'whatwg-fetch';
-import {REQUEST_URL_FICHE} from './../../../AppRoutes/constants';
+import {getRequestEnvironment} from './../../../utils/get-request-environment';
+import {REMOTE_HTTPS} from '../../../contants/server-request-environment';
+import {ENDPOINT_FICHE} from './../../../contants/end-points';
+
 
 export const GROUP_INFO_REQUEST = 'GROUP_INFO_REQUEST';
 export const GROUP_INFO_SUCCESS = 'GROUP_INFO_SUCCESS';
@@ -34,8 +37,9 @@ export const groupDataError = error => ({
 export const requestGroupInfo = id => (
     (dispatch) => {
         dispatch(groupDataRequest());
+        const url = `${getRequestEnvironment(REMOTE_HTTPS)}${ENDPOINT_FICHE}`;
         return fetch(
-            `${REQUEST_URL_FICHE}?async=1&action=modelGroup&modelId=${id}`, {
+            `${url}?async=1&action=modelGroup&modelId=${id}`, {
                 method: 'get'
                 // mode: 'cors'
             })
