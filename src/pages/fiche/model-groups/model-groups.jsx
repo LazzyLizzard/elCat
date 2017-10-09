@@ -18,6 +18,8 @@ export default function ModelGroups({modelGroups, onClick = noop, ...props}) {
                         >
                             <img src={data.imgPath} alt="" />{data.group_name}
                         </Link>
+                        {/* TODO [sf] 03.10.2017 realize further on server side */}
+                        <div>save to favorites</div>
                     </div>
                 </div>
             ))}

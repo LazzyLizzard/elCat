@@ -11,13 +11,18 @@ import {
 import {
     groupDetailsReducer
 } from '../pages/fiche/group-details/reducer';
+import {
+    manufsReducer
+} from '../pages/fiche/home/redcucer';
+
 
 // import {ficheReducers} from '../pages/fiche/reducer';
 
 export const rootReducer = combineReducers({
     [FICHE_NAMESPACE]: queueReducers(
         ficheModelReducer,
-        groupDetailsReducer
+        groupDetailsReducer,
+        manufsReducer
     ),
     [CART_NAMESPACE]: cartReducer
 });

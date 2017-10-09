@@ -1,1 +1,1 @@
-export {App as default} from './app';
+export {App} from './app';

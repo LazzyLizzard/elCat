@@ -36,8 +36,8 @@ export const requestGroupInfo = id => (
         dispatch(groupDataRequest());
         return fetch(
             `${REQUEST_URL_FICHE}?async=1&action=modelGroup&modelId=${id}`, {
-                method: 'get',
-                mode: 'cors'
+                method: 'get'
+                // mode: 'cors'
             })
             .then(response =>
                 // console.warn(response);
