@@ -1,5 +1,7 @@
 import 'whatwg-fetch';
-import {REQUEST_URL_FICHE} from './../../../AppRoutes/constants';
+import {getRequestEnvironment} from './../../../utils/get-request-environment';
+import {REMOTE_HTTPS} from '../../../contants/server-request-environment';
+import {ENDPOINT_FICHE} from './../../../contants/end-points';
 
 // export const MODEL_INFO = 'MODEL_INFO';
 export const MANUFS_REQUEST = 'MANUFS_REQUEST';
@@ -33,9 +35,10 @@ export const manufsError = error => ({
 // action generator itself
 export const requestManufacturers = () => (
     (dispatch) => {
+        const url = `${getRequestEnvironment(REMOTE_HTTPS)}${ENDPOINT_FICHE}`;
         dispatch(manufsRequest());
         return fetch(
-            `${REQUEST_URL_FICHE}?async=1&action=getManufList`, {
+            `${url}?async=1&action=getManufList`, {
                 method: 'get'
                 // mode: 'no-cors'
             })
