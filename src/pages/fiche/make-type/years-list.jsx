@@ -1,5 +1,6 @@
 import React from 'react';
-import {forEach} from 'lodash';
+import {map} from 'lodash';
+import {Link} from 'react-router';
 
 export class YearsList extends React.Component {
     render() {
@@ -8,11 +9,15 @@ export class YearsList extends React.Component {
         return (
             <div>
                 {
-                    forEach(yearsList.niceYears, (niceItem) => {
-                        forEach(niceItem, item => (
-                            <div>{item.year}</div>
-                        ));
-                    })
+                    map(yearsList.niceYears, niceItem => (
+                        <div>
+                            {
+                                map(niceItem, item => (
+                                    <span><Link to={item.year}>{item.year}</Link> ({item.modelsNumber}) </span>
+                                ))
+                            }
+                        </div>
+                    ))
                 }
             </div>
         );
