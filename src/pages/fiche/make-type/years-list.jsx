@@ -13,7 +13,7 @@ export class YearsList extends React.Component {
                         <div>
                             {
                                 map(niceItem, item => (
-                                    <span><Link to={item.year}>{item.year}</Link> ({item.modelsNumber}) </span>
+                                    <span><Link to={`/myt/${item.year}`}>{item.year}</Link> ({item.modelsNumber}) </span>
                                 ))
                             }
                         </div>
