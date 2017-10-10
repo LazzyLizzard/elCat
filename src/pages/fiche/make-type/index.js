@@ -1,1 +1,1 @@
-export {MakeType} from './make-type';
+export {default as MakeType} from './make-type';

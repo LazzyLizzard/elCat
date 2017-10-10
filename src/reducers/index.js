@@ -16,7 +16,7 @@ import {
 } from '../pages/cart/reducer';
 import {
     makeYearReducer
-} from '../pages/fiche/make-year/reducer';
+} from '../pages/fiche/make-type/reducer';
 
 // import {ficheReducers} from '../pages/fiche/reducer';
 

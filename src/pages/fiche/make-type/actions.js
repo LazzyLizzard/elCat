@@ -25,6 +25,7 @@ export const yearsDataSuccess = data => ({
 export const yearDataError = error => ({
     type: YEARS_ERROR,
     payload: {
+        loader: false,
         error
     }
 });
@@ -33,7 +34,7 @@ export const requestYearsData = (manufId, transportTypeId) => (
     (dispatch) => {
         const url = `${getRequestEnvironment(REMOTE_HTTPS)}${ENDPOINT_FICHE}`;
         dispatch(yearsDataRequest());
-        return fetch(`${url}?async=1&action=model&getYearsByManufAndType&manuf=${manufId}&tTypeId=${transportTypeId}`, {
+        return fetch(`${url}?async=1&action=getYearsByManufAndType&manufId=${manufId}&tTypeId=${transportTypeId}`, {
             method: 'get'
             // mode: 'no-cors'
         })
