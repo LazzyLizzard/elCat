@@ -1,8 +1,6 @@
 import React from 'react';
-import {Link} from 'react-router';
 import {map} from 'lodash';
-import {NAMESPACE} from '../model/reducer';
-import {TransportTypes} from './transport-types';
+import {ViewTransportTypes} from './view-transport-types';
 
 export class ManufLister extends React.Component {
     render() {
@@ -10,18 +8,17 @@ export class ManufLister extends React.Component {
         return (
             <ul>
                 {map(list, (manufItem) => {
-                        console.log(manufItem);
-                        return (
-                            <li>
-                                {manufItem.manufinfo.manuf_name}
-                                <TransportTypes
-                                    transportList={manufItem.manufinfo.transportList}
-                                    manufId={manufItem.manufinfo.manuf_id}
-                                />
-                            </li>
-                        );
-                    }
-                )}
+                    console.log(manufItem);
+                    return (
+                        <li>
+                            {manufItem.manufinfo.manuf_name}
+                            <ViewTransportTypes
+                                transportList={manufItem.transportList}
+                                manufId={manufItem.manufinfo.manuf_id}
+                            />
+                        </li>
+                    );
+                })}
             </ul>
         );
     }

@@ -1,23 +1,38 @@
 import React, {PropTypes, Component} from 'react';
+import {connect} from 'react-redux';
 import {Link} from 'react-router';
-import {NAMESPACE as FICHE_NAMESPACE} from '../model/reducer';
+import * as actions from './actions';
+import {NAMESPACE} from '../model/reducer';
 
-export class MakeYear extends Component {
+function mapDispatchToProps(dispatch) {
+    return {
+        getYears: (manufId, transportTypeId) => dispatch(actions.requestYearsData(manufId, transportTypeId))
+    };
+}
+
+function mapStateToProps(state) {
+    return state;
+}
+
+class MakeYear extends Component {
+    componentDidMount() {
+        const {routeParams: {make, typeId}} = this.props;
+        this.props.getYears(make, typeId);
+    }
+
     render() {
+        const {[NAMESPACE]: {loader, error, years}} = this.props;
+        console.log(years);
         return (
             <div>
                 <div><Link to="/">home</Link></div>
-
                 <h4>make year</h4>
-
-                honda &nbsp;
-                <Link to={`/${FICHE_NAMESPACE}/myt/1/1990/`}>1990</Link> &nbsp;
-                <Link to={`/${FICHE_NAMESPACE}/myt/1/1991/`}>1991</Link>
-
             </div>
         );
     }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(MakeYear);
 
 MakeYear.PropTypes = {
     makeId: PropTypes.number,

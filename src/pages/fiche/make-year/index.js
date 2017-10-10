@@ -1,1 +1,1 @@
-export {MakeYear} from './make-year';
+export {default as MakeYear} from './make-year';

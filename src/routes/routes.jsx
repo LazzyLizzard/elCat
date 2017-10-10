@@ -23,7 +23,7 @@ export default (
             <Route path={`/${FICHE_NAMESPACE}/mt/:make/:typeId`} component={MakeType} />
             <Route path={`/${FICHE_NAMESPACE}/my/:make/:year`} component={MakeYear} />
             <Route
-                path={`/${FICHE_NAMESPACE}/myt/:make/:year/:transport`}
+                path={`/${FICHE_NAMESPACE}/mty/:make/:transport/:year`}
                 component={MakeYearTransport}
             />
             <Route path={`/${FICHE_NAMESPACE}/model/:modelId`} component={Model} />

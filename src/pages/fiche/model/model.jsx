@@ -22,8 +22,6 @@ function mapStateToProps(state) {
 
 class Model extends Component {
     componentDidMount() {
-        // TODO [sf] 29.09.2017 get from props
-        // const modelId = 839;
         const {[NAMESPACE]: {modelData}, routeParams: {modelId}} = this.props;
         if (!get(modelData, 'modelInfo.model_id', null)) {
             this.props.onClicker(modelId);

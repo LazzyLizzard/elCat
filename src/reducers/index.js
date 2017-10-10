@@ -14,6 +14,9 @@ import {
     cartReducer,
     NAMESPACE as CART_NAMESPACE
 } from '../pages/cart/reducer';
+import {
+    makeYearReducer
+} from '../pages/fiche/make-year/reducer';
 
 // import {ficheReducers} from '../pages/fiche/reducer';
 
@@ -21,7 +24,8 @@ export const rootReducer = combineReducers({
     [FICHE_NAMESPACE]: queueReducers(
         ficheModelReducer,
         groupDetailsReducer,
-        manufsReducer
+        manufsReducer,
+        makeYearReducer
     ),
     [CART_NAMESPACE]: cartReducer
 });
