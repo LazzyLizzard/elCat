@@ -38,7 +38,7 @@ export const requestManufacturers = () => (
         const url = `${getRequestEnvironment(REMOTE_HTTPS)}${ENDPOINT_FICHE}`;
         dispatch(manufsRequest());
         return fetch(
-            `${url}?async=1&action=getManufList`, {
+            `${url}?async=1&action=getManufsAndTransport`, {
                 method: 'get'
                 // mode: 'no-cors'
             })

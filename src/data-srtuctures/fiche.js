@@ -1,6 +1,7 @@
 import {ELLIPSIS} from './../contants/empty-values';
 
 export const STATE_FICHE = {
+    breadCrumbs: null,
     // TODO [sf] 05.10.2017 rename
     homeViewMode: 1,
     modelData: {

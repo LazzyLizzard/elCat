@@ -3,8 +3,8 @@ import {Route, IndexRoute} from 'react-router';
 import {App} from '../containers';
 import {Home} from '../components/Home';
 import {FicheHome} from '../pages/fiche/home';
-import {MakeYear} from '../pages/fiche/make-year';
 import {MakeType} from '../pages/fiche/make-type';
+import {MakeYear} from '../pages/fiche/make-year';
 import {MakeYearTransport} from '../pages/fiche/make-year-transport';
 import {Model} from '../pages/fiche/model';
 import {GroupDetails} from '../pages/fiche/group-details';
@@ -23,7 +23,7 @@ export default (
             <Route path={`/${FICHE_NAMESPACE}/mt/:make/:typeId`} component={MakeType} />
             <Route path={`/${FICHE_NAMESPACE}/my/:make/:year`} component={MakeYear} />
             <Route
-                path={`/${FICHE_NAMESPACE}/myt/:make/:year/:transport`}
+                path={`/${FICHE_NAMESPACE}/mty/:make/:transport/:year`}
                 component={MakeYearTransport}
             />
             <Route path={`/${FICHE_NAMESPACE}/model/:modelId`} component={Model} />

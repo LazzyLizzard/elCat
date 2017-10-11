@@ -5,16 +5,18 @@ import {
     NAMESPACE as FICHE_NAMESPACE
 } from '../pages/fiche/model/reducer';
 import {
-    cartReducer,
-    NAMESPACE as CART_NAMESPACE
-} from '../pages/cart/reducer';
-import {
     groupDetailsReducer
 } from '../pages/fiche/group-details/reducer';
 import {
     manufsReducer
 } from '../pages/fiche/home/redcucer';
-
+import {
+    cartReducer,
+    NAMESPACE as CART_NAMESPACE
+} from '../pages/cart/reducer';
+import {
+    makeYearReducer
+} from '../pages/fiche/make-type/reducer';
 
 // import {ficheReducers} from '../pages/fiche/reducer';
 
@@ -22,7 +24,8 @@ export const rootReducer = combineReducers({
     [FICHE_NAMESPACE]: queueReducers(
         ficheModelReducer,
         groupDetailsReducer,
-        manufsReducer
+        manufsReducer,
+        makeYearReducer
     ),
     [CART_NAMESPACE]: cartReducer
 });
