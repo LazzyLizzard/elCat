@@ -22,14 +22,14 @@ class MakeType extends Component {
     }
 
     render() {
-        const {[NAMESPACE]: {loader, error, years}} = this.props;
+        const {[NAMESPACE]: {loader, error, years}, routeParams: {make, typeId}} = this.props;
         console.log(years);
         return (
             <div>
                 <div><Link to="/">home</Link></div>
                 <h4>make type TRUE</h4>
                 {years &&
-                <YearsList yearsList={years} />
+                <YearsList yearsList={years} make={make} typeId={typeId} />
                 }
             </div>
         );
