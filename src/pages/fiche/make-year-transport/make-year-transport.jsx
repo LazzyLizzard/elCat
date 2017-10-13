@@ -10,15 +10,16 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        onClicker: (make, type, year) => dispatch(actions.mtyModelData(make, type, year))
+        byAallData: (make, type, year) => dispatch(actions.mtyModelData(make, type, year))
         // onClicker: dispatch => modelId => getModelData(modelId)
     };
 }
 
-export class MakeYearTransport extends Component {
+class MakeYearTransport extends Component {
 
     componentDidMount() {
-        this.props.onClicker(make, type, year);
+        const {routeParams: {make, transport, year}} = this.props;
+        this.props.byAallData(make, transport, year);
     }
 
     render() {

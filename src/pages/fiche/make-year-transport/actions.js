@@ -31,7 +31,7 @@ export const mtyDataError = error => ({
 });
 
 // action generator itself
-const mtyModelData = (make, type, year) => (
+export const mtyModelData = (make, type, year) => (
     (dispatch) => {
         const url = `${getRequestEnvironment(REMOTE_HTTPS)}${ENDPOINT_FICHE}`;
         dispatch(mtyDataRequest());
@@ -51,5 +51,3 @@ const mtyModelData = (make, type, year) => (
             .catch(error => dispatch(mtyDataError(error)));
     }
 );
-
-
