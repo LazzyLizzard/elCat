@@ -11,7 +11,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         byAallData: (make, type, year) => dispatch(actions.mtyModelData(make, type, year))
-        // onClicker: dispatch => modelId => getModelData(modelId)
     };
 }
 
@@ -26,7 +25,6 @@ class MakeYearTransport extends Component {
         return (
             <div>
                 <h4>make year transport</h4>
-
             </div>
         );
     }
