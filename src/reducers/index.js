@@ -17,6 +17,9 @@ import {
 import {
     makeYearReducer
 } from '../pages/fiche/make-type/reducer';
+import {
+    mytReducer
+} from '../pages/fiche/make-year-transport/reducer';
 
 // import {ficheReducers} from '../pages/fiche/reducer';
 
@@ -25,7 +28,8 @@ export const rootReducer = combineReducers({
         ficheModelReducer,
         groupDetailsReducer,
         manufsReducer,
-        makeYearReducer
+        makeYearReducer,
+        mytReducer
     ),
     [CART_NAMESPACE]: cartReducer
 });
