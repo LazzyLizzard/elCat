@@ -31,7 +31,7 @@ export const mtyDataError = error => ({
 });
 
 // action generator itself
-export const requestModelData = (make, type, year) => (
+const mtyModelData = (make, type, year) => (
     (dispatch) => {
         const url = `${getRequestEnvironment(REMOTE_HTTPS)}${ENDPOINT_FICHE}`;
         dispatch(mtyDataRequest());
@@ -51,3 +51,5 @@ export const requestModelData = (make, type, year) => (
             .catch(error => dispatch(mtyDataError(error)));
     }
 );
+
+

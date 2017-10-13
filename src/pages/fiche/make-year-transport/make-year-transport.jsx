@@ -1,8 +1,26 @@
 import React, {PropTypes, Component} from 'react';
+import {connect} from 'react-redux';
+import * as actions from './actions';
 import {Link} from 'react-router';
 import {NAMESPACE as FICHE_NAMESPACE} from '../model/reducer';
 
+function mapStateToProps(state) {
+    return state;
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        onClicker: (make, type, year) => dispatch(actions.mtyModelData(make, type, year))
+        // onClicker: dispatch => modelId => getModelData(modelId)
+    };
+}
+
 export class MakeYearTransport extends Component {
+
+    componentDidMount() {
+        this.props.onClicker(make, type, year);
+    }
+
     render() {
         return (
             <div>
@@ -12,6 +30,8 @@ export class MakeYearTransport extends Component {
         );
     }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(MakeYearTransport);
 
 MakeYearTransport.PropTypes = {
     makeId: PropTypes.number,
