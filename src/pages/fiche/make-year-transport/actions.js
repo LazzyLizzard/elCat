@@ -51,3 +51,7 @@ export const mtyModelData = (make, type, year) => (
             .catch(error => dispatch(mtyDataError(error)));
     }
 );
+
+function x(method, resource, args) {
+
+}
