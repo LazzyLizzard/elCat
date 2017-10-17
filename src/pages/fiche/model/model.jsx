@@ -11,8 +11,8 @@ import {NAMESPACE} from './reducer';
 
 function mapDispatchToProps(dispatch) {
     return {
-        onClicker: modelId => dispatch(actions.requestModelData(modelId))
-        // onClicker: dispatch => modelId => getModelData(modelId)
+        modelDataFetcher: modelId => dispatch(actions.requestModelData(modelId))
+        // modelDataFetcher: dispatch => modelId => getModelData(modelId)
     };
 }
 
@@ -23,26 +23,32 @@ function mapStateToProps(state) {
 class Model extends Component {
     componentDidMount() {
         const {[NAMESPACE]: {modelData}, routeParams: {modelId}} = this.props;
-        if (!get(modelData, 'modelInfo.model_id', null)) {
-            this.props.onClicker(modelId);
-        }
+        // if (!get(modelData, 'modelInfo.model_id', null)) {
+        this.props.modelDataFetcher(modelId);
+        // }
+    }
+
+
+    componentWillReceiveProps(nextProps) {
+        console.log('---- CWRP');
+        console.log(nextProps);
+    }
+
+    componentWillUnmount() {
+        console.log('---- CWU');
     }
 
     render() {
-        console.log(this.props[NAMESPACE], 'props model');
         const {[NAMESPACE]: {loader, error, modelData}} = this.props;
+        console.log('render');
         return (
             <div>
-                hallo
-                {/* <ModelInfo modelId={modelId} actor={this.props.loadModelData} /> */}
-                {/* <Clicker modelLoader={this.props.onClicker} modelId={modelId} /> */}
                 {loader && <Loader />}
                 {error && <div>
                     error!
                     <div>{error.message}</div>
                 </div>}
                 {modelData && <ModelInfo modelData={modelData} />}
-
             </div>
         );
     }

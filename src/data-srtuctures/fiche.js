@@ -10,8 +10,10 @@ export const STATE_FICHE = {
             manuf_name: ELLIPSIS
         }
     },
+    dataGroup: null,
     manufacturers: null,
     transportTypes: null,
+    modelsList: null,
     years: null,
     error: null,
     loader: false,

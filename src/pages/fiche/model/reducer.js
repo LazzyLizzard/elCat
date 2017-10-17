@@ -14,7 +14,11 @@ export function ficheModelReducer(state = initialState, action) {
             return assign({}, state, action.payload);
 
         case MODEL_INFO_SUCCESS:
-            return assign({}, state, action.payload);
+            return assign({}, state, action.payload, {
+                current: {
+                    modelId: action.payload.modelData.modelInfo.model_id
+                }
+            });
 
         case MODEL_INFO_ERROR:
             return assign({}, state, action.payload);

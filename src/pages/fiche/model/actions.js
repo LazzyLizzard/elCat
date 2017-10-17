@@ -15,13 +15,16 @@ export const modelDataRequest = () => ({
     }
 });
 
-export const modelDataSuccess = data => ({
-    type: MODEL_INFO_SUCCESS,
-    payload: {
-        loader: false,
-        modelData: data
-    }
-});
+export const modelDataSuccess = (data) => {
+    console.log(data);
+    return ({
+        type: MODEL_INFO_SUCCESS,
+        payload: {
+            loader: false,
+            modelData: data
+        }
+    });
+};
 
 export const modelDataError = error => ({
     type: MODEL_INFO_ERROR,
@@ -41,13 +44,12 @@ export const requestModelData = id => (
                 method: 'get'
                 // mode: 'no-cors'
             })
-            .then((response) => {
-                console.warn(response);
-                if (response.status === 200) {
-                    return response.json();
-                }
-                return response.json();
-            })
+            .then(response =>
+                // console.warn(response);
+                // TODO check .status
+
+                response.json()
+            )
             .then(modelData => dispatch(modelDataSuccess(modelData)))
             .catch(error => dispatch(modelDataError(error)));
     }
