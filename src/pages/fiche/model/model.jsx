@@ -5,7 +5,6 @@ import {get} from 'lodash';
 import * as actions from './actions';
 // import {Clicker} from './clicker';
 import {ModelInfo} from '../model-info';
-import {Loader} from '../../../components/Common/loader';
 // import {getModelData} from './../../../utils/get-model-info';
 import {NAMESPACE} from './reducer';
 
@@ -43,12 +42,11 @@ class Model extends Component {
         console.log('render');
         return (
             <div>
-                {loader && <Loader />}
                 {error && <div>
                     error!
                     <div>{error.message}</div>
                 </div>}
-                {modelData && <ModelInfo modelData={modelData} />}
+                {modelData && <ModelInfo modelData={modelData} loader={loader} />}
             </div>
         );
     }

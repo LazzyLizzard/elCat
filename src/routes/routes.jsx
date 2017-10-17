@@ -27,7 +27,7 @@ export default (
                 component={MakeYearTransport}
             />
             <Route path={`/${FICHE_NAMESPACE}/model/:modelId`} component={Model} />
-            <Route path={`/${FICHE_NAMESPACE}/group/:groupId`} component={GroupDetails} />
+            <Route path={`/${FICHE_NAMESPACE}/model/:modelId/group/:groupId`} component={GroupDetails} />
 
             {/* cart */}
             <Route path={`/${CART_NAMESPACE}`} component={Cart} />
