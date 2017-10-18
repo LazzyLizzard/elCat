@@ -9,7 +9,10 @@ module.exports = {
     devtool: 'cheap-module-eval-source-map',
     resolve: {
         extensions: ['.js', '.jsx'],
-        modules: [path.resolve(__dirname, 'scr'), 'node_modules',]
+        modules: [path.resolve(__dirname, 'scr'), 'node_modules'],
+        alias: {
+            localResolve: path.resolve(__dirname, 'src')
+        }
     },
     entry: [
         'webpack-hot-middleware/client',
@@ -29,22 +32,33 @@ module.exports = {
     module: {
         rules: [
             {
-                loader: 'react-hot-loader'
+                test: /\.jsx?$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/,
+                query: {
+                    presets: ['es2015', 'react', 'stage-0']
+                }
             },
             {
-                loader: 'babel-loader'
-
-            },
-            {
-                loader: 'babel-polyfill-loader'
-            },
-            {
-                test: /\.css$/,
-                use: ['style-loader',
-                    'css-loader',
-                    'postcss-loader']
-
+                test: /\.js$/,
+                loaders: ['eslint-loader'],
+                include: [
+                    path.resolve(__dirname, 'src')
+                ]
             }
+            // {
+            //     loader: 'react-hot-loader'
+            // },
+            // {
+            //     loader: 'babel-polyfill-loader'
+            // },
+            // {
+            //     test: /\.css$/,
+            //     use: ['style-loader',
+            //         'css-loader',
+            //         'postcss-loader']
+            //
+            // }
         ]
     }
 };
