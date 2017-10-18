@@ -24,16 +24,15 @@ class FicheHome extends React.Component {
             this.props.manufRequest();
         }
     }
+
     render() {
         const {[NAMESPACE]: {manufacturers, homeViewMode}} = this.props;
         return (
             <div>
-                <div>
-                    <ViewModes currentViewMode={homeViewMode} />
-                    <hr />
-                    {manufacturers && <ManufLister list={manufacturers} />}
+                <ViewModes currentViewMode={homeViewMode} />
+                <hr />
+                {manufacturers && <ManufLister list={manufacturers} />}
 
-                </div>
             </div>
         );
     }

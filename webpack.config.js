@@ -1,14 +1,15 @@
-var path = require('path')
-var webpack = require('webpack')
-var NpmInstallPlugin = require('npm-install-webpack-plugin')
-var autoprefixer = require('autoprefixer');
-var precss = require('precss');
+/* eslint-disable no-undef */
+const path = require('path');
+const webpack = require('webpack');
+const NpmInstallPlugin = require('npm-install-webpack-plugin');
+// const autoprefixer = require('autoprefixer');
+// const precss = require('precss');
 
 module.exports = {
     devtool: 'cheap-module-eval-source-map',
     resolve: {
-        // root: [path.resolve(__dirname, 'src'), path.resolve(__dirname, 'node_modules')],
-        extensions: ['', '.js', '.jsx']
+        extensions: ['.js', '.jsx'],
+        modules: [path.resolve(__dirname, 'scr'), 'node_modules',]
     },
     entry: [
         'webpack-hot-middleware/client',
@@ -26,39 +27,25 @@ module.exports = {
         new NpmInstallPlugin()
     ],
     module: {
-        preLoaders: [
+        rules: [
             {
-                test: /\.jsx?$/,
-                loader: 'babel-loader',
-                exclude: /node_modules/,
-                query: {
-                    presets: ['es2015', 'react', 'stage-0']
-                }
+                loader: 'react-hot-loader'
             },
             {
-                test: /\.js$/,
-                loaders: ['eslint'],
-                include: [
-                    path.resolve(__dirname, "src"),
-                ],
-            }
-        ],
-        loaders: [
+                loader: 'babel-loader'
+
+            },
             {
-                loaders: ['react-hot', 'babel-loader'],
-                include: [
-                    path.resolve(__dirname, "src"),
-                ],
-                test: /\.js$/,
-                plugins: ['transform-runtime'],
+                loader: 'babel-polyfill-loader'
             },
             {
                 test: /\.css$/,
-                loader: "style-loader!css-loader!postcss-loader"
+                use: ['style-loader',
+                    'css-loader',
+                    'postcss-loader']
+
             }
         ]
-    },
-    postcss: function () {
-        return [autoprefixer, precss];
     }
-}
+};
+
