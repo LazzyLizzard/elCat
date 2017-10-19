@@ -10,7 +10,8 @@ import {NAMESPACE} from './reducer';
 
 function mapDispatchToProps(dispatch) {
     return {
-        modelDataFetcher: modelId => dispatch(actions.requestModelData(modelId))
+        modelDataFetcher: modelId => dispatch(actions.requestModelData(modelId)),
+        modelDataReset: () => dispatch(actions.resetModelData())
         // ,
         // currentModelDataUpdate: currentModelData => dispatch(actions.updateCurrent(currentModelData))
     };
@@ -22,8 +23,11 @@ function mapStateToProps(state) {
 
 class Model extends Component {
     componentDidMount() {
+        console.log('---- CDM');
         const {[NAMESPACE]: {modelData}, routeParams: {modelId}} = this.props;
-        if (!get(modelData, 'modelInfo.model_id', null)) {
+        const existingModelId = get(modelData, 'modelInfo.model_id', null);
+        if (!existingModelId || modelId !== modelData.modelInfo.model_id) {
+            this.props.modelDataReset();
             this.props.modelDataFetcher(modelId);
             // this.props.currentModelDataUpdate(modelData);
         }
@@ -42,7 +46,7 @@ class Model extends Component {
     }
 
     componentWillUnmount() {
-        console.log('---- CWU');
+        console.log('---- CWUM');
     }
 
     render() {

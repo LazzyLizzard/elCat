@@ -48,7 +48,9 @@ export const modelDataError = error => ({
 
 export const resetModelData = () => ({
     type: MODEL_INFO_RESET,
-    payload: {}
+    payload: {
+        modelData: null
+    }
 });
 
 // export const updateCurrent = data => currentModelDispatcher(data);

@@ -41,7 +41,6 @@ export const mtyModelData = (make, type, year) => (
                 // mode: 'no-cors'
             })
             .then((response) => {
-                console.warn(response);
                 if (response.status === 200) {
                     return response.json();
                 }
