@@ -11,7 +11,8 @@ import {NAMESPACE} from './reducer';
 function mapDispatchToProps(dispatch) {
     return {
         modelDataFetcher: modelId => dispatch(actions.requestModelData(modelId))
-        // modelDataFetcher: dispatch => modelId => getModelData(modelId)
+        // ,
+        // currentModelDataUpdate: currentModelData => dispatch(actions.updateCurrent(currentModelData))
     };
 }
 
@@ -22,15 +23,22 @@ function mapStateToProps(state) {
 class Model extends Component {
     componentDidMount() {
         const {[NAMESPACE]: {modelData}, routeParams: {modelId}} = this.props;
-        // if (!get(modelData, 'modelInfo.model_id', null)) {
-        this.props.modelDataFetcher(modelId);
-        // }
+        if (!get(modelData, 'modelInfo.model_id', null)) {
+            this.props.modelDataFetcher(modelId);
+            // this.props.currentModelDataUpdate(modelData);
+        }
     }
-
 
     componentWillReceiveProps(nextProps) {
         console.log('---- CWRP');
-        console.log(nextProps);
+        // console.dir(nextProps.fiche.modelData.modelInfo.model_id);
+
+
+        const {routeParams: {modelId}} = this.props;
+        console.log(modelId, nextProps.fiche.modelData.modelInfo.model_id);
+        if (modelId !== nextProps.fiche.modelData.modelInfo.model_id) {
+            // this.props.modelDataFetcher(modelId);
+        }
     }
 
     componentWillUnmount() {
@@ -39,7 +47,6 @@ class Model extends Component {
 
     render() {
         const {[NAMESPACE]: {loader, error, modelData}} = this.props;
-        console.log('render');
         return (
             <div>
                 {error && <div>
@@ -52,9 +59,17 @@ class Model extends Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Model);
+export default connect(mapStateToProps, mapDispatchToProps)
 
-ModelInfo.propTypes = {
+(
+    Model
+)
+;
+
+ModelInfo
+    .propTypes = {
+    currentModelDataUpdate: PropTypes.func,
+    modelDataFetcher: PropTypes.func,
     loader: PropTypes.bool,
     error: PropTypes.object,
     modelData: PropTypes.object,

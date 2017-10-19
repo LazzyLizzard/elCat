@@ -9,6 +9,7 @@ module.exports = {
     devtool: 'cheap-module-eval-source-map',
     resolve: {
         extensions: ['.js', '.jsx'],
+        // modules: [path.resolve(__dirname, 'scr'), 'node_modules'],
         modules: [path.resolve(__dirname, 'scr'), 'node_modules'],
         alias: {
             localResolve: path.resolve(__dirname, 'src')

@@ -1,4 +1,3 @@
-
 const LOCAL_HTTPS = 'LOCAL_HTTPS';
 const REMOTE_HTTPS = 'REMOTE_HTTPS';
 

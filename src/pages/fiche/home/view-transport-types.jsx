@@ -13,7 +13,6 @@ export class ViewTransportTypes extends React.Component {
 
     render() {
         const {transportList, manufId} = this.props;
-        console.warn(transportList);
         return (
             <ul>
                 {

@@ -7,6 +7,8 @@ import {ENDPOINT_FICHE} from './../../../contants/end-points';
 export const MODEL_INFO_REQUEST = 'MODEL_INFO_REQUEST';
 export const MODEL_INFO_SUCCESS = 'MODEL_INFO_SUCCESS';
 export const MODEL_INFO_ERROR = 'MODEL_INFO_ERROR';
+export const MODEL_INFO_RESET = 'MODEL_INFO_RESET';
+// export const CURRENT_MODEL_UPDATE = 'CURRENT_MODEL_UPDATE';
 
 export const modelDataRequest = () => ({
     type: MODEL_INFO_REQUEST,
@@ -15,16 +17,13 @@ export const modelDataRequest = () => ({
     }
 });
 
-export const modelDataSuccess = (data) => {
-    console.log(data);
-    return ({
-        type: MODEL_INFO_SUCCESS,
-        payload: {
-            loader: false,
-            modelData: data
-        }
-    });
-};
+export const modelDataSuccess = data => ({
+    type: MODEL_INFO_SUCCESS,
+    payload: {
+        loader: false,
+        modelData: data
+    }
+});
 
 export const modelDataError = error => ({
     type: MODEL_INFO_ERROR,
@@ -33,6 +32,26 @@ export const modelDataError = error => ({
         error
     }
 });
+// TODO [sf] 19.10.2017  currentModelData as erg
+// export const currentModelDispatcher = currentModelData => ({
+//     type: CURRENT_MODEL_UPDATE,
+//     // payload: currentModelData
+//     payload: {
+//         current: {
+//             modelId: currentModelData.ModelInfo.model_id,
+//             makeId: currentModelData.ModelInfo.manuf_id,
+//             transportTypeId: currentModelData.ModelInfo.transport_type_id,
+//             year: currentModelData.ModelInfo.year
+//         }
+//     }
+// });
+
+export const resetModelData = () => ({
+    type: MODEL_INFO_RESET,
+    payload: {}
+});
+
+// export const updateCurrent = data => currentModelDispatcher(data);
 
 // action generator itself
 export const requestModelData = id => (
