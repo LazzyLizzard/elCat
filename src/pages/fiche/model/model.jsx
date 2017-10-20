@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {get} from 'lodash';
 import * as actions from './actions';
 // import {Clicker} from './clicker';
-import {ModelInfo} from '../model-info';
+import {ModelInfo} from './../model-info';
 // import {getModelData} from './../../../utils/get-model-info';
 import {NAMESPACE} from './reducer';
 
@@ -31,22 +31,6 @@ class Model extends Component {
             this.props.modelDataFetcher(modelId);
             // this.props.currentModelDataUpdate(modelData);
         }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        console.log('---- CWRP');
-        // console.dir(nextProps.fiche.modelData.modelInfo.model_id);
-
-
-        const {routeParams: {modelId}} = this.props;
-        console.log(modelId, nextProps.fiche.modelData.modelInfo.model_id);
-        if (modelId !== nextProps.fiche.modelData.modelInfo.model_id) {
-            // this.props.modelDataFetcher(modelId);
-        }
-    }
-
-    componentWillUnmount() {
-        console.log('---- CWUM');
     }
 
     render() {

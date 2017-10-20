@@ -2,7 +2,7 @@ import React from 'react';
 
 export function Loader() {
     return (
-        <div>
+        <div style={{margin: '40px'}}>
             LOADING ...
         </div>
     );
