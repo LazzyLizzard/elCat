@@ -39,7 +39,7 @@ export const requestGroupInfo = id => (
         dispatch(groupDataRequest());
         const url = `${getRequestEnvironment(REMOTE_HTTPS)}${ENDPOINT_FICHE}`;
         return fetch(
-            `${url}?async=1&action=modelGroup&modelId=${id}`, {
+            `${url}?async=1&action=modelGroup&groupId=${id}`, {
                 method: 'get'
                 // mode: 'cors'
             })

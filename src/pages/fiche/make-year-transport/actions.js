@@ -18,7 +18,7 @@ export const mtyDataSuccess = data => ({
     type: MTY_SUCCESS,
     payload: {
         loader: false,
-        modelData: data
+        modelsList: data
     }
 });
 
@@ -36,12 +36,11 @@ export const mtyModelData = (make, type, year) => (
         const url = `${getRequestEnvironment(REMOTE_HTTPS)}${ENDPOINT_FICHE}`;
         dispatch(mtyDataRequest());
         return fetch(
-            `${url}?async=1&action=model&makeId=${make}&typeId=${type}&year=${year}`, {
+            `${url}?async=1&action=getModelsByAllParams&manufId=${make}&tTypeId=${type}&year=${year}`, {
                 method: 'get'
                 // mode: 'no-cors'
             })
             .then((response) => {
-                console.warn(response);
                 if (response.status === 200) {
                     return response.json();
                 }
@@ -51,7 +50,7 @@ export const mtyModelData = (make, type, year) => (
             .catch(error => dispatch(mtyDataError(error)));
     }
 );
-
-function x(method, resource, args) {
-
-}
+//
+// function x(method, resource, args) {
+//
+// }

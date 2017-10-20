@@ -1,14 +1,19 @@
-var path = require('path')
-var webpack = require('webpack')
-var NpmInstallPlugin = require('npm-install-webpack-plugin')
-var autoprefixer = require('autoprefixer');
-var precss = require('precss');
+/* eslint-disable no-undef */
+const path = require('path');
+const webpack = require('webpack');
+// const NpmInstallPlugin = require('npm-install-webpack-plugin');
+// const autoprefixer = require('autoprefixer');
+// const precss = require('precss');
 
 module.exports = {
     devtool: 'cheap-module-eval-source-map',
     resolve: {
-        // root: [path.resolve(__dirname, 'src'), path.resolve(__dirname, 'node_modules')],
-        extensions: ['', '.js', '.jsx']
+        extensions: ['.js', '.jsx'],
+        // modules: [path.resolve(__dirname, 'scr'), 'node_modules'],
+        modules: ['src', 'node_modules'],
+        alias: {
+            localResolve: path.resolve(__dirname, 'src')
+        }
     },
     entry: [
         'webpack-hot-middleware/client',
@@ -22,11 +27,11 @@ module.exports = {
     },
     plugins: [
         new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
-        new NpmInstallPlugin()
+        new webpack.HotModuleReplacementPlugin()
+        // new NpmInstallPlugin()
     ],
     module: {
-        preLoaders: [
+        rules: [
             {
                 test: /\.jsx?$/,
                 loader: 'babel-loader',
@@ -37,28 +42,25 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                loaders: ['eslint'],
+                loaders: ['eslint-loader'],
                 include: [
-                    path.resolve(__dirname, "src"),
-                ],
+                    path.resolve(__dirname, 'src')
+                ]
             }
-        ],
-        loaders: [
-            {
-                loaders: ['react-hot', 'babel-loader'],
-                include: [
-                    path.resolve(__dirname, "src"),
-                ],
-                test: /\.js$/,
-                plugins: ['transform-runtime'],
-            },
-            {
-                test: /\.css$/,
-                loader: "style-loader!css-loader!postcss-loader"
-            }
+            // {
+            //     loader: 'react-hot-loader'
+            // },
+            // {
+            //     loader: 'babel-polyfill-loader'
+            // },
+            // {
+            //     test: /\.css$/,
+            //     use: ['style-loader',
+            //         'css-loader',
+            //         'postcss-loader']
+            //
+            // }
         ]
-    },
-    postcss: function () {
-        return [autoprefixer, precss];
     }
-}
+};
+

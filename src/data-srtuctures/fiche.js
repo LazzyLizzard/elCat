@@ -1,17 +1,24 @@
-import {ELLIPSIS} from './../contants/empty-values';
+import {assign} from 'lodash';
+import {ELLIPSIS} from 'contants/empty-values';
 
-export const STATE_FICHE = {
-    breadCrumbs: null,
-    // TODO [sf] 05.10.2017 rename
-    homeViewMode: 1,
+export const DEFAULT_MODEL_DATA = {
     modelData: {
         modelInfo: {
             model_name: ELLIPSIS,
             manuf_name: ELLIPSIS
-        }
-    },
+        },
+        modelGroupsList: null
+    }
+};
+
+export const STATE_FICHE = assign({}, {
+    breadCrumbs: null,
+    // TODO [sf] 05.10.2017 rename
+    homeViewMode: 1,
+    dataGroup: null,
     manufacturers: null,
     transportTypes: null,
+    modelsList: null,
     years: null,
     error: null,
     loader: false,
@@ -21,4 +28,4 @@ export const STATE_FICHE = {
         transportTypeId: null,
         year: null
     }
-};
+}, DEFAULT_MODEL_DATA);

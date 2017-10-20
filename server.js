@@ -3,11 +3,11 @@ const express = require('express');
 const https = require('https');
 const http = require('http');
 const fs = require('fs');
+const webpack = require('webpack');
 
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
-const webpack = require('webpack');
 const config = require('./webpack.config');
 
 const compiler = webpack(config);

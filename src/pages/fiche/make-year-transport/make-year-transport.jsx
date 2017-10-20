@@ -1,8 +1,7 @@
 import React, {PropTypes, Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from './actions';
-import {Link} from 'react-router';
-import {NAMESPACE as FICHE_NAMESPACE} from '../model/reducer';
+import {ModelsList} from './models-list';
 
 function mapStateToProps(state) {
     return state;
@@ -15,16 +14,20 @@ function mapDispatchToProps(dispatch) {
 }
 
 class MakeYearTransport extends Component {
-
     componentDidMount() {
         const {routeParams: {make, transport, year}} = this.props;
         this.props.byAallData(make, transport, year);
     }
 
     render() {
+        const {fiche: {modelsList}} = this.props;
         return (
             <div>
                 <h4>make year transport</h4>
+                {modelsList &&
+                <ModelsList modelsList={modelsList} />
+                }
+
             </div>
         );
     }
