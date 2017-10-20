@@ -15,8 +15,13 @@ export default function ModelGroups({modelGroups, modelId, onClick = noop, ...pr
                         <Link
                             to={`/${NAMESPACE}/model/${modelId}/group/${data.group_id}`}
                             onClick={onClick}
+                            key={data.group_id}
                         >
-                            <img src={data.imgPath} alt="" />{data.group_name}
+                            <img
+                                src={data.imgPath}
+                                alt=""
+                                key={data.group_id}
+                            />{data.group_name}
                         </Link>
                         {/* TODO [sf] 03.10.2017 realize further on server side */}
                         <div>save to favorites</div>

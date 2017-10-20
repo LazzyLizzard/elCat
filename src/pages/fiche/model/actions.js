@@ -1,7 +1,8 @@
 import 'whatwg-fetch';
-import {getRequestEnvironment} from './../../../utils/get-request-environment';
-import {REMOTE_HTTPS} from '../../../contants/server-request-environment';
-import {ENDPOINT_FICHE} from './../../../contants/end-points';
+import {getRequestEnvironment} from 'utils/get-request-environment';
+import {REMOTE_HTTPS} from 'contants/server-request-environment';
+import {ENDPOINT_FICHE} from 'contants/end-points';
+import {DEFAULT_MODEL_DATA} from 'data-srtuctures/fiche';
 
 // export const MODEL_INFO = 'MODEL_INFO';
 export const MODEL_INFO_REQUEST = 'MODEL_INFO_REQUEST';
@@ -48,9 +49,7 @@ export const modelDataError = error => ({
 
 export const resetModelData = () => ({
     type: MODEL_INFO_RESET,
-    payload: {
-        modelData: null
-    }
+    payload: DEFAULT_MODEL_DATA
 });
 
 // export const updateCurrent = data => currentModelDispatcher(data);
