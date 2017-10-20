@@ -1,5 +1,5 @@
 import {assign} from 'lodash';
-import {STATE_FICHE as initialState} from './../../../data-srtuctures/fiche';
+import {STATE_FICHE as initialState} from 'data-srtuctures/fiche';
 import {
     MANUFS_SUCCESS,
     MANUFS_REQUEST,

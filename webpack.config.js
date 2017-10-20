@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 const path = require('path');
 const webpack = require('webpack');
-const NpmInstallPlugin = require('npm-install-webpack-plugin');
+// const NpmInstallPlugin = require('npm-install-webpack-plugin');
 // const autoprefixer = require('autoprefixer');
 // const precss = require('precss');
 
@@ -10,7 +10,7 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx'],
         // modules: [path.resolve(__dirname, 'scr'), 'node_modules'],
-        modules: [path.resolve(__dirname, 'scr'), 'node_modules'],
+        modules: ['src', 'node_modules'],
         alias: {
             localResolve: path.resolve(__dirname, 'src')
         }
@@ -27,8 +27,8 @@ module.exports = {
     },
     plugins: [
         new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
-        new NpmInstallPlugin()
+        new webpack.HotModuleReplacementPlugin()
+        // new NpmInstallPlugin()
     ],
     module: {
         rules: [
