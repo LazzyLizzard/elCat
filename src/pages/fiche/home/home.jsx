@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router';
 import * as actions from './actions';
 import {ManufLister} from './manuf-list';
 import {ViewModes} from './view-modes';
@@ -8,7 +7,8 @@ import {NAMESPACE} from '../model/reducer';
 
 function mapDispatchToProps(dispatch) {
     return {
-        manufRequest: () => dispatch(actions.requestManufacturers())
+        manufRequest: () => dispatch(actions.requestManufacturers()),
+        setHomeViewMode: homeViewMode => dispatch(actions.setHomeViewMode(homeViewMode))
     };
 }
 
@@ -29,7 +29,7 @@ class FicheHome extends React.Component {
         const {[NAMESPACE]: {manufacturers, homeViewMode}} = this.props;
         return (
             <div>
-                <ViewModes currentViewMode={homeViewMode} />
+                <ViewModes currentViewMode={homeViewMode} onClick={this.props.setHomeViewMode} />
                 <hr />
                 {manufacturers && <ManufLister list={manufacturers.byManufacturer} />}
 

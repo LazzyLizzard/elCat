@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import {map} from 'lodash';
 
 const VIEW_MODES = [
-    {id: 1, text: 'производитель + тип'},
-    {id: 2, text: 'тип + производитель'}
+    {id: 1, key: 'byManufacturer', text: 'производитель + тип'},
+    {id: 2, key: 'byTransportType', text: 'тип + производитель'}
 ];
 
 export class ViewModes extends React.Component {

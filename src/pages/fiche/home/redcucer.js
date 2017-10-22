@@ -3,7 +3,8 @@ import {STATE_FICHE as initialState} from 'data-srtuctures/fiche';
 import {
     MANUFS_SUCCESS,
     MANUFS_REQUEST,
-    MANUFS_ERROR
+    MANUFS_ERROR,
+    HOME_VIEW_MODE
 } from './actions';
 
 export const NAMESPACE = 'fiche';
@@ -18,6 +19,9 @@ export function manufsReducer(state = initialState, action) {
 
         case MANUFS_ERROR:
             return assign({}, state, action.payload);
+
+        case HOME_VIEW_MODE:
+            return assign({}, state, action.payload)
 
         default:
             return state;

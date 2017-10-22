@@ -7,6 +7,7 @@ import {ENDPOINT_FICHE} from './../../../contants/end-points';
 export const MANUFS_REQUEST = 'MANUFS_REQUEST';
 export const MANUFS_SUCCESS = 'MANUFS_SUCCESS';
 export const MANUFS_ERROR = 'MANUFS_ERROR';
+export const HOME_VIEW_MODE = 'HOME_VIEW_MODE';
 
 export const manufsRequest = () => ({
     type: MANUFS_REQUEST,
@@ -31,6 +32,13 @@ export const manufsError = error => ({
     }
 });
 
+export const setHomeViewMode = mode => ({
+    type: HOME_VIEW_MODE,
+    payload: {
+        homeViewMode: mode
+    }
+})
+
 
 // action generator itself
 export const requestManufacturers = () => (
@@ -43,7 +51,6 @@ export const requestManufacturers = () => (
                 // mode: 'no-cors'
             })
             .then((response) => {
-                console.warn(response);
                 if (response.status === 200) {
                     return response.json();
                 }
