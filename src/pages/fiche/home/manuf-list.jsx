@@ -4,6 +4,7 @@ import {ViewTransportTypes} from './view-transport-types';
 
 export class ManufLister extends React.Component {
     render() {
+        console.dir(this.props);
         const {list} = this.props;
         return (
             <ul>
@@ -11,10 +12,10 @@ export class ManufLister extends React.Component {
                     console.log(manufItem);
                     return (
                         <li>
-                            {manufItem.manufinfo.manuf_name}
+                            {manufItem.manufacturerInfo.manuf_name}
                             <ViewTransportTypes
                                 transportList={manufItem.transportList}
-                                manufId={manufItem.manufinfo.manuf_id}
+                                manufId={manufItem.manufacturerInfo.manuf_id}
                             />
                         </li>
                     );

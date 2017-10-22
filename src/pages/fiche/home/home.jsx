@@ -31,7 +31,7 @@ class FicheHome extends React.Component {
             <div>
                 <ViewModes currentViewMode={homeViewMode} />
                 <hr />
-                {manufacturers && <ManufLister list={manufacturers} />}
+                {manufacturers && <ManufLister list={manufacturers.byManufacturer} />}
 
             </div>
         );
