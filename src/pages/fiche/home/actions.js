@@ -37,8 +37,7 @@ export const setHomeViewMode = mode => ({
     payload: {
         homeViewMode: mode
     }
-})
-
+});
 
 // action generator itself
 export const requestManufacturers = () => (

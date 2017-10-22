@@ -21,7 +21,7 @@ export function manufsReducer(state = initialState, action) {
             return assign({}, state, action.payload);
 
         case HOME_VIEW_MODE:
-            return assign({}, state, action.payload)
+            return assign({}, state, action.payload);
 
         default:
             return state;
