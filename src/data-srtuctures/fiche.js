@@ -5,7 +5,8 @@ export const DEFAULT_MODEL_DATA = {
     modelData: {
         modelInfo: {
             model_name: ELLIPSIS,
-            manuf_name: ELLIPSIS
+            manuf_name: ELLIPSIS,
+            year: ELLIPSIS
         },
         modelGroupsList: null
     }
