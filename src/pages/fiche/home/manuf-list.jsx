@@ -9,7 +9,7 @@ export class ManufLister extends React.Component {
         return (
             <ul>
                 {map(list, (manufItem) => {
-                    console.log(manufItem);
+                    // console.log(manufItem);
                     return (
                         <li>
                             {manufItem.manufacturerInfo.manuf_name}

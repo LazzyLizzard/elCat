@@ -15,7 +15,7 @@ export const DEFAULT_MODEL_DATA = {
 export const STATE_FICHE = assign({}, {
     breadCrumbs: null,
     // TODO [sf] 05.10.2017 rename
-    homeViewMode: 1,
+    homeViewMode: 'byManufacturer',
     dataGroup: null,
     manufacturers: null,
     transportTypes: null,
