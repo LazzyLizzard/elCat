@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {NAMESPACE} from 'pages/fiche/model/reducer';
 import * as actions from './actions';
 import {ManufLister} from './manuf-list';
 import {ViewModes} from './view-modes';
-import {NAMESPACE} from '../model/reducer';
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -17,7 +17,6 @@ function mapStateToProps(state) {
 }
 
 class FicheHome extends React.Component {
-
     componentDidMount() {
         const {[NAMESPACE]: {manufacturers}} = this.props;
         if (!manufacturers) {
