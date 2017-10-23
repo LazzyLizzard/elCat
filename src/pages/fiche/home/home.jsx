@@ -5,6 +5,12 @@ import * as actions from './actions';
 import {ManufLister} from './manuf-list';
 import {ViewModes} from './view-modes';
 
+const VIEW_MODES = [
+    {id: 1, key: 'byManufacturer', text: 'производитель + тип'},
+    {id: 2, key: 'byTransportType', text: 'тип + производитель'}
+];
+
+
 function mapDispatchToProps(dispatch) {
     return {
         manufRequest: () => dispatch(actions.requestManufacturers()),
@@ -28,7 +34,11 @@ class FicheHome extends React.Component {
         const {[NAMESPACE]: {manufacturers, homeViewMode}} = this.props;
         return (
             <div>
-                <ViewModes currentViewMode={homeViewMode} onClick={this.props.setHomeViewMode} />
+                <ViewModes
+                    currentViewMode={homeViewMode}
+                    onClick={this.props.setHomeViewMode}
+                    viewModes={VIEW_MODES}
+                />
                 <hr />
                 {manufacturers && <ManufLister list={manufacturers.byManufacturer} />}
 
