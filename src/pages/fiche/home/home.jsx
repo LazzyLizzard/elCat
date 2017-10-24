@@ -47,8 +47,7 @@ class FicheHome extends React.Component {
 
     render() {
         const {[NAMESPACE]: {manufacturers, homeViewMode}} = this.props;
-        const Component = viewMode(homeViewMode);
-        console.log(manufacturers);
+        const MyComponent = viewMode(homeViewMode);
         return (
             <div>
                 <ViewModes
@@ -57,10 +56,8 @@ class FicheHome extends React.Component {
                     viewModes={VIEW_MODES}
                 />
                 <hr />
-                {manufacturers && <Component test="hello" />}
-                <ViewByManufacturer />
-                <ViewByTransportType />
-
+                {/* {manufacturers && <Component test="hello" />} */}
+                <MyComponent test="hello" />
             </div>
         );
     }
