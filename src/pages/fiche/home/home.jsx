@@ -12,6 +12,7 @@ const VIEW_MODES = [
     {id: 2, key: 'byTransportType', text: 'тип + производитель'}
 ];
 
+
 function mapDispatchToProps(dispatch) {
     return {
         manufRequest: () => dispatch(actions.requestManufacturers()),

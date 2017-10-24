@@ -19,7 +19,7 @@ export class ViewModes extends React.Component {
                         const active = modeItem.key === currentViewMode;
                         const btnStyle = active ? {color: '#007700'} : {};
                         // const toggleClicker = () => this.viewToggler(modeItem.id);
-                        const toggleClicker = () => onClick(modeItem.key);
+                        const toggleClicker = () => onClick(modeItem.id);
                         return (
                             <button
                                 type="button"
