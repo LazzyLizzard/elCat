@@ -4,7 +4,7 @@ export class ViewByTransportType extends React.Component {
     render() {
         return (
             <div>
-                ViewByManufacturer
+                ViewByTransportType
             </div>
         );
     }
