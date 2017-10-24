@@ -29,10 +29,12 @@ const components = {
     byTransportType: ViewByTransportType
 };
 
-function ViewMode(props, storeNode) {
+function viewMode(viewKey) {
     // Correct! JSX type can be a capitalized variable.
-    const SpecificView = components[props];
-    return <SpecificView list={storeNode[props]} />;
+    const SpecificView = components[viewKey];
+    // return <SpecificView list={componentsMap[viewKey]} />;
+    console.log(SpecificView);
+    return <SpecificView />;
 }
 
 class FicheHome extends React.Component {
@@ -45,7 +47,8 @@ class FicheHome extends React.Component {
 
     render() {
         const {[NAMESPACE]: {manufacturers, homeViewMode}} = this.props;
-        const Component = ViewMode(homeViewMode, manufacturers);
+        const Component = viewMode(homeViewMode);
+        console.log(manufacturers);
         return (
             <div>
                 <ViewModes
@@ -54,7 +57,9 @@ class FicheHome extends React.Component {
                     viewModes={VIEW_MODES}
                 />
                 <hr />
-                {manufacturers && <Component />}
+                {manufacturers && <Component test="hello" />}
+                <ViewByManufacturer />
+                <ViewByTransportType />
 
             </div>
         );

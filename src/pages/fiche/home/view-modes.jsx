@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {map} from 'lodash';
+import {map, noop} from 'lodash';
 
 export class ViewModes extends React.Component {
     // viewMode = this.props.currentViewMode;
@@ -19,7 +19,7 @@ export class ViewModes extends React.Component {
                         const active = modeItem.key === currentViewMode;
                         const btnStyle = active ? {color: '#007700'} : {};
                         // const toggleClicker = () => this.viewToggler(modeItem.id);
-                        const toggleClicker = () => onClick(modeItem.id);
+                        const toggleClicker = () => onClick(modeItem.key);
                         return (
                             <button
                                 type="button"
@@ -37,9 +37,11 @@ export class ViewModes extends React.Component {
 }
 
 ViewModes.propTypes = {
-    currentViewMode: PropTypes.string
+    currentViewMode: PropTypes.string,
+    onClick: PropTypes.func
 };
 
 ViewModes.defaultProps = {
-    currentViewMode: 'byManufacturer'
-}
+    currentViewMode: 'byManufacturer',
+    onClick: noop
+};
