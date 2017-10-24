@@ -57,6 +57,7 @@ class FicheHome extends React.Component {
                 />
                 <hr />
                 {/* {manufacturers && <Component test="hello" />} */}
+                <MyComponent test="hello" />
             </div>
         );
     }
