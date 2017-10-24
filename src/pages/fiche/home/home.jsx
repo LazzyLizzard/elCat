@@ -2,7 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {NAMESPACE} from 'pages/fiche/model/reducer';
 import * as actions from './actions';
-import {ManufLister} from './manuf-list';
+// import {ManufLister} from './manuf-list';
+import {ViewByManufacturer} from './view-by-manufacturer';
+import {ViewByTransportType} from './view-by-transport-type';
 import {ViewModes} from './view-modes';
 
 const VIEW_MODES = [
@@ -21,6 +23,17 @@ function mapStateToProps(state) {
     return state;
 }
 
+const components = {
+    byManufacturer: ViewByManufacturer,
+    byTransportType: ViewByTransportType
+};
+
+function ViewMode(props, storeNode) {
+    // Correct! JSX type can be a capitalized variable.
+    const SpecificView = components[props];
+    return <SpecificView list={storeNode[props]} />;
+}
+
 class FicheHome extends React.Component {
     componentDidMount() {
         const {[NAMESPACE]: {manufacturers}} = this.props;
@@ -31,6 +44,7 @@ class FicheHome extends React.Component {
 
     render() {
         const {[NAMESPACE]: {manufacturers, homeViewMode}} = this.props;
+        const Component = ViewMode(homeViewMode, manufacturers);
         return (
             <div>
                 <ViewModes
@@ -39,7 +53,7 @@ class FicheHome extends React.Component {
                     viewModes={VIEW_MODES}
                 />
                 <hr />
-                {manufacturers && <ManufLister list={manufacturers.byManufacturer} />}
+                {manufacturers && <Component />}
 
             </div>
         );
