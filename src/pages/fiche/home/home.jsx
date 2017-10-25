@@ -34,7 +34,7 @@ function viewMode(viewKey) {
     const SpecificView = components[viewKey];
     // return <SpecificView list={componentsMap[viewKey]} />;
     console.log(SpecificView);
-    return <SpecificView />;
+    return SpecificView;
 }
 
 class FicheHome extends React.Component {
