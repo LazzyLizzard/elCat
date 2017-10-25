@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {NAMESPACE} from 'pages/fiche/model/reducer';
 import * as actions from './actions';
-// import {ManufLister} from './manuf-list';
 import {ViewByManufacturer} from './view-by-manufacturer';
 import {ViewByTransportType} from './view-by-transport-type';
 import {ViewModes} from './view-modes';
@@ -30,11 +29,8 @@ const components = {
 };
 
 function viewMode(viewKey) {
-    // Correct! JSX type can be a capitalized variable.
     const SpecificView = components[viewKey];
-    // return <SpecificView list={componentsMap[viewKey]} />;
-    console.log(SpecificView);
-    return <SpecificView />;
+    return SpecificView;
 }
 
 class FicheHome extends React.Component {
@@ -56,8 +52,8 @@ class FicheHome extends React.Component {
                     viewModes={VIEW_MODES}
                 />
                 <hr />
-                {/* {manufacturers && <Component test="hello" />} */}
-                <MyComponent test="hello" />
+                {manufacturers && <MyComponent data={manufacturers[homeViewMode]} />}
+
             </div>
         );
     }
