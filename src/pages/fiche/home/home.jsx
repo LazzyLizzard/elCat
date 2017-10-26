@@ -29,8 +29,7 @@ const components = {
 };
 
 function viewMode(viewKey) {
-    const SpecificView = components[viewKey];
-    return SpecificView;
+    return components[viewKey];
 }
 
 class FicheHome extends React.Component {
@@ -46,6 +45,7 @@ class FicheHome extends React.Component {
         const MyComponent = viewMode(homeViewMode);
         return (
             <div>
+                <h3>fiche home 1</h3>
                 <ViewModes
                     currentViewMode={homeViewMode}
                     onClick={this.props.setHomeViewMode}

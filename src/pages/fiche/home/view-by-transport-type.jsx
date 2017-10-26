@@ -1,5 +1,7 @@
 import React from 'react';
 import {map} from 'lodash';
+import {Link} from 'react-router';
+import {NAMESPACE} from 'pages/fiche/model/reducer';
 
 export class ViewByTransportType extends React.Component {
     render() {
@@ -14,6 +16,17 @@ export class ViewByTransportType extends React.Component {
                         (
                             <li>
                                 {trasportTypeItem.transportTypeInfo.ttype_name}
+                                <ul>
+                                    {map(trasportTypeItem.manufacturersList, zzz => (
+                                        <li>
+                                            <Link
+                                                to={`/${NAMESPACE}/mt/${zzz.manufacturerId}/${zzz.transportId}`}
+                                            >
+                                                {zzz.manufacturerName}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
                             </li>
                         )
                     )}
