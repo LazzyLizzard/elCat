@@ -31,6 +31,9 @@ export default (
 
             {/* cart */}
             <Route path={`/${CART_NAMESPACE}`} component={Cart} />
+
+            {/* profile */}
+
         </Route>
         <Route path="*" component={NotFound} />
     </div>

@@ -1,9 +1,7 @@
 import {applyMiddleware, compose} from 'redux';
 // import {createLogger} from 'redux-logger';
 import thunk from 'redux-thunk';
-// import {rootReducer} from '../reducers';
 import {redirect} from '../middleware/redirect';
-// import nextRootReducer from '../reducers';
 
 export default function configureStore() {
     // const logger = createLogger();

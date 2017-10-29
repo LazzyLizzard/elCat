@@ -8,15 +8,12 @@ export const GROUP_INFO_REQUEST = 'GROUP_INFO_REQUEST';
 export const GROUP_INFO_SUCCESS = 'GROUP_INFO_SUCCESS';
 export const GROUP_INFO_ERROR = 'GROUP_INFO_ERROR';
 
-export const groupDataRequest = () => {
-    console.log('reducer gr');
-    return ({
-        type: GROUP_INFO_REQUEST,
-        payload: {
-            loader: true
-        }
-    });
-};
+export const groupDataRequest = () => ({
+    type: GROUP_INFO_REQUEST,
+    payload: {
+        loader: true
+    }
+});
 
 export const groupDataSuccess = data => ({
     type: GROUP_INFO_SUCCESS,

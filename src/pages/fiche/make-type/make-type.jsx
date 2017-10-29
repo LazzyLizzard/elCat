@@ -23,7 +23,6 @@ class MakeType extends Component {
 
     render() {
         const {[NAMESPACE]: {loader, error, years}, routeParams: {make, typeId}} = this.props;
-        console.log(years);
         return (
             <div>
                 <div><Link to="/">home</Link></div>
