@@ -6,7 +6,7 @@ export class App extends Component {
         return (
             <div>
                 <div style={{width: '1400px', margin: '0 auto'}}>
-                    <h3>App (<Link to="/">home</Link> | <Link to="/fiche">elcat</Link>)</h3>
+                    <h3>App: <Link to="/">home</Link> | <Link to="/fiche">elcat</Link> | <Link to="/profile">Profile</Link></h3>
                     <div style={{float: 'left', width: '25%'}}>
                         <div>
                             cats
