@@ -1,17 +1,19 @@
 import React from 'react';
 import {Route, IndexRoute} from 'react-router';
-import {App} from '../containers';
-import {Home} from '../components/Home';
-import {FicheHome} from '../pages/fiche/home';
-import {MakeType} from '../pages/fiche/make-type';
-import {MakeYear} from '../pages/fiche/make-year';
-import {MakeYearTransport} from '../pages/fiche/make-year-transport';
-import {Model} from '../pages/fiche/model';
-import {GroupDetails} from '../pages/fiche/group-details';
-import {NotFound} from '../components/not-found/not-found';
-import {Cart} from '../pages/cart';
-import {NAMESPACE as FICHE_NAMESPACE} from '../pages/fiche/model/reducer';
-import {NAMESPACE as CART_NAMESPACE} from '../pages/cart/reducer';
+import {App} from 'containers';
+import {Home} from 'components/Home';
+import {FicheHome} from 'pages/fiche/home';
+import {MakeType} from 'pages/fiche/make-type';
+import {MakeYear} from 'pages/fiche/make-year';
+import {MakeYearTransport} from 'pages/fiche/make-year-transport';
+import {Model} from 'pages/fiche/model';
+import {GroupDetails} from 'pages/fiche/group-details';
+import {NotFound} from 'components/not-found/not-found';
+import {Cart} from 'pages/cart';
+import {Profile} from 'pages/profile/profile';
+import {NAMESPACE as FICHE_NAMESPACE} from 'pages/fiche/model/reducer';
+import {NAMESPACE as CART_NAMESPACE} from 'pages/cart/reducer';
+import {NAMESPACE as PROFILE_NAMESPACE} from 'pages/profile/reducer';
 
 export default (
     <div>
@@ -32,7 +34,9 @@ export default (
             {/* cart */}
             <Route path={`/${CART_NAMESPACE}`} component={Cart} />
 
-            {/* profile */}
+            {/* profile, customer */}
+            <Route path={`/${PROFILE_NAMESPACE}`} component={Profile} />
+            <Route path={`/${PROFILE_NAMESPACE}/orders`} component={Profile} />
 
         </Route>
         <Route path="*" component={NotFound} />
