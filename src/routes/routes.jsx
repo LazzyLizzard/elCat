@@ -34,8 +34,9 @@ export default (
             {/* cart */}
             <Route path={`/${CART_NAMESPACE}`} component={Cart} />
 
-            {/* profile */}
+            {/* profile, customer */}
             <Route path={`/${PROFILE_NAMESPACE}`} component={Profile} />
+            <Route path={`/${PROFILE_NAMESPACE}/orders`} component={Profile} />
 
         </Route>
         <Route path="*" component={NotFound} />

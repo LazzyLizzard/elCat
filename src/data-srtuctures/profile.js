@@ -1,3 +1,3 @@
 export const profile = {
-    customer: {},
-}
+    customer: {}
+};
