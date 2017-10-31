@@ -2,13 +2,15 @@ import React, {Component} from 'react';
 import {Link} from 'react-router';
 
 export class App extends Component {
-
     render() {
         return (
             <div>
                 <div style={{width: '1400px', margin: '0 auto'}}>
                     <h3>App:
-                        <Link to="/">home</Link> | <Link to="/fiche">elcat</Link> | <Link to="/profile">Profile</Link>
+                        <Link to="/">home</Link> |
+                        <Link to="/fiche">elcat</Link> |
+                        <Link to="/profile">Profile</Link> |
+                        <Link to="/selector">Selector</Link>
                     </h3>
                     <div style={{float: 'left', width: '25%'}}>
                         <div>
