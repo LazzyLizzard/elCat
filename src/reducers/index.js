@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
 import queueReducers from 'utils/queue-reducers';
+import {selectorFormReducer} from 'pages/selector/selectror-form-reducer';
 import {
     ficheModelReducer,
     NAMESPACE as FICHE_NAMESPACE
@@ -34,5 +35,6 @@ export const rootReducer = combineReducers({
         mytReducer
     ),
     [CART_NAMESPACE]: cartReducer,
-    [PROFILE_NAMESPACE]: profileReducer
+    [PROFILE_NAMESPACE]: profileReducer,
+    form: selectorFormReducer
 });
