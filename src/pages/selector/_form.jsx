@@ -1,6 +1,8 @@
 import React from 'react';
-import {map} from 'lodash';
-// import reduxForm from 'redux-form';
+import {map, noop} from 'lodash';
+import {reduxForm, Field} from 'redux-form';
+
+// const {DOM: {input, select, textarea}} = React;
 
 const FORM_DATA = {
     groups: [
@@ -9,26 +11,49 @@ const FORM_DATA = {
                 id: 32,
                 name: 'group 1'
             },
-            list: [{
-                itemID: 100,
-                itemName: 'name 1',
-                featured: true
-            }]
+            list: [
+                {
+                    itemID: 100,
+                    itemName: 'name 1',
+                    featured: true
+                },
+                {
+                    itemID: 200,
+                    itemName: 'name 2',
+                    featured: true
+                }
+            ]
         }
     ]
 };
 
-export const TestForm = () => (
-    <div>
-        {map(FORM_DATA.groups, group => (
-                <div>
-                    {group.info.name}
-                    {map(group.list, list => (
-                        <div key={list.itemName}>{list.itemName}</div>
+class TestForm extends React.Component {
+    render() {
+        return (
+            <div>
+                <form onSubmit={noop}>
+                    {map(FORM_DATA.groups, group => (
+                        <div>
+                            {group.info.name}
+                            <div>
+                                {map(group.list, list => (
+                                    <span>
+                                        <Field
+                                            type="checkbox"
+                                            name={`t[${group.info.id}]`}
+                                            component="input"
+                                        />
+                                        {list.itemName}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
                     ))}
-                </div>
-            )
-        )}
-    </div>
-);
+                    <button type="submit">go</button>
+                </form>
+            </div>
+        );
+    }
+}
 
+export default reduxForm({form: 'myForm'})(TestForm);

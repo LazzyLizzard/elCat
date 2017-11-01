@@ -1,5 +1,5 @@
 import React from 'react';
-import {TestForm} from './_form';
+import TestForm from './_form';
 
 export class Selector extends React.Component {
     render() {
