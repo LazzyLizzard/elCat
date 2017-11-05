@@ -15,11 +15,13 @@ const FORM_DATA = {
                 {
                     itemID: 100,
                     itemName: 'name 1',
+                    value: 40,
                     featured: true
                 },
                 {
                     itemID: 200,
                     itemName: 'name 2',
+                    value: 60,
                     featured: true
                 }
             ]
@@ -40,10 +42,11 @@ class TestForm extends React.Component {
                                     <span>
                                         <Field
                                             type="checkbox"
-                                            name={`t[${group.info.id}]`}
+                                            name={`${list.value}`}
                                             component="input"
+                                            onChange={e => e.preventDefault()}
                                         />
-                                        {list.itemName}
+                                        {list.itemName} - {list.value} |
                                     </span>
                                 ))}
                             </div>
