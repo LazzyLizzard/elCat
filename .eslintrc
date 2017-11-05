@@ -8,6 +8,25 @@
     "plugins": [
         "react"
     ],
+    "settings": {
+        "import/extensions": [".js", ".jsx"],
+        "import/resolver": {
+            "node": {
+                "paths": ["src"]
+            }
+        }
+//        "import/core-modules": ["fe-root/constants/routes"],
+//        "import/resolver": {
+//            "webpack": {
+//                "config": {
+//                    "resolve": {
+//                        "modules": ["src", "node_modules"],
+//                        "extensions": [".js", ".jsx"]
+//                    }
+//                }
+//            }
+//        }
+    },
     "rules": {
         "indent": [
             "error",

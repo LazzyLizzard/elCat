@@ -1,20 +1,39 @@
 import React, {PropTypes, Component} from 'react';
-import {Link} from 'react-router';
+import {connect} from 'react-redux';
+import * as actions from './actions';
+import {ModelsList} from './models-list';
 
-export class MakeYearTransport extends Component {
+function mapStateToProps(state) {
+    return state;
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        byAallData: (make, type, year) => dispatch(actions.mtyModelData(make, type, year))
+    };
+}
+
+class MakeYearTransport extends Component {
+    componentDidMount() {
+        const {routeParams: {make, transport, year}} = this.props;
+        this.props.byAallData(make, transport, year);
+    }
+
     render() {
+        const {fiche: {modelsList}} = this.props;
         return (
             <div>
                 <h4>make year transport</h4>
+                {modelsList &&
+                <ModelsList modelsList={modelsList} />
+                }
 
-                <div> c :
-                    <Link to="/model/465" modelId={500}>cr500</Link> 500 |
-                    <Link to="/model/4657" modelId={700}>cb700</Link> 700
-                </div>
             </div>
         );
     }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(MakeYearTransport);
 
 MakeYearTransport.PropTypes = {
     makeId: PropTypes.number,

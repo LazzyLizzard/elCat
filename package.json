@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "webpack -p"
   },
   "author": "",
   "license": "MIT",
@@ -24,25 +25,28 @@
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
     "express": "^4.13.4",
-    "npm-install-webpack-plugin": "^2.0.2",
+    "npm-install-webpack-plugin": "^4.0.5",
     "postcss-loader": "^0.8.0",
     "precss": "^1.4.0",
-    "react-hot-loader": "^1.3.0",
+    "react-hot-loader": "^3.1.1",
     "style-loader": "^0.13.0",
-    "webpack": "^1.12.12",
+    "webpack": "^2.7.0",
     "webpack-dev-middleware": "^1.5.1",
     "webpack-hot-middleware": "^2.6.4"
   },
   "dependencies": {
     "babel-polyfill": "^6.3.14",
+    "babel-polyfill-loader": "^1.0.1",
     "babel-runtime": "^6.3.19",
     "eslint-config-airbnb": "^15.1.0",
     "lodash": "^4.17.4",
+    "prop-types": "^15.6.0",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
     "react-redux": "^4.0.6",
     "react-router": "^3.0.5",
     "redux": "^3.0.6",
+    "redux-form": "^7.1.2",
     "redux-logger": "^3.0.1",
     "redux-thunk": "^2.2.0",
     "whatwg-fetch": "^2.0.3"

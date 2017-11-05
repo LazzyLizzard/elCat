@@ -1,39 +1,26 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
-// import ManufsAndTypes from '../components/manufsAndTypes'
-// import { bindActionCreators } from 'redux'
-// import { connect } from 'react-redux'
-
 
 export class App extends Component {
     render() {
-        // const ml = this.props.ml.manufacturers;
-        // console.log(this.props);
-        // const { ml, isLoading, trTypesData } = this.props;
         return (
             <div>
-                <h3>Elcat app (<Link to="/">go</Link>)</h3>
-                {this.props.children}
+                <div style={{width: '1400px', margin: '0 auto'}}>
+                    <h3>App:
+                        <Link to="/">home</Link> |
+                        <Link to="/fiche">elcat</Link> |
+                        <Link to="/profile">Profile</Link> |
+                        <Link to="/selector">Selector</Link>
+                    </h3>
+                    <div style={{float: 'left', width: '25%'}}>
+                        <div>
+                            cats
+                        </div>
+                    </div>
+                    <div style={{float: 'left', width: '75%'}}>{this.props.children}</div>
+                    <div style={{display: 'block', clear: 'both', content: ' '}} />
+                </div>
             </div>);
     }
 }
-
-// function mapStateToProps({manufsAndTypesList}) {
-//     return {
-//         ml: manufsAndTypesList.manufacturers,
-//         trTypesData: manufsAndTypesList.transportTypesData,
-//         isLoading: manufsAndTypesList.loading
-//     }
-// }
-
-// function mapDispatchToProps(dispatch) {
-//     // return bindActionCreators({
-//     //     loadListStep1: getManufsAndTypes
-//     // });
-//     return {
-//         load: () => dispatch(Actions.getManufsAndTypes())
-//     }
-// }
-
-// export default connect(mapStateToProps)(App)
 
