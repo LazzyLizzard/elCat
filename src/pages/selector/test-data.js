@@ -7,12 +7,14 @@ export const FORM_DATA = {
             },
             list: [
                 {
+                    id: 444,
                     itemID: 100,
                     label: 'name 1',
                     value: '40',
                     featured: true
                 },
                 {
+                    id: 555,
                     itemID: 200,
                     label: 'name 2',
                     value: '60',

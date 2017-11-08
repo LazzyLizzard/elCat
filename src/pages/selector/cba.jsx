@@ -1,5 +1,7 @@
+// https://github.com/leroy0211/form-redux-checkbox-group
 import React, {Component} from 'react';
-import {Field} from 'redux-form';
+import {Field, FieldArray} from 'redux-form';
+import {uniqueId} from 'lodash';
 // import PropTypes from 'prop-types';
 
 export default class CheckboxGroup extends Component {
@@ -9,6 +11,8 @@ export default class CheckboxGroup extends Component {
     //         value: PropTypes.string.isRequired
     //     })).isRequired
     // };
+
+
 
     field = ({input, meta, options}) => {
         const {name, onChange} = input;
@@ -28,10 +32,10 @@ export default class CheckboxGroup extends Component {
             };
             const checked = inputValue.includes(value);
             return (
-                <label key={`checkbox-${index}`}>
+                <label key={uniqueId()}>
                     <input
                         type="checkbox"
-                        name={`${name}[${index}]`}
+                        name={`${name}`}
                         value={value}
                         checked={checked}
                         onChange={handleChange}
