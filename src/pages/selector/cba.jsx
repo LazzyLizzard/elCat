@@ -1,3 +1,4 @@
+// https://github.com/leroy0211/form-redux-checkbox-group
 import React, {Component} from 'react';
 import {Field} from 'redux-form';
 // import PropTypes from 'prop-types';
