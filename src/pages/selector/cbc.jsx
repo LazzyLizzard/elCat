@@ -65,7 +65,7 @@ class MultiCheckboxField extends Component {
                                         type="checkbox"
                                         onChange={event => this.handleChange(event, option.id)}
                                         // onBlur={() => onBlur(values)}
-                                        onBlur={onBlurHandler}
+                                        onBlur={() => onBlurHandler(values)}
                                         checked={isChecked}
                                         value={option.id}
                                     />
