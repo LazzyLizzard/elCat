@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {isUndefined, isArray} from 'lodash';
+import {isUndefined, isArray, noop} from 'lodash';
 
 class MultiCheckboxField extends Component {
     getCurrentValues = () => {
@@ -65,7 +65,8 @@ class MultiCheckboxField extends Component {
                                         type="checkbox"
                                         onChange={event => this.handleChange(event, option.id)}
                                         // onBlur={() => onBlur(values)}
-                                        onBlur={() => onBlurHandler(values)}
+                                        // onBlur={() => onBlurHandler(values)}
+                                        onBlur={noop}
                                         checked={isChecked}
                                         value={option.id}
                                     />
