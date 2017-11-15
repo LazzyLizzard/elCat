@@ -3,7 +3,8 @@ import {isUndefined, isArray, noop} from 'lodash';
 
 class MultiCheckboxField extends Component {
     getCurrentValues = () => {
-        console.dir(this.props);
+        console.dir('getCurrentValues this.props.field');
+        console.dir(this.props.field);
         const {field: {value, initialValue}} = this.props;
 
         let previousValues = [];
@@ -20,28 +21,32 @@ class MultiCheckboxField extends Component {
     };
 
     handleChange = (event, id) => {
-        const {field} = this.props;
-        const {onChange} = field;
+        const {field: {onChange}} = this.props;
         const values = this.getCurrentValues();
 
+        console.log('handleChange values');
+        console.log(values);
+        console.log(event.target.checked);
+
         if (event.target.checked) {
+            console.log('push ', id);
             values.push(id);
         } else {
+            console.log('remove ', id);
             values.splice(values.indexOf(id), 1);
         }
+
+        console.log('post values');
+        console.log(values);
 
         return onChange(values);
     };
 
     render() {
-        const {label, options, field, field: {onBlur}} = this.props;
+        const {label, options, field} = this.props;
         const values = this.getCurrentValues();
 
-        const onBlurHandler = (v) => {
-            console.log(v);
-            return onBlur(v);
-        };
-
+        console.log('render values');
         console.log(values);
 
         return (
