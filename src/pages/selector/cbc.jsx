@@ -24,6 +24,7 @@ class MultiCheckboxField extends Component {
         const {field: {onChange}} = this.props;
         const values = this.getCurrentValues();
 
+        console.log('---');
         console.log('handleChange values');
         console.log(values);
         console.log(event.target.checked);
@@ -72,8 +73,9 @@ class MultiCheckboxField extends Component {
                                         // onBlur={() => onBlur(values)}
                                         // onBlur={() => onBlurHandler(values)}
                                         onBlur={noop}
-                                        checked={isChecked}
-                                        value={option.id}
+                                        // checked={isChecked}
+                                        value={isChecked}
+                                        data-number={option.id}
                                     />
                                     {option.label}
                                 </label>
