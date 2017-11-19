@@ -4,30 +4,6 @@ import {reduxForm, Field} from 'redux-form';
 
 // const {DOM: {input, select, textarea}} = React;
 
-const FORM_DATA = {
-    groups: [
-        {
-            info: {
-                id: 32,
-                name: 'group 1'
-            },
-            list: [
-                {
-                    itemID: 100,
-                    itemName: 'name 1',
-                    value: 40,
-                    featured: true
-                },
-                {
-                    itemID: 200,
-                    itemName: 'name 2',
-                    value: 60,
-                    featured: true
-                }
-            ]
-        }
-    ]
-};
 
 class TestForm extends React.Component {
     render() {
@@ -44,7 +20,7 @@ class TestForm extends React.Component {
                                             type="checkbox"
                                             name={`${list.value}`}
                                             component="input"
-                                            onChange={e => e.preventDefault()}
+                                            // onChange={e => e.preventDefault()}
                                         />
                                         {list.itemName} - {list.value} |
                                     </span>
