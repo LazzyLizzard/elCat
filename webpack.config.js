@@ -4,6 +4,7 @@ const webpack = require('webpack');
 // const NpmInstallPlugin = require('npm-install-webpack-plugin');
 // const autoprefixer = require('autoprefixer');
 // const precss = require('precss');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     devtool: 'cheap-module-eval-source-map',
@@ -27,7 +28,8 @@ module.exports = {
     },
     plugins: [
         new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new ExtractTextPlugin({filename: 'static/styles.css'})
         // new NpmInstallPlugin()
     ],
     module: {
@@ -46,7 +48,7 @@ module.exports = {
                 include: [
                     path.resolve(__dirname, 'src')
                 ]
-            }
+            },
             // {
             //     loader: 'react-hot-loader'
             // },
@@ -60,6 +62,16 @@ module.exports = {
             //         'postcss-loader']
             //
             // }
+            {
+                test: /\.scss$/,
+                use: [{
+                    loader: 'style-loader' // creates style nodes from JS strings
+                }, {
+                    loader: 'css-loader' // translates CSS into CommonJS
+                }, {
+                    loader: 'sass-loader' // compiles Sass to CSS
+                }]
+            }
         ]
     }
 };
