@@ -1,5 +1,11 @@
 $block: 'home';
 
-#{$block} {
+.home {
     display: block;
+    padding: 10px;
+    background: #ccc;
+
+    &__title {
+        font-weight: bold;
+    }
 }
