@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
-import './home.scss';
+import styles from './home.scss';
 
 export class Home extends Component {
     render() {
