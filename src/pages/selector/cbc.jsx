@@ -27,7 +27,8 @@ class MultiCheckboxField extends Component {
 
         console.log('---');
         console.log('handleChange values');
-        console.log(values);
+        console.log(this.props);
+        console.log(this.props.field.value);
         console.log(event.target.checked);
 
         if (event.target.checked) {
