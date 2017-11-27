@@ -6,7 +6,7 @@ export class Home extends Component {
     render() {
         console.log(styles);
         return (
-            <div>
+            <div className="home">
                 <h4>home</h4>
                 <div>
                     <Link to="/fiche">fiche</Link>
