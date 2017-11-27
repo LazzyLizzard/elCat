@@ -1,9 +1,15 @@
+//@import '~styles/constants/index.scss';
+
 $block: 'home';
 
 .home {
     display: block;
-    padding: 10px;
     background: #ccc;
+
+    &__links {
+        padding: 10px;
+        border: solid 1px #00f;
+    }
 
     &__title {
         font-weight: bold;
