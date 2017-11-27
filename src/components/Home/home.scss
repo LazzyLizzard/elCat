@@ -1,10 +1,7 @@
-@import '../../styles/index.scss';
-
 $block: 'home';
 
 .home {
     display: block;
-    background: #ccc;
 
     &__links {
         padding: 10px;
