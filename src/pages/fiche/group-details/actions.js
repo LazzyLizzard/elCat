@@ -1,19 +1,19 @@
 import 'whatwg-fetch';
-import {REQUEST_URL_FICHE} from './../../../AppRoutes/constants';
+import {getRequestEnvironment} from './../../../utils/get-request-environment';
+import {REMOTE_HTTPS} from '../../../contants/server-request-environment';
+import {ENDPOINT_FICHE} from './../../../contants/end-points';
+
 
 export const GROUP_INFO_REQUEST = 'GROUP_INFO_REQUEST';
 export const GROUP_INFO_SUCCESS = 'GROUP_INFO_SUCCESS';
 export const GROUP_INFO_ERROR = 'GROUP_INFO_ERROR';
 
-export const groupDataRequest = () => {
-    console.log('reducer gr');
-    return ({
-        type: GROUP_INFO_REQUEST,
-        payload: {
-            loader: true
-        }
-    });
-};
+export const groupDataRequest = () => ({
+    type: GROUP_INFO_REQUEST,
+    payload: {
+        loader: true
+    }
+});
 
 export const groupDataSuccess = data => ({
     type: GROUP_INFO_SUCCESS,
@@ -34,10 +34,11 @@ export const groupDataError = error => ({
 export const requestGroupInfo = id => (
     (dispatch) => {
         dispatch(groupDataRequest());
+        const url = `${getRequestEnvironment(REMOTE_HTTPS)}${ENDPOINT_FICHE}`;
         return fetch(
-            `${REQUEST_URL_FICHE}?async=1&action=modelGroup&modelId=${id}`, {
-                method: 'get',
-                mode: 'cors'
+            `${url}?async=1&action=modelGroup&groupId=${id}`, {
+                method: 'get'
+                // mode: 'cors'
             })
             .then(response =>
                 // console.warn(response);

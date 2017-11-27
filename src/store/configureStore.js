@@ -1,12 +1,10 @@
 import {applyMiddleware, compose} from 'redux';
-import {createLogger} from 'redux-logger';
+// import {createLogger} from 'redux-logger';
 import thunk from 'redux-thunk';
-// import {rootReducer} from '../reducers';
 import {redirect} from '../middleware/redirect';
-// import nextRootReducer from '../reducers';
 
 export default function configureStore() {
-    const logger = createLogger();
+    // const logger = createLogger();
 
     // const store = createStore(
     //     rootReducer,
@@ -17,7 +15,7 @@ export default function configureStore() {
     // );
 
     const store = compose(
-        applyMiddleware(thunk, logger, redirect),
+        applyMiddleware(thunk, redirect),
         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     );
 

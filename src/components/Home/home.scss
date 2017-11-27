@@ -1,5 +1,10 @@
 $block: 'home';
 
-#{$block} {
+.home {
     display: block;
+
+    &__links {
+        padding: 10px;
+        border: solid 1px #00f;
+    }
 }
