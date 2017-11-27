@@ -1,5 +1,13 @@
+//@import '~styles/constants/index.scss';
+
 $block: 'home';
 
-#{$block} {
+.home {
     display: block;
+    background: #ccc;
+
+    &__links {
+        padding: 10px;
+        border: solid 1px #00f;
+    }
 }

@@ -29,7 +29,7 @@ module.exports = {
     plugins: [
         new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        new ExtractTextPlugin({filename: 'static/styles.css'})
+        new ExtractTextPlugin('styles.css')
         // new NpmInstallPlugin()
     ],
     module: {
@@ -64,13 +64,10 @@ module.exports = {
             // }
             {
                 test: /\.scss$/,
-                use: [{
-                    loader: 'style-loader' // creates style nodes from JS strings
-                }, {
-                    loader: 'css-loader' // translates CSS into CommonJS
-                }, {
-                    loader: 'sass-loader' // compiles Sass to CSS
-                }]
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader', 'sass-loader']
+                })
             }
         ]
     }
