@@ -7,7 +7,9 @@ export class Home extends Component {
         return (
             <div className="home">
                 <h4>home</h4>
-                <div><Link to="/fiche">fiche</Link></div>
+                <div>
+                    <Link to="/fiche">fiche</Link>
+                </div>
             </div>
         );
     }
