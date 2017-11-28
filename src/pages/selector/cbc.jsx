@@ -5,7 +5,7 @@ import {isUndefined, isArray, noop} from 'lodash';
 class MultiCheckboxField extends Component {
     getCurrentValues = () => {
         console.dir('getCurrentValues this.props.field');
-        console.dir(this.props.field);
+        console.log(this.props.field);
         const {field: {value, initialValue}} = this.props;
 
         let previousValues = [];
@@ -27,7 +27,6 @@ class MultiCheckboxField extends Component {
 
         console.log('---');
         console.log('handleChange values');
-        console.log(this.props);
         console.log(this.props.field.value);
         console.log(event.target.checked);
 
@@ -77,7 +76,6 @@ class MultiCheckboxField extends Component {
                                         onBlur={noop}
                                         // checked={isChecked}
                                         value={isChecked}
-                                        data-number={option.id}
                                     />
                                     {option.label}
                                 </label>
