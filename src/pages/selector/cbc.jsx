@@ -45,10 +45,12 @@ class MultiCheckboxField extends Component {
     };
 
     render() {
-        const {label, options, field} = this.props;
+        const {label, options, field, field: {value}} = this.props;
+        console.log('options val prop ', options);
+        console.log('options val field ', value);
         const values = this.getCurrentValues();
 
-        console.log('render values');
+        console.log('*** render values');
         console.log(values);
 
         return (
@@ -59,6 +61,7 @@ class MultiCheckboxField extends Component {
 
                 <div>
                     {options.map((option) => {
+
                         const isChecked = values.indexOf(option.id) > -1;
 
                         return (
