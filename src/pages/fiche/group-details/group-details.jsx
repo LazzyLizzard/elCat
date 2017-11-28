@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {get} from 'lodash';
+import {Loader} from 'components/Common/loader';
 import * as actions from './actions';
-import {Loader} from '../../../components/Common/loader';
 import {NAMESPACE} from './../model/reducer';
 import {DetailsList} from './details-list';
 
@@ -29,7 +29,7 @@ class GroupDetails extends React.Component {
     render() {
         const {[NAMESPACE]: {loader, groupData}} = this.props;
         return (
-            <div>
+            <div style={{position: 'relative'}}>
                 <div>details in group</div>
                 {loader && <Loader />}
                 {groupData && <DetailsList list={groupData} />}
