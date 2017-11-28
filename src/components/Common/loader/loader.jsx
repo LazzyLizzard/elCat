@@ -1,9 +1,14 @@
 import React from 'react';
+import './loader.scss';
 
-export function Loader() {
+export const Loader = () => {
     return (
-        <div style={{margin: '40px 0', background: '#666'}}>
-            LOADING ...
+        <div
+            className="loader loader--overlay"
+        >
+            <div>
+                LOADING ...
+            </div>
         </div>
     );
-}
+};

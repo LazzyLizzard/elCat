@@ -19,6 +19,13 @@ export const FORM_DATA = {
                     label: 'name 2',
                     value: '60',
                     featured: true
+                },
+                {
+                    id: 777,
+                    itemID: 300,
+                    label: 'lang',
+                    value: 'eng',
+                    featured: true
                 }
             ]
         }
