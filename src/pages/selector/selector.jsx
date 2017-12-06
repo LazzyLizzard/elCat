@@ -9,7 +9,8 @@ const SelectorForm = (props) => {
             <h4>Selector</h4>
             {
                 FORM_DATA.groups[0].list.map(boxItem => (
-                    <div>
+                    /* It's important to use key to avoid performance issues */
+                    <div key={boxItem.id}>
                         {boxItem.label} id {boxItem.id}
                         <Field
                             name={`box${boxItem.id}`}
