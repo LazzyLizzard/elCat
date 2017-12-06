@@ -4,7 +4,6 @@ import './home.scss';
 
 export class Home extends Component {
     render() {
-        console.log(styles);
         return (
             <div className="home">
                 <h4>home</h4>
