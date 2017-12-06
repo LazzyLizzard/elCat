@@ -10,7 +10,7 @@ export class ModelInfo extends Component {
     render() {
         const {modelData: {modelInfo, modelGroupsList}, loader} = this.props;
         return (
-            <div>
+            <div style={{position: 'relative'}}>
                 <h4>model {modelInfo.manuf_name} {modelInfo.model_name} {modelInfo.year} (groups in model)</h4>
                 {loader && <Loader />}
                 {modelGroupsList && <ModelGroups modelGroups={modelGroupsList} modelId={modelInfo.model_id} />}

@@ -1,17 +1,22 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
+import './app.scss';
 
 export class App extends Component {
     render() {
         return (
-            <div>
-                <div style={{width: '1400px', margin: '0 auto'}}>
-                    <h3>App:
+            <div className="container">
+                <header>
+                    <h3>App:</h3>
+                    <div>
                         <Link to="/">home</Link> |
                         <Link to="/fiche">elcat</Link> |
                         <Link to="/profile">Profile</Link> |
                         <Link to="/selector">Selector</Link>
-                    </h3>
+                    </div>
+                </header>
+
+                <section>
                     <div style={{float: 'left', width: '25%'}}>
                         <div>
                             cats
@@ -19,8 +24,13 @@ export class App extends Component {
                     </div>
                     <div style={{float: 'left', width: '75%'}}>{this.props.children}</div>
                     <div style={{display: 'block', clear: 'both', content: ' '}} />
-                </div>
-            </div>);
+                </section>
+
+                <footer>
+                    Footer
+                </footer>
+            </div>
+        );
     }
 }
 
