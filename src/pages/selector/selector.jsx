@@ -1,30 +1,22 @@
 import React from 'react';
-// import TestForm from './_form';
-import {reduxForm, Field} from 'redux-form';
-// import CheckboxGroup from './cba';
-import MultiCheckboxField from './cbc';
+import {reduxForm} from 'redux-form';
 import {FORM_DATA} from './test-data';
+import {showResults} from './show-results';
+import {FormWithBoxes} from './form-with-boxes';
 
-// https://github.com/erikras/redux-form/issues/635
-class Selector extends React.Component {
-    render() {
-        return (
+const SelectorForm = (props) => {
+    const {pristine, reset, submitting} = props;
+    return (
+        <form onSubmit={showResults}>
+            <h4>Selector</h4>
+            <FormWithBoxes boxesGroup={FORM_DATA.groups[0]} />
+
             <div>
-                <h4>Selector</h4>
-                <Field
-                    name="fruits"
-                    component={props => (<MultiCheckboxField
-                        options={FORM_DATA.groups[0].list}
-                        field={props.input}
-                        label="ZZZZZZZZZ"
-                    />)
-                    }
-                />
-                {/* <MultiCheckboxField label="box1" field="boxxxx" options={FORM_DATA.groups[0].list} /> */}
-                {/* <CheckboxGroup options={FORM_DATA.groups[0].list} name="box" /> */}
+                <button type="submit" disabled={pristine || submitting}>Submit</button>
+                <button type="button" disabled={pristine || submitting} onClick={reset}>Reset</button>
             </div>
-        );
-    }
-}
+        </form>
+    );
+};
 
-export default reduxForm({form: 'myForm'})(Selector);
+export default reduxForm({form: 'myForm'})(SelectorForm);
