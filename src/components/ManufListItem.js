@@ -1,6 +1,6 @@
-import React, {PropTypes, Component} from 'react';
-
-import TransportTypes from './TransportTypes'
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import TransportTypes from './TransportTypes';
 
 class ManufListItem extends Component {
 

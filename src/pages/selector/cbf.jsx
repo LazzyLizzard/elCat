@@ -11,7 +11,7 @@ export default class CheckboxGroup extends Component {
     };
 
     field = ({input, meta, options}) => {
-        const {name, onChange, onBlur, onFocus} = input;
+        const {name, onChange} = input;
         const {touched, error} = meta;
         const inputValue = input.value;
 
@@ -23,21 +23,12 @@ export default class CheckboxGroup extends Component {
                 } else {
                     arr.splice(arr.indexOf(value), 1);
                 }
-                onBlur(arr);
                 return onChange(arr);
             };
             const checked = inputValue.includes(value);
             return (
                 <label key={`checkbox-${index}`}>
-                    <input
-                        type="checkbox"
-                        name={`${name}[${index}]`}
-                        value={value}
-                        checked={checked}
-                        onChange={handleChange}
-                        onBlur={() => undefined}
-                        onFocus={onFocus}
-                    />
+                    <input type="checkbox" name={`${name}[${index}]`} value={value} checked={checked} onChange={handleChange} onBlur={() => undefined} />
                     <span>{label}</span>
                 </label>
             );

@@ -1,10 +1,11 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {isUndefined, isArray, noop} from 'lodash';
 
 class MultiCheckboxField extends Component {
     getCurrentValues = () => {
         console.dir('getCurrentValues this.props.field');
-        console.dir(this.props.field);
+        console.log(this.props.field);
         const {field: {value, initialValue}} = this.props;
 
         let previousValues = [];
@@ -26,7 +27,7 @@ class MultiCheckboxField extends Component {
 
         console.log('---');
         console.log('handleChange values');
-        console.log(values);
+        console.log(this.props.field.value);
         console.log(event.target.checked);
 
         if (event.target.checked) {
@@ -44,10 +45,12 @@ class MultiCheckboxField extends Component {
     };
 
     render() {
-        const {label, options, field} = this.props;
+        const {label, options, field, field: {value}} = this.props;
+        console.log('options val prop ', options);
+        console.log('options val field ', value);
         const values = this.getCurrentValues();
 
-        console.log('render values');
+        console.log('*** render values');
         console.log(values);
 
         return (
@@ -58,6 +61,7 @@ class MultiCheckboxField extends Component {
 
                 <div>
                     {options.map((option) => {
+
                         const isChecked = values.indexOf(option.id) > -1;
 
                         return (
@@ -75,7 +79,6 @@ class MultiCheckboxField extends Component {
                                         onBlur={noop}
                                         // checked={isChecked}
                                         value={isChecked}
-                                        data-number={option.id}
                                     />
                                     {option.label}
                                 </label>
