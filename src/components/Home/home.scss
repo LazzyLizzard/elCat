@@ -4,10 +4,9 @@ $block: 'home';
 
 .home {
     display: block;
-    padding: 10px;
-    background: #ccc;
 
-    &__title {
-        font-weight: bold;
+    &__links {
+        padding: 10px;
+        border: solid 1px #00f;
     }
 }
