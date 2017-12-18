@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
+import {reducer as formReducer} from 'redux-form';
 import queueReducers from 'utils/queue-reducers';
-import {selectorFormReducer} from 'pages/selector/selectror-form-reducer';
 import {
     ficheModelReducer,
     NAMESPACE as FICHE_NAMESPACE
@@ -27,6 +27,7 @@ import {
 } from '../pages/profile/reducer';
 
 export const rootReducer = combineReducers({
+    form: formReducer, // Redux-form reducer should be connected in the application root reducer
     [FICHE_NAMESPACE]: queueReducers(
         ficheModelReducer,
         groupDetailsReducer,
@@ -35,6 +36,5 @@ export const rootReducer = combineReducers({
         mytReducer
     ),
     [CART_NAMESPACE]: cartReducer,
-    [PROFILE_NAMESPACE]: profileReducer,
-    form: selectorFormReducer
+    [PROFILE_NAMESPACE]: profileReducer
 });
