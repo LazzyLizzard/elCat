@@ -1,0 +1,35 @@
+$fullHeight = 100vh;
+
+html {
+    height: $fullHeight;
+}
+
+body {
+    min-height: $fullHeight;
+    display: flex;
+    flex-direction: column;
+}
+
+section {
+    /* flex: 1; would be enough but it looks bad in IE */
+    flex: 1 0 auto;
+}
+
+/* Unimportant part */
+body {
+    font: 16px/1.5 sans-serif;
+}
+
+header, section, footer {
+    padding: 2em;
+    color: white;
+}
+header {
+    background-color: #85144B;
+}
+section {
+    background-color: #3D9970;
+}
+footer {
+    background-color: #001F3F;
+}

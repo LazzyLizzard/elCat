@@ -29,7 +29,10 @@ module.exports = {
     plugins: [
         new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        new ExtractTextPlugin('styles.css')
+        new ExtractTextPlugin({
+            filename: 'styles.css',
+            fallback: 'style-loader'
+        })
         // new NpmInstallPlugin()
     ],
     module: {

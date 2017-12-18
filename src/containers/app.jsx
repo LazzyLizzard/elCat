@@ -12,16 +12,12 @@ export class App extends Component {
                         <Link to="/">home</Link> |
                         <Link to="/fiche">elcat</Link> |
                         <Link to="/profile">Profile</Link> |
-                        <Link to="/selector">Selector</Link>
+                        <Link to="/pick">Pick</Link>
                     </div>
                 </header>
 
                 <section>
-                    <div style={{float: 'left', width: '25%'}}>
-                        <div>
-                            cats
-                        </div>
-                    </div>
+                    <div style={{float: 'left', width: '25%'}}>&nbsp;</div>
                     <div style={{float: 'left', width: '75%'}}>{this.props.children}</div>
                     <div style={{display: 'block', clear: 'both', content: ' '}} />
                 </section>
