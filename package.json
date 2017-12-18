@@ -1,13 +1,13 @@
 {
-  "name": "ElCatReduxl",
-  "version": "0.0.1",
-  "description": "",
+  "name": "ozm-front",
+  "version": "0.0.2",
+  "description": "ozmoto frontend",
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
     "build": "webpack -p"
   },
-  "author": "",
+  "author": "lazy.lizard@yandex.ru",
   "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^6.3.1",
