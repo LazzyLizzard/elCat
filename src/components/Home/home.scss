@@ -9,4 +9,8 @@ $block: 'home';
         padding: 10px;
         border: solid 1px #00f;
     }
+
+    &__title {
+        font-weight: bold;
+    }
 }

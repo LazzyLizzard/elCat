@@ -13,7 +13,7 @@ const SelectorForm = (props) => {
                     <div key={boxItem.id}>
                         {boxItem.label} id {boxItem.id}
                         <Field
-                            name={`box[${boxItem.id}]`}
+                            name={`box${boxItem.id}`}
                             component="input"
                             type="checkbox"
                         />
