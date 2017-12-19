@@ -12,7 +12,7 @@ export class App extends Component {
                         <Link to="/">home</Link> |
                         <Link to="/fiche">elcat</Link> |
                         <Link to="/profile">Profile</Link> |
-                        <Link to="/selector">Selector</Link>
+                        <Link to="/pick">Pick</Link>
                     </div>
                 </header>
 
