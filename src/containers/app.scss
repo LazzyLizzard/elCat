@@ -26,9 +26,10 @@ header {
 }
 
 section {
+    /* flex: 1; would be enough but it looks bad in IE */
     flex: 1 0 auto;
 }
 
 footer {
-    padding: 40px 0;
+    padding: 40px;
 }
