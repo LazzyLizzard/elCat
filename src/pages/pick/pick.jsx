@@ -1,16 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as actions from './actions';
+import {NAMESPACE} from './reducer';
 
-function mapDispatchToProps(dispatch) {
-    return {
-        pickListFetcher: () => dispatch(actions.requestPickList())
-    };
-}
+const mapDispatchToProps = dispatch => ({
+    pickListFetcher: () => dispatch(actions.requestPickList())
+});
 
-function mapStateToProps(state) {
-    return state;
-}
+const mapStateToProps = state => state;
 
 class Pick extends React.Component {
     componentDidMount() {
@@ -18,9 +15,10 @@ class Pick extends React.Component {
     }
 
     render() {
+        const {[NAMESPACE]: pickList} = this.props;
         return (
             <div>
-                pick
+                pick {pickList ? 'ok' : 'no'}
             </div>
         );
     }
