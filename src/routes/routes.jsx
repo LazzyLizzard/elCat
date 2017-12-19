@@ -11,11 +11,11 @@ import {GroupDetails} from 'pages/fiche/group-details';
 import {NotFound} from 'components/not-found';
 import {Cart} from 'pages/cart';
 import {Profile} from 'pages/profile';
-import {Selector} from 'pages/selector';
+import {Pick} from 'pages/pick';
 import {NAMESPACE as FICHE_NAMESPACE} from 'pages/fiche/model/reducer';
 import {NAMESPACE as CART_NAMESPACE} from 'pages/cart/reducer';
 import {NAMESPACE as PROFILE_NAMESPACE} from 'pages/profile/reducer';
-import {NAMESPACE as SELECTOR_NAMESPACE} from 'pages/selector/reducer';
+import {NAMESPACE as PICK_NAMESPACE} from 'pages/pick/reducer';
 
 export default (
     <div>
@@ -41,7 +41,7 @@ export default (
             <Route path={`/${PROFILE_NAMESPACE}/orders`} component={Profile} />
 
             {/* selector */}
-            <Route path={`/${SELECTOR_NAMESPACE}`} component={Selector} />
+            <Route path={`/${PICK_NAMESPACE}`} component={Pick} />
 
         </Route>
         <Route path="*" component={NotFound} />
