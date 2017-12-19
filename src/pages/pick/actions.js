@@ -17,8 +17,16 @@ export const requestPickList = () => (
             `${url}?async=1`, {
                 method: 'get'
             })
-            .then(response => response.json())
-            .then(pickGroups => dispatch(requestSuccess(PICK_REQUEST_SUCCESS, 'pickList', pickGroups)))
+            .then((response) => {
+                console.log(response);
+                const x = response.json();
+                console.log(x);
+                return x;
+            })
+            .then((pickGroups) => {
+                console.log(pickGroups);
+                return dispatch(requestSuccess(PICK_REQUEST_SUCCESS, 'pickList', pickGroups));
+            })
             .catch(error => dispatch(requestError(PICK_REQUEST_ERROR, error)));
     }
 );
