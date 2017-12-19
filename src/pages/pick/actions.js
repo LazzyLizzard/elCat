@@ -17,13 +17,8 @@ export const requestPickList = () => (
             `${url}?async=1`, {
                 method: 'get'
             })
-            .then((response) => {
-                if (response.status === 200) {
-                    return response.json();
-                }
-                return response.json();
-            })
-            .then(modelData => dispatch(requestSuccess(PICK_REQUEST_SUCCESS, 'pickList', modelData)))
+            .then(response => response.json())
+            .then(pickGroups => dispatch(requestSuccess(PICK_REQUEST_SUCCESS, 'pickList', pickGroups)))
             .catch(error => dispatch(requestError(PICK_REQUEST_ERROR, error)));
     }
 );
