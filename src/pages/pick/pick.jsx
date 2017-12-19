@@ -1,9 +1,29 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import * as actions from './actions';
 
-import PickFrom from './pick-form';
-import {showResults} from './show-results';
+function mapDispatchToProps(dispatch) {
+    return {
+        pickListFetcher: () => dispatch(actions.requestPickList())
+    };
+}
 
-export const Pick = () => (
-    <PickFrom onSubmit={showResults} />
-);
+function mapStateToProps(state) {
+    return state;
+}
 
+class Pick extends React.Component {
+    componentDidMount() {
+        this.props.pickListFetcher();
+    }
+
+    render() {
+        return (
+            <div>
+                pick
+            </div>
+        );
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Pick);

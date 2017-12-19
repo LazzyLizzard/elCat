@@ -18,12 +18,15 @@ export const requestPickList = () => (
                 method: 'get'
             })
             .then((response) => {
-                if (response.status === 200) {
-                    return response.json();
-                }
-                return response.json();
+                console.log(response);
+                const x = response.json();
+                console.log(x);
+                return x;
             })
-            .then(modelData => dispatch(requestSuccess(PICK_REQUEST_SUCCESS, 'pickList', modelData)))
+            .then((pickGroups) => {
+                console.log(pickGroups);
+                return dispatch(requestSuccess(PICK_REQUEST_SUCCESS, 'pickList', pickGroups));
+            })
             .catch(error => dispatch(requestError(PICK_REQUEST_ERROR, error)));
     }
 );
