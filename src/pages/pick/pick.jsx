@@ -15,10 +15,11 @@ class Pick extends React.Component {
     }
 
     render() {
-        const {[NAMESPACE]: pickList} = this.props;
+        const {[NAMESPACE]: {pickList}} = this.props;
         return (
             <div>
-                pick {pickList ? 'ok' : 'no'}
+                <h3>pick</h3>
+                pick groups {pickList ? 'yes' : 'no'}
             </div>
         );
     }

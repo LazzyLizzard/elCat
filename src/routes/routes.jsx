@@ -42,6 +42,7 @@ export default (
 
             {/* selector */}
             <Route path={`/${PICK_NAMESPACE}`} component={Pick} />
+            <Route path={`/${PICK_NAMESPACE}/:pickGroupName`} component={Pick} />
 
             <Route path="*" component={NotFound} />
 
