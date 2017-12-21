@@ -1,1 +1,1 @@
-export {Pick} from './pick-list';
+export {PickList} from './pick-list';

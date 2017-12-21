@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as actions from './actions';
+import {PickList} from './pickList/pick-list';
 import {NAMESPACE} from './reducer';
 
 const mapDispatchToProps = dispatch => ({
@@ -18,7 +19,7 @@ class Pick extends React.Component {
         const {[NAMESPACE]: pickList} = this.props;
         return (
             <div>
-                pick {pickList ? 'ok' : 'no'}
+                pick {pickList ? <PickList /> : 'no'}
             </div>
         );
     }
