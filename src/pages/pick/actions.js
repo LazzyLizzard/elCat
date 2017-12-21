@@ -18,7 +18,7 @@ export const requestPickList = () => (
                 method: 'get'
             })
             .then(response => response.json())
-            .then(pickGroups => dispatch(requestSuccess(PICK_REQUEST_SUCCESS, 'pick-list', pickGroups)))
+            .then(pickGroups => dispatch(requestSuccess(PICK_REQUEST_SUCCESS, 'pickList', pickGroups)))
             .catch(error => dispatch(requestError(PICK_REQUEST_ERROR, error)));
     }
 );
