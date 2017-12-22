@@ -11,7 +11,7 @@ import {GroupDetails} from 'pages/fiche/group-details';
 import {NotFound} from 'components/not-found';
 import {Cart} from 'pages/cart';
 import {Profile} from 'pages/profile';
-import {PickHome} from 'pages/pick';
+import {PickHome, PickList} from 'pages/pick';
 import {NAMESPACE as FICHE_NAMESPACE} from 'pages/fiche/model/reducer';
 import {NAMESPACE as CART_NAMESPACE} from 'pages/cart/reducer';
 import {NAMESPACE as PROFILE_NAMESPACE} from 'pages/profile/reducer';
@@ -42,7 +42,7 @@ export default (
 
             {/* selector */}
             <Route path={`/${PICK_NAMESPACE}`} component={PickHome} />
-            {/* <Route path={`/${PICK_NAMESPACE}/:pickGroupName`} component={Pick} /> */}
+            <Route path={`/${PICK_NAMESPACE}/:pickGroupName`} component={PickList} />
 
             <Route path="*" component={NotFound} />
 
