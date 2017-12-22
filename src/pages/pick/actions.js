@@ -8,17 +8,37 @@ export const PICK_REQUEST_START = 'PICK/REQUEST_START';
 export const PICK_REQUEST_SUCCESS = 'PICK/REQUEST_SUCCESS';
 export const PICK_REQUEST_ERROR = 'PICK/REQUEST_ERROR';
 
+export const PICK_REQUEST_LIST_START = 'PICK/REQUEST_LIST_START';
+export const PICK_REQUEST_LIST_SUCCESS = 'PICK/REQUEST_LIST_SUCCESS';
+export const PICK_REQUEST_LIST_ERROR = 'PICK/REQUEST_LIST_ERROR';
+
+
+const baseUrl = `${getRequestEnvironment(REMOTE_HTTPS)}${ENDPOINT_PICK}`;
+
 // action generator itself
 export const requestPickList = () => (
     (dispatch) => {
-        const url = `${getRequestEnvironment(REMOTE_HTTPS)}${ENDPOINT_PICK}`;
         dispatch(requestStart(PICK_REQUEST_START));
         return fetch(
-            `${url}?async=1`, {
+            `${baseUrl}?async=1`, {
                 method: 'get'
             })
             .then(response => response.json())
             .then(pickGroups => dispatch(requestSuccess(PICK_REQUEST_SUCCESS, 'pickList', pickGroups)))
             .catch(error => dispatch(requestError(PICK_REQUEST_ERROR, error)));
+    }
+);
+
+
+export const getOptionsByGroupId = id => (
+    (dispatch) => {
+        dispatch(requestStart(PICK_REQUEST_LIST_START));
+        return fetch(
+            `${baseUrl}?async=1&prodGroupId=${id}`, {
+                method: 'get'
+            })
+            .then(response => response.json())
+            .then(pickGroupsList => dispatch(requestSuccess(PICK_REQUEST_LIST_SUCCESS, 'pickListGroups', pickGroupsList)))
+            .catch(error => dispatch(requestError(PICK_REQUEST_LIST_ERROR, error)));
     }
 );

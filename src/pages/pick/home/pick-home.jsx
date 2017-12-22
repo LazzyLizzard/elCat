@@ -16,6 +16,7 @@ const mapStateToProps = state => state;
 
 class PickHome extends React.Component {
     componentDidMount() {
+        // TODO [sf] 22.12.2017 add check if data already in store
         this.props.pickListFetcher();
     }
 
