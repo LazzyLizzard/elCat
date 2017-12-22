@@ -1,1 +1,1 @@
-export {default as Pick} from './pick';
+export {PickHome} from './home';

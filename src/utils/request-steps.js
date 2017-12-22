@@ -1,4 +1,8 @@
 /**
+ * Utility functions for action creators
+ */
+
+/**
  *
  * @param {string} type An action type
  */
