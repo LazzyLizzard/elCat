@@ -1,6 +1,6 @@
 import React from 'react';
 import {reduxForm} from 'redux-form';
-import {FORM_DATA} from './test-data';
+import {FORM_DATA} from './../test-data';
 import {FormWithBoxes} from './form-with-boxes';
 
 const SelectorForm = (props) => {
