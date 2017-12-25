@@ -8,7 +8,7 @@ import {NAMESPACE} from './../reducer';
 import {PickGroups} from './pick-groups';
 
 const mapDispatchToProps = dispatch => ({
-    pickListFetcher: () => dispatch(actions.requestPickList())
+    requestPickList: () => dispatch(actions.requestPickList())
 });
 
 const mapStateToProps = state => state;
@@ -16,7 +16,7 @@ const mapStateToProps = state => state;
 class PickHome extends React.Component {
     componentDidMount() {
         // TODO [sf] 22.12.2017 add check if data already in store
-        this.props.pickListFetcher();
+        this.props.requestPickList();
     }
 
     render() {

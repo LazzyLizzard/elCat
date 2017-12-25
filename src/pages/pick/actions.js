@@ -30,15 +30,20 @@ export const requestPickList = (otherOperation, options) => (
                 method: 'get'
             })
             .then(response => response.json())
-            .then(pickGroups => dispatch(requestSuccess(PICK_REQUEST_SUCCESS, 'pickList', pickGroups)))
             .then((pickGroups) => {
-                // console.log(pickGroups);
+                dispatch(requestSuccess(PICK_REQUEST_SUCCESS, 'pickList', pickGroups));
+                return pickGroups;
+            })
+            .then((pickGroups) => {
+                console.log(pickGroups);
                 if (otherOperation) {
                     console.log('otherOperation');
                     console.log(options);
-                    return dispatch(otherOperation(32));
+                    // function already wrapped into dispatch
+                    otherOperation(32);
+                    return null;
                 }
-                return pickGroups;
+                return null;
             })
             .catch(error => dispatch(requestError(PICK_REQUEST_ERROR, error)));
     }

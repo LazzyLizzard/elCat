@@ -16,7 +16,7 @@ import {NAMESPACE} from '../reducer';
 
 // const fff = (groupId) => {
 //     return function (groupId) {
-//         return this.props.pickListGroupsFetcher(groupId);
+//         return this.props.getOptionsByGroupId(groupId);
 //     };
 // }
 
@@ -27,7 +27,7 @@ class PickList extends React.Component {
         } = this.props;
 
         if (!pickList) {
-            this.props.pickListFetcher(this.props.pickListGroupsFetcher, {groupId: 32});
+            this.props.requestPickList(this.props.getOptionsByGroupId, {groupId: 32});
         }
     }
 
@@ -50,7 +50,7 @@ class PickList extends React.Component {
 export default connect(
     state => state,
     dispatch => ({
-        pickListFetcher: (operation, options) => dispatch(actions.requestPickList(operation, options)),
-        pickListGroupsFetcher: id => dispatch(actions.getOptionsByGroupId(id)),
+        requestPickList: (operation, options) => dispatch(actions.requestPickList(operation, options)),
+        getOptionsByGroupId: id => dispatch(actions.getOptionsByGroupId(id)),
         pickListGroupsReset: () => dispatch(actions.resetGroupsList())
     }))(PickList);
