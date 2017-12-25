@@ -41,9 +41,7 @@ export const requestPickList = (otherOperation, options) => (
                     console.log(options);
                     // function already wrapped into dispatch
                     otherOperation(32);
-                    return null;
                 }
-                return null;
             })
             .catch(error => dispatch(requestError(PICK_REQUEST_ERROR, error)));
     }

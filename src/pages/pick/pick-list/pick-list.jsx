@@ -28,6 +28,8 @@ class PickList extends React.Component {
 
         if (!pickList) {
             this.props.requestPickList(this.props.getOptionsByGroupId, {groupId: 32});
+        } else {
+            this.props.getOptionsByGroupId(32);
         }
     }
 
