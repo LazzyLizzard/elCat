@@ -35,15 +35,13 @@ export const requestPickList = (otherOperation, options) => (
                 return pickGroups;
             })
             .then((pickGroups) => {
-                console.log(pickGroups);
+                console.dir(pickGroups);
                 if (otherOperation) {
-                    console.log('otherOperation');
                     console.log(options);
+                    // console.log(options);
                     // function already wrapped into dispatch
-                    otherOperation(32);
-                    return null;
+                    otherOperation(options.id);
                 }
-                return null;
             })
             .catch(error => dispatch(requestError(PICK_REQUEST_ERROR, error)));
     }
@@ -58,7 +56,10 @@ export const getOptionsByGroupId = id => (
                 method: 'get'
             })
             .then(response => response.json())
-            .then(pickGroupsList => dispatch(requestSuccess(PICK_REQUEST_LIST_SUCCESS, 'pickListGroups', pickGroupsList)))
+            .then((pickGroupsList) => {
+                console.log(id);
+                dispatch(requestSuccess(PICK_REQUEST_LIST_SUCCESS, 'pickListGroups', pickGroupsList));
+            })
             .catch(error => dispatch(requestError(PICK_REQUEST_LIST_ERROR, error)));
     }
 );
