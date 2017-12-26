@@ -8,8 +8,13 @@ export const PickGroups = ({pickGroupsList}) => (
     <div>
         {
             map(pickGroupsList, group => (
-                <div>
-                    <Link to={`${NAMESPACE}/${group.groupNameTransformed}/`}>{group.group_name}</Link> (id {group.id})
+                <div key={group.groupNameTransformed}>
+                    <Link
+                        to={`/${NAMESPACE}/${group.groupNameTransformed}/`}
+                    >
+                        {group.group_name}
+                    </Link>
+                    (id {group.id})
                 </div>
             ))
         }

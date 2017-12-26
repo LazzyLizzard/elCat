@@ -1,7 +1,6 @@
 /**
  * List of pick (selectors) groups, home page
  */
-
 import React from 'react';
 import {connect} from 'react-redux';
 import * as actions from './../actions';
@@ -9,14 +8,15 @@ import {NAMESPACE} from './../reducer';
 import {PickGroups} from './pick-groups';
 
 const mapDispatchToProps = dispatch => ({
-    pickListFetcher: () => dispatch(actions.requestPickList())
+    requestPickList: () => dispatch(actions.requestPickList())
 });
 
 const mapStateToProps = state => state;
 
 class PickHome extends React.Component {
     componentDidMount() {
-        this.props.pickListFetcher();
+        // TODO [sf] 22.12.2017 add check if data already in store
+        this.props.requestPickList();
     }
 
     render() {
