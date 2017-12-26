@@ -1,4 +1,4 @@
-# elCat v.0.0.1
+# elCat v.0.0.2
 
 A React-Redux front-end solution for pretty much modified osCommerce engine.
 

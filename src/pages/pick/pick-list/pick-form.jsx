@@ -1,15 +1,14 @@
 import React from 'react';
 import {reduxForm} from 'redux-form';
-import {FORM_DATA} from './../test-data';
+// import {FORM_DATA} from './../test-data';
 import {FormWithBoxes} from './form-with-boxes';
 
-const SelectorForm = (props) => {
-    const {handleSubmit, pristine, reset, submitting} = props;
+const PickForm = (props) => {
+    const {handleSubmit, pristine, reset, submitting, pickFormData} = props;
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <h4>Selector</h4>
-                <FormWithBoxes boxesGroup={FORM_DATA.groups[0]} />
+                <FormWithBoxes formData={pickFormData} />
 
                 <div>
                     <button type="submit" disabled={pristine || submitting}>Submit</button>
@@ -20,4 +19,4 @@ const SelectorForm = (props) => {
     );
 };
 
-export default reduxForm({form: 'myForm'})(SelectorForm);
+export default reduxForm({form: 'myForm'})(PickForm);
