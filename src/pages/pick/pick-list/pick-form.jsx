@@ -1,6 +1,6 @@
 import React from 'react';
 import {reduxForm} from 'redux-form';
-// import {FORM_DATA} from './../test-data';
+import {ManufacturersList} from './manufacturers-list';
 import {FormWithBoxes} from './form-with-boxes';
 
 const PickForm = (props) => {
@@ -8,6 +8,7 @@ const PickForm = (props) => {
     return (
         <div>
             <form onSubmit={handleSubmit}>
+                <ManufacturersList formData={pickFormData} />
                 <FormWithBoxes formData={pickFormData} />
 
                 <div>
@@ -19,4 +20,4 @@ const PickForm = (props) => {
     );
 };
 
-export default reduxForm({form: 'myForm'})(PickForm);
+export default reduxForm({form: 'pickForm'})(PickForm);

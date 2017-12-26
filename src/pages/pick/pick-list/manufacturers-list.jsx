@@ -1,7 +1,7 @@
 import React from 'react';
 
-export const ManufacturersList = ({manufsList}) => {
-    const {manufList} = manufsList;
+export const ManufacturersList = ({formData}) => {
+    const {manufList} = formData;
     return (
         <div>
             {
