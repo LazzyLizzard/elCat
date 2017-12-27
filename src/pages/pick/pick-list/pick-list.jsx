@@ -45,7 +45,8 @@ class PickList extends React.Component {
 export default connect(
     state => state,
     dispatch => ({
-        requestPickList: (pickGroupName) => dispatch(actions.requestPickList(pickGroupName)),
+        requestPickList: pickGroupName => dispatch(actions.requestPickList(pickGroupName)),
         getOptionsByGroupId: id => dispatch(actions.getOptionsByGroupId(id)),
-        resetGroupsList: () => dispatch(actions.resetGroupsList())
+        resetGroupsList: () => dispatch(actions.resetGroupsList()),
+        getPickResults: requestBody => dispatch(actions.getPickResults(requestBody))
     }))(PickList);
