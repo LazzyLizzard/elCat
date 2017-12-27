@@ -21,7 +21,7 @@ export const PickGroups = ({pickGroupsList}) => (
     </div>
 );
 
-PickGroups.PropTypes = {
+PickGroups.propTypes = {
     pickGroupsList: PropTypes.shape({
         id: PropTypes.oneOfType([
             PropTypes.string,
@@ -30,4 +30,8 @@ PickGroups.PropTypes = {
         group_name: PropTypes.string,
         groupNameTransformed: PropTypes.string
     })
+};
+
+PickGroups.defaultProps = {
+    pickGroupsList: {}
 };
