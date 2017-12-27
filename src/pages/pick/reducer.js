@@ -1,4 +1,5 @@
 import {assign} from 'lodash';
+import {PICK_STATE} from 'data-srtuctures/pick';
 import {
     PICK_REQUEST_START,
     PICK_REQUEST_SUCCESS,
@@ -11,12 +12,7 @@ import {
 
 export const NAMESPACE = 'pick';
 
-const initialState = {
-    pickList: null,
-    pickListGroups: null
-};
-
-export const pickReducer = (state = initialState, action) => {
+export const pickReducer = (state = PICK_STATE, action) => {
     switch (action.type) {
         case PICK_REQUEST_START:
         case PICK_REQUEST_SUCCESS:

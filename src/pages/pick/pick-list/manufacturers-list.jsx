@@ -1,4 +1,5 @@
 import React from 'react';
+import {uniqueId} from 'lodash';
 
 export const ManufacturersList = ({formData}) => {
     const {manufList} = formData;
@@ -6,7 +7,7 @@ export const ManufacturersList = ({formData}) => {
         <div>
             {
                 manufList.map(item => (
-                    <span>{item.manufacturers_name}</span>
+                    <span key={uniqueId()}>{item.manufacturers_name}</span>
                 ))
             }
         </div>

@@ -28,8 +28,6 @@ class PickList extends React.Component {
     }
 
     render() {
-        console.log('render list');
-        console.log(this.props);
         const {[NAMESPACE]: {pickListGroups}} = this.props;
         return (
             <div>
