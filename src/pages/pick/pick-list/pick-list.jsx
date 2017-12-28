@@ -5,7 +5,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions';
 import PickForm from './pick-form';
-import {showResults} from './../show-results';
+// import {showResults} from './../show-results';
 import {NAMESPACE} from '../reducer';
 
 class PickList extends React.Component {
@@ -28,13 +28,14 @@ class PickList extends React.Component {
     }
 
     render() {
+        console.log('render');
         const {[NAMESPACE]: {pickListGroups}} = this.props;
         return (
             <div>
                 {pickListGroups && (
                     <div>
                         <h4>Picker</h4>
-                        <PickForm pickFormData={pickListGroups} onSubmit={showResults} />
+                        <PickForm pickFormData={pickListGroups} onSubmit={this.props.getPickResults} />
                     </div>
                 )}
             </div>

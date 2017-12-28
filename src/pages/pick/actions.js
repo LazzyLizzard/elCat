@@ -83,10 +83,15 @@ export const resetGroupsList = () => ({
     }
 });
 
-export const getPickResults = body => (dispatch) => {
+/**
+ * get
+ * @param requestBody
+ */
+export const getPickResults = requestBody => (dispatch) => {
     dispatch(requestStart(PICK_REQUEST_RESULT_START));
-    fetch(baseUrl, {
-        body
+    return fetch(baseUrl, {
+        method: 'post',
+        body: JSON.stringify(requestBody)
     })
         .then(response => response.json())
         .then((json) => {
