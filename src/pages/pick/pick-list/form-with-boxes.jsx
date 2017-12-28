@@ -16,7 +16,7 @@ export const FormWithBoxes = ({formData}) => {
                             filterItem.prodParamsList.map(checkboxItem => (
                                 <span key={uniqueId()}>
                                     {checkboxItem.parameterName} <Field
-                                        name={`box[${checkboxItem.valueId}]`}
+                                        name={`param[${checkboxItem.valueId}]`}
                                         component="input"
                                         type="checkbox"
                                     /> |

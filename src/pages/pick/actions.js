@@ -84,7 +84,7 @@ export const resetGroupsList = () => ({
 });
 
 /**
- * get
+ * Getting result by filter (thunk)
  * @param requestBody
  */
 export const getPickResults = requestBody => (dispatch) => {
