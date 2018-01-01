@@ -18,6 +18,8 @@ export const PICK_REQUEST_RESULT_START = 'PICK/REQUEST_RESULT_START';
 export const PICK_REQUEST_RESULT_SUCCESS = 'PICK/REQUEST_RESULT_SUCCESS';
 export const PICK_REQUEST_RESULT_ERROR = 'PICK/REQUEST_RESULT_ERROR';
 
+export const PICK_SET_PAGE_FROM_PAGINATION = 'PICK/SET_PAGE_FROM_PAGINATION';
+
 const baseUrl = `${getRequestEnvironment(REMOTE_HTTPS)}${ENDPOINT_PICK}`;
 
 /**
@@ -84,7 +86,7 @@ export const resetGroupsList = () => ({
 });
 
 /**
- * get
+ * Getting result by filter (thunk)
  * @param requestBody
  */
 export const getPickResults = requestBody => (dispatch) => {
@@ -111,4 +113,15 @@ export const getPickResults = requestBody => (dispatch) => {
             dispatch(requestError(PICK_REQUEST_RESULT_ERROR, error));
             return error;
         });
+};
+
+// export const setPageNumberToForm = () => (dispatch) => {
+//
+// };
+
+/**
+ *
+ */
+export const toggleBoxesHandler = (filterGroupId) => {
+    console.log(filterGroupId);
 };
