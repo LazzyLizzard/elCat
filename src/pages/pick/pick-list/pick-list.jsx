@@ -10,9 +10,11 @@ import {PickResults} from './pick-results';
 // import {showResults} from './../show-results';
 import {NAMESPACE} from '../reducer';
 
-const xCl = () => (dispatch) => {
 
-}
+// TODO or https://stackoverflow.com/questions/45079887/await-equivalent-of-promise-resolve-then ?
+const xCl = p => dispatch => Promise.resolve(
+    dispatch(change(NAMESPACE, 'page', p))
+);
 
 class PickList extends React.Component {
     componentDidMount() {
@@ -62,9 +64,7 @@ export default connect(
         resetGroupsList: () => dispatch(actions.resetGroupsList()),
         getPickResults: requestBody => dispatch(actions.getPickResults(requestBody)),
         pageNumberClick: (pageNumber) => {
-            dispatch(change(NAMESPACE, 'page', pageNumber));
-            setTimeout(() => {
-                dispatch(submit(NAMESPACE));
-            }, 50);
+            dispatch(xCl(pageNumber).then(
+                () => dispatch(submit(NAMESPACE))));
         }
     }))(PickList);
