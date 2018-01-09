@@ -1,6 +1,5 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
-import {uniqueId} from 'lodash';
 import './pagination.scss';
 
 export class Pagination extends React.Component {
@@ -15,6 +14,10 @@ export class Pagination extends React.Component {
     render() {
         const {pagination: {current, total, items}, pageClickHandler} = this.props;
         console.log(this.props.pagination);
+        const clickHandler = (pageItem) => {
+            console.log('pageItem , ', pageItem);
+            return pageClickHandler(pageItem);
+        };
         return (
             <div className="pagination">
                 <div className="pagination__total-pages">pagination: total {total} of {current}</div>
@@ -22,9 +25,9 @@ export class Pagination extends React.Component {
                     {items.map(pageItem => (
                         /* TODO remove this crap and use classNames */
                         <span
-                            key={uniqueId()}
+                            key={pageItem}
                             className={`pagination__item ${current === pageItem && 'pagination__item--current'}`}
-                            onClick={() => pageClickHandler(pageItem)}
+                            onClick={() => clickHandler(pageItem)}
                         >
                             {pageItem} |
                         </span>
