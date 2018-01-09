@@ -1,1 +1,1 @@
-export {ModelInfo} from './model-groups';
+export {ModelGroups} from './model-groups';

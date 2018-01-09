@@ -5,7 +5,7 @@ import {Pagination} from 'components/ui/pagination';
 //     console.log(pageNumber);
 // };
 
-export const PickResults = ({result, pagination, pageClickHandler}) => {
+export const PickResults = ({result, pagination, pageClickHandler, baseUrl}) => {
     if (result) {
         return (
             <div>
@@ -13,6 +13,7 @@ export const PickResults = ({result, pagination, pageClickHandler}) => {
                 <Pagination
                     pagination={pagination}
                     pageClickHandler={pageClickHandler}
+                    baseUrl={baseUrl}
                 />
             </div>
         );

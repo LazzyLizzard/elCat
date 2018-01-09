@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
 import {reducer as formReducer} from 'redux-form';
+import {routerReducer} from 'react-router-redux';
 import queueReducers from 'utils/queue-reducers';
 import {
     ficheModelReducer,
@@ -32,6 +33,7 @@ import {
 
 export const rootReducer = combineReducers({
     form: formReducer, // Redux-form reducer should be connected in the application root reducer
+    routing: routerReducer,
     [FICHE_NAMESPACE]: queueReducers(
         ficheModelReducer,
         groupDetailsReducer,

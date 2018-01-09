@@ -10,12 +10,16 @@ import {PickResults} from './pick-results';
 // import {showResults} from './../show-results';
 import {NAMESPACE} from '../reducer';
 
+let paginationBaseUrl;
+
 class PickList extends React.Component {
     componentDidMount() {
         const {
             [NAMESPACE]: {pickList},
             routeParams: {pickGroupName}
         } = this.props;
+
+        paginationBaseUrl = `${NAMESPACE}/${pickGroupName}`;
 
         if (!pickList) {
             this.props.requestPickList(pickGroupName);
@@ -45,6 +49,7 @@ class PickList extends React.Component {
                             result={pickResult}
                             pagination={pagination}
                             pageClickHandler={this.props.pageNumberClick}
+                            baseUrl={paginationBaseUrl}
                         />
                     </div>
                 )}
