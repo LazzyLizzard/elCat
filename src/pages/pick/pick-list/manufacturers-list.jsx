@@ -1,6 +1,5 @@
 import React from 'react';
 import {Field} from 'redux-form';
-import {uniqueId} from 'lodash';
 
 export const ManufacturersList = ({formData}) => {
     const {manufList} = formData;
@@ -8,7 +7,7 @@ export const ManufacturersList = ({formData}) => {
         <div>
             {
                 manufList.map(item => (
-                    <span key={uniqueId()}>{item.manufacturers_name}
+                    <span key={item.manufacturers_id}>{item.manufacturers_name}
                         <Field
                             name={`m[${item.manufacturers_id}]`}
                             component="input"

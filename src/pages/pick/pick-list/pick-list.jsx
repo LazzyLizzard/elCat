@@ -10,12 +10,6 @@ import {PickResults} from './pick-results';
 // import {showResults} from './../show-results';
 import {NAMESPACE} from '../reducer';
 
-
-// TODO or https://stackoverflow.com/questions/45079887/await-equivalent-of-promise-resolve-then ?
-const xCl = p => dispatch => Promise.resolve(
-    dispatch(change(NAMESPACE, 'page', p))
-);
-
 class PickList extends React.Component {
     componentDidMount() {
         const {
@@ -43,7 +37,10 @@ class PickList extends React.Component {
                 {pickListGroups && (
                     <div>
                         <h4>Picker</h4>
-                        <PickForm pickFormData={pickListGroups} onSubmit={this.props.getPickResults} />
+                        <PickForm
+                            pickFormData={pickListGroups}
+                            onSubmit={this.props.getPickResults}
+                        />
                         <PickResults
                             result={pickResult}
                             pagination={pagination}
@@ -62,9 +59,12 @@ export default connect(
         requestPickList: pickGroupName => dispatch(actions.requestPickList(pickGroupName)),
         getOptionsByGroupId: id => dispatch(actions.getOptionsByGroupId(id)),
         resetGroupsList: () => dispatch(actions.resetGroupsList()),
-        getPickResults: requestBody => dispatch(actions.getPickResults(requestBody)),
+        getPickResults: (requestBody) => {
+            console.warn((requestBody));
+            dispatch(actions.getPickResults(requestBody));
+        },
         pageNumberClick: (pageNumber) => {
-            dispatch(xCl(pageNumber).then(
-                () => dispatch(submit(NAMESPACE))));
+            dispatch(change(NAMESPACE, 'page', pageNumber));
+            dispatch(submit(NAMESPACE));
         }
     }))(PickList);
