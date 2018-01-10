@@ -3,10 +3,14 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
+import {change, submit} from 'redux-form';
 import * as actions from '../actions';
 import PickForm from './pick-form';
+import {PickResults} from './pick-results';
 // import {showResults} from './../show-results';
 import {NAMESPACE} from '../reducer';
+
+let paginationBaseUrl;
 
 class PickList extends React.Component {
     componentDidMount() {
@@ -14,6 +18,8 @@ class PickList extends React.Component {
             [NAMESPACE]: {pickList},
             routeParams: {pickGroupName}
         } = this.props;
+
+        paginationBaseUrl = `${NAMESPACE}/${pickGroupName}`;
 
         if (!pickList) {
             this.props.requestPickList(pickGroupName);
@@ -29,13 +35,22 @@ class PickList extends React.Component {
 
     render() {
         console.log('render');
-        const {[NAMESPACE]: {pickListGroups}} = this.props;
+        const {[NAMESPACE]: {pickListGroups, pickResult, pagination}} = this.props;
         return (
             <div>
                 {pickListGroups && (
                     <div>
                         <h4>Picker</h4>
-                        <PickForm pickFormData={pickListGroups} onSubmit={this.props.getPickResults} />
+                        <PickForm
+                            pickFormData={pickListGroups}
+                            onSubmit={this.props.getPickResults}
+                        />
+                        <PickResults
+                            result={pickResult}
+                            pagination={pagination}
+                            pageClickHandler={this.props.pageNumberClick}
+                            baseUrl={paginationBaseUrl}
+                        />
                     </div>
                 )}
             </div>
@@ -49,5 +64,15 @@ export default connect(
         requestPickList: pickGroupName => dispatch(actions.requestPickList(pickGroupName)),
         getOptionsByGroupId: id => dispatch(actions.getOptionsByGroupId(id)),
         resetGroupsList: () => dispatch(actions.resetGroupsList()),
-        getPickResults: requestBody => dispatch(actions.getPickResults(requestBody))
+        getPickResults: (requestBody) => {
+            console.warn((requestBody));
+            dispatch(actions.getPickResults(requestBody));
+        },
+        pageNumberClick: (pageNumber) => {
+            console.log('pageNumber in pick, ', pageNumber);
+            dispatch(change(NAMESPACE, 'page', pageNumber));
+            console.log('fire submit');
+            dispatch(submit(NAMESPACE));
+            console.log('submit fired');
+        }
     }))(PickList);

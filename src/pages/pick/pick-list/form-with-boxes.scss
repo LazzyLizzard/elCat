@@ -1,0 +1,12 @@
+.form-with-boxes {
+    display: flex;
+    margin-bottom: 2em;
+    flex-direction: row;
+    &__name {
+        flex: 0 0 200px;
+    }
+    &__boxes {
+        //display: flex;
+        flex: auto;
+    }
+}

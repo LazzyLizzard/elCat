@@ -10,9 +10,9 @@ const baseUrl = `${getRequestEnvironment(REMOTE_HTTPS)}${ENDPOINT_PICK}`;
 // https://github.com/gaearon/redux-thunk
 export const showResults = (formSubmitResult /* , page = 1 */) => {
     console.log(formSubmitResult); // eslint-disable-line no-console
-    const box = [];
-    formSubmitResult.box.forEach((value, index) => (!isNil(value) && box.push(index)));
-    const submitData = assign({}, formSubmitResult, {box});
+    const param = [];
+    formSubmitResult.box.forEach((value, index) => (!isNil(value) && param.push(index)));
+    const submitData = assign({}, formSubmitResult, {param});
     console.log(submitData);
 
     fetch(baseUrl, {
