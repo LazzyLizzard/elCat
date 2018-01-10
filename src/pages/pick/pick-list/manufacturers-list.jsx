@@ -1,5 +1,5 @@
 import React from 'react';
-import {uniqueId} from 'lodash';
+import {Field} from 'redux-form';
 
 export const ManufacturersList = ({formData}) => {
     const {manufList} = formData;
@@ -7,7 +7,12 @@ export const ManufacturersList = ({formData}) => {
         <div>
             {
                 manufList.map(item => (
-                    <span key={uniqueId()}>{item.manufacturers_name}</span>
+                    <span key={item.manufacturers_id}>{item.manufacturers_name}
+                        <Field
+                            name={`m[${item.manufacturers_id}]`}
+                            component="input"
+                            type="checkbox"
+                        /> |</span>
                 ))
             }
         </div>

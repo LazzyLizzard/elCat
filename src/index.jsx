@@ -2,10 +2,11 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {Router, browserHistory} from 'react-router';
+import {syncHistoryWithStore} from 'react-router-redux';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import configureStore from './store/configureStore';
-import AppRoutes from './routes/routes';
+import {Routes} from './routes';
 import storeStructure from './store/storeStructure';
 import {rootReducer} from './reducers';
 
@@ -14,10 +15,11 @@ const store = createStore(
     rootReducer,
     configureStore(storeStructure)
 );
+const history = syncHistoryWithStore(browserHistory, store);
 
 render(
     <Provider store={store}>
-        <Router history={browserHistory} routes={AppRoutes} />
+        <Router history={history} routes={Routes} />
     </Provider>,
     document.getElementById('root')
 );

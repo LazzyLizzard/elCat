@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 // import {connect} from 'react-redux';
 // import get from 'lodash/get';
-import ModelGroups from 'pages/fiche/model-groups/model-groups';
+import {ModelGroups} from 'pages/fiche/model-groups';
 import {Loader} from 'components/Common/loader';
 
 // import styles from './styles.scss';

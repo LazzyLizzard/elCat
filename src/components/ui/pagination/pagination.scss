@@ -1,0 +1,15 @@
+.pagination {
+    display: flex;
+    border: solid 1px #666;
+    margin-bottom: 15px;
+    &__total-pages {
+        flex: 1;
+        padding: 0 20px 0 0;
+    }
+    &__item {
+        flex: 1;
+        &--current {
+            font-weight: bold;
+        }
+    }
+}
