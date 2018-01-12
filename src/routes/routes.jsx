@@ -2,7 +2,7 @@ import React from 'react';
 import {Route, IndexRoute} from 'react-router';
 import {App} from 'containers';
 import {Home} from 'components/Home';
-import {NotFound} from 'components/not-found';
+import {NotFound} from 'pages/not-found';
 import {
     FicheHome,
     MakeType,
