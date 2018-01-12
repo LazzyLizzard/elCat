@@ -2,8 +2,10 @@
  * Entry point for pick form
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {change, submit} from 'redux-form';
+import {noop} from 'lodash';
 import * as actions from '../actions';
 import PickForm from './pick-form';
 import {PickResults} from './pick-results';
@@ -76,3 +78,17 @@ export default connect(
             console.log('submit fired');
         }
     }))(PickList);
+
+PickList.propTypes = {
+    routeParams: PropTypes.object,
+    requestPickList: PropTypes.func,
+    getOptionsByGroupId: PropTypes.func,
+    resetGroupsList: PropTypes.func
+};
+
+PickList.defaultProps = {
+    routeParams: {},
+    requestPickList: noop,
+    getOptionsByGroupId: noop,
+    resetGroupsList: noop
+};
