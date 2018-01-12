@@ -2,6 +2,7 @@ import {combineReducers} from 'redux';
 import {reducer as formReducer} from 'redux-form';
 import {routerReducer} from 'react-router-redux';
 import queueReducers from 'utils/queue-reducers';
+import {FORM_NAMESPACE, ROUTING_NAMESPACE} from 'constants/additional-namespaces';
 import {
     ficheModelReducer,
     NAMESPACE as FICHE_NAMESPACE
@@ -32,8 +33,8 @@ import {
 } from 'pages/pick/reducer';
 
 export const rootReducer = combineReducers({
-    form: formReducer, // Redux-form reducer should be connected in the application root reducer
-    routing: routerReducer,
+    [FORM_NAMESPACE]: formReducer, // Redux-form reducer should be connected in the application root reducer
+    [ROUTING_NAMESPACE]: routerReducer,
     [FICHE_NAMESPACE]: queueReducers(
         ficheModelReducer,
         groupDetailsReducer,

@@ -2,8 +2,10 @@
  * Entry point for pick form
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {change, submit} from 'redux-form';
+import {noop} from 'lodash';
 import * as actions from '../actions';
 import PickForm from './pick-form';
 import {PickResults} from './pick-results';
@@ -11,6 +13,19 @@ import {PickResults} from './pick-results';
 import {NAMESPACE} from '../reducer';
 
 let paginationBaseUrl;
+const mockedForm = {
+    m: [
+        {
+            32: true
+        }
+    ],
+    66: [
+        {
+            700: true,
+            701: true
+        }
+    ]
+};
 
 class PickList extends React.Component {
     componentDidMount() {
@@ -49,6 +64,7 @@ class PickList extends React.Component {
                             result={pickResult}
                             pagination={pagination}
                             pageClickHandler={this.props.pageNumberClick}
+                            formData={mockedForm}
                             baseUrl={paginationBaseUrl}
                         />
                     </div>
@@ -69,10 +85,20 @@ export default connect(
             dispatch(actions.getPickResults(requestBody));
         },
         pageNumberClick: (pageNumber) => {
-            console.log('pageNumber in pick, ', pageNumber);
-            dispatch(change(NAMESPACE, 'page', pageNumber));
-            console.log('fire submit');
-            dispatch(submit(NAMESPACE));
-            console.log('submit fired');
+            console.log(pageNumber);
         }
     }))(PickList);
+
+PickList.propTypes = {
+    routeParams: PropTypes.object,
+    requestPickList: PropTypes.func,
+    getOptionsByGroupId: PropTypes.func,
+    resetGroupsList: PropTypes.func
+};
+
+PickList.defaultProps = {
+    routeParams: {},
+    requestPickList: noop,
+    getOptionsByGroupId: noop,
+    resetGroupsList: noop
+};

@@ -1,7 +1,7 @@
 import 'whatwg-fetch';
-import {getRequestEnvironment} from './../../../utils/get-request-environment';
-import {REMOTE_HTTPS} from '../../../contants/server-request-environment';
-import {ENDPOINT_FICHE} from './../../../contants/end-points';
+import {getRequestEnvironment} from 'utils/get-request-environment';
+import {REMOTE_HTTPS} from 'constants/server-request-environment';
+import {ENDPOINT_FICHE} from 'constants/end-points';
 
 export const MTY_REQUEST = 'MTY_REQUEST';
 export const MTY_SUCCESS = 'MTY_SUCCESS';
