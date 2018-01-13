@@ -13,6 +13,19 @@ import {PickResults} from './pick-results';
 import {NAMESPACE} from '../reducer';
 
 let paginationBaseUrl;
+const mockedForm = {
+    m: [
+        {
+            32: true
+        }
+    ],
+    66: [
+        {
+            700: true,
+            701: true
+        }
+    ]
+};
 
 class PickList extends React.Component {
     componentDidMount() {
@@ -51,6 +64,7 @@ class PickList extends React.Component {
                             result={pickResult}
                             pagination={pagination}
                             pageClickHandler={this.props.pageNumberClick}
+                            formData={mockedForm}
                             baseUrl={paginationBaseUrl}
                         />
                     </div>
@@ -71,11 +85,7 @@ export default connect(
             dispatch(actions.getPickResults(requestBody));
         },
         pageNumberClick: (pageNumber) => {
-            console.log('pageNumber in pick, ', pageNumber);
-            dispatch(change(NAMESPACE, 'page', pageNumber));
-            console.log('fire submit');
-            dispatch(submit(NAMESPACE));
-            console.log('submit fired');
+            console.log(pageNumber);
         }
     }))(PickList);
 

@@ -1,8 +1,8 @@
 import 'whatwg-fetch';
 import {find, omit} from 'lodash';
 import {getRequestEnvironment} from 'utils/get-request-environment';
-import {REMOTE_HTTPS} from 'contants/server-request-environment';
-import {ENDPOINT_PICK} from 'contants/end-points';
+import {REMOTE_HTTPS} from 'constants/server-request-environment';
+import {ENDPOINT_PICK} from 'constants/end-points';
 import {requestStart, requestError, requestSuccess} from 'utils/request-steps';
 
 export const PICK_REQUEST_START = 'PICK/REQUEST_START';
