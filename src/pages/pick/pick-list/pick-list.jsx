@@ -13,16 +13,18 @@ import {PickResults} from './pick-results';
 import {NAMESPACE} from '../reducer';
 
 let paginationBaseUrl;
+// &page=1&filters=500:1,2,3;700:3,4,5;vendor:1,2,3
 const mockedForm = {
-    m: [
+    filters: [
         {
-            32: true
-        }
-    ],
-    66: [
-        {
-            700: true,
-            701: true
+            page: 1,
+            50: {
+                700: true,
+                701: true
+            },
+            vendors: {
+                100: true
+            }
         }
     ]
 };
