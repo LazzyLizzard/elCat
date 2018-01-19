@@ -32,6 +32,8 @@
     "react-hot-loader": "^3.1.1",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
+    "tslint": "^5.9.1",
+    "typescript": "^2.6.2",
     "webpack": "^3.8.1",
     "webpack-dev-middleware": "^1.5.1",
     "webpack-hot-middleware": "^2.6.4"
