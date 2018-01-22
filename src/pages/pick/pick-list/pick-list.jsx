@@ -4,12 +4,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {change, submit} from 'redux-form';
+import {push} from 'react-router-redux';
 import {noop} from 'lodash';
 import * as actions from '../actions';
 import PickForm from './pick-form';
 import {PickResults} from './pick-results';
-// import {showResults} from './../show-results';
 import {NAMESPACE} from '../reducer';
 
 let paginationBaseUrl;
@@ -31,6 +30,8 @@ const mockedForm = {
 
 class PickList extends React.Component {
     componentDidMount() {
+        // console.log(this.props.op);
+        console.log(this);
         const {
             [NAMESPACE]: {pickList},
             routeParams: {pickGroupName}
@@ -71,13 +72,17 @@ class PickList extends React.Component {
                         />
                     </div>
                 )}
+                <span onClick={() => this.props.pushToHistory()}>push</span>
             </div>
         );
     }
 }
 
 export default connect(
-    state => state,
+    (state, ownProps) => ({
+        ...state,
+        op: {...ownProps}
+    }),
     dispatch => ({
         requestPickList: pickGroupName => dispatch(actions.requestPickList(pickGroupName)),
         getOptionsByGroupId: id => dispatch(actions.getOptionsByGroupId(id)),
@@ -88,7 +93,8 @@ export default connect(
         },
         pageNumberClick: (pageNumber) => {
             console.log(pageNumber);
-        }
+        },
+        pushToHistory: () => dispatch(push('/aaa'))
     }))(PickList);
 
 PickList.propTypes = {
