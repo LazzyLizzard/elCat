@@ -81,7 +81,7 @@ class PickList extends React.Component {
 export default connect(
     (state, ownProps) => ({
         ...state,
-        op: {...ownProps}
+        ...ownProps
     }),
     dispatch => ({
         requestPickList: pickGroupName => dispatch(actions.requestPickList(pickGroupName)),
@@ -94,7 +94,8 @@ export default connect(
         pageNumberClick: (pageNumber) => {
             console.log(pageNumber);
         },
-        pushToHistory: () => dispatch(push('/aaa'))
+        pushToHistory: () => dispatch(push(`/${NAMESPACE}`)),
+        setLocation: (page, formData) => dispatch();
     }))(PickList);
 
 PickList.propTypes = {
