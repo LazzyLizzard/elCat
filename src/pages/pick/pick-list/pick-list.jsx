@@ -4,7 +4,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {push} from 'react-router-redux';
 import {noop} from 'lodash';
 import * as actions from '../actions';
 import PickForm from './pick-form';
@@ -47,6 +46,11 @@ class PickList extends React.Component {
         }
     }
 
+
+    componentWillReceiveProps(nextProps) {
+        console.log('nextProps', nextProps);
+    }
+
     componentWillUnmount() {
         this.props.resetGroupsList();
     }
@@ -72,7 +76,6 @@ class PickList extends React.Component {
                         />
                     </div>
                 )}
-                <span onClick={() => this.props.pushToHistory()}>push</span>
             </div>
         );
     }
@@ -94,8 +97,7 @@ export default connect(
         pageNumberClick: (pageNumber) => {
             console.log(pageNumber);
         },
-        pushToHistory: () => dispatch(push(`/${NAMESPACE}`)),
-        setLocation: (page, formData) => dispatch();
+        setLocation: (page, formData) => dispatch()
     }))(PickList);
 
 PickList.propTypes = {

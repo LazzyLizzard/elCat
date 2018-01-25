@@ -13,7 +13,7 @@ export class Pagination extends React.Component {
     // };
 
     render() {
-        const {pagination: {current, total, items}, pageClickHandler, baseUrl} = this.props;
+        const {pagination: {current, total, items}, pageClickHandler, baseUrl, pageUri = ''} = this.props;
         const clickHandler = (pageItem) => {
             return pageClickHandler(pageItem);
         };
@@ -25,7 +25,7 @@ export class Pagination extends React.Component {
                         /* TODO remove this crap and use classNames */
                         <Link
                             key={pageItem}
-                            to={`/${baseUrl}/page/${pageItem}/`}
+                            to={`/${baseUrl}/page/${pageItem}/?x=${pageItem}${pageUri}`}
                         >
                             <span
                                 className={`pagination__item ${current === pageItem && 'pagination__item--current'}`}

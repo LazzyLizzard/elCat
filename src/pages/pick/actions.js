@@ -131,6 +131,6 @@ export const toggleBoxesHandler = (filterGroupId) => {
  * @param {number|string} page
  * @param {object} formData
  */
-export const setLocation = (page, formData) => dispatch => {
-
-}
+export const setLocation = () => (dispatch) => {
+    dispatch({});
+};
