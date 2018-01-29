@@ -5,7 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
-import {getFormValues} from 'redux-form';
+import {getFormValues, getFormInitialValues} from 'redux-form';
 import {noop, isEqual} from 'lodash';
 import * as actions from '../actions';
 import PickForm from './pick-form';
@@ -40,7 +40,10 @@ class PickList extends React.Component {
         console.log(this);
         const {
             [NAMESPACE]: {pickList},
-            routeParams: {pickGroupName}
+            routeParams: {pickGroupName},
+            pickFormValues,
+            pickFormInitialValues,
+
         } = this.props;
 
         paginationBaseUrl = `${NAMESPACE}/${pickGroupName}`;
@@ -50,6 +53,12 @@ class PickList extends React.Component {
         } else {
             const id = actions.getGroupIdByName(pickGroupName, pickList);
             this.props.getOptionsByGroupId(id);
+        }
+
+        if (isEqual(pickFormValues, pickFormInitialValues)) {
+            console.log('simple request');
+        } else {
+            console.log('check searc in query string');
         }
     }
 
@@ -96,8 +105,10 @@ class PickList extends React.Component {
 }
 
 export default connect(
-    state => ({
-        fw: getFormValues('pick')(state),
+    (state, ownProps) => ({
+        pickForValues: getFormValues(NAMESPACE)(state),
+        pickForInitialValues: getFormInitialValues(NAMESPACE)(state),
+        ownLocation: ownProps.location,
         ...state
     }),
     dispatch => ({
