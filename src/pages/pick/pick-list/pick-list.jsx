@@ -5,7 +5,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
-import {noop} from 'lodash';
+import {getFormValues} from 'redux-form';
+import {noop, isEqual} from 'lodash';
 import * as actions from '../actions';
 import PickForm from './pick-form';
 import {PickResults} from './pick-results';
@@ -14,7 +15,7 @@ import {NAMESPACE} from '../reducer';
 let paginationBaseUrl;
 // &page=1&filters=500:1,2,3;700:3,4,5;vendor:1,2,3
 const mockedForm = {
-    filters: [
+    filters:
         {
             page: 1,
             50: {
@@ -25,8 +26,13 @@ const mockedForm = {
                 100: true
             }
         }
-    ]
 };
+
+// const reservedFields = ['page', 'vendors'];
+//
+// const formValuesToFormData = (formValues) => {
+//
+// }
 
 class PickList extends React.Component {
     componentDidMount() {
@@ -45,6 +51,17 @@ class PickList extends React.Component {
             const id = actions.getGroupIdByName(pickGroupName, pickList);
             this.props.getOptionsByGroupId(id);
         }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps);
+        // let eq;
+        // if (isEqual(this.props.form.pick, nextProps.form.pick)) {
+        //     eq = 'eq';
+        // } else {
+        //     eq = 'not eq';
+        // }
+        // console.warn(eq);
     }
 
     componentWillUnmount() {
@@ -79,9 +96,9 @@ class PickList extends React.Component {
 }
 
 export default connect(
-    (state, ownProps) => ({
-        ...state,
-        ...ownProps
+    state => ({
+        fw: getFormValues('pick')(state),
+        ...state
     }),
     dispatch => ({
         requestPickList: pickGroupName => dispatch(actions.requestPickList(pickGroupName)),
@@ -95,7 +112,7 @@ export default connect(
             console.log(pageNumber);
         },
         pushToHistory: () => dispatch(push(`/${NAMESPACE}`)),
-        setLocation: (page, formData) => dispatch();
+        setLocation: (page, formData) => dispatch()
     }))(PickList);
 
 PickList.propTypes = {
