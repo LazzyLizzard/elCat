@@ -1,11 +1,12 @@
 import React from 'react';
+import {noop} from 'lodash';
 import {Pagination} from 'components/ui/pagination';
 
 // const pageClickHandler = (pageNumber) => {
 //     console.log(pageNumber);
 // };
 
-export const PickResults = ({result, pagination, pageClickHandler, baseUrl}) => {
+export const PickResults = ({result, pagination, pageClickHandler = noop, baseUrl}) => {
     if (result) {
         return (
             <div>

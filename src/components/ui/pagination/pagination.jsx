@@ -1,4 +1,5 @@
 import React from 'react';
+import {noop} from 'lodash';
 import {Link} from 'react-router';
 // import PropTypes from 'prop-types';
 import './pagination.scss';
@@ -13,7 +14,7 @@ export class Pagination extends React.Component {
     // };
 
     render() {
-        const {pagination: {current, total, items}, pageClickHandler, baseUrl, pageUri = ''} = this.props;
+        const {pagination: {current, total, items}, pageClickHandler = noop, baseUrl, pageUri = ''} = this.props;
         const clickHandler = (pageItem) => {
             return pageClickHandler(pageItem);
         };

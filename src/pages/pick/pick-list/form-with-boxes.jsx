@@ -34,7 +34,7 @@ export const FormWithBoxes = ({formData, boxToggleHandler = noop}) => {
                                             (id {checkboxItem.valueId})
                                         </span>
                                         <Field
-                                            name={`param[${checkboxItem.valueId}]`}
+                                            name={`filters[${filterItem.prodParamsGroupId}][${checkboxItem.valueId}]`}
                                             component="input"
                                             type="checkbox"
                                         /> |

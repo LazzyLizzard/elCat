@@ -5,7 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {getFormValues, getFormInitialValues} from 'redux-form';
-import {noop, isEqual} from 'lodash';
+import {noop, isEqual, isNil, get} from 'lodash';
 import * as actions from '../actions';
 import PickForm from './pick-form';
 import {PickResults} from './pick-results';
@@ -14,24 +14,23 @@ import {NAMESPACE} from '../reducer';
 let paginationBaseUrl;
 // &page=1&filters=500:1,2,3;700:3,4,5;vendor:1,2,3
 const mockedForm = {
-    filters:
-        {
-            page: 1,
-            50: {
-                700: true,
-                701: true
-            },
-            vendors: {
-                100: true
-            }
-        }
-};
+    page: 1,
+    filters: [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, true], null, null, null, null, null, null, [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, true, null, null, null, null, null, null, null, null, null, null, null, null, null, true, null, null, null, null, null, null, true, null, null, null, true], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, true]]
+}
 
 // const reservedFields = ['page', 'vendors'];
-//
-// const formValuesToFormData = (formValues) => {
-//
-// }
+
+const formValuesToFormData = (formValues) => {
+    // console.warn(formValues);
+    const filters = get(formValues, 'filters', {});
+    console.warn(filters);
+    // const params = [];
+    // filters.forEach((value) => {
+    //     console.log(value);
+    //     // const x = isNil(value) && params.push(index)
+    // });
+    // return params;
+}
 
 class PickList extends React.Component {
     componentDidMount() {
@@ -41,9 +40,12 @@ class PickList extends React.Component {
             [NAMESPACE]: {pickList},
             routeParams: {pickGroupName},
             pickFormValues,
-            pickFormInitialValues,
+            // pickFormInitialValues,
 
         } = this.props;
+
+        formValuesToFormData(pickFormValues);
+        // console.log(processedFormValues);
 
         paginationBaseUrl = `${NAMESPACE}/${pickGroupName}`;
 
@@ -54,11 +56,11 @@ class PickList extends React.Component {
             this.props.getOptionsByGroupId(id);
         }
 
-        if (isEqual(pickFormValues, pickFormInitialValues)) {
-            console.log('simple request');
-        } else {
-            console.log('check searc in query string');
-        }
+        // if (isEqual(pickFormValues, pickFormInitialValues)) {
+        //     console.log('simple request');
+        // } else {
+        //     console.log('check searc in query string');
+        // }
     }
 
     componentWillReceiveProps(nextProps) {
@@ -72,23 +74,21 @@ class PickList extends React.Component {
         // console.warn(eq);
     }
 
-
-    componentWillReceiveProps(nextProps) {
-        console.log('nextProps', nextProps);
-    }
-
     componentWillUnmount() {
         this.props.resetGroupsList();
     }
 
     render() {
         console.log('render');
-        const {[NAMESPACE]: {pickListGroups, pickResult, pagination}} = this.props;
+        const {[NAMESPACE]: {pickListGroups, pickResult, pagination, error}} = this.props;
         return (
             <div>
                 {pickListGroups && (
                     <div>
                         <h4>Picker</h4>
+                        {error && (
+                            <div style={{color: '#c70000'}}>{error.message}</div>
+                        )}
                         <PickForm
                             pickFormData={pickListGroups}
                             onSubmit={this.props.getPickResults}
@@ -109,10 +109,11 @@ class PickList extends React.Component {
 
 export default connect(
     (state, ownProps) => ({
-        pickForValues: getFormValues(NAMESPACE)(state),
-        pickForInitialValues: getFormInitialValues(NAMESPACE)(state),
-        ownLocation: ownProps.location,
-        ...state
+        pick: state.pick,
+        pickFormValues: getFormValues(NAMESPACE)(state),
+        pickFormInitialValues: getFormInitialValues(NAMESPACE)(state),
+        ownLocation: ownProps.location
+        // ...state
     }),
     dispatch => ({
         requestPickList: pickGroupName => dispatch(actions.requestPickList(pickGroupName)),
