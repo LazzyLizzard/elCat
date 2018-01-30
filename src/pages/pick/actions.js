@@ -125,12 +125,3 @@ export const getPickResults = requestBody => (dispatch) => {
 export const toggleBoxesHandler = (filterGroupId) => {
     console.log(filterGroupId);
 };
-
-/**
- *
- * @param {number|string} page
- * @param {object} formData
- */
-export const setLocation = () => (dispatch) => {
-    dispatch({});
-};
