@@ -22,13 +22,15 @@ const mockedForm = {
 
 const formValuesToFormData = (formValues) => {
     // console.warn(formValues);
-    const filters = get(formValues, 'filters', {});
+    const filters = get(formValues, 'filters', null);
     console.warn(filters);
     // const params = [];
-    // filters.forEach((value) => {
-    //     console.log(value);
-    //     // const x = isNil(value) && params.push(index)
-    // });
+    if (!isNil(filters)) {
+        filters.forEach((value) => {
+            console.log(value);
+            // const x = isNil(value) && params.push(index)
+        });
+    }
     // return params;
 }
 
@@ -39,7 +41,7 @@ class PickList extends React.Component {
         const {
             [NAMESPACE]: {pickList},
             routeParams: {pickGroupName},
-            pickFormValues,
+            pickFormValues
             // pickFormInitialValues,
 
         } = this.props;
@@ -64,7 +66,8 @@ class PickList extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps);
+        // console.log(nextProps);
+        formValuesToFormData(nextProps.pickFormValues);
         // let eq;
         // if (isEqual(this.props.form.pick, nextProps.form.pick)) {
         //     eq = 'eq';
