@@ -37,14 +37,12 @@ const formValuesToFormData = (formValues) => {
             });
         });
     }
-    console.log(params);
     return params;
-}
+};
 
 class PickList extends React.Component {
     componentDidMount() {
         // console.log(this.props.op);
-        // console.log(this);
         const {
             [NAMESPACE]: {pickList},
             routeParams: {pickGroupName},
@@ -64,12 +62,6 @@ class PickList extends React.Component {
             const id = actions.getGroupIdByName(pickGroupName, pickList);
             this.props.getOptionsByGroupId(id);
         }
-
-        // if (isEqual(pickFormValues, pickFormInitialValues)) {
-        //     console.log('simple request');
-        // } else {
-        //     console.log('check searc in query string');
-        // }
     }
 
     componentWillReceiveProps(nextProps) {
