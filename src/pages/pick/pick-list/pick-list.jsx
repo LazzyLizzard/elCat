@@ -5,7 +5,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {getFormValues, getFormInitialValues} from 'redux-form';
-import {noop, isEqual, isNil, get} from 'lodash';
+import {noop} from 'lodash';
+import {formValuesToFormData} from 'utils/pick-from-utils';
 import * as actions from '../actions';
 import PickForm from './pick-form';
 import {PickResults} from './pick-results';
@@ -13,45 +14,18 @@ import {NAMESPACE} from '../reducer';
 
 let paginationBaseUrl;
 // &page=1&filters=500:1,2,3;700:3,4,5;vendor:1,2,3
-const mockedForm = {
-    page: 1,
-    filters: []
-}
-
-// const reservedFields = ['page', 'vendors'];
-
-const formValuesToFormData = (formValues) => {
-    // console.warn(formValues);
-    const filters = get(formValues, 'filters', null);
-    console.warn(filters);
-    // const params = [];
-    if (!isNil(filters)) {
-        filters.forEach((boxesList) => {
-            console.dir(boxesList);
-            // console.log(index);
-            boxesList.forEach((value, inx) => {
-                if (!isNil(value) && value !== false) {
-                    console.log('* index ', inx, value);
-                }
-            });
-        });
-    }
-    // return params;
-}
+// const mockedForm = {
+//     page: 1,
+//     filters: []
+// };
 
 class PickList extends React.Component {
     componentDidMount() {
         // console.log(this.props.op);
-        console.log(this);
         const {
             [NAMESPACE]: {pickList},
             routeParams: {pickGroupName}
-            // ,
-            // pickFormValues
-            // pickFormInitialValues,
-
         } = this.props;
-
 
         paginationBaseUrl = `${NAMESPACE}/${pickGroupName}`;
 
@@ -61,24 +35,11 @@ class PickList extends React.Component {
             const id = actions.getGroupIdByName(pickGroupName, pickList);
             this.props.getOptionsByGroupId(id);
         }
-
-        // if (isEqual(pickFormValues, pickFormInitialValues)) {
-        //     console.log('simple request');
-        // } else {
-        //     console.log('check searc in query string');
-        // }
     }
 
     componentWillReceiveProps(nextProps) {
         // console.log(nextProps);
         formValuesToFormData(nextProps.pickFormValues);
-        // let eq;
-        // if (isEqual(this.props.form.pick, nextProps.form.pick)) {
-        //     eq = 'eq';
-        // } else {
-        //     eq = 'not eq';
-        // }
-        // console.warn(eq);
     }
 
     componentWillUnmount() {
@@ -104,7 +65,6 @@ class PickList extends React.Component {
                             result={pickResult}
                             pagination={pagination}
                             pageClickHandler={this.props.pageNumberClick}
-                            formData={mockedForm}
                             baseUrl={paginationBaseUrl}
                         />
                     </div>
