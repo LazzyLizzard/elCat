@@ -5,22 +5,24 @@ import {isNil, get} from 'lodash';
 /**
  * Converts form data object to queryString-like string
  * @param {object} formValues
+ * @return {string}
  */
 export const formValuesToFormData = (formValues) => {
-    const params = {};
+    const groupIndexes = [];
+    const paramsString = [];
     const pickFilters = get(formValues, 'filters', null);
     if (!isNil(pickFilters)) {
         pickFilters.forEach((groupData, index) => {
-            params[index] = [];
             groupData.forEach((itemData, itemIndex) => {
-                if (itemData !== null && itemData !== false) {
-                    params[index].push(String(itemIndex));
+                if (!isNil(itemData) && itemData !== false) {
+                    groupIndexes.push(String(itemIndex));
                 }
             });
+            paramsString.push(`${index}:${groupIndexes.join(',')}`);
         });
     }
-    console.log(params);
-    return params;
+    return paramsString.join(';');
 };
 
-export const queryStringToFormData = () => {};
+export const queryStringToFormData = () => {
+};
