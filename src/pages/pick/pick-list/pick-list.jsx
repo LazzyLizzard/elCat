@@ -5,7 +5,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {getFormValues, getFormInitialValues} from 'redux-form';
-import {noop, isNil, get} from 'lodash';
+import {noop} from 'lodash';
+import {formValuesToFormData} from 'utils/pick-from-utils';
 import * as actions from '../actions';
 import PickForm from './pick-form';
 import {PickResults} from './pick-results';
@@ -18,41 +19,13 @@ let paginationBaseUrl;
 //     filters: []
 // };
 
-// const reservedFields = ['page', 'vendors'];
-
-/**
- * Converts form data object to queryString-like string
- * @param {object} formValues
- */
-const formValuesToFormData = (formValues) => {
-    const params = {};
-    const pickFilters = get(formValues, 'filters', null);
-    if (!isNil(pickFilters)) {
-        pickFilters.forEach((groupData, index) => {
-            params[index] = [];
-            groupData.forEach((itemData, itemIndex) => {
-                if (itemData !== null && itemData !== false) {
-                    params[index].push(String(itemIndex));
-                }
-            });
-        });
-    }
-    return params;
-};
-
 class PickList extends React.Component {
     componentDidMount() {
         // console.log(this.props.op);
         const {
             [NAMESPACE]: {pickList},
-            routeParams: {pickGroupName},
-            pickFormValues
-            // pickFormInitialValues,
-
+            routeParams: {pickGroupName}
         } = this.props;
-
-        formValuesToFormData(pickFormValues);
-        // console.log(processedFormValues);
 
         paginationBaseUrl = `${NAMESPACE}/${pickGroupName}`;
 
@@ -67,13 +40,6 @@ class PickList extends React.Component {
     componentWillReceiveProps(nextProps) {
         // console.log(nextProps);
         formValuesToFormData(nextProps.pickFormValues);
-        // let eq;
-        // if (isEqual(this.props.form.pick, nextProps.form.pick)) {
-        //     eq = 'eq';
-        // } else {
-        //     eq = 'not eq';
-        // }
-        // console.warn(eq);
     }
 
     componentWillUnmount() {
