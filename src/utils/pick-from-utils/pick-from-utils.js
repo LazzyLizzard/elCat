@@ -1,4 +1,4 @@
-import {isNil, get} from 'lodash';
+import {isNil, get, forEach, some} from 'lodash';
 
 // const reservedFields = ['page', 'vendors'];
 
@@ -8,21 +8,32 @@ import {isNil, get} from 'lodash';
  * @return {string}
  */
 export const formValuesToFormData = (formValues) => {
-    const groupIndexes = [];
-    const paramsString = [];
+    const filterParams = {};
+    const finalValue = [];
     const pickFilters = get(formValues, 'filters', null);
     if (!isNil(pickFilters)) {
         pickFilters.forEach((groupData, index) => {
-            groupData.forEach((itemData, itemIndex) => {
-                if (!isNil(itemData) && itemData !== false) {
-                    groupIndexes.push(String(itemIndex));
-                }
-            });
-            paramsString.push(`${index}:${groupIndexes.join(',')}`);
+            if (groupData.length > 0 && some(groupData, val => val === true)) {
+                filterParams[index] = [];
+                groupData.forEach((itemData, itemIndex) => {
+                    if (itemData !== null && itemData !== false) {
+                        filterParams[index].push(String(itemIndex));
+                    }
+                });
+            } else if (filterParams[index]) {
+                delete filterParams[index];
+            }
         });
     }
-    return paramsString.join(';');
+    forEach(filterParams, (paramItem, paramIndex) => {
+        if (paramIndex) {
+            finalValue.push(`${paramIndex}:${paramItem.join(',')}`);
+        }
+    });
+
+    return finalValue.join(';');
 };
+
 
 export const queryStringToFormData = () => {
 };
