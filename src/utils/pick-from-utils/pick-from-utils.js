@@ -1,4 +1,4 @@
-import {isNil, get} from 'lodash';
+import {isNil, get, toPairs, forEach} from 'lodash';
 
 // const reservedFields = ['page', 'vendors'];
 
@@ -23,4 +23,10 @@ export const formValuesToFormData = (formValues) => {
     return params;
 };
 
-export const queryStringToFormData = () => {};
+// 500:1,2,3;700:5,7,9
+// []
+
+export const queryStringToFormData = (string) => {
+    const exploded = string.split(';');
+    const retVal = [];
+};
