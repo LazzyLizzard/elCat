@@ -1,1 +1,1 @@
-export {formValuesToFormData, queryStringToFormData} from './pick-from-utils';
+export {formValuesStringify, formValuesParse} from './pick-from-utils';
