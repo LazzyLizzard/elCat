@@ -1,4 +1,4 @@
-import {isNil, get, forEach, some, toPairs} from 'lodash';
+import {isNil, get, forEach, some} from 'lodash';
 
 // const reservedFields = ['page', 'vendors'];
 
@@ -16,6 +16,7 @@ export const formValuesStringify = (formValues) => {
     const filterParams = {};
     const finalValue = [];
     const pickFilters = get(formValues, 'filters', null);
+    console.log(pickFilters);
     if (!isNil(pickFilters)) {
         pickFilters.forEach((groupData, index) => {
             if (groupData.length > 0 && some(groupData, val => val === true)) {
@@ -45,24 +46,13 @@ export const formValuesStringify = (formValues) => {
 
 export const formValuesParse = (filtersString) => {
     // let x;
-    // const y = [];
+    const y = [];
     if (filtersString) {
         filtersString.split(';').forEach((item) => {
+            const x = item.split(':');
             console.log('item ', item.split(':'));
-            console.log(toPairs(item));
-            // item.split(':').forEach((slice) => {
-            //     console.log('s: ', slice);
-            //     // slice.forEach((sliceItem) => {
-            //     //     console.log('si', sliceItem);
-            //     // });
-            // });
-            console.log('---');
-            // console.log(item.split(':').forEach((slice) => {
-            // console.log(slice);
-            // }));
-            // item.split(':').forEach(())
-            // y[idx] = item.slice(',').map(sliced => ({[sliced]: true}));
+            y[x[0]] = x[1].split(',').map(zz => ({[zz]: true}));
         });
     }
-    // console.log(y);
+    console.log(y);
 };
