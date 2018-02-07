@@ -42,17 +42,26 @@ export const formValuesStringify = (formValues) => {
 
 // 500:1,2,3;700:5,7,9
 // ['500:1,2,3', '700:5,7,9']
-// {500: [1,2,3], 700: [5,7,9]}
+// {500: [1:true,2:true,3:true], 700: [53:true,73:true,93:true]}
 
 export const formValuesParse = (filtersString) => {
-    // let x;
     const y = [];
     if (filtersString) {
         filtersString.split(';').forEach((item) => {
             const x = item.split(':');
             console.log('item ', item.split(':'));
-            y[x[0]] = x[1].split(',').map(zz => ({[zz]: true}));
+            y[x[0]] = x[1].split(',').map(zz => (y[x[0]][zz] = true));
         });
     }
     console.log(y);
 };
+
+function a(inp) {
+    return inp.split(';').reduce((acc, part) => {
+        const [code, values] = part.split(':');
+        return {...acc, [code]: values.split(',').reduce((arr, key) => {
+            arr[parseInt(key, 10)] = true;
+            return arr;
+        }, [])};
+    }, {});
+}
