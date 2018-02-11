@@ -40,7 +40,7 @@ export const getGroupIdByName = (name, data) => {
 export const getOptionsByGroupId = id => (dispatch) => {
     dispatch(requestStart(PICK_REQUEST_LIST_START));
     return fetch(
-        `${baseUrl}?async=1&prodGroupId=${id}`, {
+        `${baseUrl}/${id}`, {
             method: 'get'
         })
         .then(response => response.json())
@@ -57,7 +57,7 @@ export const getOptionsByGroupId = id => (dispatch) => {
 export const requestPickList = pickGroupName => (dispatch) => {
     dispatch(requestStart(PICK_REQUEST_START));
     return fetch(
-        `${baseUrl}?async=1`, {
+        baseUrl, {
             method: 'get'
         })
         .then(response => response.json())
@@ -91,14 +91,13 @@ export const resetGroupsList = () => ({
  */
 export const getPickResults = requestBody => (dispatch) => {
     dispatch(requestStart(PICK_REQUEST_RESULT_START));
-    return fetch(baseUrl, {
-        method: 'post',
-        body: JSON.stringify(requestBody)
-    })
+    return fetch(
+        `${baseUrl}?temp_args=${JSON.stringify(requestBody)}`, {
+            method: 'get'
+        })
         .then(response => response.json())
         .then((json) => {
-            const page = json.page;
-            const pagination = json.pagination;
+            const {page, pagination} = json;
             dispatch({
                 type: PICK_REQUEST_RESULT_SUCCESS,
                 payload: {

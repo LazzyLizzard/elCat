@@ -1,5 +1,5 @@
 import React from 'react';
-import {reduxForm} from 'redux-form';
+import {reduxForm, Field} from 'redux-form';
 import {ManufacturersList} from './manufacturers-list';
 import {FormWithBoxes} from './form-with-boxes';
 import {NAMESPACE} from './../reducer';
@@ -11,12 +11,21 @@ const formInitialValues = {
 };
 
 const PickForm = (props) => {
-    const {handleSubmit, pristine, reset, submitting, pickFormData, onSubmit} = props;
+    const {handleSubmit, pristine, reset, submitting, pickFormData, onSubmit, pickGroupId} = props;
     return (
         <div>
             <form onSubmit={handleSubmit(onSubmit)}>
+                * {pickGroupId} <Field
+                    component="input"
+                    name="pickId"
+                    type="text"
+                    value={pickGroupId}
+                />
                 <ManufacturersList formData={pickFormData} />
-                <FormWithBoxes formData={pickFormData} boxToggleHandler={toggleBoxesHandler} />
+                <FormWithBoxes
+                    formData={pickFormData}
+                    boxToggleHandler={toggleBoxesHandler}
+                />
 
                 <div>
                     <button type="submit" disabled={pristine || submitting}>Submit</button>

@@ -61,6 +61,7 @@ class PickList extends React.Component {
                             <div style={{color: '#c70000'}}>{error.message}</div>
                         )}
                         <PickForm
+                            pickGroupId={32} // TODO get from props
                             pickFormData={pickListGroups}
                             onSubmit={this.props.getPickResults}
                         />
