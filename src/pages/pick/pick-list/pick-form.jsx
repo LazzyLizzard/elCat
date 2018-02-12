@@ -12,15 +12,28 @@ const formInitialValues = {
 
 const PickForm = (props) => {
     const {handleSubmit, pristine, reset, submitting, pickFormData, onSubmit, pickGroupId} = props;
+    // autofill(NAMESPACE, 'pickId', 'dfsdfs');
+    console.log('af');
+
+    const renderField = (field) => {
+        console.log(field);
+        return (
+            <div className="input-row">
+                <input {...field.input} type="text" />
+            </div>
+        );
+    };
+
     return (
         <div>
             <form onSubmit={handleSubmit(onSubmit)}>
-                * {pickGroupId} <Field
-                    component="input"
+                * {pickGroupId}
+                <Field
                     name="pickId"
-                    type="text"
-                    value={pickGroupId}
+                    value="5345345"
+                    component={renderField}
                 />
+
                 <ManufacturersList formData={pickFormData} />
                 <FormWithBoxes
                     formData={pickFormData}
