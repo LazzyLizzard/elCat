@@ -1,4 +1,4 @@
-import {isNil, get, forEach, some} from 'lodash';
+import {isNil, forEach, some} from 'lodash';
 
 // const reservedFields = ['page', 'vendors'];
 
@@ -9,13 +9,12 @@ import {isNil, get, forEach, some} from 'lodash';
  * Only suitable for filters field.
  * Input object like {500:[true, true, false, false, null, null, true]}
  * Output string like 500:1,2,3;700:5,9 - accepting only true values
- * @param {object} formValues
+ * @param {object} pickFilters
  * @return {string}
  */
-export const formValuesStringify = (formValues) => {
+export const filterValuesStringify = (pickFilters) => {
     const filterParams = {};
     const finalValue = [];
-    const pickFilters = get(formValues, 'filters', null);
     console.log(pickFilters);
     if (!isNil(pickFilters)) {
         pickFilters.forEach((groupData, index) => {
@@ -45,12 +44,14 @@ export const formValuesStringify = (formValues) => {
 // {500: [null, true, true, true]}
 
 
-export const a = inp => inp.split(';').reduce((acc, part) => {
+export const filterValuesParse = inp => inp.split(';').reduce((acc, part) => {
     const z = [];
     const [code, values] = part.split(':');
-    return {...acc,
+    return {
+        ...acc,
         [code]: values.split(',').reduce((arr, key) => {
             z[parseInt(key, 10)] = true;
             return z;
-        }, [])};
+        }, [])
+    };
 }, {});

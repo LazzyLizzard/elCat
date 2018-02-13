@@ -5,8 +5,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {getFormValues, getFormInitialValues} from 'redux-form';
-import {noop} from 'lodash';
-import {a, formValuesStringify} from 'utils/pick-from-utils';
+import {noop, get} from 'lodash';
+import {filterValuesParse, filterValuesStringify} from 'utils/pick-from-utils';
 import * as actions from '../actions';
 import PickForm from './pick-form';
 import {PickResults} from './pick-results';
@@ -36,13 +36,14 @@ class PickList extends React.Component {
             this.props.getOptionsByGroupId(id);
         }
 
-        // formValuesParse('500:1,2,3;700:5,7,9');
-        console.log(a('500:1,2,3;700:5,7,9'));
+        // filterValuesParse('500:1,2,3;700:5,7,9');
+        console.log(filterValuesParse('500:1,2,3;700:5,7,9'));
     }
 
     componentWillReceiveProps(nextProps) {
+        const filterValues = get(nextProps, 'pickFormValues.filters', null);
         // console.log(nextProps);
-        formValuesStringify(nextProps.pickFormValues);
+        filterValuesStringify(filterValues);
     }
 
     componentWillUnmount() {
