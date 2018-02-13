@@ -1,5 +1,5 @@
 import React from 'react';
-import {reduxForm, Field} from 'redux-form';
+import {reduxForm} from 'redux-form';
 import {ManufacturersList} from './manufacturers-list';
 import {FormWithBoxes} from './form-with-boxes';
 import {NAMESPACE} from './../reducer';
@@ -7,47 +7,51 @@ import {NAMESPACE} from './../reducer';
 import {toggleBoxesHandler} from '../actions';
 
 const formInitialValues = {
-    page: 1
+    page: 1,
+    pickGroupId: null
 };
 
-const PickForm = (props) => {
-    const {handleSubmit, pristine, reset, submitting, pickFormData, onSubmit, pickGroupId} = props;
-    // autofill(NAMESPACE, 'pickId', 'dfsdfs');
-    console.log('af');
+// const renderField = (field) => {
+//     console.log(field);
+//     return (
+//         <div className="input-row">
+//             <input {...field.input} type="text" />
+//         </div>
+//     );
+// };
 
-    const renderField = (field) => {
-        console.log(field);
+class PickForm extends React.Component {
+    componentWillReceiveProps() {
+        const {change, pickGroupId} = this.props;
+        change('pickGroupId', pickGroupId);
+    }
+
+    render() {
+        const {handleSubmit, pristine, reset, submitting, pickFormData, onSubmit} = this.props;
+        // const x = {aaa: 'bbb'}
         return (
-            <div className="input-row">
-                <input {...field.input} type="text" />
+            <div>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    {/* <Field */}
+                    {/* name="pickGoId" */}
+                    {/* component={renderField} */}
+                    {/* /> */}
+
+                    <ManufacturersList formData={pickFormData} />
+                    <FormWithBoxes
+                        formData={pickFormData}
+                        boxToggleHandler={toggleBoxesHandler}
+                    />
+
+                    <div>
+                        <button type="submit" disabled={pristine || submitting}>Submit</button>
+                        <button type="button" disabled={pristine || submitting} onClick={reset}>Reset</button>
+                    </div>
+                </form>
             </div>
         );
-    };
-
-    return (
-        <div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                * {pickGroupId}
-                <Field
-                    name="pickId"
-                    value="5345345"
-                    component={renderField}
-                />
-
-                <ManufacturersList formData={pickFormData} />
-                <FormWithBoxes
-                    formData={pickFormData}
-                    boxToggleHandler={toggleBoxesHandler}
-                />
-
-                <div>
-                    <button type="submit" disabled={pristine || submitting}>Submit</button>
-                    <button type="button" disabled={pristine || submitting} onClick={reset}>Reset</button>
-                </div>
-            </form>
-        </div>
-    );
-};
+    }
+}
 
 export default reduxForm({
     form: NAMESPACE,
