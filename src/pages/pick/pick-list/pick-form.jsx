@@ -11,15 +11,6 @@ const formInitialValues = {
     pickGroupId: null
 };
 
-// const renderField = (field) => {
-//     console.log(field);
-//     return (
-//         <div className="input-row">
-//             <input {...field.input} type="text" />
-//         </div>
-//     );
-// };
-
 class PickForm extends React.Component {
     componentWillReceiveProps() {
         const {change, pickGroupId} = this.props;
@@ -28,15 +19,9 @@ class PickForm extends React.Component {
 
     render() {
         const {handleSubmit, pristine, reset, submitting, pickFormData, onSubmit} = this.props;
-        // const x = {aaa: 'bbb'}
         return (
             <div>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    {/* <Field */}
-                    {/* name="pickGoId" */}
-                    {/* component={renderField} */}
-                    {/* /> */}
-
                     <ManufacturersList formData={pickFormData} />
                     <FormWithBoxes
                         formData={pickFormData}
