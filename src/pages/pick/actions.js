@@ -1,8 +1,10 @@
 import 'whatwg-fetch';
 import {find, omit} from 'lodash';
+import {push} from 'react-router-redux';
 import {getRequestEnvironment} from 'utils/get-request-environment';
 import {REMOTE_HTTPS} from 'constants/server-request-environment';
 import {ENDPOINT_PICK} from 'constants/end-points';
+import {filterValuesStringify} from 'utils/pick-from-utils';
 import {requestStart, requestError, requestSuccess} from 'utils/request-steps';
 
 export const PICK_REQUEST_START = 'PICK/REQUEST_START';
@@ -40,7 +42,7 @@ export const getGroupIdByName = (name, data) => {
 export const getOptionsByGroupId = id => (dispatch) => {
     dispatch(requestStart(PICK_REQUEST_LIST_START));
     return fetch(
-        `${baseUrl}/${id}`, {
+        `${baseUrl}${id}`, {
             method: 'get'
         })
         .then(response => response.json())
@@ -91,19 +93,22 @@ export const resetGroupsList = () => ({
  */
 export const getPickResults = requestBody => (dispatch) => {
     dispatch(requestStart(PICK_REQUEST_RESULT_START));
+    const {pickGroupId, page, filters} = requestBody;
+    const filtersString = filterValuesStringify(filters);
+    dispatch(push(`page/${page}?filters=${filtersString}`));
     return fetch(
-        `${baseUrl}?temp_args=${JSON.stringify(requestBody)}`, {
+        `${baseUrl}${pickGroupId}/page/${page}?filters=${filtersString}`, {
             method: 'get'
         })
         .then(response => response.json())
         .then((json) => {
-            const {page, pagination} = json;
+            // const {page, pagination} = json;
             dispatch({
                 type: PICK_REQUEST_RESULT_SUCCESS,
                 payload: {
                     loader: false,
                     pickResult: {[page]: omit(json, ['page', 'pagination'])},
-                    pagination
+                    ...[1, 2, 3]
                 }
             });
             return json;
