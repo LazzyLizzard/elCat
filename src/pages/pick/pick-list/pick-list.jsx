@@ -7,12 +7,17 @@ import {connect} from 'react-redux';
 import {getFormValues, getFormInitialValues} from 'redux-form';
 import {noop, get} from 'lodash';
 import {filterValuesParse, filterValuesStringify} from 'utils/pick-from-utils';
-import * as actions from '../actions';
+import {
+    getGroupIdByName,
+    requestPickList,
+    getOptionsByGroupId,
+    resetGroupsList,
+    getPickResults
+} from '../actions';
 import PickForm from './pick-form';
 import {PickResults} from './pick-results';
 import {NAMESPACE} from '../reducer';
 
-let paginationBaseUrl;
 // &page=1&filters=500:1,2,3;700:3,4,5;vendor:1,2,3
 // const mockedForm = {
 //     page: 1,
@@ -20,6 +25,11 @@ let paginationBaseUrl;
 // };
 
 class PickList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.pickGroupId = 32;
+    }
+
     componentDidMount() {
         // console.log(this.props.op);
         const {
@@ -27,13 +37,13 @@ class PickList extends React.Component {
             routeParams: {pickGroupName}
         } = this.props;
 
-        paginationBaseUrl = `${NAMESPACE}/${pickGroupName}`;
+        this.paginationBaseUrl = `${NAMESPACE}/${pickGroupName}`;
 
         if (!pickList) {
             this.props.requestPickList(pickGroupName);
         } else {
-            const id = actions.getGroupIdByName(pickGroupName, pickList);
-            this.props.getOptionsByGroupId(id);
+            this.pickGroupId = getGroupIdByName(pickGroupName, pickList);
+            this.props.getOptionsByGroupId(this.pickGroupId);
         }
 
         // filterValuesParse('500:1,2,3;700:5,7,9');
@@ -42,7 +52,6 @@ class PickList extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         const filterValues = get(nextProps, 'pickFormValues.filters', null);
-        // console.log(nextProps);
         filterValuesStringify(filterValues);
     }
 
@@ -50,9 +59,14 @@ class PickList extends React.Component {
         this.props.resetGroupsList();
     }
 
+    pickGroupId = null;
+    paginationBaseUrl = '';
+
     render() {
         console.log('render');
-        const {[NAMESPACE]: {pickListGroups, pickResult, pagination, error}} = this.props;
+        const {
+            [NAMESPACE]: {pickListGroups, pickResult, pagination, error}
+        } = this.props;
         return (
             <div>
                 {pickListGroups && (
@@ -62,7 +76,7 @@ class PickList extends React.Component {
                             <div style={{color: '#c70000'}}>{error.message}</div>
                         )}
                         <PickForm
-                            pickGroupId={32} // TODO get from props
+                            pickGroupId={this.pickGroupId} // TODO get from props
                             pickFormData={pickListGroups}
                             onSubmit={this.props.getPickResults}
                         />
@@ -70,7 +84,7 @@ class PickList extends React.Component {
                             result={pickResult}
                             pagination={pagination}
                             pageClickHandler={this.props.pageNumberClick}
-                            baseUrl={paginationBaseUrl}
+                            baseUrl={this.paginationBaseUrl}
                         />
                     </div>
                 )}
@@ -88,17 +102,16 @@ export default connect(
         // ...state
     }),
     dispatch => ({
-        requestPickList: pickGroupName => dispatch(actions.requestPickList(pickGroupName)),
-        getOptionsByGroupId: id => dispatch(actions.getOptionsByGroupId(id)),
-        resetGroupsList: () => dispatch(actions.resetGroupsList()),
+        requestPickList: pickGroupName => dispatch(requestPickList(pickGroupName)),
+        getOptionsByGroupId: id => dispatch(getOptionsByGroupId(id)),
+        resetGroupsList: () => dispatch(resetGroupsList()),
         getPickResults: (requestBody) => {
             console.warn((requestBody));
-            dispatch(actions.getPickResults(requestBody));
+            dispatch(getPickResults(requestBody));
         },
         pageNumberClick: (pageNumber) => {
             console.log(pageNumber);
-        },
-        setLocation: (page, formData) => dispatch()
+        }
     }))(PickList);
 
 PickList.propTypes = {
