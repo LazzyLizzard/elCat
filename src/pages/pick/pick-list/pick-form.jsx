@@ -17,11 +17,15 @@ class PickForm extends React.Component {
         change('pickGroupId', pickGroupId);
     }
 
+    onSubmitWithArgument = additionalArgument => values => this.props.onSubmit(values, additionalArgument);
+
     render() {
-        const {handleSubmit, pristine, reset, submitting, pickFormData, onSubmit} = this.props;
+        const {handleSubmit, pristine, reset, submitting, pickFormData, pathName = null} = this.props;
         return (
             <div>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                {/* <form onSubmit={handleSubmit(onSubmit)}> */}
+                {/* <form onSubmit={(values, otherProps) => handleSubmit(onSubmit(values, otherProps))}> */}
+                <form onSubmit={handleSubmit(this.onSubmitWithArgument(pathName))}>
                     <ManufacturersList formData={pickFormData} />
                     <FormWithBoxes
                         formData={pickFormData}

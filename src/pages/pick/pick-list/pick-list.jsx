@@ -65,8 +65,10 @@ class PickList extends React.Component {
     render() {
         console.log('render');
         const {
-            [NAMESPACE]: {pickListGroups, pickResult, pagination, error}
+            [NAMESPACE]: {pickListGroups, pickResult, pagination, error},
+            ownLocation: {pathname}
         } = this.props;
+        // console.log(ownLocation);
         return (
             <div>
                 {pickListGroups && (
@@ -76,8 +78,9 @@ class PickList extends React.Component {
                             <div style={{color: '#c70000'}}>{error.message}</div>
                         )}
                         <PickForm
-                            pickGroupId={this.pickGroupId} // TODO get from props
+                            pickGroupId={this.pickGroupId}
                             pickFormData={pickListGroups}
+                            pathName={pathname}
                             onSubmit={this.props.getPickResults}
                         />
                         <PickResults
@@ -105,10 +108,7 @@ export default connect(
         requestPickList: pickGroupName => dispatch(requestPickList(pickGroupName)),
         getOptionsByGroupId: id => dispatch(getOptionsByGroupId(id)),
         resetGroupsList: () => dispatch(resetGroupsList()),
-        getPickResults: (requestBody) => {
-            console.warn((requestBody));
-            dispatch(getPickResults(requestBody));
-        },
+        getPickResults: (requestBody, path) => dispatch(getPickResults(requestBody, path)),
         pageNumberClick: (pageNumber) => {
             console.log(pageNumber);
         }

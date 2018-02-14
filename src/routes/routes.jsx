@@ -41,9 +41,9 @@ export const Routes = (
         <Route path={`/${PROFILE_NAMESPACE}`} component={Profile} />
         <Route path={`/${PROFILE_NAMESPACE}/orders`} component={Profile} />
 
-        {/* selector */}
+        {/* pick */}
         <Route path={`/${PICK_NAMESPACE}`} component={PickHome} />
-        <Route path={`/${PICK_NAMESPACE}/:pickGroupName(/page/:page)`} component={PickList} />
+        <Route path={`/${PICK_NAMESPACE}/:pickGroupName`} component={PickList} />
 
         <Route path="*" component={NotFound} />
     </Route>

@@ -15,7 +15,7 @@ import {isNil, forEach, some} from 'lodash';
 export const filterValuesStringify = (pickFilters) => {
     const filterParams = {};
     const finalValue = [];
-    console.log(pickFilters);
+    // console.log(pickFilters);
     if (!isNil(pickFilters)) {
         pickFilters.forEach((groupData, index) => {
             if (groupData.length > 0 && some(groupData, val => val === true)) {
