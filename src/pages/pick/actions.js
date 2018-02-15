@@ -1,7 +1,7 @@
 import 'whatwg-fetch';
 import {find, omit} from 'lodash';
 import {push} from 'react-router-redux';
-// import {stringify} from 'query-string';
+import {stringify} from 'query-string';
 import {getRequestEnvironment} from 'utils/get-request-environment';
 import {REMOTE_HTTPS} from 'constants/server-request-environment';
 import {ENDPOINT_PICK} from 'constants/end-points';
@@ -95,12 +95,13 @@ export const resetGroupsList = () => ({
  */
 export const getPickResults = (requestBody, path) => (dispatch) => {
     console.log(requestBody);
-    const {pickGroupId, page, filters} = requestBody;
+    const {pickGroupId, page, filters, m} = requestBody;
     const filtersString = filterValuesStringify(filters);
 
     // m, page, filters, pickGroupId - поля сабмита
-    // const queryData = omit(requestBody, ['pickGroupId', 'filters']).assign({}, {filters: filtersString});
-    // console.log(stringify(queryData));
+    const queryDataClean = omit(requestBody, ['pickGroupId', 'filters']);
+    const queryData = Object.assign({}, queryDataClean, {filters: filtersString});
+    console.log(m, filtersString, queryDataClean, stringify(queryData, {encode: false}));
     dispatch(requestStart(PICK_REQUEST_RESULT_START));
     dispatch(push(`${path}?page=${page}&filters=${filtersString}`));
     return fetch(
