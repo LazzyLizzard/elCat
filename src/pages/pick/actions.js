@@ -1,5 +1,5 @@
 import 'whatwg-fetch';
-import {find, omit} from 'lodash';
+import {find, omit, pick, toPairs} from 'lodash';
 import {push} from 'react-router-redux';
 import {stringify} from 'query-string';
 import {getRequestEnvironment} from 'utils/get-request-environment';
@@ -24,6 +24,26 @@ export const PICK_REQUEST_RESULT_ERROR = 'PICK/REQUEST_RESULT_ERROR';
 export const PICK_SET_PAGE_FROM_PAGINATION = 'PICK/SET_PAGE_FROM_PAGINATION';
 
 const baseUrl = `${getRequestEnvironment(REMOTE_HTTPS)}${ENDPOINT_PICK}`;
+
+/**
+ * Reformatting form data for passing as query string
+ * @param {object} formData
+ * @param {Array} fields
+ */
+const processFormData = (formData = {}, fields = []) => {
+    const process = toPairs(pick(formData, fields));
+    const z = [];
+    console.log(typeof process);
+    process.reduce((acc, part) => {
+        const [key, value] = part;
+        const x = {[key]: filterValuesStringify(value)};
+        return [...z,
+            ...x];
+        // console.log(acc);
+        // return null;
+    }, {});
+    return z;
+};
 
 /**
  * Getting group id by group name
@@ -98,6 +118,7 @@ export const getPickResults = (requestBody, path) => (dispatch) => {
     const {pickGroupId, page, filters, m} = requestBody;
     const filtersString = filterValuesStringify(filters);
 
+    console.log(processFormData(requestBody, ['m', 'filters']));
     // m, page, filters, pickGroupId - поля сабмита
     const queryDataClean = omit(requestBody, ['pickGroupId', 'filters']);
     const queryData = Object.assign({}, queryDataClean, {filters: filtersString});
