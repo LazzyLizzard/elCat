@@ -39,10 +39,27 @@ export const filterValuesStringify = (pickFilters) => {
     return finalValue.join(';');
 };
 
+export const simpleFilterProcess = (data = []) => {
+    if (data.length > 0 && some(data, val => val === true)) {
+        const a = data.reduce((arr, key, index) => {
+            console.log(arr, key, index);
+            return [...arr, String(index)];
+        }, []);
+        console.log(a);
+        return a.join(',');
+    }
+    return null;
+};
+
 // 500:1,2,3;700:5,7,9
 // ['500:1,2,3', '700:5,7,9']
 // {500: [null, true, true, true]}
 
+/**
+ *
+ * @param {string} inp
+ * @return {array}
+ */
 
 export const filterValuesParse = inp => inp.split(';').reduce((acc, part) => {
     const z = [];
