@@ -1,11 +1,11 @@
 import 'whatwg-fetch';
-import {find, omit, pick, toPairs} from 'lodash';
+import {find, omit, pick, toPairs, isNil} from 'lodash';
 import {push} from 'react-router-redux';
 import {stringify} from 'query-string';
 import {getRequestEnvironment} from 'utils/get-request-environment';
 import {REMOTE_HTTPS} from 'constants/server-request-environment';
 import {ENDPOINT_PICK} from 'constants/end-points';
-import {filterValuesStringify} from 'utils/pick-from-utils';
+import {filterValuesStringify, simpleFilterProcess} from 'utils/pick-from-utils';
 import {requestStart, requestError, requestSuccess} from 'utils/request-steps';
 
 export const PICK_REQUEST_START = 'PICK/REQUEST_START';
@@ -25,24 +25,29 @@ export const PICK_SET_PAGE_FROM_PAGINATION = 'PICK/SET_PAGE_FROM_PAGINATION';
 
 const baseUrl = `${getRequestEnvironment(REMOTE_HTTPS)}${ENDPOINT_PICK}`;
 
+const formDataProcessFields = ['m', 'filters'];
+
 /**
- * Reformatting form data for passing as query string
- * @param {object} formData
- * @param {Array} fields
+ *
+ * @param {Object} formData
+ * @param {Array} fieldsToProcess
  */
-const processFormData = (formData = {}, fields = []) => {
-    const process = toPairs(pick(formData, fields));
-    const z = [];
-    console.log(typeof process);
-    process.reduce((acc, part) => {
-        const [key, value] = part;
-        const x = {[key]: filterValuesStringify(value)};
-        return [...z,
-            ...x];
-        // console.log(acc);
-        // return null;
-    }, {});
-    return z;
+const transformFieldsToString = (formData = {}, fieldsToProcess = []) => {
+    const proc = toPairs(pick(formData, fieldsToProcess));
+    const tempArray = [];
+    return proc.reduce((acc, part) => {
+        const [key, val] = part;
+        if (!isNil(val)) {
+            // tempArray[key] = filterValuesStringify(val);
+            console.log(filterValuesStringify(val));
+            tempArray[key] = filterValuesStringify(val);
+            return {
+                ...acc,
+                ...tempArray
+            };
+        }
+        return null;
+    }, []);
 };
 
 /**
@@ -114,19 +119,21 @@ export const resetGroupsList = () => ({
  * @param path
  */
 export const getPickResults = (requestBody, path) => (dispatch) => {
-    console.log(requestBody);
-    const {pickGroupId, page, filters, m} = requestBody;
-    const filtersString = filterValuesStringify(filters);
+    const {pickGroupId, page, m} = requestBody;
+    // console.log(filterValuesStringify(filters));
+    const filtersString = transformFieldsToString(requestBody, formDataProcessFields);
+    // const filtersString = '';
 
-    console.log(processFormData(requestBody, ['m', 'filters']));
+    console.log(m);
+    console.log(simpleFilterProcess(m));
+    // console.log(pick(requestBody, ['filters']));
+    // console.log(filtersString);
+
     // m, page, filters, pickGroupId - поля сабмита
-    const queryDataClean = omit(requestBody, ['pickGroupId', 'filters']);
-    const queryData = Object.assign({}, queryDataClean, {filters: filtersString});
-    console.log(m, filtersString, queryDataClean, stringify(queryData, {encode: false}));
     dispatch(requestStart(PICK_REQUEST_RESULT_START));
-    dispatch(push(`${path}?page=${page}&filters=${filtersString}`));
+    dispatch(push(`${path}?page=${page}&${stringify(filtersString, {encode: false})}`));
     return fetch(
-        `${baseUrl}${pickGroupId}?page=${page}?filters=${filtersString}`, {
+        `${baseUrl}${pickGroupId}?page=${page}&${stringify(filtersString, {encode: false})}`, {
             method: 'get'
         })
         .then(response => response.json())
@@ -147,10 +154,6 @@ export const getPickResults = (requestBody, path) => (dispatch) => {
             return error;
         });
 };
-
-// export const setPageNumberToForm = () => (dispatch) => {
-//
-// };
 
 /**
  *
