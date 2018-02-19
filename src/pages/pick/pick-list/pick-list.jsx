@@ -27,7 +27,7 @@ import {NAMESPACE} from '../reducer';
 class PickList extends React.Component {
     constructor(props) {
         super(props);
-        this.pickGroupId = 32;
+        this.pickGroupId = null;
     }
 
     componentDidMount() {
