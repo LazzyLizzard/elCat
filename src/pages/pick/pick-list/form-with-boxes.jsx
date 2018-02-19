@@ -1,6 +1,7 @@
 import React from 'react';
 import {noop} from 'lodash';
 import {Field} from 'redux-form';
+import {PICK_FORM_FILTERS} from './../field-names';
 import './form-with-boxes.scss';
 
 export const FormWithBoxes = ({formData, boxToggleHandler = noop}) => {
@@ -34,7 +35,7 @@ export const FormWithBoxes = ({formData, boxToggleHandler = noop}) => {
                                             (id {checkboxItem.valueId})
                                         </span>
                                         <Field
-                                            name={`filters[${filterItem.prodParamsGroupId}][${checkboxItem.valueId}]`}
+                                            name={`${PICK_FORM_FILTERS}[${filterItem.prodParamsGroupId}][${checkboxItem.valueId}]`}
                                             component="input"
                                             type="checkbox"
                                         /> |

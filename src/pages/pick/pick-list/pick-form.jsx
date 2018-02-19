@@ -2,13 +2,14 @@ import React from 'react';
 import {reduxForm} from 'redux-form';
 import {ManufacturersList} from './manufacturers-list';
 import {FormWithBoxes} from './form-with-boxes';
+import {PICK_FORM_PAGE, PICK_FORM_GROUP_ID} from './../field-names';
 import {NAMESPACE} from './../reducer';
 // TODO think where import below should be
 import {toggleBoxesHandler} from '../actions';
 
 const formInitialValues = {
-    page: 1,
-    pickGroupId: null
+    [PICK_FORM_PAGE]: 1,
+    [PICK_FORM_GROUP_ID]: null
 };
 
 class PickForm extends React.Component {

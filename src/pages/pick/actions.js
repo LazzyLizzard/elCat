@@ -1,5 +1,5 @@
 import 'whatwg-fetch';
-import {find, omit, pick, toPairs, isNil} from 'lodash';
+import {find, omit} from 'lodash';
 import {push} from 'react-router-redux';
 import {stringify} from 'query-string';
 import {getRequestEnvironment} from 'utils/get-request-environment';
@@ -7,6 +7,12 @@ import {REMOTE_HTTPS} from 'constants/server-request-environment';
 import {ENDPOINT_PICK} from 'constants/end-points';
 import {filterValuesStringify, simpleFilterProcess} from 'utils/pick-from-utils';
 import {requestStart, requestError, requestSuccess} from 'utils/request-steps';
+import {
+    PICK_FORM_PAGE,
+    PICK_FORM_GROUP_ID,
+    PICK_FORM_FILTERS,
+    PICK_FORM_MANUFACTURERS
+} from './field-names';
 
 export const PICK_REQUEST_START = 'PICK/REQUEST_START';
 export const PICK_REQUEST_SUCCESS = 'PICK/REQUEST_SUCCESS';
@@ -24,31 +30,6 @@ export const PICK_REQUEST_RESULT_ERROR = 'PICK/REQUEST_RESULT_ERROR';
 export const PICK_SET_PAGE_FROM_PAGINATION = 'PICK/SET_PAGE_FROM_PAGINATION';
 
 const baseUrl = `${getRequestEnvironment(REMOTE_HTTPS)}${ENDPOINT_PICK}`;
-
-const formDataProcessFields = ['m', 'filters'];
-
-/**
- *
- * @param {Object} formData
- * @param {Array} fieldsToProcess
- */
-const transformFieldsToString = (formData = {}, fieldsToProcess = []) => {
-    const proc = toPairs(pick(formData, fieldsToProcess));
-    const tempArray = [];
-    return proc.reduce((acc, part) => {
-        const [key, val] = part;
-        if (!isNil(val)) {
-            // tempArray[key] = filterValuesStringify(val);
-            console.log(filterValuesStringify(val));
-            tempArray[key] = filterValuesStringify(val);
-            return {
-                ...acc,
-                ...tempArray
-            };
-        }
-        return null;
-    }, []);
-};
 
 /**
  * Getting group id by group name
@@ -118,22 +99,26 @@ export const resetGroupsList = () => ({
  * @param requestBody
  * @param path
  */
+// m, page, filters, pickGroupId - поля формы
 export const getPickResults = (requestBody, path) => (dispatch) => {
-    const {pickGroupId, page, m} = requestBody;
-    // console.log(filterValuesStringify(filters));
-    const filtersString = transformFieldsToString(requestBody, formDataProcessFields);
-    // const filtersString = '';
+    const {
+        [PICK_FORM_GROUP_ID]: pickGroupId,
+        [PICK_FORM_PAGE]: page,
+        [PICK_FORM_MANUFACTURERS]: m,
+        [PICK_FORM_FILTERS]: filters
+    } = requestBody;
 
-    console.log(m);
-    console.log(simpleFilterProcess(m));
-    // console.log(pick(requestBody, ['filters']));
-    // console.log(filtersString);
+    // TODO [sf] 19.02.2018 add check if values are empty
+    const queryParams = stringify({
+        filters: filterValuesStringify(filters),
+        m: simpleFilterProcess(m)
+    }, {encode: false});
 
-    // m, page, filters, pickGroupId - поля сабмита
     dispatch(requestStart(PICK_REQUEST_RESULT_START));
-    dispatch(push(`${path}?page=${page}&${stringify(filtersString, {encode: false})}`));
+    dispatch(push(`${path}?page=${page}&${queryParams}`));
+
     return fetch(
-        `${baseUrl}${pickGroupId}?page=${page}&${stringify(filtersString, {encode: false})}`, {
+        `${baseUrl}${pickGroupId}?page=${page}&${queryParams}`, {
             method: 'get'
         })
         .then(response => response.json())

@@ -1,9 +1,5 @@
 import {isNil, forEach, some} from 'lodash';
 
-// const reservedFields = ['page', 'vendors'];
-
-// const toJSON = val => `${val}`;
-
 /**
  * Converts form data object to queryString-like string
  * Only suitable for filters field.
@@ -19,6 +15,7 @@ export const filterValuesStringify = (pickFilters) => {
     if (!isNil(pickFilters)) {
         pickFilters.forEach((groupData, index) => {
             if (groupData.length > 0 && some(groupData, val => val === true)) {
+                // TODO [sf] 19.02.2018 rewrite with .reduce()
                 filterParams[index] = [];
                 groupData.forEach((itemData, itemIndex) => {
                     if (itemData === true) {
@@ -39,13 +36,15 @@ export const filterValuesStringify = (pickFilters) => {
     return finalValue.join(';');
 };
 
+/**
+ *
+ * @param data
+ * @returns {*}
+ */
 export const simpleFilterProcess = (data = []) => {
     if (data.length > 0 && some(data, val => val === true)) {
-        const a = data.reduce((arr, key, index) => {
-            console.log(arr, key, index);
-            return [...arr, String(index)];
-        }, []);
-        console.log(a);
+        const a = data.reduce((arr, key, index) => [...arr, String(index)], []);
+        // TODO [sf] 19.02.2018 maybe rewrite to string concat
         return a.join(',');
     }
     return null;
@@ -56,9 +55,9 @@ export const simpleFilterProcess = (data = []) => {
 // {500: [null, true, true, true]}
 
 /**
- *
+ * Parse string presentation to object
  * @param {string} inp
- * @return {array}
+ * @return {object}
  */
 
 export const filterValuesParse = inp => inp.split(';').reduce((acc, part) => {
