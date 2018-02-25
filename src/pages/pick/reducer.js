@@ -11,6 +11,7 @@ import {
     PICK_REQUEST_RESULT_START,
     PICK_REQUEST_RESULT_SUCCESS,
     PICK_REQUEST_RESULT_ERROR,
+    PICK_REQUEST_GROUP_ID,
     PICK_SET_PAGE_FROM_PAGINATION
 } from './actions';
 
@@ -27,6 +28,7 @@ export const pickReducer = (state = PICK_STATE, action) => {
         case PICK_REQUEST_LIST_SUCCESS:
         case PICK_REQUEST_LIST_ERROR:
         case PICK_REQUEST_LIST_RESET:
+        case PICK_REQUEST_GROUP_ID:
             return assign({}, state, action.payload);
 
         case PICK_REQUEST_RESULT_START:

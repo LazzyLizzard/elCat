@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import {map} from 'lodash';
 import {Link} from 'react-router';
 import {NAMESPACE} from '../reducer';
@@ -21,16 +21,16 @@ export const PickGroups = ({pickGroupsList}) => (
     </div>
 );
 
-PickGroups.propTypes = {
-    pickGroupsList: PropTypes.shape({
-        id: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.number
-        ]).required,
-        group_name: PropTypes.string,
-        groupNameTransformed: PropTypes.string
-    })
-};
+// PickGroups.propTypes = {
+//     pickGroupsList: PropTypes.shape({
+//         id: PropTypes.oneOfType([
+//             PropTypes.string,
+//             PropTypes.number
+//         ]).required,
+//         group_name: PropTypes.string,
+//         groupNameTransformed: PropTypes.string
+//     })
+// };
 
 PickGroups.defaultProps = {
     pickGroupsList: {}

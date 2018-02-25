@@ -36,20 +36,6 @@ export const filterValuesStringify = (pickFilters) => {
     return finalValue.join(';');
 };
 
-/**
- *
- * @param data
- * @returns {*}
- */
-export const simpleFilterProcess = (data = []) => {
-    if (data.length > 0 && some(data, val => val === true)) {
-        const a = data.reduce((arr, key, index) => [...arr, String(index)], []);
-        // TODO [sf] 19.02.2018 maybe rewrite to string concat
-        return a.join(',');
-    }
-    return null;
-};
-
 // 500:1,2,3;700:5,7,9
 // ['500:1,2,3', '700:5,7,9']
 // {500: [null, true, true, true]}
@@ -71,3 +57,26 @@ export const filterValuesParse = inp => inp.split(';').reduce((acc, part) => {
         }, [])
     };
 }, {});
+
+/**
+ *
+ * @param {Array} data
+ * @returns {*}
+ */
+export const simpleFilterStringify = (data = []) => {
+    if (data.length && some(data, val => val === true)) {
+        const a = data.reduce((arr, key, index) => [...arr, String(index)], []);
+        // TODO [sf] 19.02.2018 maybe rewrite to string concat
+        return a.join(',');
+    }
+    return null;
+};
+
+export const simpleFilterParse = (string = '') => {
+    const proc = string.split(',');
+    // const z = [];
+    return proc.reduce((acc, part) => {
+        acc[parseInt(part, 10)] = true;
+        return acc;
+    }, []);
+};

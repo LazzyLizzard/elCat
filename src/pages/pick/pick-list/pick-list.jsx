@@ -5,8 +5,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {getFormValues, getFormInitialValues} from 'redux-form';
-import {noop, get} from 'lodash';
-import {filterValuesParse, filterValuesStringify} from 'utils/pick-from-utils';
+import {noop} from 'lodash';
+import {simpleFilterParse, filterValuesParse} from 'utils/pick-from-utils';
 import {
     getGroupIdByName,
     requestPickList,
@@ -24,18 +24,28 @@ import {NAMESPACE} from '../reducer';
 //     filters: []
 // };
 
-class PickList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.pickGroupId = null;
+const prepareAtoFillData = (query) => {
+    const x = {};
+    if (query.filters || query.m) {
+        if (query.filters) {
+            x.filters = filterValuesParse(query.filters);
+        }
+        if (query.m) {
+            x.m = simpleFilterParse(query.m);
+        }
+        return x;
     }
+    return null;
+};
 
+class PickList extends React.Component {
     componentDidMount() {
-        // console.log(this.props.op);
         const {
             [NAMESPACE]: {pickList},
             routeParams: {pickGroupName}
         } = this.props;
+
+        // let pickGroupId;
 
         this.paginationBaseUrl = `${NAMESPACE}/${pickGroupName}`;
 
@@ -46,53 +56,55 @@ class PickList extends React.Component {
             this.props.getOptionsByGroupId(this.pickGroupId);
         }
 
-        // filterValuesParse('500:1,2,3;700:5,7,9');
-        console.log(filterValuesParse('500:1,2,3;700:5,7,9'));
-    }
-
-    componentWillReceiveProps(nextProps) {
-        const filterValues = get(nextProps, 'pickFormValues.filters', null);
-        filterValuesStringify(filterValues);
+        // console.log(this.props);
     }
 
     componentWillUnmount() {
         this.props.resetGroupsList();
     }
 
-    pickGroupId = null;
-    paginationBaseUrl = '';
+    // pickGroupId = null;
+    // paginationBaseUrl = '';
 
     render() {
         console.log('render');
         const {
-            [NAMESPACE]: {pickListGroups, pickResult, pagination, error},
-            ownLocation: {pathname}
+            [NAMESPACE]: {pickListGroups, pickResult, pagination, error, pickGroupId},
+            ownLocation: {pathname, query}
         } = this.props;
-        // console.log(ownLocation);
-        return (
-            <div>
-                {pickListGroups && (
-                    <div>
-                        <h4>Picker</h4>
-                        {error && (
-                            <div style={{color: '#c70000'}}>{error.message}</div>
-                        )}
-                        <PickForm
-                            pickGroupId={this.pickGroupId}
-                            pickFormData={pickListGroups}
-                            pathName={pathname}
-                            onSubmit={this.props.getPickResults}
-                        />
-                        <PickResults
-                            result={pickResult}
-                            pagination={pagination}
-                            pageClickHandler={this.props.pageNumberClick}
-                            baseUrl={this.paginationBaseUrl}
-                        />
-                    </div>
-                )}
-            </div>
-        );
+
+        const afd = prepareAtoFillData(query);
+        // console.log('afd', afd);
+        // console.log('query', query);
+
+        if (pickListGroups) {
+            // change(NAMESPACE, 'm', afd.m);
+            // change(NAMESPACE, 'filters', afd.filters);
+            // console.log(afd);
+
+            return (
+                <div>
+                    <h4>Picker</h4>
+                    {error && (
+                        <div style={{color: '#c70000'}}>{error.message}</div>
+                    )}
+                    <PickForm
+                        pickGroupId={pickGroupId}
+                        pickFormData={pickListGroups}
+                        pathName={pathname}
+                        afd={afd}
+                        onSubmit={this.props.getPickResults}
+                    />
+                    <PickResults
+                        result={pickResult}
+                        pagination={pagination}
+                        pageClickHandler={this.props.pageNumberClick}
+                        baseUrl={this.paginationBaseUrl}
+                    />
+                </div>
+            );
+        }
+        return null;
     }
 }
 
@@ -118,12 +130,14 @@ PickList.propTypes = {
     routeParams: PropTypes.object,
     requestPickList: PropTypes.func,
     getOptionsByGroupId: PropTypes.func,
-    resetGroupsList: PropTypes.func
+    resetGroupsList: PropTypes.func,
+    ownLocation: PropTypes.object
 };
 
 PickList.defaultProps = {
     routeParams: {},
     requestPickList: noop,
     getOptionsByGroupId: noop,
-    resetGroupsList: noop
+    resetGroupsList: noop,
+    ownLocation: {}
 };

@@ -1,1 +1,6 @@
-export {filterValuesStringify, filterValuesParse, simpleFilterProcess} from './pick-from-utils';
+export {
+    filterValuesStringify,
+    filterValuesParse,
+    simpleFilterStringify,
+    simpleFilterParse
+} from './pick-from-utils';

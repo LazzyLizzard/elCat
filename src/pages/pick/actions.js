@@ -5,7 +5,7 @@ import {stringify} from 'query-string';
 import {getRequestEnvironment} from 'utils/get-request-environment';
 import {REMOTE_HTTPS} from 'constants/server-request-environment';
 import {ENDPOINT_PICK} from 'constants/end-points';
-import {filterValuesStringify, simpleFilterProcess} from 'utils/pick-from-utils';
+import {filterValuesStringify, simpleFilterStringify} from 'utils/pick-from-utils';
 import {requestStart, requestError, requestSuccess} from 'utils/request-steps';
 import {
     PICK_FORM_PAGE,
@@ -22,6 +22,7 @@ export const PICK_REQUEST_LIST_START = 'PICK/REQUEST_LIST_START';
 export const PICK_REQUEST_LIST_SUCCESS = 'PICK/REQUEST_LIST_SUCCESS';
 export const PICK_REQUEST_LIST_ERROR = 'PICK/REQUEST_LIST_ERROR';
 export const PICK_REQUEST_LIST_RESET = 'PICK/REQUEST_LIST_RESET';
+export const PICK_REQUEST_GROUP_ID = 'PICK/REQUEST_GROUP_ID';
 
 export const PICK_REQUEST_RESULT_START = 'PICK/REQUEST_RESULT_START';
 export const PICK_REQUEST_RESULT_SUCCESS = 'PICK/REQUEST_RESULT_SUCCESS';
@@ -43,17 +44,23 @@ export const getGroupIdByName = (name, data) => {
 };
 
 /**
- * Get groups of options by id
- * @param {number} id
+ * Get groups of options by group id
+ * @param {number} pickGroupId
  */
-export const getOptionsByGroupId = id => (dispatch) => {
+export const getOptionsByGroupId = pickGroupId => (dispatch) => {
     dispatch(requestStart(PICK_REQUEST_LIST_START));
     return fetch(
-        `${baseUrl}${id}`, {
+        `${baseUrl}${pickGroupId}`, {
             method: 'get'
         })
         .then(response => response.json())
         .then((pickGroupsList) => {
+            dispatch({
+                type: PICK_REQUEST_GROUP_ID,
+                payload: {
+                    pickGroupId
+                }
+            });
             dispatch(requestSuccess(PICK_REQUEST_LIST_SUCCESS, 'pickListGroups', pickGroupsList));
         })
         .catch(error => dispatch(requestError(PICK_REQUEST_LIST_ERROR, error)));
@@ -77,6 +84,12 @@ export const requestPickList = pickGroupName => (dispatch) => {
         .then((pickGroups) => {
             if (pickGroupName) {
                 const groupId = getGroupIdByName(pickGroupName, pickGroups);
+                dispatch({
+                    type: PICK_REQUEST_GROUP_ID,
+                    payload: {
+                        pickGroupId: groupId
+                    }
+                });
                 // TODO [sf] 26.12.2017 add null check
                 dispatch(getOptionsByGroupId(groupId));
             }
@@ -108,12 +121,13 @@ export const getPickResults = (requestBody, path) => (dispatch) => {
         [PICK_FORM_FILTERS]: filters
     } = requestBody;
 
+    console.log('rb', requestBody);
     // TODO [sf] 19.02.2018 add check if values are empty
     const queryParams = stringify({
         filters: filterValuesStringify(filters),
-        m: simpleFilterProcess(m)
+        m: simpleFilterStringify(m)
     }, {encode: false});
-
+    console.log('qp', queryParams);
     dispatch(requestStart(PICK_REQUEST_RESULT_START));
     dispatch(push(`${path}?page=${page}&${queryParams}`));
 
@@ -128,8 +142,7 @@ export const getPickResults = (requestBody, path) => (dispatch) => {
                 type: PICK_REQUEST_RESULT_SUCCESS,
                 payload: {
                     loader: false,
-                    pickResult: {[page]: omit(json, ['page', 'pagination'])},
-                    ...[1, 2, 3]
+                    pickResult: {[page]: omit(json, ['page', 'pagination'])}
                 }
             });
             return json;
