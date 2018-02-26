@@ -11,9 +11,10 @@ import {isNil, forEach, some} from 'lodash';
 export const filterValuesStringify = (pickFilters) => {
     const filterParams = {};
     const finalValue = [];
-    // console.log(pickFilters);
+    console.log('pickFilters', pickFilters);
     if (!isNil(pickFilters)) {
         pickFilters.forEach((groupData, index) => {
+            console.log('groupData', groupData);
             if (groupData.length > 0 && some(groupData, val => val === true)) {
                 // TODO [sf] 19.02.2018 rewrite with .reduce()
                 filterParams[index] = [];
@@ -47,8 +48,9 @@ export const filterValuesStringify = (pickFilters) => {
  */
 
 export const filterValuesParse = inp => inp.split(';').reduce((acc, part) => {
-    const z = [];
     const [code, values] = part.split(':');
+    console.log('acc + part', acc, part, code);
+    const z = [];
     return {
         ...acc,
         [code]: values.split(',').reduce((arr, key) => {
@@ -56,7 +58,7 @@ export const filterValuesParse = inp => inp.split(';').reduce((acc, part) => {
             return z;
         }, [])
     };
-}, {});
+}, []);
 
 /**
  *

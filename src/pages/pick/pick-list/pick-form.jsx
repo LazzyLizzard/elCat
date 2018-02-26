@@ -31,16 +31,16 @@ class PickForm extends React.Component {
         const {change, pickGroupId, autofill, afd} = this.props;
         console.log('CWRP ', afd);
         change('pickGroupId', pickGroupId);
-        if (get(afd, 'filters')) {
-            autofill('filters', afd.filters);
-        }
-        if (get(afd, 'm')) {
-            autofill('m', afd.m);
-        }
+        // if (get(afd, 'filters')) {
+        //     autofill('filters', afd.filters);
+        // }
+        // if (get(afd, 'm')) {
+        //     autofill('m', afd.m);
+        // }
     }
 
     onSubmitWithArgument = additionalArgument => (values) => {
-        console.log(values);
+        console.log('onSubmitWithArgument', values);
         return this.props.onSubmit(values, additionalArgument);
     };
 

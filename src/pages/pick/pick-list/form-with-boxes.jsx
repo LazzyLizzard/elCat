@@ -15,8 +15,7 @@ export const FormWithBoxes = ({formData, boxToggleHandler = noop}) => {
                     <div key={filterItem.prodParamsGroupId} className="form-with-boxes">
                         <div className="form-with-boxes__name">
                             <div>
-                                {filterItem.prodParamsGroupName}
-                                (prodParamsGroupId {filterItem.prodParamsGroupId})
+                                {filterItem.prodParamsGroupName} (prodParamsGroupId {filterItem.prodParamsGroupId})
                             </div>
                             <div onClick={() => boxToggleHandler(filterItem.prodParamsGroupId)}>reset all</div>
                         </div>
