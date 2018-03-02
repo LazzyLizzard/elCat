@@ -40,7 +40,6 @@ export const filterValuesStringify = (pickFilters) => {
 // 500:1,2,3;700:5,7,9
 // ['500:1,2,3', '700:5,7,9']
 // {500: [null, true, true, true]}
-
 /**
  * Parse string presentation to object
  * @param {string} inp
@@ -49,15 +48,12 @@ export const filterValuesStringify = (pickFilters) => {
 
 export const filterValuesParse = inp => inp.split(';').reduce((acc, part) => {
     const [code, values] = part.split(':');
-    console.log('acc + part', acc, part, code);
-    const z = [];
-    return {
-        ...acc,
-        [code]: values.split(',').reduce((arr, key) => {
-            z[parseInt(key, 10)] = true;
-            return z;
-        }, [])
-    };
+    acc[code] = values.split(',').reduce((_acc, key) => {
+        const newAcc = _acc.slice();
+        newAcc[parseInt(key, 10)] = true;
+        return newAcc;
+    }, []);
+    return acc;
 }, []);
 
 /**
