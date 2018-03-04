@@ -3,7 +3,12 @@ import {reduxForm} from 'redux-form';
 import {get} from 'lodash';
 import {ManufacturersList} from './manufacturers-list';
 import {FormWithBoxes} from './form-with-boxes';
-import {PICK_FORM_PAGE, PICK_FORM_GROUP_ID} from './../field-names';
+import {
+    PICK_FORM_PAGE,
+    PICK_FORM_GROUP_ID,
+    PICK_FORM_FILTERS,
+    PICK_FORM_MANUFACTURERS
+} from './../field-names';
 import {NAMESPACE} from './../reducer';
 // TODO think where import below should be
 import {toggleBoxesHandler} from '../actions';
@@ -13,34 +18,27 @@ const formInitialValues = {
     [PICK_FORM_GROUP_ID]: null
 };
 
-// const x = [];
-// x[50] = true;
-// const y = [];
-// y[701] = [];
-// y[701][17] = true;
-
-// const y = {
-//     707: {
-//         116: true,
-//         120: true
-//     }
-// };
-
 class PickForm extends React.Component {
-    componentWillReceiveProps() {
-        const {change, pickGroupId, autofill, afd} = this.props;
-        console.log('CWRP ', afd);
-        change('pickGroupId', pickGroupId);
-        // if (get(afd, 'filters')) {
-        //     autofill('filters', afd.filters);
-        // }
-        // if (get(afd, 'm')) {
-        //     autofill('m', afd.m);
-        // }
+    componentDidMount() {
+        const {autoFillData, pickGroupId, autofill, change, forceFormSubmit} = this.props;
+        change(PICK_FORM_GROUP_ID, pickGroupId);
+        // TODO
+        let doSubmit = false;
+        if (get(autoFillData, PICK_FORM_FILTERS)) {
+            doSubmit = true;
+            autofill(PICK_FORM_FILTERS, autoFillData[PICK_FORM_FILTERS]);
+        }
+        if (get(autoFillData, PICK_FORM_MANUFACTURERS)) {
+            doSubmit = true;
+            autofill(PICK_FORM_MANUFACTURERS, autoFillData[PICK_FORM_MANUFACTURERS]);
+        }
+        if (doSubmit === true) {
+            forceFormSubmit(NAMESPACE);
+        }
     }
 
     onSubmitWithArgument = additionalArgument => (values) => {
-        console.log('onSubmitWithArgument', values);
+        // console.log('onSubmitWithArgument', values);
         return this.props.onSubmit(values, additionalArgument);
     };
 

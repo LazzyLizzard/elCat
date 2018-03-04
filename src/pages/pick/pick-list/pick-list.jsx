@@ -4,7 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {getFormValues, getFormInitialValues} from 'redux-form';
+import {getFormValues, getFormInitialValues, submit} from 'redux-form';
 import {noop} from 'lodash';
 import {simpleFilterParse, filterValuesParse} from 'utils/pick-from-utils';
 import {
@@ -18,13 +18,7 @@ import PickForm from './pick-form';
 import {PickResults} from './pick-results';
 import {NAMESPACE} from '../reducer';
 
-// &page=1&filters=500:1,2,3;700:3,4,5;vendor:1,2,3
-// const mockedForm = {
-//     page: 1,
-//     filters: []
-// };
-
-const prepareAtoFillData = (query) => {
+const prepareAutoFillData = (query) => {
     const x = {};
     if (query.filters || query.m) {
         if (query.filters) {
@@ -41,11 +35,9 @@ const prepareAtoFillData = (query) => {
 class PickList extends React.Component {
     componentDidMount() {
         const {
-            [NAMESPACE]: {pickList},
+            [NAMESPACE]: {pickList, pickListGroups},
             routeParams: {pickGroupName}
         } = this.props;
-
-        // let pickGroupId;
 
         this.paginationBaseUrl = `${NAMESPACE}/${pickGroupName}`;
 
@@ -56,15 +48,14 @@ class PickList extends React.Component {
             this.props.getOptionsByGroupId(this.pickGroupId);
         }
 
-        // console.log(this.props);
+        // if (pickListGroups && ) {
+        //     console.log()
+        // }
     }
 
     componentWillUnmount() {
         this.props.resetGroupsList();
     }
-
-    // pickGroupId = null;
-    // paginationBaseUrl = '';
 
     render() {
         console.log('render');
@@ -73,15 +64,9 @@ class PickList extends React.Component {
             ownLocation: {pathname, query}
         } = this.props;
 
-        const afd = prepareAtoFillData(query);
-        // console.log('afd', afd);
-        // console.log('query', query);
+        const autoFillData = prepareAutoFillData(query);
 
         if (pickListGroups) {
-            // change(NAMESPACE, 'm', afd.m);
-            // change(NAMESPACE, 'filters', afd.filters);
-            // console.log(afd);
-
             return (
                 <div>
                     <h4>Picker</h4>
@@ -92,8 +77,9 @@ class PickList extends React.Component {
                         pickGroupId={pickGroupId}
                         pickFormData={pickListGroups}
                         pathName={pathname}
-                        afd={afd}
+                        autoFillData={autoFillData}
                         onSubmit={this.props.getPickResults}
+                        forceFormSubmit={this.props.forceFormSubmit}
                     />
                     <PickResults
                         result={pickResult}
@@ -121,6 +107,10 @@ export default connect(
         getOptionsByGroupId: id => dispatch(getOptionsByGroupId(id)),
         resetGroupsList: () => dispatch(resetGroupsList()),
         getPickResults: (requestBody, path) => dispatch(getPickResults(requestBody, path)),
+        forceFormSubmit: (formName) => {
+            console.log('formName', formName);
+            return dispatch(submit(formName));
+        },
         pageNumberClick: (pageNumber) => {
             console.log(pageNumber);
         }
