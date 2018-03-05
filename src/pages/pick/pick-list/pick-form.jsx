@@ -20,7 +20,7 @@ const formInitialValues = {
 
 class PickForm extends React.Component {
     componentDidMount() {
-        const {autoFillData, pickGroupId, autofill, change, forceFormSubmit} = this.props;
+        const {autoFillData, pickGroupId, autofill, change, handleSubmit, pathName} = this.props;
         change(PICK_FORM_GROUP_ID, pickGroupId);
         // TODO
         let doSubmit = false;
@@ -32,13 +32,15 @@ class PickForm extends React.Component {
             doSubmit = true;
             autofill(PICK_FORM_MANUFACTURERS, autoFillData[PICK_FORM_MANUFACTURERS]);
         }
+        console.log('DS', doSubmit);
         if (doSubmit === true) {
-            forceFormSubmit(NAMESPACE);
+            console.log('DS FIRED');
+            handleSubmit(this.onSubmitWithArgument(pathName));
         }
     }
 
     onSubmitWithArgument = additionalArgument => (values) => {
-        // console.log('onSubmitWithArgument', values);
+        console.log('onSubmitWithArgument', values);
         return this.props.onSubmit(values, additionalArgument);
     };
 

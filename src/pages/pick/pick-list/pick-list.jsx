@@ -79,7 +79,7 @@ class PickList extends React.Component {
                         pathName={pathname}
                         autoFillData={autoFillData}
                         onSubmit={this.props.getPickResults}
-                        forceFormSubmit={this.props.forceFormSubmit}
+                        // forceFormSubmit={this.props.forceFormSubmit}
                     />
                     <PickResults
                         result={pickResult}
@@ -107,10 +107,10 @@ export default connect(
         getOptionsByGroupId: id => dispatch(getOptionsByGroupId(id)),
         resetGroupsList: () => dispatch(resetGroupsList()),
         getPickResults: (requestBody, path) => dispatch(getPickResults(requestBody, path)),
-        forceFormSubmit: (formName) => {
-            console.log('formName', formName);
-            return dispatch(submit(formName));
-        },
+        // forceFormSubmit: (formName) => {
+        //     console.log('formName', formName);
+        //     return dispatch(submit(formName));
+        // },
         pageNumberClick: (pageNumber) => {
             console.log(pageNumber);
         }
