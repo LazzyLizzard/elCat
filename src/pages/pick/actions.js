@@ -110,10 +110,10 @@ export const resetGroupsList = () => ({
 /**
  * Getting result by filter (thunk)
  * @param requestBody
- * @param path
+ * @param pathName
  */
 // m, page, filters, pickGroupId - поля формы
-export const getPickResults = (requestBody, path) => (dispatch) => {
+export const getPickResults = requestBody => (dispatch) => {
     const {
         [PICK_FORM_GROUP_ID]: pickGroupId,
         [PICK_FORM_PAGE]: page,
@@ -124,15 +124,20 @@ export const getPickResults = (requestBody, path) => (dispatch) => {
     console.log('rb', requestBody);
     // TODO [sf] 19.02.2018 add check if values are empty
     const queryParams = stringify({
-        filters: filterValuesStringify(filters),
-        m: simpleFilterStringify(m)
+        [PICK_FORM_FILTERS]: filterValuesStringify(filters),
+        [PICK_FORM_MANUFACTURERS]: simpleFilterStringify(m)
     }, {encode: false});
+    const p = `/pick/czepi-transmissiya/?page=${page}&${queryParams}`;
+    const p1 = `?page=${page}&${queryParams}`;
+    console.log('p', p);
     console.log('qp', queryParams);
     dispatch(requestStart(PICK_REQUEST_RESULT_START));
-    dispatch(push(`${path}?page=${page}&${queryParams}`));
+
+    // TODO add flag if push or not
+    dispatch(push(p));
 
     return fetch(
-        `${baseUrl}${pickGroupId}?page=${page}&${queryParams}`, {
+        `${baseUrl}${pickGroupId}?${p1}`, {
             method: 'get'
         })
         .then(response => response.json())

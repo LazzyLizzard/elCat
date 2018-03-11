@@ -5,7 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {getFormValues, getFormInitialValues, submit} from 'redux-form';
-import {noop} from 'lodash';
+import {noop, isNil} from 'lodash';
 import {simpleFilterParse, filterValuesParse} from 'utils/pick-from-utils';
 import {
     getGroupIdByName,
@@ -35,19 +35,21 @@ const prepareAutoFillData = (query) => {
 class PickList extends React.Component {
     componentDidMount() {
         const {
-            [NAMESPACE]: {pickList, pickListGroups},
-            routeParams: {pickGroupName}
+            [NAMESPACE]: {pickList},
+            routeParams: {pickGroupName},
+            ownLocation: {query}
         } = this.props;
 
         this.paginationBaseUrl = `${NAMESPACE}/${pickGroupName}`;
 
-        if (!pickList) {
+        if (isNil(pickList)) {
             this.props.requestPickList(pickGroupName);
         } else {
             this.pickGroupId = getGroupIdByName(pickGroupName, pickList);
             this.props.getOptionsByGroupId(this.pickGroupId);
         }
 
+        this.autoFillData = prepareAutoFillData(query);
         // if (pickListGroups && ) {
         //     console.log()
         // }
@@ -61,10 +63,8 @@ class PickList extends React.Component {
         console.log('render');
         const {
             [NAMESPACE]: {pickListGroups, pickResult, pagination, error, pickGroupId},
-            ownLocation: {pathname, query}
+            ownLocation: {pathname}
         } = this.props;
-
-        const autoFillData = prepareAutoFillData(query);
 
         if (pickListGroups) {
             return (
@@ -77,9 +77,9 @@ class PickList extends React.Component {
                         pickGroupId={pickGroupId}
                         pickFormData={pickListGroups}
                         pathName={pathname}
-                        autoFillData={autoFillData}
+                        autoFillData={this.autoFillData}
                         onSubmit={this.props.getPickResults}
-                        // forceFormSubmit={this.props.forceFormSubmit}
+                        forceFormSubmit={this.props.forceFormSubmit}
                     />
                     <PickResults
                         result={pickResult}
@@ -106,11 +106,11 @@ export default connect(
         requestPickList: pickGroupName => dispatch(requestPickList(pickGroupName)),
         getOptionsByGroupId: id => dispatch(getOptionsByGroupId(id)),
         resetGroupsList: () => dispatch(resetGroupsList()),
-        getPickResults: (requestBody, path) => dispatch(getPickResults(requestBody, path)),
-        // forceFormSubmit: (formName) => {
-        //     console.log('formName', formName);
-        //     return dispatch(submit(formName));
-        // },
+        getPickResults: (requestBody, pathName) => dispatch(getPickResults(requestBody, pathName)),
+        forceFormSubmit: (formName) => {
+            console.log('formName', formName);
+            return dispatch(submit(formName));
+        },
         pageNumberClick: (pageNumber) => {
             console.log(pageNumber);
         }
