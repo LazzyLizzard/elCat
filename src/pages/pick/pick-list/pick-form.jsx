@@ -21,7 +21,7 @@ const formInitialValues = {
 class PickForm extends React.Component {
     componentDidMount() {
         const {autoFillData, pickGroupId, autofill, change, handleSubmit, pathName} = this.props;
-        const submitter = handleSubmit(this.onSubmitWithArgument(pathName));
+        // const submitter = handleSubmit(this.onSubmitWithArgument(pathName));
         change(PICK_FORM_GROUP_ID, pickGroupId);
         // TODO
         let doSubmit = false;
@@ -38,11 +38,11 @@ class PickForm extends React.Component {
         if (doSubmit === true) {
             console.log('DS FIRED');
             // action doesn't fire
-            // handleSubmit(this.onSubmitWithArgument(pathName));
+            handleSubmit(this.onSubmitWithArgument(pathName));
 
             // losing form data
             // forceFormSubmit(NAMESPACE);
-            submitter();
+            // submitter();
         }
     }
 
