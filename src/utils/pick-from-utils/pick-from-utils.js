@@ -63,9 +63,7 @@ export const filterValuesParse = inp => inp.split(';').reduce((acc, part) => {
  */
 export const simpleFilterStringify = (data = []) => {
     if (data.length && some(data, val => val === true)) {
-        const a = data.reduce((arr, key, index) => [...arr, String(index)], []);
-        // TODO [sf] 19.02.2018 maybe rewrite to string concat
-        return a.join(',');
+        return data.reduce((arr, key, index) => [...arr, String(index)], []).join(',');
     }
     return null;
 };

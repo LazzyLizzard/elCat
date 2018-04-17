@@ -20,25 +20,31 @@ const formInitialValues = {
 
 class PickForm extends React.Component {
     componentDidMount() {
-        const {autoFillData, pickGroupId, autofill, change, handleSubmit, pathName} = this.props;
+        const {autoFillData, pickGroupId, autofill, change, handleSubmit, pathName, onSubmit} = this.props;
         // const submitter = handleSubmit(this.onSubmitWithArgument(pathName));
+        const fData = {};
         change(PICK_FORM_GROUP_ID, pickGroupId);
+        fData[PICK_FORM_GROUP_ID] = PICK_FORM_PAGE;
+        fData[PICK_FORM_PAGE] = 1;
         // TODO
         let doSubmit = false;
         if (get(autoFillData, PICK_FORM_FILTERS)) {
             doSubmit = true;
+            fData[PICK_FORM_FILTERS] = autoFillData[PICK_FORM_FILTERS];
             autofill(PICK_FORM_FILTERS, autoFillData[PICK_FORM_FILTERS]);
         }
         if (get(autoFillData, PICK_FORM_MANUFACTURERS)) {
             doSubmit = true;
+            fData[PICK_FORM_MANUFACTURERS] = autoFillData[PICK_FORM_MANUFACTURERS];
             autofill(PICK_FORM_MANUFACTURERS, autoFillData[PICK_FORM_MANUFACTURERS]);
         }
         console.log('DS', doSubmit);
+        console.log('fData', fData);
         // console.log('handleSubmit', handleSubmit);
         if (doSubmit === true) {
             console.log('DS FIRED');
             // action doesn't fire
-            handleSubmit(this.onSubmitWithArgument(pathName));
+            onSubmit(fData, 'sdasdas');
 
             // losing form data
             // forceFormSubmit(NAMESPACE);
