@@ -50,9 +50,6 @@ class PickList extends React.Component {
         }
 
         this.autoFillData = prepareAutoFillData(query);
-        // if (pickListGroups && ) {
-        //     console.log()
-        // }
     }
 
     componentWillUnmount() {
@@ -79,12 +76,10 @@ class PickList extends React.Component {
                         pathName={pathname}
                         autoFillData={this.autoFillData}
                         onSubmit={this.props.getPickResults}
-                        forceFormSubmit={this.props.forceFormSubmit}
                     />
                     <PickResults
                         result={pickResult}
                         pagination={pagination}
-                        pageClickHandler={this.props.pageNumberClick}
                         baseUrl={this.paginationBaseUrl}
                     />
                 </div>
@@ -107,10 +102,6 @@ export default connect(
         getOptionsByGroupId: id => dispatch(getOptionsByGroupId(id)),
         resetGroupsList: () => dispatch(resetGroupsList()),
         getPickResults: (requestBody, pathName) => dispatch(getPickResults(requestBody, pathName)),
-        forceFormSubmit: (formName) => {
-            console.log('formName', formName);
-            return dispatch(submit(formName));
-        },
         pageNumberClick: (pageNumber) => {
             console.log(pageNumber);
         }

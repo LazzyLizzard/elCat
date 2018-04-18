@@ -13,21 +13,17 @@ import {NAMESPACE} from './../reducer';
 // TODO think where import below should be
 import {toggleBoxesHandler} from '../actions';
 
-const formInitialValues = {
-    [PICK_FORM_PAGE]: 1,
-    [PICK_FORM_GROUP_ID]: null
-};
-
 class PickForm extends React.Component {
     componentDidMount() {
-        const {autoFillData, pickGroupId, autofill, change, handleSubmit, pathName, onSubmit} = this.props;
-        // const submitter = handleSubmit(this.onSubmitWithArgument(pathName));
+        const {autoFillData, pickGroupId, autofill, change, pathName, onSubmit} = this.props;
+
         const fData = {};
         change(PICK_FORM_GROUP_ID, pickGroupId);
-        fData[PICK_FORM_GROUP_ID] = PICK_FORM_PAGE;
+        fData[PICK_FORM_GROUP_ID] = pickGroupId;
         fData[PICK_FORM_PAGE] = 1;
-        // TODO
+
         let doSubmit = false;
+
         if (get(autoFillData, PICK_FORM_FILTERS)) {
             doSubmit = true;
             fData[PICK_FORM_FILTERS] = autoFillData[PICK_FORM_FILTERS];
@@ -40,15 +36,9 @@ class PickForm extends React.Component {
         }
         console.log('DS', doSubmit);
         console.log('fData', fData);
-        // console.log('handleSubmit', handleSubmit);
-        if (doSubmit === true) {
-            console.log('DS FIRED');
-            // action doesn't fire
-            onSubmit(fData, 'sdasdas');
 
-            // losing form data
-            // forceFormSubmit(NAMESPACE);
-            // submitter();
+        if (doSubmit === true) {
+            onSubmit(fData, pathName);
         }
     }
 
@@ -62,9 +52,9 @@ class PickForm extends React.Component {
         // console.log('handleSubmit R', handleSubmit);
         return (
             <div>
-                {/* <form onSubmit={handleSubmit(onSubmit)}> */}
-                {/* <form onSubmit={(values, otherProps) => handleSubmit(onSubmit(values, otherProps))}> */}
-                <form onSubmit={handleSubmit(this.onSubmitWithArgument(pathName))}>
+                <form
+                    onSubmit={handleSubmit(this.onSubmitWithArgument(pathName))}
+                >
                     <ManufacturersList formData={pickFormData} />
                     <FormWithBoxes
                         formData={pickFormData}
@@ -73,7 +63,13 @@ class PickForm extends React.Component {
 
                     <div>
                         <button type="submit" disabled={pristine || submitting}>Submit</button>
-                        <button type="button" disabled={pristine || submitting} onClick={reset}>Reset</button>
+                        <button
+                            type="button"
+                            disabled={pristine || submitting}
+                            onClick={reset}
+                        >
+                            Reset
+                        </button>
                     </div>
                 </form>
             </div>
@@ -83,6 +79,10 @@ class PickForm extends React.Component {
 
 export default reduxForm({
     form: NAMESPACE,
-    enableReinitialize: true,
-    initialValues: formInitialValues
-})(PickForm);
+    enableReinitialize: true
+}, (state, ownProps) => ({
+    initialValues: {
+        first_name: ownProps.pickGroupId,
+        page: 1
+    }
+}))(PickForm);

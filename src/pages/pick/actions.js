@@ -113,7 +113,7 @@ export const resetGroupsList = () => ({
  * @param pathName
  */
 // m, page, filters, pickGroupId - поля формы
-export const getPickResults = requestBody => (dispatch) => {
+export const getPickResults = (requestBody, pathName) => (dispatch) => {
     const {
         [PICK_FORM_GROUP_ID]: pickGroupId,
         [PICK_FORM_PAGE]: page,
@@ -127,7 +127,7 @@ export const getPickResults = requestBody => (dispatch) => {
         [PICK_FORM_FILTERS]: filterValuesStringify(filters),
         [PICK_FORM_MANUFACTURERS]: simpleFilterStringify(m)
     }, {encode: false});
-    const p = `/pick/czepi-transmissiya/?page=${page}&${queryParams}`;
+    const p = `${pathName}?page=${page}&${queryParams}`;
     const p1 = `?page=${page}&${queryParams}`;
     console.log('p', p);
     console.log('qp', queryParams);
@@ -137,7 +137,7 @@ export const getPickResults = requestBody => (dispatch) => {
     dispatch(push(p));
 
     return fetch(
-        `${baseUrl}${pickGroupId}?${p1}`, {
+        `${baseUrl}${pickGroupId}${p1}`, {
             method: 'get'
         })
         .then(response => response.json())
