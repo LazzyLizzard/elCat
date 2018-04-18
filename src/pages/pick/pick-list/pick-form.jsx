@@ -15,10 +15,9 @@ import {toggleBoxesHandler} from '../actions';
 
 class PickForm extends React.Component {
     componentDidMount() {
-        const {autoFillData, pickGroupId, autofill, change, pathName, onSubmit} = this.props;
+        const {autoFillData, pickGroupId, autofill, pathName, onSubmit} = this.props;
 
         const fData = {};
-        change(PICK_FORM_GROUP_ID, pickGroupId);
         fData[PICK_FORM_GROUP_ID] = pickGroupId;
         fData[PICK_FORM_PAGE] = 1;
 
@@ -80,9 +79,4 @@ class PickForm extends React.Component {
 export default reduxForm({
     form: NAMESPACE,
     enableReinitialize: true
-}, (state, ownProps) => ({
-    initialValues: {
-        first_name: ownProps.pickGroupId,
-        page: 1
-    }
-}))(PickForm);
+})(PickForm);

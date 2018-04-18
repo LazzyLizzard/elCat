@@ -4,7 +4,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {getFormValues, getFormInitialValues, submit} from 'redux-form';
 import {noop, isNil} from 'lodash';
 import {simpleFilterParse, filterValuesParse} from 'utils/pick-from-utils';
 import {
@@ -76,11 +75,17 @@ class PickList extends React.Component {
                         pathName={pathname}
                         autoFillData={this.autoFillData}
                         onSubmit={this.props.getPickResults}
+                        initialValues={{
+                            pickGroupId,
+                            page: 1
+                        }}
                     />
                     <PickResults
                         result={pickResult}
                         pagination={pagination}
                         baseUrl={this.paginationBaseUrl}
+                        pageClickHandler={this.props.pageNumberClick}
+                        pathName={pathname}
                     />
                 </div>
             );
@@ -91,11 +96,10 @@ class PickList extends React.Component {
 
 export default connect(
     (state, ownProps) => ({
-        pick: state.pick,
-        pickFormValues: getFormValues(NAMESPACE)(state),
-        pickFormInitialValues: getFormInitialValues(NAMESPACE)(state),
+        [NAMESPACE]: state.pick,
+        // pickFormValues: getFormValues(NAMESPACE)(state),
+        // pickFormInitialValues: getFormInitialValues(NAMESPACE)(state),
         ownLocation: ownProps.location
-        // ...state
     }),
     dispatch => ({
         requestPickList: pickGroupName => dispatch(requestPickList(pickGroupName)),

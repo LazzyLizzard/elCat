@@ -26,7 +26,7 @@ export class Pagination extends React.Component {
                         /* TODO remove this crap and use classNames */
                         <Link
                             key={pageItem}
-                            to={`/${baseUrl}/page/${pageItem}/?x=${pageItem}${pageUri}`}
+                            to={`/${baseUrl}?page=${pageItem}&x=${pageItem}${pageUri}`}
                         >
                             <span
                                 className={`pagination__item ${current === pageItem && 'pagination__item--current'}`}
