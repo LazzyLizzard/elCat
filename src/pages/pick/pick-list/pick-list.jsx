@@ -91,9 +91,9 @@ class PickList extends React.Component {
 
 export default connect(
     (state, ownProps) => ({
-        pick: state.pick,
-        pickFormValues: getFormValues(NAMESPACE)(state),
-        pickFormInitialValues: getFormInitialValues(NAMESPACE)(state),
+        [NAMESPACE]: state.pick,
+        // pickFormValues: getFormValues(NAMESPACE)(state),
+        // pickFormInitialValues: getFormInitialValues(NAMESPACE)(state),
         ownLocation: ownProps.location
         // ...state
     }),
