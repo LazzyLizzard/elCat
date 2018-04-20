@@ -1,6 +1,7 @@
 import React from 'react';
 import {noop} from 'lodash';
 import {Field} from 'redux-form';
+import {declension} from 'utils/declension';
 import {PICK_FORM_FILTERS} from './../field-names';
 import './form-with-boxes.scss';
 
@@ -17,7 +18,13 @@ export const FormWithBoxes = ({formData, boxToggleHandler = noop}) => {
                             <div>
                                 {filterItem.prodParamsGroupName} (prodParamsGroupId {filterItem.prodParamsGroupId})
                             </div>
-                            <div onClick={() => boxToggleHandler(filterItem.prodParamsGroupId)}>reset all</div>
+                            <div
+                                onClick={() => boxToggleHandler(filterItem.prodParamsGroupId)}
+                            >
+                                сбросить {filterItem.prodParamsList.length}
+                                {' '}
+                                {declension(filterItem.prodParamsList.length, 'чекбокс', 'чекбокса', 'чекбоксов')}
+                            </div>
                         </div>
                         <div className="form-with-boxes__boxes ">
                             {
