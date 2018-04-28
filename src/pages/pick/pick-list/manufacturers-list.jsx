@@ -1,9 +1,13 @@
 import React from 'react';
 import {Field} from 'redux-form';
+import {isNil} from 'lodash';
 import {PICK_FORM_MANUFACTURERS} from './../field-names';
 
 export const ManufacturersList = ({formData}) => {
     const {manufList} = formData;
+    if (isNil(manufList)) {
+        return null;
+    }
     return (
         <div>
             {

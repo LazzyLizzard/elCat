@@ -1,5 +1,5 @@
 import 'whatwg-fetch';
-import {find, omit} from 'lodash';
+import {find} from 'lodash';
 import {push} from 'react-router-redux';
 import {stringify} from 'query-string';
 import {getRequestEnvironment} from 'utils/get-request-environment';
@@ -108,6 +108,29 @@ export const resetGroupsList = () => ({
 });
 
 /**
+ *
+ * @param pickGroupId
+ */
+export const getPickFilters = pickGroupId => (dispatch) => {
+    console.log(pickGroupId);
+    return fetch(
+        `${baseUrl}${pickGroupId}/`, {
+            method: 'get'
+        })
+        .then(response => response.json())
+        .then((json) => {
+            dispatch({
+                type: 'PICK/',
+                payload: json
+            });
+        })
+        .catch((error) => {
+            dispatch(requestError(PICK_REQUEST_RESULT_ERROR, error));
+            return error;
+        });
+};
+
+/**
  * Getting result by filter (thunk)
  * @param requestBody
  * @param pathName
@@ -147,7 +170,14 @@ export const getPickResults = (requestBody, pathName) => (dispatch) => {
                 type: PICK_REQUEST_RESULT_SUCCESS,
                 payload: {
                     loader: false,
-                    pickResult: {[page]: omit(json, ['page', 'pagination'])}
+                    pickResult: [
+                        {
+                            id: 100
+                        },
+                        {
+                            id: 200
+                        }
+                    ]
                 }
             });
             return json;
