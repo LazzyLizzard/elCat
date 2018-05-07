@@ -17,8 +17,6 @@ export const FormWithBoxes = ({formData, boxToggleHandler = noop}) => {
             const title = `${filterItem.prodParamsGroupName} (prodParamsGroupId ${filterItem.prodParamsGroupId})`;
             const checkboxesNumber = filterItem.prodParamsList.length;
             return (
-                /* It's important to use key to avoid performance issues */
-
                 <HolderBlock
                     key={filterItem.prodParamsGroupId}
                     title={title}

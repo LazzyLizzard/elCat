@@ -43,7 +43,7 @@ export class HolderBlock extends Component {
                 <div className="holder-block__title-box">
                     <div className="holder-block__title">{title}</div>
                     {
-                        subTitle &&
+                        subTitle && !this.state.collapsed &&
                         <div className="holder-block__subtitle">
                             {subTitle}
                         </div>
