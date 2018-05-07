@@ -1,56 +1,56 @@
 import React from 'react';
-import {noop} from 'lodash';
-import {Field} from 'redux-form';
+import {isNil, noop} from 'lodash';
 import {declension} from 'utils/declension';
+import {CheckboxFilter} from 'components/checkbox-filter';
+import {HolderBlock} from 'components/holder-block/holder-block';
 import {PICK_FORM_FILTERS} from './../field-names';
 import './form-with-boxes.scss';
 
 export const FormWithBoxes = ({formData, boxToggleHandler = noop}) => {
     const {filters} = formData;
+    if (isNil(filters) || filters.length === 0) {
+        return null;
+    }
+
     return (
-        <div>
-            {
-                // TODO [sf] 07.12.2017 add check if > 0
-                filters.map(filterItem => (
-                    /* It's important to use key to avoid performance issues */
-                    <div key={filterItem.prodParamsGroupId} className="form-with-boxes">
-                        <div className="form-with-boxes__name">
-                            <div>
-                                {filterItem.prodParamsGroupName} (prodParamsGroupId {filterItem.prodParamsGroupId})
-                            </div>
-                            <div
-                                onClick={() => boxToggleHandler(filterItem.prodParamsGroupId)}
-                            >
-                                сбросить {filterItem.prodParamsList.length}
-                                {' '}
-                                {declension(filterItem.prodParamsList.length, 'чекбокс', 'чекбокса', 'чекбоксов')}
-                            </div>
+        filters.map((filterItem) => {
+            const title = `${filterItem.prodParamsGroupName} (prodParamsGroupId ${filterItem.prodParamsGroupId})`;
+            const checkboxesNumber = filterItem.prodParamsList.length;
+            return (
+                /* It's important to use key to avoid performance issues */
+
+                <HolderBlock
+                    key={filterItem.prodParamsGroupId}
+                    title={title}
+                    subTitle={
+                        <div
+                            onClick={() => boxToggleHandler(filterItem.prodParamsGroupId)}
+                        >
+                            сбросить {checkboxesNumber}
+                            {' '}
+                            {declension(checkboxesNumber, 'чекбокс', 'чекбокса', 'чекбоксов')}
                         </div>
+                    }
+                    collapsible
+                >
+                    <div className="form-with-boxes">
                         <div className="form-with-boxes__boxes ">
                             {
                                 filterItem.prodParamsList.map(checkboxItem => (
-                                    <span key={checkboxItem.valueId}>
-                                        <span
-                                            style={{fontWeight: 'bold'}}
-                                        >
-                                            {checkboxItem.parameterName}
-                                        </span>
-                                        <span
-                                            style={{color: '#ccc'}}
-                                        >
-                                            (id {checkboxItem.valueId})
-                                        </span>
-                                        <Field
+                                    <div
+                                        className="form-with-boxes__box-item"
+                                        key={checkboxItem.valueId}
+                                    >
+                                        <CheckboxFilter
+                                            label={`${checkboxItem.parameterName} (id ${checkboxItem.valueId})`}
                                             name={`${PICK_FORM_FILTERS}[${filterItem.prodParamsGroupId}][${checkboxItem.valueId}]`}
-                                            component="input"
-                                            type="checkbox"
-                                        /> |
-                                    </span>))
-                            }
+                                        />
+                                    </div>
+                                ))}
                         </div>
                     </div>
-                ))
-            }
-        </div>
+                </HolderBlock>
+            );
+        })
     );
 };

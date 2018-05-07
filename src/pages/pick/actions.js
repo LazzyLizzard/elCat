@@ -50,7 +50,7 @@ export const getGroupIdByName = (name, data) => {
 export const getOptionsByGroupId = pickGroupId => (dispatch) => {
     dispatch(requestStart(PICK_REQUEST_LIST_START));
     return fetch(
-        `${baseUrl}${pickGroupId}`, {
+        `${baseUrl}${pickGroupId}/`, {
             method: 'get'
         })
         .then(response => response.json())
@@ -160,7 +160,7 @@ export const getPickResults = (requestBody, pathName) => (dispatch) => {
     dispatch(push(p));
 
     return fetch(
-        `${baseUrl}${pickGroupId}${p1}`, {
+        `${baseUrl}${pickGroupId}/${p1}`, {
             method: 'get'
         })
         .then(response => response.json())
