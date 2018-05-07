@@ -42,6 +42,7 @@ export const FormWithBoxes = ({formData, boxToggleHandler = noop}) => {
                                         <CheckboxFilter
                                             label={`${checkboxItem.parameterName} (id ${checkboxItem.valueId})`}
                                             name={`${PICK_FORM_FILTERS}[${filterItem.prodParamsGroupId}][${checkboxItem.valueId}]`}
+                                            featured={checkboxItem.featured}
                                         />
                                     </div>
                                 ))}
