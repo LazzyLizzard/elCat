@@ -16,23 +16,29 @@ export const FormWithBoxes = ({formData, boxToggleHandler = noop}) => {
         filters.map((filterItem) => {
             const title = `${filterItem.prodParamsGroupName} (prodParamsGroupId ${filterItem.prodParamsGroupId})`;
             const checkboxesNumber = filterItem.prodParamsList.length;
+            const featuredNumber = filterItem.prodParamsList.filter(checkboxItem => checkboxItem.featured).length;
             return (
                 <HolderBlock
                     key={filterItem.prodParamsGroupId}
                     title={title}
-                    subTitle={
+                    collapsible
+                >
+                    <div className="form-with-boxes">
                         <div
                             onClick={() => boxToggleHandler(filterItem.prodParamsGroupId)}
+                            className="form-with-boxes__head"
                         >
                             сбросить {checkboxesNumber}
                             {' '}
                             {declension(checkboxesNumber, 'чекбокс', 'чекбокса', 'чекбоксов')}
+                            {
+                                featuredNumber > 0 &&
+                                <span>, feat: {featuredNumber}</span>
+                            }
+
                         </div>
-                    }
-                    collapsible
-                >
-                    <div className="form-with-boxes">
                         <div className="form-with-boxes__boxes ">
+
                             {
                                 filterItem.prodParamsList.map(checkboxItem => (
                                     <div

@@ -1,9 +1,9 @@
 .form-with-boxes {
     display: flex;
     margin-bottom: 2em;
-    flex-direction: row;
-    &__name {
-        flex: 0 0 200px;
+    flex-direction: column;
+    &__head {
+        display: flex;
     }
     &__boxes {
         display: flex;

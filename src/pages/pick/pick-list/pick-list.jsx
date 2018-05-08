@@ -2,6 +2,9 @@
  * Entry point for pick form
  */
 import React from 'react';
+// import {createSelector} from 'reselect';
+// import {formValueSelector} from 'redux-form';
+import {reduxForm, getFormValues} from 'redux-form';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {noop, isNil} from 'lodash';
@@ -16,6 +19,29 @@ import {
 import PickForm from './pick-form';
 import {PickResults} from './pick-results';
 import {NAMESPACE} from '../reducer';
+
+// const getInitialValues = createSelector(
+//     state => state.form[NAMESPACE]
+// );
+
+// const getFilersValues = createSelector(
+//     state => state.form[NAMESPACE]
+// );
+
+
+// export const valueSelector = formValueSelector(NAMESPACE);
+// export const getNumber = state => valueSelector(state, 'filters');
+
+//
+// const getSomeField = createSelector(
+//     getFormValues(NAMESPACE),
+//     funckinFormValues => funckinFormValues.filters
+// );
+
+// const getCheckxesCount = createSelector(
+//     getFilersValues,
+//     items => items.length
+// );
 
 const prepareAutoFillData = (query) => {
     const x = {};
@@ -49,6 +75,7 @@ class PickList extends React.Component {
         }
 
         this.autoFillData = prepareAutoFillData(query);
+        console.log(this.props.filterValues);
     }
 
     componentWillUnmount() {
@@ -94,10 +121,16 @@ class PickList extends React.Component {
     }
 }
 
+const PickListX = reduxForm({
+    form: NAMESPACE,
+    enableReinitialize: true
+})(PickList);
+
 export default connect(
     (state, ownProps) => ({
-        [NAMESPACE]: state.pick,
-        ownLocation: ownProps.location
+        [NAMESPACE]: state[NAMESPACE],
+        ownLocation: ownProps.location,
+        filterValues: getFormValues(NAMESPACE)(state)
     }),
     dispatch => ({
         requestPickList: pickGroupName => dispatch(requestPickList(pickGroupName)),
@@ -107,7 +140,8 @@ export default connect(
         pageNumberClick: (pageNumber) => {
             console.log(pageNumber);
         }
-    }))(PickList);
+    }))(PickListX);
+
 
 PickList.propTypes = {
     routeParams: PropTypes.object,

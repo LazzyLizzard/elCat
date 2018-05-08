@@ -2,25 +2,24 @@
     display: flex;
     border-bottom: solid 1px #ccc;
     margin-bottom: 10px;
-    justify-content: space-between;
-    &__title-box {
+    flex-direction: column;
+    &__head {
         display: flex;
-        flex-direction: column;
+        justify-content: space-between;
     }
     &__title {
         display: flex;
         font-weight: bold;
         font-size: 16px;
     }
-    &__subtitle {
-        display: flex;
-    }
-    &__content {
-        display: flex;
-    }
     &__toggler {
         display: flex;
         padding: 10px;
         cursor: pointer;
     }
+
+    &__content {
+        display: flex;
+    }
+
 }

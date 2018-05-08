@@ -35,28 +35,21 @@ export class HolderBlock extends Component {
     );
 
     render() {
-        const {collapsible, children, title, subTitle} = this.props;
+        const {collapsible, children, title} = this.props;
         return (
-            <div
-                className="holder-block"
-            >
-                <div className="holder-block__title-box">
+            <div className="holder-block">
+                <div className="holder-block__head">
                     <div className="holder-block__title">{title}</div>
-                    {
-                        subTitle && !this.state.collapsed &&
-                        <div className="holder-block__subtitle">
-                            {subTitle}
-                        </div>
+
+                    {collapsible &&
+                    this.renderToggler(this.state.collapsed)
                     }
                 </div>
-
-                {!this.state.collapsed &&
-                <div className="holder-block__content">
-                    {children}
-                </div>
-                }
-                {collapsible &&
-                this.renderToggler(this.state.collapsed)
+                {
+                    !this.state.collapsed &&
+                    <div className="holder-block__content">
+                        {children}
+                    </div>
                 }
             </div>
         );
