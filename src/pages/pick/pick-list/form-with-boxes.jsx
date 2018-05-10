@@ -1,61 +1,36 @@
 import React from 'react';
 import {isNil, noop} from 'lodash';
-import {declension} from 'utils/declension';
-import {CheckboxFilter} from 'components/checkbox-filter';
 import {HolderBlock} from 'components/holder-block/holder-block';
-import {PICK_FORM_FILTERS} from './../field-names';
+import {FormFilterItem} from './form-filter-item';
 import './form-with-boxes.scss';
 
-export const FormWithBoxes = ({formData, boxToggleHandler = noop}) => {
-    const {filters} = formData;
-    if (isNil(filters) || filters.length === 0) {
-        return null;
+export class FormWithBoxes extends React.PureComponent {
+
+    render() {
+        const {formData, boxToggleHandler = noop} = this.props;
+        if (isNil(formData.filters) || formData.filters.length === 0) {
+            return null;
+        }
+
+        return (
+            formData.filters.map((filterItem) => {
+                const title = `${filterItem.prodParamsGroupName} (prodParamsGroupId ${filterItem.prodParamsGroupId})`;
+                return (
+                    <HolderBlock
+                        key={filterItem.prodParamsGroupId}
+                        title={title}
+                        collapsible
+                    >
+                        <FormFilterItem
+                            filterData={filterItem}
+                            onClickCheckbox={boxToggleHandler}
+                        />
+                        {/* <div>{memoizedProp(this.props.someProp).map(e => <div>{e.id}</div>)}</div> */}
+
+                    </HolderBlock>
+                );
+            })
+        );
     }
+}
 
-    return (
-        filters.map((filterItem) => {
-            const title = `${filterItem.prodParamsGroupName} (prodParamsGroupId ${filterItem.prodParamsGroupId})`;
-            const checkboxesNumber = filterItem.prodParamsList.length;
-            const featuredNumber = filterItem.prodParamsList.filter(checkboxItem => checkboxItem.featured).length;
-            return (
-                <HolderBlock
-                    key={filterItem.prodParamsGroupId}
-                    title={title}
-                    collapsible
-                >
-                    <div className="form-with-boxes">
-                        <div
-                            onClick={() => boxToggleHandler(filterItem.prodParamsGroupId)}
-                            className="form-with-boxes__head"
-                        >
-                            сбросить {checkboxesNumber}
-                            {' '}
-                            {declension(checkboxesNumber, 'чекбокс', 'чекбокса', 'чекбоксов')}
-                            {
-                                featuredNumber > 0 &&
-                                <span>, feat: {featuredNumber}</span>
-                            }
-
-                        </div>
-                        <div className="form-with-boxes__boxes ">
-
-                            {
-                                filterItem.prodParamsList.map(checkboxItem => (
-                                    <div
-                                        className="form-with-boxes__box-item"
-                                        key={checkboxItem.valueId}
-                                    >
-                                        <CheckboxFilter
-                                            label={`${checkboxItem.parameterName} (id ${checkboxItem.valueId})`}
-                                            name={`${PICK_FORM_FILTERS}[${filterItem.prodParamsGroupId}][${checkboxItem.valueId}]`}
-                                            featured={checkboxItem.featured}
-                                        />
-                                    </div>
-                                ))}
-                        </div>
-                    </div>
-                </HolderBlock>
-            );
-        })
-    );
-};
