@@ -1,13 +1,13 @@
 import React from 'react';
-import {memoize, filter, map} from 'lodash';
+// import {memoize, filter, map} from 'lodash';
 import {CheckboxFilter} from 'components/checkbox-filter/checkbox-filter';
 import {declension} from 'utils/declension';
 import {PICK_FORM_FILTERS} from './../field-names';
 
-const memoizedProp = memoize(
-    needleProps => filter(needleProps, {featured: true}),
-    needleProps => map(needleProps, e => e.id).join('-')
-);
+// const memoizedProp = memoize(
+//     needleProps => filter(needleProps, item => item.featured),
+//     needleProps => map(needleProps, e => e.id).join('-')
+// );
 
 
 export class FormFilterItem extends React.PureComponent {
@@ -21,15 +21,16 @@ export class FormFilterItem extends React.PureComponent {
     });
 
     render() {
-        const {filterData: {prodParamsList, prodParamsGroupId}, onClickCheckbox} = this.props;
+        const {filterData: {prodParamsList, prodParamsGroupId}} = this.props;
         const checkboxesNumber = prodParamsList.length;
         const featuredNumber = prodParamsList.filter(checkboxItem => checkboxItem.featured).length;
 
         return (
             <div>
+                {/* <div>{memoizedProp(this.props.featured).map(e => <div> * {e.id}</div>)}</div> */}
                 <div className="form-with-boxes">
                     <div
-                        onClick={() => onClickCheckbox(prodParamsGroupId)}
+
                         className="form-with-boxes__head"
                     >
                         сбросить {checkboxesNumber}
@@ -59,6 +60,7 @@ export class FormFilterItem extends React.PureComponent {
                                 <div
                                     className="form-with-boxes__box-item"
                                     key={checkboxItem.valueId}
+                                    // onClick={() => onClickCheckbox(prodParamsGroupId)}
                                 >
                                     <CheckboxFilter
                                         label={`${checkboxItem.parameterName} (id ${checkboxItem.valueId})`}
