@@ -121,10 +121,10 @@ class PickList extends React.Component {
     }
 }
 
-const PickListX = reduxForm({
-    form: NAMESPACE,
-    enableReinitialize: true
-})(PickList);
+// const PickListX = reduxForm({
+//     form: NAMESPACE,
+//     enableReinitialize: true
+// })(PickList);
 
 export default connect(
     (state, ownProps) => ({
@@ -140,7 +140,7 @@ export default connect(
         pageNumberClick: (pageNumber) => {
             console.log(pageNumber);
         }
-    }))(PickListX);
+    }))(PickList);
 
 
 PickList.propTypes = {

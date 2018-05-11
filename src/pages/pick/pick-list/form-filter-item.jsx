@@ -31,7 +31,6 @@ export class FormFilterItem extends React.PureComponent {
 
         return (
             <div>
-                {/* <div>{memoizedProp(this.props.featured).map(e => <div> * {e.id}</div>)}</div> */}
                 <div className="form-with-boxes">
                     <div className="form-with-boxes__head">
                         сбросить {checkboxesNumber}
@@ -43,16 +42,19 @@ export class FormFilterItem extends React.PureComponent {
                         }
                         {',  '}
                         <span onClick={() => this.selectView()}>
-                            показать
-                            {' '}
                             {
-                                this.state.onlyFeatured === true
-                                    ? <React.Fragment>все</React.Fragment>
-                                    : <React.Fragment>featured only</React.Fragment>
-
+                                featuredNumber > 0 &&
+                                <React.Fragment>
+                                    показать
+                                    {' '}
+                                    {
+                                        this.state.onlyFeatured === true
+                                            ? <React.Fragment>все</React.Fragment>
+                                            : <React.Fragment>featured only</React.Fragment>
+                                    }
+                                </React.Fragment>
                             }
                         </span>
-
                     </div>
                     <div className="form-with-boxes__boxes ">
                         {
