@@ -1,17 +1,16 @@
 import React from 'react';
-// import {memoize, filter, map} from 'lodash';
+import {memoize} from 'lodash';
 import {CheckboxFilter} from 'components/checkbox-filter/checkbox-filter';
 import {declension} from 'utils/declension';
 import {PICK_FORM_FILTERS} from './../field-names';
 
-// const memoizedProp = memoize(
-//     needleProps => filter(needleProps, item => item.featured),
-//     needleProps => map(needleProps, e => e.id).join('-')
-// );
+const memoizedProp = memoize(
+    needleProps => needleProps.filter(item => item.featured),
+    needleProps => needleProps.map(e => e.name).join('-')
+);
 
 
 export class FormFilterItem extends React.PureComponent {
-
     state = {
         onlyFeatured: false
     };
@@ -19,6 +18,11 @@ export class FormFilterItem extends React.PureComponent {
     selectView = () => this.setState({
         onlyFeatured: !this.state.onlyFeatured
     });
+
+    // eslint-disable-next-line arrow-body-style
+    showModeWrapper = (what, data) => {
+        return what === true ? memoizedProp(data) : data;
+    };
 
     render() {
         const {filterData: {prodParamsList, prodParamsGroupId}} = this.props;
@@ -29,10 +33,7 @@ export class FormFilterItem extends React.PureComponent {
             <div>
                 {/* <div>{memoizedProp(this.props.featured).map(e => <div> * {e.id}</div>)}</div> */}
                 <div className="form-with-boxes">
-                    <div
-
-                        className="form-with-boxes__head"
-                    >
+                    <div className="form-with-boxes__head">
                         сбросить {checkboxesNumber}
                         {' '}
                         {declension(checkboxesNumber, 'чекбокс', 'чекбокса', 'чекбоксов')}
@@ -40,7 +41,7 @@ export class FormFilterItem extends React.PureComponent {
                             featuredNumber > 0 &&
                             <span>, feat: {featuredNumber}</span>
                         }
-                        {' '}
+                        {',  '}
                         <span onClick={() => this.selectView()}>
                             показать
                             {' '}
@@ -55,8 +56,7 @@ export class FormFilterItem extends React.PureComponent {
                     </div>
                     <div className="form-with-boxes__boxes ">
                         {
-                            prodParamsList.map(checkboxItem => (
-
+                            this.showModeWrapper(this.state.onlyFeatured, prodParamsList).map(checkboxItem => (
                                 <div
                                     className="form-with-boxes__box-item"
                                     key={checkboxItem.valueId}
