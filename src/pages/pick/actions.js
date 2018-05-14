@@ -160,7 +160,7 @@ export const getPickResults = (requestBody, pathName) => (dispatch) => {
     dispatch(push(p));
 
     return fetch(
-        `${baseUrl}${pickGroupId}/${p1}`, {
+        `${baseUrl}${pickGroupId}/data/${p1}`, {
             method: 'get'
         })
         .then(response => response.json())
