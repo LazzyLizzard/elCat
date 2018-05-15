@@ -3,8 +3,7 @@
  */
 import React from 'react';
 // import {createSelector} from 'reselect';
-// import {formValueSelector} from 'redux-form';
-import {reduxForm, getFormValues} from 'redux-form';
+import {formValueSelector} from 'redux-form';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {noop, isNil} from 'lodash';
@@ -20,16 +19,7 @@ import PickForm from './pick-form';
 import {PickResults} from './pick-results';
 import {NAMESPACE} from '../reducer';
 
-// const getInitialValues = createSelector(
-//     state => state.form[NAMESPACE]
-// );
-
-// const getFilersValues = createSelector(
-//     state => state.form[NAMESPACE]
-// );
-
-
-// export const valueSelector = formValueSelector(NAMESPACE);
+export const valueSelector = formValueSelector(NAMESPACE);
 // export const getNumber = state => valueSelector(state, 'filters');
 
 //
@@ -75,7 +65,6 @@ class PickList extends React.Component {
         }
 
         this.autoFillData = prepareAutoFillData(query);
-        console.log(this.props.filterValues);
     }
 
     componentWillUnmount() {
@@ -121,16 +110,10 @@ class PickList extends React.Component {
     }
 }
 
-// const PickListX = reduxForm({
-//     form: NAMESPACE,
-//     enableReinitialize: true
-// })(PickList);
-
 export default connect(
     (state, ownProps) => ({
         [NAMESPACE]: state[NAMESPACE],
-        ownLocation: ownProps.location,
-        filterValues: getFormValues(NAMESPACE)(state)
+        ownLocation: ownProps.location
     }),
     dispatch => ({
         requestPickList: pickGroupName => dispatch(requestPickList(pickGroupName)),

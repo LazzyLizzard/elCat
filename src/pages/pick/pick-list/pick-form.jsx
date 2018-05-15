@@ -1,5 +1,6 @@
 import React from 'react';
 import {reduxForm} from 'redux-form';
+import {connect} from 'react-redux';
 import {get} from 'lodash';
 import {ManufacturersList} from './manufacturers-list';
 import {FormWithBoxes} from './form-with-boxes';
@@ -12,6 +13,7 @@ import {
 import {NAMESPACE} from './../reducer';
 // TODO think where import below should be
 import {toggleBoxesHandler} from '../actions';
+import {valueSelector} from './pick-list';
 
 class PickForm extends React.Component {
     componentDidMount() {
@@ -39,6 +41,7 @@ class PickForm extends React.Component {
         if (doSubmit === true) {
             onSubmit(fData, pathName);
         }
+        console.log('filterValues', this.props.filterValues);
     }
 
     onSubmitWithArgument = additionalArgument => (values) => {
@@ -76,7 +79,10 @@ class PickForm extends React.Component {
     }
 }
 
-export default reduxForm({
-    form: NAMESPACE,
-    enableReinitialize: true
-})(PickForm);
+export default connect(state => ({
+    filterValues: valueSelector(state, 'filters')
+}), null)(
+    reduxForm({
+        form: NAMESPACE
+    })(PickForm)
+);
