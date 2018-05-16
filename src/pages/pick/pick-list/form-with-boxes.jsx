@@ -1,13 +1,12 @@
 import React from 'react';
-import {isNil, noop} from 'lodash';
+import {isNil, noop, get} from 'lodash';
 import {HolderBlock} from 'components/holder-block/holder-block';
 import {FormFilterItem} from './form-filter-item';
 import './form-with-boxes.scss';
 
 export class FormWithBoxes extends React.PureComponent {
-
     render() {
-        const {formData, boxToggleHandler = noop} = this.props;
+        const {formData, boxToggleHandler = noop, filterFieldValues, resetFiltersGroup} = this.props;
         if (isNil(formData.filters) || formData.filters.length === 0) {
             return null;
         }
@@ -24,8 +23,9 @@ export class FormWithBoxes extends React.PureComponent {
                         <FormFilterItem
                             filterData={filterItem}
                             onClickCheckbox={boxToggleHandler}
+                            filterFieldValues={get(filterFieldValues, [[filterItem.prodParamsGroupId]], [])}
+                            resetFiltersGroup={resetFiltersGroup}
                         />
-                        {/* <div>{memoizedProp(this.props.someProp).map(e => <div>{e.id}</div>)}</div> */}
 
                     </HolderBlock>
                 );

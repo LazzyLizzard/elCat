@@ -9,7 +9,6 @@ const memoizedProp = memoize(
     needleProps => needleProps.map(e => e.name).join('-')
 );
 
-
 export class FormFilterItem extends React.PureComponent {
     state = {
         onlyFeatured: false
@@ -25,15 +24,25 @@ export class FormFilterItem extends React.PureComponent {
     };
 
     render() {
-        const {filterData: {prodParamsList, prodParamsGroupId}} = this.props;
+        const {filterFieldValues, resetFiltersGroup, filterData: {prodParamsList, prodParamsGroupId}} = this.props;
         const checkboxesNumber = prodParamsList.length;
         const featuredNumber = prodParamsList.filter(checkboxItem => checkboxItem.featured).length;
+        const checkedCount = filterFieldValues.filter(checked => checked === true).length;
 
         return (
             <div>
                 <div className="form-with-boxes">
                     <div className="form-with-boxes__head">
-                        сбросить {checkboxesNumber}
+                        <button
+                            type="button"
+                            disabled={checkedCount === 0}
+                            onClick={() => resetFiltersGroup(prodParamsGroupId)}
+
+                        >
+                            сбросить {checkedCount} для группы {prodParamsGroupId}
+                        </button>
+
+                        {checkboxesNumber}
                         {' '}
                         {declension(checkboxesNumber, 'чекбокс', 'чекбокса', 'чекбоксов')}
                         {

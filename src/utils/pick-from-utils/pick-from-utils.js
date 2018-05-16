@@ -15,7 +15,7 @@ export const filterValuesStringify = (pickFilters) => {
     if (!isNil(pickFilters)) {
         pickFilters.forEach((groupData, index) => {
             console.log('groupData', groupData);
-            if (groupData.length > 0 && some(groupData, val => val === true)) {
+            if (typeof groupData !== 'undefined' && groupData.length > 0 && some(groupData, val => val === true)) {
                 // TODO [sf] 19.02.2018 rewrite with .reduce()
                 filterParams[index] = [];
                 groupData.forEach((itemData, itemIndex) => {

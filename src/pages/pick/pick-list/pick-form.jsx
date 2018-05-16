@@ -41,17 +41,20 @@ class PickForm extends React.Component {
         if (doSubmit === true) {
             onSubmit(fData, pathName);
         }
-        console.log('filterValues', this.props.filterValues);
     }
 
     onSubmitWithArgument = additionalArgument => (values) => {
-        console.log('onSubmitWithArgument', values);
         return this.props.onSubmit(values, additionalArgument);
     };
 
+    resetFiltersGroup = (groupId) => {
+        // TODO [sf] 16.05.2018 think if there's less rude way to clear checkboxes array
+        const {array} = this.props;
+        array.remove('filters', groupId);
+    };
+
     render() {
-        const {handleSubmit, pristine, reset, submitting, pickFormData, pathName = null} = this.props;
-        // console.log('handleSubmit R', handleSubmit);
+        const {handleSubmit, pristine, reset, submitting, pickFormData, pathName = null, filterValues} = this.props;
         return (
             <div>
                 <form
@@ -61,6 +64,8 @@ class PickForm extends React.Component {
                     <FormWithBoxes
                         formData={pickFormData}
                         boxToggleHandler={toggleBoxesHandler}
+                        filterFieldValues={filterValues}
+                        resetFiltersGroup={this.resetFiltersGroup}
                     />
 
                     <div>
