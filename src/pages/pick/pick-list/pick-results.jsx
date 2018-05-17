@@ -18,8 +18,17 @@ import {Pagination} from 'components/ui/pagination';
  * @returns {*}
  * @constructor
  */
-export const PickResults = ({result, pagination, pageClickHandler = noop, baseUrl}) => {
+export const PickResults = ({
+    result,
+    pagination,
+    pageClickHandler = noop,
+    baseUrl,
+    pathName,
+    // pickGroupId,
+    queryParams
+}) => {
     if (result) {
+        console.log(queryParams);
         return (
             <div>
                 <h4>Results</h4>
@@ -27,6 +36,9 @@ export const PickResults = ({result, pagination, pageClickHandler = noop, baseUr
                     pagination={pagination}
                     pageClickHandler={pageClickHandler}
                     baseUrl={baseUrl}
+                    pathName={pathName}
+                    // pickGroupId={pickGroupId}
+                    queryParams={queryParams}
                 />
             </div>
         );

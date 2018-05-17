@@ -1,6 +1,6 @@
 import React from 'react';
 import {isNil, noop, get} from 'lodash';
-import {HolderBlock} from 'components/holder-block/holder-block';
+import {HolderBlock} from 'components/holder-block';
 import {FormFilterItem} from './form-filter-item';
 import './form-with-boxes.scss';
 

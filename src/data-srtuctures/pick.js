@@ -5,17 +5,7 @@
 export const PICK_STATE = {
     pickList: null,
     pickListGroups: null,
-    // TODO remove this mock
-    pickResult: [
-        {
-            id: 100,
-            name: 'mock 1'
-        },
-        {
-            id: 101,
-            name: 'mock 2'
-        }
-    ],
+    pickResult: [],
     pagination: {
         // TODO remove this mock
         current: 1,

@@ -37,7 +37,6 @@ export class FormFilterItem extends React.PureComponent {
                             type="button"
                             disabled={checkedCount === 0}
                             onClick={() => resetFiltersGroup(prodParamsGroupId)}
-
                         >
                             сбросить {checkedCount} для группы {prodParamsGroupId}
                         </button>

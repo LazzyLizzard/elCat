@@ -40,7 +40,6 @@ export class HolderBlock extends Component {
             <div className="holder-block">
                 <div className="holder-block__head">
                     <div className="holder-block__title">{title}</div>
-
                     {collapsible &&
                     this.renderToggler(this.state.collapsed)
                     }

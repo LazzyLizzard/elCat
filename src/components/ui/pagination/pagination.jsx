@@ -1,23 +1,34 @@
 import React from 'react';
 import {noop} from 'lodash';
 import {Link} from 'react-router';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+// import {prepareAutoFillData} from 'utils/pick-from-utils';
+import {stringify} from 'query-string';
 import './pagination.scss';
 
 export class Pagination extends React.Component {
-    // static propTypes = {
-    //     pagination: PropTypes.shape({
-    //         current: PropTypes.number,
-    //         total: PropTypes.number,
-    //         items: PropTypes.arrayOf(PropTypes.object)
-    //     })
-    // };
+    static propTypes = {
+        pagination: PropTypes.shape({
+            current: PropTypes.number,
+            total: PropTypes.number,
+            items: PropTypes.arrayOf(PropTypes.object)
+        })
+    };
 
     render() {
-        const {pagination: {current, total, items}, pageClickHandler = noop, baseUrl, pageUri = ''} = this.props;
-        const clickHandler = (pageItem) => {
-            return pageClickHandler(pageItem);
-        };
+        const {
+            pagination: {current, total, items},
+            pageClickHandler = noop,
+            baseUrl,
+            pathName,
+            queryParams
+        } = this.props;
+        const link = pageNumber => Object.assign(
+            {},
+            {
+                page: pageNumber
+            },
+            queryParams);
         return (
             <div className="pagination">
                 <div className="pagination__total-pages">pagination: total {total} of {current}</div>
@@ -26,11 +37,13 @@ export class Pagination extends React.Component {
                         /* TODO remove this crap and use classNames */
                         <Link
                             key={pageItem}
-                            to={`/${baseUrl}?page=${pageItem}&x=${pageItem}${pageUri}`}
+                            to={`/${baseUrl}?${stringify(link(pageItem), {encode: false})}`}
                         >
                             <span
                                 className={`pagination__item ${current === pageItem && 'pagination__item--current'}`}
-                                onClick={() => clickHandler(pageItem)}
+                                onClick={() => pageClickHandler(
+                                    link(pageItem),
+                                    pathName)}
                             >
                                 {pageItem} |
                             </span>
@@ -42,3 +55,4 @@ export class Pagination extends React.Component {
         );
     }
 }
+

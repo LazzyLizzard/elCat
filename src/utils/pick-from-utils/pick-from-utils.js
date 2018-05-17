@@ -76,3 +76,17 @@ export const simpleFilterParse = (string = '') => {
         return acc;
     }, []);
 };
+
+export const prepareAutoFillData = (query) => {
+    const x = {};
+    if (query.filters || query.m) {
+        if (query.filters) {
+            x.filters = filterValuesParse(query.filters);
+        }
+        if (query.m) {
+            x.m = simpleFilterParse(query.m);
+        }
+        return x;
+    }
+    return null;
+};

@@ -6,8 +6,8 @@ import React from 'react';
 import {formValueSelector} from 'redux-form';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {noop, isNil} from 'lodash';
-import {simpleFilterParse, filterValuesParse} from 'utils/pick-from-utils';
+import {noop, isNil, pick} from 'lodash';
+import {prepareAutoFillData} from 'utils/pick-from-utils';
 import {
     getGroupIdByName,
     requestPickList,
@@ -32,20 +32,6 @@ export const valueSelector = formValueSelector(NAMESPACE);
 //     getFilersValues,
 //     items => items.length
 // );
-
-const prepareAutoFillData = (query) => {
-    const x = {};
-    if (query.filters || query.m) {
-        if (query.filters) {
-            x.filters = filterValuesParse(query.filters);
-        }
-        if (query.m) {
-            x.m = simpleFilterParse(query.m);
-        }
-        return x;
-    }
-    return null;
-};
 
 class PickList extends React.Component {
     componentDidMount() {
@@ -75,7 +61,7 @@ class PickList extends React.Component {
         console.log('render');
         const {
             [NAMESPACE]: {pickListGroups, pickResult, pagination, error, pickGroupId},
-            ownLocation: {pathname}
+            ownLocation: {pathname, query}
         } = this.props;
 
         if (pickListGroups) {
@@ -100,8 +86,10 @@ class PickList extends React.Component {
                         result={pickResult}
                         pagination={pagination}
                         baseUrl={this.paginationBaseUrl}
-                        pageClickHandler={this.props.pageNumberClick}
+                        pageClickHandler={this.props.getPickResults}
                         pathName={pathname}
+                        // pickGroupId={pickGroupId}
+                        queryParams={pick(query, ['filters', 'm'])}
                     />
                 </div>
             );

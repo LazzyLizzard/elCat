@@ -2,5 +2,6 @@ export {
     filterValuesStringify,
     filterValuesParse,
     simpleFilterStringify,
-    simpleFilterParse
+    simpleFilterParse,
+    prepareAutoFillData
 } from './pick-from-utils';

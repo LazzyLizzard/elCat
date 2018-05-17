@@ -32,8 +32,12 @@ export const pickReducer = (state = PICK_STATE, action) => {
             return assign({}, state, action.payload);
 
         case PICK_REQUEST_RESULT_START:
-        case PICK_REQUEST_RESULT_SUCCESS:
         case PICK_REQUEST_RESULT_ERROR:
+            return assign({}, state, action.payload);
+
+        case PICK_REQUEST_RESULT_SUCCESS:
+            // TODO [sf] 17.05.2018 check if pages data is stored properly
+            // (all pages data present in store pick.pickResult)
             return assign({}, state, action.payload);
 
         case PICK_SET_PAGE_FROM_PAGINATION: {
