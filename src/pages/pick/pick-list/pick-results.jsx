@@ -24,7 +24,7 @@ export const PickResults = ({
     pageClickHandler = noop,
     baseUrl,
     pathName,
-    // pickGroupId,
+    pickGroupId,
     queryParams
 }) => {
     if (result) {
@@ -37,7 +37,7 @@ export const PickResults = ({
                     pageClickHandler={pageClickHandler}
                     baseUrl={baseUrl}
                     pathName={pathName}
-                    // pickGroupId={pickGroupId}
+                    pickGroupId={pickGroupId}
                     queryParams={queryParams}
                 />
             </div>

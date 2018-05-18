@@ -88,7 +88,7 @@ class PickList extends React.Component {
                         baseUrl={this.paginationBaseUrl}
                         pageClickHandler={this.props.getPickResults}
                         pathName={pathname}
-                        // pickGroupId={pickGroupId}
+                        pickGroupId={pickGroupId}
                         queryParams={pick(query, ['filters', 'm'])}
                     />
                 </div>
