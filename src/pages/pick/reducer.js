@@ -17,11 +17,11 @@ import {
 
 export const NAMESPACE = 'pick';
 
-// TODO [sf] 18.05.2018 add check if page already loaded
 const rebuildPickResult = (state, payload) => {
     const newState = {};
     newState.loader = payload.loader;
     newState.pickResult = [...state.pickResult, payload.pickResult];
+    newState.selectedPage = payload.page;
     return Object.assign({}, state, newState);
 };
 

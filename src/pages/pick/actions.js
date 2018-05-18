@@ -136,6 +136,7 @@ export const getPickFilters = pickGroupId => (dispatch) => {
  * @param pathName
  */
 // m, page, filters, pickGroupId - поля формы
+// TODO [sf] 18.05.2018 add check if page already loaded
 export const getPickResults = (requestBody, pathName) => (dispatch) => {
     const {
         [PICK_FORM_GROUP_ID]: pickGroupId,
@@ -169,6 +170,7 @@ export const getPickResults = (requestBody, pathName) => (dispatch) => {
             dispatch({
                 type: PICK_REQUEST_RESULT_SUCCESS,
                 payload: {
+                    page,
                     loader: false,
                     pickResult: {
                         page,

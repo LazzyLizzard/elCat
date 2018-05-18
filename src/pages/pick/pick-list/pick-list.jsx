@@ -2,7 +2,7 @@
  * Entry point for pick form
  */
 import React from 'react';
-// import {createSelector} from 'reselect';
+import {createSelector} from 'reselect';
 import {formValueSelector} from 'redux-form';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
@@ -21,6 +21,16 @@ import {NAMESPACE} from '../reducer';
 
 export const valueSelector = formValueSelector(NAMESPACE);
 // export const getNumber = state => valueSelector(state, 'filters');
+
+const getNameSpace = nameSpace => state => state[nameSpace];
+
+const getSelectedPickResults = createSelector(
+    getNameSpace,
+    (data) => {
+        console.log(data);
+        return data.pickResult;
+    }
+);
 
 //
 // const getSomeField = createSelector(
@@ -64,6 +74,8 @@ class PickList extends React.Component {
             ownLocation: {pathname, query}
         } = this.props;
 
+        console.warn(this.props.selectedPickResults);
+
         if (pickListGroups) {
             return (
                 <div>
@@ -100,7 +112,8 @@ class PickList extends React.Component {
 
 export default connect(
     (state, ownProps) => ({
-        [NAMESPACE]: state[NAMESPACE],
+        [NAMESPACE]: getNameSpace(NAMESPACE)(state),
+        selectedPickResults: getSelectedPickResults(state),
         ownLocation: ownProps.location
     }),
     dispatch => ({

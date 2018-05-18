@@ -4,6 +4,7 @@
 import React from 'react';
 import {noop} from 'lodash';
 import {Pagination} from 'components/ui/pagination';
+import {ProductsList} from 'components/products-list';
 
 // const pageClickHandler = (pageNumber) => {
 //     console.log(pageNumber);
