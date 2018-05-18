@@ -17,6 +17,14 @@ import {
 
 export const NAMESPACE = 'pick';
 
+// TODO [sf] 18.05.2018 add check if page already loaded
+const rebuildPickResult = (state, payload) => {
+    const newState = {};
+    newState.loader = payload.loader;
+    newState.pickResult = [...state.pickResult, payload.pickResult];
+    return Object.assign({}, state, newState);
+};
+
 export const pickReducer = (state = PICK_STATE, action) => {
     switch (action.type) {
         case PICK_REQUEST_START:
@@ -36,9 +44,7 @@ export const pickReducer = (state = PICK_STATE, action) => {
             return assign({}, state, action.payload);
 
         case PICK_REQUEST_RESULT_SUCCESS:
-            // TODO [sf] 17.05.2018 check if pages data is stored properly
-            // (all pages data present in store pick.pickResult)
-            return assign({}, state, action.payload);
+            return rebuildPickResult(state, action.payload);
 
         case PICK_SET_PAGE_FROM_PAGINATION: {
             return assign({}, state, action.payload);

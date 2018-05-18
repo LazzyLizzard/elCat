@@ -9,9 +9,7 @@ import './pagination.scss';
 // TODO [sf] 18.05.2018 rewrite this crap
 const link = (pageNumber, queryParams, pickGroupId, transformQuery = false) => (Object.assign(
     {},
-    {
-        page: pageNumber
-    },
+    {page: pageNumber},
     transformQuery === true
         ? Object.assign({}, prepareAutoFillData(queryParams), {pickGroupId})
         : queryParams

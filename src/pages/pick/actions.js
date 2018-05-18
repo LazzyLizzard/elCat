@@ -170,10 +170,10 @@ export const getPickResults = (requestBody, pathName) => (dispatch) => {
                 type: PICK_REQUEST_RESULT_SUCCESS,
                 payload: {
                     loader: false,
-                    pickResult: [{
+                    pickResult: {
                         page,
                         data: json.productsList
-                    }]
+                    }
                 }
             });
             return json;
