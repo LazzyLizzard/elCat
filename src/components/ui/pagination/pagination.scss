@@ -2,14 +2,20 @@
     display: flex;
     border: solid 1px #666;
     margin-bottom: 15px;
+    justify-content: space-between;
     &__total-pages {
-        flex: 1;
-        padding: 0 20px 0 0;
+        display: flex;
+    }
+    &__navigation {
+        display: flex;
     }
     &__item {
         flex: 1;
+        padding: 4px 10px;
         &--current {
             font-weight: bold;
+            text-decoration: none;
+            background: darkkhaki;
         }
     }
 }

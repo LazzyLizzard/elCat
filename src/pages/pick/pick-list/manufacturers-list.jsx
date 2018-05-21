@@ -12,7 +12,6 @@ export const ManufacturersList = ({formData}) => {
     return (
         <HolderBlock
             title="Произвордители"
-            collapsible
         >
             {
                 // TODO [sf] 17.05.2018 refactor backend code to get rid of manufacturers_id === false
@@ -28,7 +27,6 @@ export const ManufacturersList = ({formData}) => {
                         </span>
                     ))
             }
-
         </HolderBlock>
     );
 };

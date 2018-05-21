@@ -2,8 +2,6 @@
  * Entry point for pick form
  */
 import React from 'react';
-import {createSelector} from 'reselect';
-import {formValueSelector} from 'redux-form';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {noop, isNil, pick} from 'lodash';
@@ -15,22 +13,12 @@ import {
     resetGroupsList,
     getPickResults
 } from '../actions';
+import {getNameSpace, getSelectedPickResults} from './selectors';
 import PickForm from './pick-form';
 import {PickResults} from './pick-results';
 import {NAMESPACE} from '../reducer';
 
-export const valueSelector = formValueSelector(NAMESPACE);
 // export const getNumber = state => valueSelector(state, 'filters');
-
-const getNameSpace = nameSpace => state => state[nameSpace];
-
-const getSelectedPickResults = createSelector(
-    getNameSpace,
-    (data) => {
-        console.log(data);
-        return data.pickResult;
-    }
-);
 
 //
 // const getSomeField = createSelector(
@@ -70,7 +58,7 @@ class PickList extends React.Component {
     render() {
         console.log('render');
         const {
-            [NAMESPACE]: {pickListGroups, pickResult, pagination, error, pickGroupId},
+            [NAMESPACE]: {pickListGroups, pickResult, pagination, error, pickGroupId, loader},
             ownLocation: {pathname, query}
         } = this.props;
 
@@ -83,12 +71,16 @@ class PickList extends React.Component {
                     {error && (
                         <div style={{color: '#c70000'}}>{error.message}</div>
                     )}
+                    {loader &&
+                    <div style={{color: '#009900'}}>LOADING</div>
+                    }
                     <PickForm
                         pickGroupId={pickGroupId}
                         pickFormData={pickListGroups}
                         pathName={pathname}
                         autoFillData={this.autoFillData}
                         onSubmit={this.props.getPickResults}
+                        loader={loader}
                         initialValues={{
                             pickGroupId,
                             page: 1
@@ -113,7 +105,7 @@ class PickList extends React.Component {
 export default connect(
     (state, ownProps) => ({
         [NAMESPACE]: getNameSpace(NAMESPACE)(state),
-        selectedPickResults: getSelectedPickResults(state),
+        selectedPickResults: getSelectedPickResults(NAMESPACE)(state),
         ownLocation: ownProps.location
     }),
     dispatch => ({

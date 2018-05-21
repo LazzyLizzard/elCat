@@ -170,7 +170,7 @@ export const getPickResults = (requestBody, pathName) => (dispatch) => {
             dispatch({
                 type: PICK_REQUEST_RESULT_SUCCESS,
                 payload: {
-                    page,
+                    selectedPage: page,
                     loader: false,
                     pickResult: {
                         page,

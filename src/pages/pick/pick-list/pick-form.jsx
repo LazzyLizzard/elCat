@@ -13,7 +13,7 @@ import {
 import {NAMESPACE} from './../reducer';
 // TODO think where import below should be
 import {toggleBoxesHandler} from '../actions';
-import {valueSelector} from './pick-list';
+import {valueSelector} from './selectors';
 
 class PickForm extends React.Component {
     componentDidMount() {
@@ -43,9 +43,7 @@ class PickForm extends React.Component {
         }
     }
 
-    onSubmitWithArgument = additionalArgument => (values) => {
-        return this.props.onSubmit(values, additionalArgument);
-    };
+    onSubmitWithArgument = additionalArgument => values => this.props.onSubmit(values, additionalArgument);
 
     resetFiltersGroup = (groupId) => {
         // TODO [sf] 16.05.2018 think if there's less rude way to clear checkboxes array

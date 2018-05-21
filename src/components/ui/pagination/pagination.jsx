@@ -15,6 +15,17 @@ const link = (pageNumber, queryParams, pickGroupId, transformQuery = false) => (
         : queryParams
 ));
 
+// const otherProps = (pageNumber, currentPage) => {
+//     const isCurrent = pageNumber === currentPage;
+//     return {
+//         to: isCurrent
+//             ? ''
+//             : `/${baseUrl}?${stringify(link(pageItem, queryParams, pickGroupId), {encode: false})}`,
+//         className: '',
+//         onClick: ''
+//     };
+// };
+
 export class Pagination extends React.Component {
     // static propTypes = {
     //     pagination: PropTypes.shape({
@@ -37,24 +48,31 @@ export class Pagination extends React.Component {
         return (
             <div className="pagination">
                 <div className="pagination__total-pages">pagination: total {total} of {current}</div>
-                <div>
-                    {items.map(pageItem => (
-                        /* TODO remove this crap and use classNames */
-                        <Link
-                            key={pageItem}
-                            to={`/${baseUrl}?${stringify(link(pageItem, queryParams, pickGroupId), {encode: false})}`}
-                        >
-                            <span
-                                className={`pagination__item ${current === pageItem && 'pagination__item--current'}`}
-                                onClick={() => pageClickHandler(
-                                    link(pageItem, queryParams, pickGroupId, true),
-                                    pathName)}
+                <div className="pagination__navigation">
+                    {items.map((pageItem) => {
+                        const isCurrent = current === pageItem;
+                        const linkHref = isCurrent
+                            ? ''
+                            : `/${baseUrl}?${stringify(link(pageItem, queryParams, pickGroupId), {encode: false})}`;
+                        const clickHandler = isCurrent
+                            ? e => e.preventDefault()
+                            : () => pageClickHandler(
+                                link(pageItem, queryParams, pickGroupId, true),
+                                pathName);
+                        return (
+                            /* TODO remove this crap and use classNames */
+                            <Link
+                                key={pageItem}
+                                to={linkHref}
+                                className={`pagination__item ${isCurrent && 'pagination__item--current'}`}
+                                onClick={clickHandler}
                             >
-                                {pageItem} |
-                            </span>
-                        </Link>
-
-                    ))}
+                                <span>
+                                    {pageItem}
+                                </span>
+                            </Link>
+                        );
+                    })}
                 </div>
             </div>
         );
