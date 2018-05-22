@@ -22,6 +22,7 @@ export class ViewModes extends React.Component {
                         const toggleClicker = () => onClick(modeItem.key);
                         return (
                             <button
+                                key={modeItem.key}
                                 type="button"
                                 style={btnStyle}
                                 onClick={toggleClicker}

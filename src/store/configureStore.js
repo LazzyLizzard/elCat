@@ -1,4 +1,6 @@
 import {applyMiddleware, compose} from 'redux';
+import {routerMiddleware} from 'react-router-redux';
+import {browserHistory} from 'react-router';
 // import {createLogger} from 'redux-logger';
 import thunk from 'redux-thunk';
 import {redirect} from '../middleware/redirect';
@@ -14,8 +16,9 @@ export default function configureStore() {
     //     )
     // );
 
+    // https://github.com/reactjs/react-router-redux
     const store = compose(
-        applyMiddleware(thunk, redirect),
+        applyMiddleware(thunk, redirect, routerMiddleware(browserHistory)),
         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     );
 

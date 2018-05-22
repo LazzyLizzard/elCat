@@ -1,5 +1,5 @@
 import {assign} from 'lodash';
-import {ELLIPSIS} from 'contants/empty-values';
+import {ELLIPSIS} from 'constants/empty-values';
 
 export const DEFAULT_MODEL_DATA = {
     modelData: {

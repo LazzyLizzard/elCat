@@ -1,7 +1,30 @@
 import React from 'react';
+import {noop, isNil} from 'lodash';
 import {Link} from 'react-router';
 // import PropTypes from 'prop-types';
+import {prepareAutoFillData} from 'utils/pick-from-utils';
+import {stringify} from 'query-string';
 import './pagination.scss';
+
+// TODO [sf] 18.05.2018 rewrite this crap
+const link = (pageNumber, queryParams, pickGroupId, transformQuery = false) => (Object.assign(
+    {},
+    {page: pageNumber},
+    transformQuery === true
+        ? Object.assign({}, prepareAutoFillData(queryParams), {pickGroupId})
+        : queryParams
+));
+
+// const otherProps = (pageNumber, currentPage) => {
+//     const isCurrent = pageNumber === currentPage;
+//     return {
+//         to: isCurrent
+//             ? ''
+//             : `/${baseUrl}?${stringify(link(pageItem, queryParams, pickGroupId), {encode: false})}`,
+//         className: '',
+//         onClick: ''
+//     };
+// };
 
 export class Pagination extends React.Component {
     // static propTypes = {
@@ -13,31 +36,50 @@ export class Pagination extends React.Component {
     // };
 
     render() {
-        const {pagination: {current, total, items}, pageClickHandler, baseUrl} = this.props;
-        const clickHandler = (pageItem) => {
-            return pageClickHandler(pageItem);
-        };
+        if (isNil(this.props.pagination)) {
+            return null;
+        }
+        const {
+            pagination: {currentPage, itemsPerPage, total, pages, pagesNumber},
+            pageClickHandler = noop,
+            baseUrl,
+            pathName,
+            queryParams,
+            pickGroupId
+        } = this.props;
         return (
             <div className="pagination">
-                <div className="pagination__total-pages">pagination: total {total} of {current}</div>
-                <div>
-                    {items.map(pageItem => (
-                        /* TODO remove this crap and use classNames */
-                        <Link
-                            key={pageItem}
-                            to={`/${baseUrl}/page/${pageItem}/`}
-                        >
-                            <span
-                                className={`pagination__item ${current === pageItem && 'pagination__item--current'}`}
-                                onClick={() => clickHandler(pageItem)}
+                <div className="pagination__total-pages">
+                    pagination: items found total {total}, per page {itemsPerPage},
+                    current {currentPage} of {pagesNumber}</div>
+                <div className="pagination__navigation">
+                    {pages.map((pageItem) => {
+                        const isCurrent = pageItem.current;
+                        const linkHref = isCurrent
+                            ? ''
+                            : `/${baseUrl}?${stringify(link(pageItem.pageNumber, queryParams, pickGroupId), {encode: false})}`;
+                        const clickHandler = isCurrent
+                            ? e => e.preventDefault()
+                            : () => pageClickHandler(
+                                link(pageItem.pageNumber, queryParams, pickGroupId, true),
+                                pathName);
+                        return (
+                            /* TODO remove this crap and use classNames */
+                            <Link
+                                key={pageItem.pageNumber}
+                                to={linkHref}
+                                className={`pagination__item ${isCurrent && 'pagination__item--current'}`}
+                                onClick={clickHandler}
                             >
-                                {pageItem} |
-                            </span>
-                        </Link>
-
-                    ))}
+                                <span>
+                                    {pageItem.pageNumber}
+                                </span>
+                            </Link>
+                        );
+                    })}
                 </div>
             </div>
         );
     }
 }
+

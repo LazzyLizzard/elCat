@@ -1,7 +1,7 @@
 import 'whatwg-fetch';
 import {getRequestEnvironment} from 'utils/get-request-environment';
-import {REMOTE_HTTPS} from 'contants/server-request-environment';
-import {ENDPOINT_FICHE} from 'contants/end-points';
+import {REMOTE_HTTPS} from 'constants/server-request-environment';
+import {ENDPOINT_FICHE} from 'constants/end-points';
 
 // export const MODEL_INFO = 'MODEL_INFO';
 export const MANUFS_REQUEST = 'MANUFS_REQUEST';

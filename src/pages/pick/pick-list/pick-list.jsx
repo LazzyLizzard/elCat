@@ -4,31 +4,51 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {change, submit} from 'redux-form';
-import {noop} from 'lodash';
-import * as actions from '../actions';
+import {noop, isNil, pick} from 'lodash';
+import {prepareAutoFillData} from 'utils/pick-from-utils';
+import {
+    getGroupIdByName,
+    requestPickList,
+    getOptionsByGroupId,
+    resetGroupsList,
+    getPickResults
+} from '../actions';
+import {getNameSpace, getSelectedPickResults} from './selectors';
 import PickForm from './pick-form';
 import {PickResults} from './pick-results';
-// import {showResults} from './../show-results';
 import {NAMESPACE} from '../reducer';
 
-let paginationBaseUrl;
+// export const getNumber = state => valueSelector(state, 'filters');
+
+//
+// const getSomeField = createSelector(
+//     getFormValues(NAMESPACE),
+//     funckinFormValues => funckinFormValues.filters
+// );
+
+// const getCheckxesCount = createSelector(
+//     getFilersValues,
+//     items => items.length
+// );
 
 class PickList extends React.Component {
     componentDidMount() {
         const {
             [NAMESPACE]: {pickList},
-            routeParams: {pickGroupName}
+            routeParams: {pickGroupName},
+            ownLocation: {query}
         } = this.props;
 
-        paginationBaseUrl = `${NAMESPACE}/${pickGroupName}`;
+        this.paginationBaseUrl = `${NAMESPACE}/${pickGroupName}`;
 
-        if (!pickList) {
+        if (isNil(pickList)) {
             this.props.requestPickList(pickGroupName);
         } else {
-            const id = actions.getGroupIdByName(pickGroupName, pickList);
-            this.props.getOptionsByGroupId(id);
+            this.pickGroupId = getGroupIdByName(pickGroupName, pickList);
+            this.props.getOptionsByGroupId(this.pickGroupId);
         }
+
+        this.autoFillData = prepareAutoFillData(query);
     }
 
     componentWillUnmount() {
@@ -37,58 +57,80 @@ class PickList extends React.Component {
 
     render() {
         console.log('render');
-        const {[NAMESPACE]: {pickListGroups, pickResult, pagination}} = this.props;
-        return (
-            <div>
-                {pickListGroups && (
-                    <div>
-                        <h4>Picker</h4>
-                        <PickForm
-                            pickFormData={pickListGroups}
-                            onSubmit={this.props.getPickResults}
-                        />
-                        <PickResults
-                            result={pickResult}
-                            pagination={pagination}
-                            pageClickHandler={this.props.pageNumberClick}
-                            baseUrl={paginationBaseUrl}
-                        />
-                    </div>
-                )}
-            </div>
-        );
+        const {
+            [NAMESPACE]: {pickListGroups, pickResult, pagination, error, pickGroupId, loader},
+            ownLocation: {pathname, query}
+        } = this.props;
+
+        console.warn(this.props.selectedPickResults);
+
+        if (pickListGroups) {
+            return (
+                <div>
+                    <h4>Picker</h4>
+                    {error && (
+                        <div style={{color: '#c70000'}}>{error.message}</div>
+                    )}
+                    {loader &&
+                    <div style={{color: '#009900'}}>LOADING</div>
+                    }
+                    <PickForm
+                        pickGroupId={pickGroupId}
+                        pickFormData={pickListGroups}
+                        pathName={pathname}
+                        autoFillData={this.autoFillData}
+                        onSubmit={this.props.getPickResults}
+                        loader={loader}
+                        initialValues={{
+                            pickGroupId,
+                            page: 1
+                        }}
+                    />
+                    <PickResults
+                        result={pickResult}
+                        pagination={pagination}
+                        baseUrl={this.paginationBaseUrl}
+                        pageClickHandler={this.props.getPickResults}
+                        pathName={pathname}
+                        pickGroupId={pickGroupId}
+                        queryParams={pick(query, ['filters', 'm'])}
+                    />
+                </div>
+            );
+        }
+        return null;
     }
 }
 
 export default connect(
-    state => state,
+    (state, ownProps) => ({
+        [NAMESPACE]: getNameSpace(NAMESPACE)(state),
+        selectedPickResults: getSelectedPickResults(NAMESPACE)(state),
+        ownLocation: ownProps.location
+    }),
     dispatch => ({
-        requestPickList: pickGroupName => dispatch(actions.requestPickList(pickGroupName)),
-        getOptionsByGroupId: id => dispatch(actions.getOptionsByGroupId(id)),
-        resetGroupsList: () => dispatch(actions.resetGroupsList()),
-        getPickResults: (requestBody) => {
-            console.warn((requestBody));
-            dispatch(actions.getPickResults(requestBody));
-        },
+        requestPickList: pickGroupName => dispatch(requestPickList(pickGroupName)),
+        getOptionsByGroupId: id => dispatch(getOptionsByGroupId(id)),
+        resetGroupsList: () => dispatch(resetGroupsList()),
+        getPickResults: (requestBody, pathName) => dispatch(getPickResults(requestBody, pathName)),
         pageNumberClick: (pageNumber) => {
-            console.log('pageNumber in pick, ', pageNumber);
-            dispatch(change(NAMESPACE, 'page', pageNumber));
-            console.log('fire submit');
-            dispatch(submit(NAMESPACE));
-            console.log('submit fired');
+            console.log(pageNumber);
         }
     }))(PickList);
+
 
 PickList.propTypes = {
     routeParams: PropTypes.object,
     requestPickList: PropTypes.func,
     getOptionsByGroupId: PropTypes.func,
-    resetGroupsList: PropTypes.func
+    resetGroupsList: PropTypes.func,
+    ownLocation: PropTypes.object
 };
 
 PickList.defaultProps = {
     routeParams: {},
     requestPickList: noop,
     getOptionsByGroupId: noop,
-    resetGroupsList: noop
+    resetGroupsList: noop,
+    ownLocation: {}
 };
