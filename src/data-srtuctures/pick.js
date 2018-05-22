@@ -7,11 +7,5 @@ export const PICK_STATE = {
     pickListGroups: null,
     pickResult: [],
     selectedPage: 1,
-    pagination: {
-        // TODO remove this mock
-        current: 1,
-        total: 20,
-        items: [1, 2, 3, 4, 5]
-
-    }
+    pagination: null
 };

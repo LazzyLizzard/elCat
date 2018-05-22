@@ -1,5 +1,5 @@
 import React from 'react';
-import {noop} from 'lodash';
+import {noop, isNil} from 'lodash';
 import {Link} from 'react-router';
 // import PropTypes from 'prop-types';
 import {prepareAutoFillData} from 'utils/pick-from-utils';
@@ -36,39 +36,43 @@ export class Pagination extends React.Component {
     // };
 
     render() {
+        if (isNil(this.props.pagination)) {
+            return null;
+        }
         const {
-            pagination: {current, total, items},
+            pagination: {currentPage, itemsPerPage, total, pages, pagesNumber},
             pageClickHandler = noop,
             baseUrl,
             pathName,
             queryParams,
             pickGroupId
         } = this.props;
-
         return (
             <div className="pagination">
-                <div className="pagination__total-pages">pagination: total {total} of {current}</div>
+                <div className="pagination__total-pages">
+                    pagination: items found total {total}, per page {itemsPerPage},
+                    current {currentPage} of {pagesNumber}</div>
                 <div className="pagination__navigation">
-                    {items.map((pageItem) => {
-                        const isCurrent = current === pageItem;
+                    {pages.map((pageItem) => {
+                        const isCurrent = pageItem.current;
                         const linkHref = isCurrent
                             ? ''
-                            : `/${baseUrl}?${stringify(link(pageItem, queryParams, pickGroupId), {encode: false})}`;
+                            : `/${baseUrl}?${stringify(link(pageItem.pageNumber, queryParams, pickGroupId), {encode: false})}`;
                         const clickHandler = isCurrent
                             ? e => e.preventDefault()
                             : () => pageClickHandler(
-                                link(pageItem, queryParams, pickGroupId, true),
+                                link(pageItem.pageNumber, queryParams, pickGroupId, true),
                                 pathName);
                         return (
                             /* TODO remove this crap and use classNames */
                             <Link
-                                key={pageItem}
+                                key={pageItem.pageNumber}
                                 to={linkHref}
                                 className={`pagination__item ${isCurrent && 'pagination__item--current'}`}
                                 onClick={clickHandler}
                             >
                                 <span>
-                                    {pageItem}
+                                    {pageItem.pageNumber}
                                 </span>
                             </Link>
                         );
