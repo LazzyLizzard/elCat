@@ -1,0 +1,28 @@
+import {getRequestEnvironment} from 'utils/get-request-environment';
+import {REMOTE_HTTPS} from 'constants/server-request-environment';
+import {ENDPOINT_PRODUCT} from 'constants/end-points';
+import {requestError} from 'utils/request-steps';
+import {PRODUCT_FETCH_SUCCESS, PRODUCT_FETCH_ERROR} from './reducer';
+
+const baseUrl = `${getRequestEnvironment(REMOTE_HTTPS)}${ENDPOINT_PRODUCT}`;
+
+export const getProductInfo = productId => dispatch => fetch(
+    `${baseUrl}${productId}/`,
+    {method: 'get'}
+)
+    .then(response => response.json())
+    .then((json) => {
+        dispatch({
+            type: PRODUCT_FETCH_SUCCESS,
+            payload: {
+                info: json,
+                error: null,
+                loader: false
+            }
+        });
+    })
+    .catch((error) => {
+        console.warn(error);
+        dispatch(requestError(PRODUCT_FETCH_ERROR, error));
+        return error;
+    });

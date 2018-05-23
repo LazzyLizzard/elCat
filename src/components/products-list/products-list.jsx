@@ -18,7 +18,14 @@ export const ProductsList = ({productsList = {}}) => {
                         <div
                             key={product.info.products_id}
                         >
-                            id <Link to={`/${product.urlData.url}`}>{product.info.products_id}</Link>,
+                            id
+                            <Link
+                                to={`/product/${product.urlData.url}`}
+                                rel="canonical"
+                                productId={product.info.products_id}
+                            >
+                                {product.info.products_id}
+                            </Link>,
                             {product.info.products_name}
                         </div>
 

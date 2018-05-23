@@ -14,10 +14,13 @@ import {
 import {Cart} from 'pages/cart';
 import {Profile} from 'pages/profile';
 import {PickHome, PickList} from 'pages/pick';
+import {Product} from 'pages/product';
 import {NAMESPACE as FICHE_NAMESPACE} from 'pages/fiche/model/reducer';
 import {NAMESPACE as CART_NAMESPACE} from 'pages/cart/reducer';
 import {NAMESPACE as PROFILE_NAMESPACE} from 'pages/profile/reducer';
 import {NAMESPACE as PICK_NAMESPACE} from 'pages/pick/reducer';
+import {NAMESPACE as PRODUCT_NAMESPACE} from 'pages/product/reducer';
+
 
 export const Routes = (
     <Route path="/" component={App}>
@@ -44,6 +47,8 @@ export const Routes = (
         {/* pick */}
         <Route path={`/${PICK_NAMESPACE}`} component={PickHome} />
         <Route path={`/${PICK_NAMESPACE}/:pickGroupName`} component={PickList} />
+
+        <Route path={`/${PRODUCT_NAMESPACE}/:productUrl`} component={Product} />
 
         <Route path="*" component={NotFound} />
     </Route>
