@@ -4,22 +4,27 @@ import {get, isNil, isEmpty} from 'lodash';
 import {NAMESPACE} from './reducer';
 import {getProductInfo} from './actions';
 import {ProductDescendants} from './product-descendants';
+import {ProductPrice} from './product-price';
+import {ProductParams} from './product-params';
 
+// const rx = /^(\w+)_(\d+).html/;
+const getIdFromUrl = productUrl => Number(productUrl.split('.')[0].split('_')[1]);
 
 class Product extends React.PureComponent {
-    componentDidMount() {
-        const {params: {productUrl}} = this.props;
-        const productId = productUrl.split('.')[0].split('_')[1];
-        this.props.productInfo(productId);
-    }
+    state = {
+        productUrl: null
+    };
 
-    componentWillReceiveProps() {
-
+    static getDerivedStateFromProps(nextProps, prevState) {
+        const {params: {productUrl}} = nextProps;
+        if (productUrl !== prevState.productUrl) {
+            nextProps.productInfo(getIdFromUrl(productUrl));
+            return {productUrl};
+        }
+        return null;
     }
 
     render() {
-        console.log(this.props.product);
-
         if (isEmpty(this.props.product.data)) {
             return null;
         }
@@ -28,7 +33,9 @@ class Product extends React.PureComponent {
             product: {
                 data: {
                     info,
-                    descendants
+                    descendants,
+                    priceFinal,
+                    parameters
                 },
                 error
             }
@@ -43,6 +50,8 @@ class Product extends React.PureComponent {
                     }
                 </h2>
                 {error && <div>{error.message}</div>}
+                <ProductPrice price={priceFinal} />
+                <ProductParams params={parameters} />
                 <ProductDescendants descendants={descendants} />
             </div>
         );

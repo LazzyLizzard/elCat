@@ -22,7 +22,6 @@ export const getProductInfo = productId => dispatch => fetch(
         });
     })
     .catch((error) => {
-        console.warn(error);
         dispatch(requestError(PRODUCT_FETCH_ERROR, error));
         return error;
     });
