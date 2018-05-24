@@ -15,7 +15,7 @@ export const getProductInfo = productId => dispatch => fetch(
         dispatch({
             type: PRODUCT_FETCH_SUCCESS,
             payload: {
-                info: json,
+                data: json,
                 error: null,
                 loader: false
             }

@@ -1,5 +1,5 @@
 export const PRODUCT_STATE = {
-    info: null,
+    data: null,
     loader: false,
     error: null
 };
