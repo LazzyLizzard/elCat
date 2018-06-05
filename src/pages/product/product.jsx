@@ -61,7 +61,7 @@ class Product extends React.PureComponent {
                     title={getFamilyTitle(superProduct)}
                     descendants={descendants || brothers}
                     allowFiltering
-                    itemsPerBlock={5}
+                    itemsPerBlock={10}
                 />
             </div>
         );

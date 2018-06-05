@@ -11,6 +11,12 @@ export class ProductFamily extends React.PureComponent {
         filterBy: ''
     };
 
+    resetFitler = () => (
+        this.setState({
+            filterBy: ''
+        })
+    )
+
     handleChange = (event) => {
         const {value} = event.currentTarget;
         this.setState({
@@ -29,7 +35,11 @@ export class ProductFamily extends React.PureComponent {
             return null;
         }
         return list.map(item => (
-            <div>{item.info.products_id}<Link to="#">{item.info.products_name.toLowerCase()}</Link></div>
+            <div key={item.info.products_id}>
+                {item.info.products_id}
+                {' '}
+                <Link to={`/product/${item.urlData.url}`}>{item.info.products_name.toLowerCase()}</Link>
+            </div>
         ));
     };
 
