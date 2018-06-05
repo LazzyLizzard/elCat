@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {get, isNil, isEmpty} from 'lodash';
+import {ELLIPSIS} from 'constants/empty-values';
 import {NAMESPACE} from './reducer';
 import {getProductInfo} from './actions';
 import {ProductFamily} from './product-family';
@@ -50,7 +51,7 @@ class Product extends React.PureComponent {
                 <h2>
                     {!isNil(get(info, 'products_name'))
                         ? info.products_name
-                        : '...'
+                        : ELLIPSIS
                     }
                 </h2>
                 {error && <div>{error.message}</div>}
@@ -59,6 +60,8 @@ class Product extends React.PureComponent {
                 <ProductFamily
                     title={getFamilyTitle(superProduct)}
                     descendants={descendants || brothers}
+                    allowFiltering
+                    itemsPerBlock={5}
                 />
             </div>
         );
