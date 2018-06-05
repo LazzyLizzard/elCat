@@ -6,7 +6,11 @@ export const ProductParams = ({params = []}) => {
             <div>
                 <h4>params</h4>
                 {params.map(paramItem => (
-                    <div>{paramItem.name} - {paramItem.value}</div>
+                    <div
+                        key={paramItem.value_id}
+                    >
+                        {paramItem.name} - {paramItem.value}
+                    </div>
                 ))}
             </div>
         );

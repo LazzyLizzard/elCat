@@ -3,12 +3,14 @@ import {connect} from 'react-redux';
 import {get, isNil, isEmpty} from 'lodash';
 import {NAMESPACE} from './reducer';
 import {getProductInfo} from './actions';
-import {ProductDescendants} from './product-descendants';
+import {ProductFamily} from './product-family';
 import {ProductPrice} from './product-price';
 import {ProductParams} from './product-params';
 
 // const rx = /^(\w+)_(\d+).html/;
 const getIdFromUrl = productUrl => Number(productUrl.split('.')[0].split('_')[1]);
+
+const getFamilyTitle = superProduct => (superProduct === true ? 'потомки' : 'братья');
 
 class Product extends React.PureComponent {
     state = {
@@ -34,8 +36,10 @@ class Product extends React.PureComponent {
                 data: {
                     info,
                     descendants,
+                    brothers,
                     priceFinal,
-                    parameters
+                    parameters,
+                    superProduct
                 },
                 error
             }
@@ -52,7 +56,10 @@ class Product extends React.PureComponent {
                 {error && <div>{error.message}</div>}
                 <ProductPrice price={priceFinal} />
                 <ProductParams params={parameters} />
-                <ProductDescendants descendants={descendants} />
+                <ProductFamily
+                    title={getFamilyTitle(superProduct)}
+                    descendants={descendants || brothers}
+                />
             </div>
         );
     }
