@@ -1,0 +1,19 @@
+.product-card {
+
+    &__filter {
+
+    }
+
+    &__filter-pages {
+        display: flex;
+        &-item {
+            cursor: pointer;
+            display: flex;
+            padding: 2px;
+            &--active {
+                background: #ccc;
+                cursor: default;
+            }
+        }
+    }
+}

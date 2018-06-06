@@ -7,6 +7,8 @@ import {getProductInfo} from './actions';
 import {ProductFamily} from './product-family';
 import {ProductPrice} from './product-price';
 import {ProductParams} from './product-params';
+import {ProdustAncestor} from './product-ancestor';
+import './product.scss';
 
 // const rx = /^(\w+)_(\d+).html/;
 const getIdFromUrl = productUrl => Number(productUrl.split('.')[0].split('_')[1]);
@@ -37,6 +39,7 @@ class Product extends React.PureComponent {
                 data: {
                     info,
                     descendants,
+                    ancestorData,
                     brothers,
                     priceFinal,
                     parameters,
@@ -47,7 +50,7 @@ class Product extends React.PureComponent {
         } = this.props;
 
         return (
-            <div>
+            <div className="product-card">
                 <h2>
                     {!isNil(get(info, 'products_name'))
                         ? info.products_name
@@ -55,6 +58,7 @@ class Product extends React.PureComponent {
                     }
                 </h2>
                 {error && <div>{error.message}</div>}
+                <ProdustAncestor ancestorData={ancestorData} />
                 <ProductPrice price={priceFinal} />
                 <ProductParams params={parameters} />
                 <ProductFamily
