@@ -1,19 +1,99 @@
 .product-card {
 
-    &__filter {
+    // TODO [sf] 08-Jun-18 delete tem layout
 
+    &__layout {
+        display: flex;
+        &-image {
+            display: flex;
+            flex-basis: 250px;
+            min-width: 250px;
+        }
+
+        &-props {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    &__filter {
+        display: flex;
+        &-input {
+            border: solid 1px #ccc;
+            padding: 8px;
+        }
+        &-button {
+            border: solid 1px #ccc;
+            padding: 8px;
+        }
     }
 
     &__filter-pages {
         display: flex;
+        margin-bottom: 16px;
         &-item {
+            border-bottom: solid 2px transparent;
             cursor: pointer;
             display: flex;
-            padding: 2px;
+            padding: 8px 16px;
+            margin-right: 8px;
+            transition: .3s;
+            &:hover {
+                border-color: #ccc;
+            }
             &--active {
-                background: #ccc;
+                border-color: #3D9970;
                 cursor: default;
+                &:hover {
+                    border-color: darkgreen;
+                }
             }
         }
     }
+
+    &__option-items {
+        display: flex;
+        flex-wrap: wrap;
+        &-item {
+            border: solid 1px #ccc;
+            cursor: pointer;
+            display: flex;
+            font-size: 12px;
+            margin: 0 8px 8px 0;
+            padding: 8px;
+            transition: .3s;
+            &:hover {
+                background: #ccc;
+            }
+            &--active {
+                background: #3D9970;
+                color: #fff;
+                &:hover {
+                    background: darkolivegreen;
+                }
+            }
+
+        }
+    }
+
+    &__family-list {
+        display: flex;
+        flex-direction: column;
+        &-item {
+            border-bottom: solid 1px #ccc;
+            padding: 8px;
+            transition: .3s;
+            &:hover {
+                box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+            }
+        }
+        &-link {
+            color: #009ceb;
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
 }

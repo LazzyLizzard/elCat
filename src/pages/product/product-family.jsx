@@ -4,6 +4,7 @@ import {Link} from 'react-router';
 import {isEmpty, chunk} from 'lodash';
 import {ProductFamilyFilter} from './product-family-filter';
 import {ProductFamilyPages} from './product-family-pages';
+import {ProductFamilyItems} from './product-family-items';
 
 export class ProductFamily extends React.PureComponent {
     state = {
@@ -39,7 +40,8 @@ export class ProductFamily extends React.PureComponent {
             <div key={item.info.products_id}>
                 {item.info.products_id}
                 {' '}
-                <Link to={`/product/${item.urlData.url}`}>{item.info.products_name}</Link> ({item.info.products_name_for_list})
+                <Link
+                    to={`/product/${item.urlData.url}`}>{item.info.products_name}</Link> ({item.info.products_name_for_list})
             </div>
         ));
     };
@@ -70,7 +72,9 @@ export class ProductFamily extends React.PureComponent {
                     currentPage={this.state.groupId}
                     clickHandler={this.groupNumberClickHandler}
                 />
-                <div>{this.renderProductsItems(familyChunked[this.state.groupId])}</div>
+                <ProductFamilyItems
+                    itemsList={familyChunked[this.state.groupId]}
+                />
             </div>
         );
     }
