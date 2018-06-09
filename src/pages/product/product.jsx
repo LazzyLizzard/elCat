@@ -20,15 +20,24 @@ const getFamilyTitle = superProduct => (superProduct === true ? 'потомки'
 class Product extends React.PureComponent {
     state = {
         productUrl: null,
+        customerId: null,
         // for superProduct only
         selectedProductId: null
     };
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        const {params: {productUrl}} = nextProps;
+        const {
+            params: {productUrl},
+            profile: {
+                customer: {id: customerId}
+            }
+        } = nextProps;
         if (productUrl !== prevState.productUrl) {
             nextProps.productInfo(getIdFromUrl(productUrl));
             return {productUrl};
+        }
+        if (customerId !== prevState.customerId) {
+            console.log('refetch product with Id');
         }
         return null;
     }
@@ -108,7 +117,8 @@ class Product extends React.PureComponent {
 
 export default connect(
     state => ({
-        [NAMESPACE]: state[NAMESPACE]
+        [NAMESPACE]: state[NAMESPACE],
+        profile: state.profile
     }),
     dispatch => ({
         productInfo: productId => dispatch(getProductInfo(productId))

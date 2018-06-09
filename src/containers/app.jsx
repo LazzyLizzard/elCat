@@ -1,18 +1,40 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
+import {isEmpty, get} from 'lodash';
+import customerData from 'modules/hocs/customer-data';
+import FakeAuth from 'pages/profile/fake-auth';
 import './app.scss';
 
-export class App extends Component {
+const processCart = () => {
+    const prodLength = localStorage.getItem('products');
+    if (isEmpty(prodLength)) {
+        localStorage.setItem('products', JSON.stringify([]));
+        localStorage.setItem('money', JSON.stringify({total: null}));
+    }
+};
+
+const autoLogin = () => {
+    console.log('autologoin on cookie, stub');
+};
+
+class App extends Component {
+    componentDidMount() {
+        console.log('* APP CDM');
+        processCart();
+        autoLogin();
+    }
+
     render() {
         return (
             <div className="container">
                 <header>
-                    <h3>App:</h3>
                     <div>
                         <Link to="/">home</Link> |
                         <Link to="/fiche">elcat</Link> |
                         <Link to="/profile">Profile</Link> |
                         <Link to="/pick">Pick</Link>
+                        <FakeAuth />
+                        <div>{get(this.props.profile, 'customer.name', 'not logged in')}</div>
                     </div>
                 </header>
 
@@ -30,3 +52,4 @@ export class App extends Component {
     }
 }
 
+export default customerData(App);
