@@ -2,7 +2,6 @@
 import React from 'react';
 
 export const ProductFamilyPages = (props) => {
-    console.log(props);
     const {pagesNumber, currentPage, clickHandler} = props;
     if (pagesNumber === 0) {
         return null;

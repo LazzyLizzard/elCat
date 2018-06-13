@@ -2,7 +2,6 @@ import React from 'react';
 import {Link} from 'react-router';
 
 export const ProductFamilyItems = ({itemsList = []}) => {
-    console.log(itemsList);
     if (itemsList.length > 0) {
         return (
             <div className="product-card__family-list">
@@ -25,6 +24,8 @@ export const ProductFamilyItems = ({itemsList = []}) => {
                                     >
                                         {info.products_name}
                                     </Link>
+                                    {' '}
+                                    {info.products_id}
                                 </div>
                                 <div>Цена {priceFinal.priceCustomer}</div>
                             </div>

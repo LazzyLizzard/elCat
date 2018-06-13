@@ -41,7 +41,11 @@ export class ProductFamily extends React.PureComponent {
                 {item.info.products_id}
                 {' '}
                 <Link
-                    to={`/product/${item.urlData.url}`}>{item.info.products_name}</Link> ({item.info.products_name_for_list})
+                    to={`/product/${item.urlData.url}`}
+                >
+                    {item.info.products_name}
+                </Link>
+                ({item.info.products_name_for_list})
             </div>
         ));
     };

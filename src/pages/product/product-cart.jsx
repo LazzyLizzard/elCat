@@ -15,8 +15,10 @@ export class ProductCart extends React.PureComponent {
                         type="button"
                         disabled={isNil(selectedProductId)}
                     >
-                        add to cart {selectedProductId}
+                        add to cart
                     </button>
+                    {' '}
+                    state.selectedProductId: {selectedProductId}
                 </div>
             </div>
         );

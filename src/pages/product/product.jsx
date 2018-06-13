@@ -20,32 +20,54 @@ const getFamilyTitle = superProduct => (superProduct === true ? 'потомки'
 class Product extends React.PureComponent {
     state = {
         productUrl: null,
-        customerId: null,
+        customerId: undefined,
         // for superProduct only
-        selectedProductId: null
+        selectedProductId: null,
+        superProduct: false
     };
 
     static getDerivedStateFromProps(nextProps, prevState) {
+        console.log('----------------------------\nnextProps', nextProps.product.data);
         const {
             params: {productUrl},
-            profile: {
-                customer: {id: customerId}
-            }
+            profile,
+            product
         } = nextProps;
-        if (productUrl !== prevState.productUrl) {
-            nextProps.productInfo(getIdFromUrl(productUrl));
-            return {productUrl};
-        }
+
+        const customerId = get(profile, 'customer.id');
+        console.log('customerId', customerId);
+
+
         if (customerId !== prevState.customerId) {
             console.log('refetch product with Id');
         }
+
+        if (productUrl !== prevState.productUrl) {
+
+            nextProps.productInfo(getIdFromUrl(productUrl));
+            const x = get(product, 'data.productId', null);
+            console.log('next x, super', x, get(product, 'data.superProduct'));
+
+            return {
+                productUrl,
+                superProduct: get(product, 'data.superProduct'),
+                selectedProductId: getIdFromUrl(productUrl)
+            };
+        } else {
+            return {
+                superProduct: get(product, 'data.superProduct'),
+                selectedProductId: getIdFromUrl(productUrl)
+            };
+        }
+
         return null;
     }
 
     selectProductForSuperProduct = (productId) => {
         console.log('selectProductForSuperProduct', productId);
         this.setState({
-            selectedProductId: productId
+            selectedProductId: productId,
+            superProduct: false
         });
     };
 
@@ -76,6 +98,7 @@ class Product extends React.PureComponent {
                         ? info.products_name
                         : ELLIPSIS
                     }
+                    {superProduct && ' [SUPERPROD]'}
                 </h2>
                 {error && <div>{error.message}</div>}
                 <ProdustAncestor ancestorData={ancestorData} />
