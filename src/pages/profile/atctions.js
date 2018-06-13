@@ -14,7 +14,7 @@ export const fakeLogout = () => (dispatch) => {
     dispatch({
         type: 'AUTH/LOGOUT',
         payload: {
-            customer: null
+            customer: {id: 0}
         }
     });
 };

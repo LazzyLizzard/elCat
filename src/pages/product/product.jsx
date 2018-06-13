@@ -23,7 +23,9 @@ class Product extends React.PureComponent {
         customerId: undefined,
         // for superProduct only
         selectedProductId: null,
-        superProduct: false
+        selectedProductData: null,
+        superProduct: false,
+        x: 0
     };
 
     static getDerivedStateFromProps(nextProps, prevState) {
@@ -40,10 +42,10 @@ class Product extends React.PureComponent {
 
         if (customerId !== prevState.customerId) {
             console.log('refetch product with Id');
+            return {customerId};
         }
 
         if (productUrl !== prevState.productUrl) {
-
             nextProps.productInfo(getIdFromUrl(productUrl));
             const x = get(product, 'data.productId', null);
             console.log('next x, super', x, get(product, 'data.superProduct'));
@@ -53,14 +55,8 @@ class Product extends React.PureComponent {
                 superProduct: get(product, 'data.superProduct'),
                 selectedProductId: getIdFromUrl(productUrl)
             };
-        } else {
-            return {
-                superProduct: get(product, 'data.superProduct'),
-                selectedProductId: getIdFromUrl(productUrl)
-            };
         }
-
-        return null;
+        return {};
     }
 
     selectProductForSuperProduct = (productId) => {
@@ -111,8 +107,11 @@ class Product extends React.PureComponent {
 
                         <div>Изготовитель {info.manufacturers_name}</div>
                         <ProductPrice price={priceFinal} />
+
                         <ProductCart
+                            isSuperProduct={this.state.superProduct}
                             selectedProductId={this.state.selectedProductId}
+                            minimalQuantit={1}
                         />
 
                         {superProduct && <ProductSuperVariants
