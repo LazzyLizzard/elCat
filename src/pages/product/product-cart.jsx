@@ -3,7 +3,7 @@ import {isNil} from 'lodash';
 
 export class ProductCart extends React.PureComponent {
     render() {
-        const {selectedProductId} = this.props;
+        const {selectedProductId, isSuperProduct} = this.props;
         return (
             <div>
                 <div>
@@ -13,7 +13,7 @@ export class ProductCart extends React.PureComponent {
                 <div>
                     <button
                         type="button"
-                        disabled={isNil(selectedProductId)}
+                        disabled={isSuperProduct || isNil(selectedProductId)}
                     >
                         add to cart
                     </button>

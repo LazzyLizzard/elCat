@@ -36,14 +36,6 @@ class Product extends React.PureComponent {
             product
         } = nextProps;
 
-        const customerId = get(profile, 'customer.id');
-        console.log('customerId', customerId);
-
-
-        if (customerId !== prevState.customerId) {
-            console.log('refetch product with Id');
-            return {customerId};
-        }
 
         if (productUrl !== prevState.productUrl) {
             nextProps.productInfo(getIdFromUrl(productUrl));
@@ -56,7 +48,19 @@ class Product extends React.PureComponent {
                 selectedProductId: getIdFromUrl(productUrl)
             };
         }
-        return {};
+
+        const customerId = get(profile, 'customer.id');
+        if (customerId !== prevState.customerId) {
+            console.log('refetch product with Id');
+            return {customerId};
+        }
+
+        return null;
+
+        // return {
+        //     superProduct: get(product, 'data.superProduct'),
+        //     selectedProductId: get(product, 'data.products_id')
+        // };
     }
 
     selectProductForSuperProduct = (productId) => {
@@ -81,7 +85,8 @@ class Product extends React.PureComponent {
                     brothers,
                     priceFinal,
                     parameters,
-                    superProduct
+                    superProduct,
+                    descendantPriceRange
                 },
                 error
             }
@@ -106,12 +111,15 @@ class Product extends React.PureComponent {
                     <div className="product-card__layout-props">
 
                         <div>Изготовитель {info.manufacturers_name}</div>
-                        <ProductPrice price={priceFinal} />
+                        <ProductPrice
+                            price={priceFinal}
+                            descendantPriceRange={descendantPriceRange}
+                        />
 
                         <ProductCart
                             isSuperProduct={this.state.superProduct}
-                            selectedProductId={this.state.selectedProductId}
-                            minimalQuantit={1}
+                            selectedProductId={info.products_id}
+                            minimalQuantity={1}
                         />
 
                         {superProduct && <ProductSuperVariants
