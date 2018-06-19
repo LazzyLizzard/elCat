@@ -36,16 +36,15 @@ class Product extends React.PureComponent {
             product
         } = nextProps;
 
-
         if (productUrl !== prevState.productUrl) {
+            console.log(nextProps);
             nextProps.productInfo(getIdFromUrl(productUrl));
-            const x = get(product, 'data.productId', null);
-            console.log('next x, super', x, get(product, 'data.superProduct'));
+            console.log('next x ', product);
 
             return {
                 productUrl,
-                superProduct: get(product, 'data.superProduct'),
-                selectedProductId: getIdFromUrl(productUrl)
+                superProduct: get(product, 'data.superProduct', true),
+                selectedProductId: null
             };
         }
 
@@ -55,20 +54,22 @@ class Product extends React.PureComponent {
             return {customerId};
         }
 
+        if (isEmpty(get(product, 'data'))) {
+            const x = get(product, 'data.superProduct');
+            return {
+                superProduct: x,
+                selectedProductId: x ? null : get(product, 'data.productsId')
+            };
+        }
         return null;
-
-        // return {
-        //     superProduct: get(product, 'data.superProduct'),
-        //     selectedProductId: get(product, 'data.products_id')
-        // };
     }
 
     selectProductForSuperProduct = (productId) => {
         console.log('selectProductForSuperProduct', productId);
-        this.setState({
+        this.setState(() => ({
             selectedProductId: productId,
             superProduct: false
-        });
+        }));
     };
 
     render() {
@@ -102,6 +103,12 @@ class Product extends React.PureComponent {
                     {superProduct && ' [SUPERPROD]'}
                 </h2>
                 {error && <div>{error.message}</div>}
+                <div>
+                    <pre>
+                        {JSON.stringify(this.state, null, '  ')}
+                    </pre>
+                </div>
+                <hr />
                 <ProdustAncestor ancestorData={ancestorData} />
 
                 <div className="product-card__layout">

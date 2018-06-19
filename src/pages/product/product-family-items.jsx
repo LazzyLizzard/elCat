@@ -20,9 +20,14 @@ export const ProductFamilyItems = ({itemsList = []}) => {
                                     <Link
                                         rel="canonical"
                                         className="product-card__family-list-link"
-                                        to={`/product/${product.urlData.url}`}
+                                        to={{
+                                            pathname: `/product/${product.urlData.url}`,
+                                            state: {
+                                                productId: info.products_id
+                                            }
+                                        }}
                                     >
-                                        {info.products_name}
+                                       * {info.products_name}
                                     </Link>
                                     {' '}
                                     {info.products_id}

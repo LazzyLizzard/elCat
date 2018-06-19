@@ -18,7 +18,7 @@ export class ProductCart extends React.PureComponent {
                         add to cart
                     </button>
                     {' '}
-                    state.selectedProductId: {selectedProductId}
+                    props selectedProductId: {selectedProductId}
                 </div>
             </div>
         );
