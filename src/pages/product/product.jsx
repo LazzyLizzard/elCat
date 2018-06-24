@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {get, isNil, isEmpty} from 'lodash';
 import {ELLIPSIS} from 'constants/empty-values';
 import {NAMESPACE} from './reducer';
-import {getProductInfo} from './actions';
+import {getProductInfo, clearProductData} from './actions';
 import {ProductFamily} from './product-family';
 import {ProductPrice} from './product-price';
 import {ProductParams} from './product-params';
@@ -19,48 +19,45 @@ const getFamilyTitle = superProduct => (superProduct === true ? 'потомки'
 
 class Product extends React.PureComponent {
     state = {
-        productUrl: null,
-        customerId: undefined,
+        productId: null,
+        customerId: null,
         // for superProduct only
-        selectedProductId: null,
-        selectedProductData: null,
-        superProduct: false,
-        x: 0
+        selectedProductId: null
     };
 
+    componentWillUnmount() {
+        this.props.clearProductData();
+    }
+
     static getDerivedStateFromProps(nextProps, prevState) {
-        console.log('----------------------------\nnextProps', nextProps.product.data);
+        console.log('GDSFP');
+
         const {
-            params: {productUrl},
-            profile,
-            product
+            location: {pathname, state},
+            productInfo
         } = nextProps;
 
-        if (productUrl !== prevState.productUrl) {
-            console.log(nextProps);
-            nextProps.productInfo(getIdFromUrl(productUrl));
-            console.log('next x ', product);
+        const productId = get(state, 'productId') ? get(state, 'productId') : getIdFromUrl(pathname);
+        console.log(productId, prevState.productId);
 
+        if (productId !== prevState.productId) {
+            console.log('fetch', productId);
+            productInfo(productId);
             return {
-                productUrl,
-                superProduct: get(product, 'data.superProduct', true),
-                selectedProductId: null
+                productId
             };
         }
 
-        const customerId = get(profile, 'customer.id');
-        if (customerId !== prevState.customerId) {
-            console.log('refetch product with Id');
-            return {customerId};
-        }
+        const cid = get(nextProps, 'profile.customer.id', null);
+        console.log(cid, prevState.customerId);
 
-        if (isEmpty(get(product, 'data'))) {
-            const x = get(product, 'data.superProduct');
+        if (cid !== prevState.customerId) {
+            productInfo(productId);
             return {
-                superProduct: x,
-                selectedProductId: x ? null : get(product, 'data.productsId')
+                customerId: cid
             };
         }
+
         return null;
     }
 
@@ -124,7 +121,7 @@ class Product extends React.PureComponent {
                         />
 
                         <ProductCart
-                            isSuperProduct={this.state.superProduct}
+                            isSuperProduct={superProduct}
                             selectedProductId={info.products_id}
                             minimalQuantity={1}
                         />
@@ -158,6 +155,7 @@ export default connect(
         profile: state.profile
     }),
     dispatch => ({
-        productInfo: productId => dispatch(getProductInfo(productId))
+        productInfo: productId => dispatch(getProductInfo(productId)),
+        clearProductData: () => dispatch(clearProductData())
     })
 )(Product);

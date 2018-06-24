@@ -1,4 +1,4 @@
 export const profile = {
-    customer: {},
+    customer: null,
     loader: false
 };

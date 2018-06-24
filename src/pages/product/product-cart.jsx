@@ -4,6 +4,7 @@ import {isNil} from 'lodash';
 export class ProductCart extends React.PureComponent {
     render() {
         const {selectedProductId, isSuperProduct} = this.props;
+        console.log('-> isSuperProduct', isSuperProduct);
         return (
             <div>
                 <div>
