@@ -1,0 +1,23 @@
+@import "./../../styles/constants/colors";
+
+.button-cart {
+  background: $red;
+  border: none;
+  color: #fff;
+  font-family: 'Roboto', 'Arial', sans-serif;
+  font-weight: 500;
+  padding: 12px 24px;
+  outline: none;
+  transition: .3s;
+  &:hover {
+    background: saturate($red, 10%);
+  }
+  &:active {
+    background: saturate($red, 30%);
+    transition: .1s;
+  }
+  &--disabled {
+    background: desaturate($red, 10%);
+    color: $white-disabled;
+  }
+}

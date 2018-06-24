@@ -1,5 +1,6 @@
 import React from 'react';
 import {isNil} from 'lodash';
+import {ButtonCart} from 'components/button-cart';
 
 export class ProductCart extends React.PureComponent {
     render() {
@@ -12,12 +13,10 @@ export class ProductCart extends React.PureComponent {
                     <button>-</button>
                 </div>
                 <div>
-                    <button
-                        type="button"
+                    <ButtonCart
                         disabled={isSuperProduct || isNil(selectedProductId)}
-                    >
-                        add to cart
-                    </button>
+                        label="Купить"
+                    />
                     {' '}
                     props selectedProductId: {selectedProductId}
                 </div>
