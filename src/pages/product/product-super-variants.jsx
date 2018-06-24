@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import {noop} from 'lodash';
+import classNames from 'classnames';
 
 export const ProductSuperVariants = (props) => {
     const {
@@ -23,8 +24,12 @@ export const ProductSuperVariants = (props) => {
                         return (
                             <div
                                 onClick={() => itemClicHandler(products_id)}
-                                className={`product-card__option-items-item ${selectedProductId === products_id && 'product-card__option-items-item--active'}`}
+                                className={classNames(
+                                    'product-card__option-items-item',
+                                    {'product-card__option-items-item--active': selectedProductId === products_id}
+                                )}
                                 key={products_id}
+                                title={`${products_name}, цена - ...`}
                             >
                                 {products_name_for_list}
                             </div>
