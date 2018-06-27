@@ -1,0 +1,10 @@
+&__price {
+  display: flex;
+  &-value {
+    font-size: 24px;
+    font-weight: 500;
+  }
+  &-note {
+    margin-left: 16px;
+  }
+}

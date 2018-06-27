@@ -22,7 +22,9 @@ class Product extends React.PureComponent {
         productId: null,
         customerId: null,
         // for superProduct only
-        selectedProductId: null
+        selectedProductId: null,
+        selectedProductDataBrief: null,
+        superProduct: true
     };
 
     componentWillUnmount() {
@@ -48,25 +50,32 @@ class Product extends React.PureComponent {
             };
         }
 
-        const cid = get(nextProps, 'profile.customer.id', null);
-        console.log(cid, prevState.customerId);
+        const customerId = get(nextProps, 'profile.customer.id', null);
+        console.log(customerId, prevState.customerId);
 
-        if (cid !== prevState.customerId) {
+        if (customerId !== prevState.customerId) {
             productInfo(productId);
             return {
-                customerId: cid
+                customerId
             };
         }
 
-        return null;
+        return {
+            superProduct: get(nextProps, 'product.data.superProduct')
+        };
     }
 
     selectProductForSuperProduct = (productId) => {
         console.log('selectProductForSuperProduct', productId);
-        this.setState(() => ({
-            selectedProductId: productId,
-            superProduct: false
-        }));
+        this.setState((prevState) => {
+            if (prevState.selectedProductId !== productId) {
+                // TODO
+            }
+            return {
+                selectedProductId: productId,
+                superProduct: false
+            }
+        });
     };
 
     render() {
@@ -106,7 +115,6 @@ class Product extends React.PureComponent {
                     </pre>
                 </div>
                 <hr />
-                <ProdustAncestor ancestorData={ancestorData} />
 
                 <div className="product-card__layout">
                     <div className="product-card__layout-image">
@@ -115,6 +123,11 @@ class Product extends React.PureComponent {
                     <div className="product-card__layout-props">
 
                         <div>Изготовитель {info.manufacturers_name}</div>
+                        <ProdustAncestor
+                            ancestorData={ancestorData}
+                            familyItems={descendants || brothers}
+                            superProduct={this.state.superProduct}
+                        />
                         <ProductPrice
                             price={priceFinal}
                             descendantPriceRange={descendantPriceRange}
