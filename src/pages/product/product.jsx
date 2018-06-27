@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {get, isNil, isEmpty} from 'lodash';
+import {get, isNil, isEmpty, pick} from 'lodash';
 import {ELLIPSIS} from 'constants/empty-values';
 import {NAMESPACE} from './reducer';
 import {getProductInfo, clearProductData} from './actions';
@@ -14,8 +14,8 @@ import './product.scss';
 
 // const rx = /^(\w+)_(\d+).html/;
 const getIdFromUrl = productUrl => Number(productUrl.split('.')[0].split('_')[1]);
-
 const getFamilyTitle = superProduct => (superProduct === true ? 'потомки' : 'братья');
+const briefFields = ['info', 'priceFinal', 'superProduct'];
 
 class Product extends React.PureComponent {
     state = {
@@ -24,7 +24,7 @@ class Product extends React.PureComponent {
         // for superProduct only
         selectedProductId: null,
         selectedProductDataBrief: null,
-        superProduct: true
+        superProduct: 555
     };
 
     componentWillUnmount() {
@@ -46,7 +46,8 @@ class Product extends React.PureComponent {
             console.log('fetch', productId);
             productInfo(productId);
             return {
-                productId
+                productId,
+                superProduct: get(nextProps, 'product.data.superProduct')
             };
         }
 
@@ -60,21 +61,27 @@ class Product extends React.PureComponent {
             };
         }
 
-        return {
-            superProduct: get(nextProps, 'product.data.superProduct')
-        };
+        return null;
     }
 
     selectProductForSuperProduct = (productId) => {
         console.log('selectProductForSuperProduct', productId);
         this.setState((prevState) => {
             if (prevState.selectedProductId !== productId) {
-                // TODO
+                const {product: {data}} = this.props;
+                const field = data.superProduct ? 'descendants' : 'brothers';
+
+                const x = pick(data[field].find(item => item.productId === productId), briefFields);
+                console.log(x.superProduct);
+
+                return {
+                    selectedProductId: productId,
+                    superProduct: x.superProduct,
+                    selectedProductDataBrief: x
+
+                };
             }
-            return {
-                selectedProductId: productId,
-                superProduct: false
-            }
+            return null;
         });
     };
 
