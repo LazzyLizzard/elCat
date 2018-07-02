@@ -1,14 +1,13 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import {get, isNil} from 'lodash';
-import {Link} from 'react-router';
+import {ProductLink} from 'components/product-link';
 
 export const ProductsList = ({productsList = {}}) => {
+    const {page, data} = productsList;
     if (isNil(get(productsList, 'data'))) {
         return null;
     }
-    console.log(typeof productsList);
-    const {page, data} = productsList;
     return (
         <div>
             <h3>prod list, page {page}</h3>
@@ -19,14 +18,11 @@ export const ProductsList = ({productsList = {}}) => {
                             key={product.info.products_id}
                         >
                             id
-                            <Link
-                                to={`/product/${product.urlData.url}`}
-                                rel="canonical"
+                            <ProductLink
+                                productUrl={`/product/${product.urlData.url}`}
                                 productId={product.info.products_id}
-                            >
-                                {product.info.products_id}
-                            </Link>,
-                            {product.info.products_name}
+                                productName={product.info.products_name}
+                            />
                         </div>
 
                     ))

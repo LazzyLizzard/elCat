@@ -57,6 +57,7 @@ class Product extends React.PureComponent {
         if (customerId !== prevState.customerId) {
             productInfo(productId);
             return {
+                // ...prevState,
                 customerId
             };
         }
