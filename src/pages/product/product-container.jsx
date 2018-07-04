@@ -4,12 +4,7 @@ import {get, isNil, isEmpty, pick} from 'lodash';
 import {ELLIPSIS} from 'constants/empty-values';
 import {NAMESPACE} from './reducer';
 import {getProductInfo, clearProductData} from './actions';
-import {ProductFamily} from './product-family';
-import {ProductPrice} from './product-price';
-import {ProductParams} from './product-params';
-import {ProdustAncestor} from './product-ancestor';
-import {ProductCart} from './product-cart';
-import {ProductSuperVariants} from './product-super-variants';
+import {ProductPage} from './product-page';
 import './product.scss';
 
 // const rx = /^(\w+)_(\d+).html/;
@@ -89,7 +84,7 @@ class Product extends React.PureComponent {
     render() {
         const np = {...this.props, ...this.state};
         return (
-            <Product {...np} />
+            <ProductPage {...np} />
         );
     }
 }
