@@ -31,6 +31,10 @@ import {
     pickReducer,
     NAMESPACE as PICK_NAMESPACE
 } from 'pages/pick/reducer';
+import {
+    productReducer,
+    NAMESPACE as PRODUCT_REDUCER
+} from 'pages/product/reducer';
 
 export const rootReducer = combineReducers({
     [FORM_NAMESPACE]: formReducer, // Redux-form reducer should be connected in the application root reducer
@@ -44,6 +48,6 @@ export const rootReducer = combineReducers({
     ),
     [CART_NAMESPACE]: cartReducer,
     [PROFILE_NAMESPACE]: profileReducer,
-    [PICK_NAMESPACE]: pickReducer
-
+    [PICK_NAMESPACE]: pickReducer,
+    [PRODUCT_REDUCER]: productReducer
 });

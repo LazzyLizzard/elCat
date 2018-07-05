@@ -1,21 +1,30 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+import {get, isNil} from 'lodash';
+import {ProductLink} from 'components/product-link';
 
-export const ProductsList = (productsList = []) => {
-    if (productsList.length === 0) {
+export const ProductsList = ({productsList = {}}) => {
+    const {page, data} = productsList;
+    if (isNil(get(productsList, 'data'))) {
         return null;
     }
     return (
         <div>
-            <h3>prod list</h3>
+            <h3>prod list, page {page}</h3>
             <div>
                 {
-                    productsList.map(product => (
+                    data.map(product => (
                         <div
                             key={product.info.products_id}
                         >
-                            id {product.info.products_id}
+                            id
+                            <ProductLink
+                                productUrl={`/product/${product.urlData.url}`}
+                                productId={product.info.products_id}
+                                productName={product.info.products_name}
+                            />
                         </div>
+
                     ))
                 }
             </div>
@@ -23,6 +32,9 @@ export const ProductsList = (productsList = []) => {
     );
 };
 
-ProductsList.propTypes = {
-    productsList: PropTypes.array
-};
+// ProductsList.propTypes = {
+//     productsList: PropTypes.shape({
+//         page: PropTypes.number,
+//         data: PropTypes.array
+//     })
+// };

@@ -33,6 +33,7 @@ export const PickResults = ({
         return (
             <div>
                 <h4>Results</h4>
+                <ProductsList productsList={result} />
                 <Pagination
                     pagination={pagination}
                     pageClickHandler={pageClickHandler}
