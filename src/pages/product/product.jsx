@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {get, isNil, isEmpty, pick} from 'lodash';
 import {ELLIPSIS} from 'constants/empty-values';
+import {ProductToCart} from 'modules/product-to-cart';
 import {NAMESPACE} from './reducer';
 import {getProductInfo, clearProductData} from './actions';
 import {ProductFamily} from './product-family';
@@ -16,6 +17,7 @@ import './product.scss';
 const getIdFromUrl = productUrl => Number(productUrl.split('.')[0].split('_')[1]);
 const getFamilyTitle = superProduct => (superProduct === true ? 'потомки' : 'братья');
 const briefFields = ['info', 'priceFinal', 'superProduct'];
+const getCartButtonState = () => true;
 
 class Product extends React.PureComponent {
     state = {
@@ -23,8 +25,7 @@ class Product extends React.PureComponent {
         customerId: null,
         // for superProduct only
         selectedProductId: null,
-        selectedProductDataBrief: null,
-        superProduct: 555
+        selectedProductDataBrief: null
     };
 
     componentWillUnmount() {
@@ -47,7 +48,7 @@ class Product extends React.PureComponent {
             productInfo(productId);
             return {
                 productId,
-                superProduct: get(nextProps, 'product.data.superProduct')
+                superProduct: nextProps.getZ()
             };
         }
 
@@ -141,6 +142,13 @@ class Product extends React.PureComponent {
                             descendantPriceRange={descendantPriceRange}
                         />
 
+                        <ProductToCart
+                            initialValues={{
+                                q: 1,
+                                id: 555
+                            }}
+                        />
+
                         <ProductCart
                             isSuperProduct={superProduct}
                             selectedProductId={info.products_id}
@@ -175,8 +183,13 @@ export default connect(
         [NAMESPACE]: state[NAMESPACE],
         profile: state.profile
     }),
-    dispatch => ({
+    (dispatch) => ({
         productInfo: productId => dispatch(getProductInfo(productId)),
-        clearProductData: () => dispatch(clearProductData())
+        clearProductData: () => dispatch(clearProductData()),
+        getZ: () => (getState) => {
+            const state = getState();
+            console.log(state);
+            return get(state, 'product.data.superProduct', 'hello');
+        }
     })
 )(Product);

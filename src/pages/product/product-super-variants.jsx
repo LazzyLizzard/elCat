@@ -19,7 +19,8 @@ export const ProductSuperVariants = (props) => {
                                 products_id,
                                 products_name,
                                 products_name_for_list
-                            }
+                            },
+                            priceFinal
                         } = item;
                         return (
                             <div
@@ -29,7 +30,7 @@ export const ProductSuperVariants = (props) => {
                                     {'product-card__option-items-item--active': selectedProductId === products_id}
                                 )}
                                 key={products_id}
-                                title={`${products_name}, цена - ...`}
+                                title={`${products_name}, цена - ${priceFinal.priceCustomer}`}
                             >
                                 {products_name_for_list}
                             </div>
