@@ -1,3 +1,4 @@
+import {get} from 'lodash';
 import {getRequestEnvironment} from 'utils/get-request-environment';
 import {REMOTE_HTTPS} from 'constants/server-request-environment';
 import {ENDPOINT_PRODUCT} from 'constants/end-points';
@@ -33,6 +34,12 @@ export const getProductInfo = productId => (dispatch) => {
             dispatch(requestError(PRODUCT_FETCH_ERROR, error));
             return error;
         });
+};
+
+export const prodS = () => (_, getState) => {
+    const state = getState();
+    console.log(state);
+    return get(state, 'product.data.superProduct');
 };
 
 export const clearProductData = () => ({
