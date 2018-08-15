@@ -17,7 +17,13 @@ import './product.scss';
 const getIdFromUrl = productUrl => Number(productUrl.split('.')[0].split('_')[1]);
 const getFamilyTitle = superProduct => (superProduct === true ? 'потомки' : 'братья');
 const briefFields = ['info', 'priceFinal', 'superProduct'];
-const getCartButtonState = () => true;
+// const getCartButtonState = () => true;
+//
+// const ddd = field => (getState) => {
+//     console.log('**********');
+//     console.log(getState()[field]);
+// };
+
 
 class Product extends React.PureComponent {
     state = {
@@ -34,6 +40,7 @@ class Product extends React.PureComponent {
 
     static getDerivedStateFromProps(nextProps, prevState) {
         console.log('GDSFP');
+        console.log(() => nextProps.getZ('sss'));
 
         const {
             location: {pathname, state},
@@ -48,7 +55,7 @@ class Product extends React.PureComponent {
             productInfo(productId);
             return {
                 productId,
-                superProduct: nextProps.getZ()
+                superProduct: () => nextProps.getZ('product')
             };
         }
 
@@ -183,13 +190,12 @@ export default connect(
         [NAMESPACE]: state[NAMESPACE],
         profile: state.profile
     }),
-    (dispatch) => ({
+    dispatch => ({
         productInfo: productId => dispatch(getProductInfo(productId)),
         clearProductData: () => dispatch(clearProductData()),
-        getZ: () => (getState) => {
-            const state = getState();
-            console.log(state);
-            return get(state, 'product.data.superProduct', 'hello');
+        getZ: field => (getState) => {
+            console.log(field);
+            console.log(getState()[field]);
         }
     })
 )(Product);
