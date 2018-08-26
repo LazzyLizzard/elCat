@@ -4,6 +4,7 @@ import {get, isNil, isEmpty, pick} from 'lodash';
 import {ELLIPSIS} from 'constants/empty-values';
 import {ProductToCart} from 'modules/product-to-cart';
 import {NAMESPACE} from './reducer';
+import {getRootData, getProductFamily} from './selectors';
 import {getProductInfo, clearProductData, prodS} from './actions';
 import {ProductFamily} from './product-family';
 import {ProductPrice} from './product-price';
@@ -25,15 +26,15 @@ const briefFields = ['info', 'priceFinal', 'superProduct'];
 // };
 
 
-
-class Product extends React.PureComponent {
+class Product extends React.Component {
     state = {
         productId: null,
         customerId: null,
         // for superProduct only
         selectedProductId: null,
         selectedProductDataBrief: null,
-        superProduct: -1
+        superProduct: 555,
+        f: 8
     };
 
     componentWillUnmount() {
@@ -42,7 +43,6 @@ class Product extends React.PureComponent {
 
     static getDerivedStateFromProps(nextProps, prevState) {
         console.log('GDSFP');
-        console.log(() => nextProps.getZ('sss'));
 
         const {
             location: {pathname, state},
@@ -57,7 +57,8 @@ class Product extends React.PureComponent {
             getProductInfo(productId);
             return {
                 productId,
-                superProduct: nextProps.getZ('product')
+                superProduct: nextProps.prodS('product'),
+                x: 1
             };
         }
 
@@ -87,7 +88,8 @@ class Product extends React.PureComponent {
 
                 return {
                     selectedProductId: productId,
-                    superProduct: x.superProduct,
+                    // superProduct: x.superProduct,
+                    superProduct: 111,
                     selectedProductDataBrief: x
 
                 };
@@ -190,16 +192,13 @@ class Product extends React.PureComponent {
 export default connect(
     state => ({
         [NAMESPACE]: state[NAMESPACE],
-        profile: state.profile
+        profile: state.profile,
+        rootData: getRootData(NAMESPACE)(state),
+        // productFamily: getProductFamily(NAMESPACE)(state)
     }),
     {
         getProductInfo,
         clearProductData,
-        prodS,
-        getZ: field => (getState) => {
-            console.log(field);
-            console.log(getState()[field]);
-            //     return get(state, 'product.data.superProduct', 'hello');
-        }
+        prodS
     }
 )(Product);
