@@ -1,19 +1,24 @@
 import React from 'react';
+import {isNil} from 'lodash';
 import {reduxForm, formValueSelector, Field} from 'redux-form';
 import {connect} from 'react-redux';
+import {ButtonCart} from '../../components/button-cart';
 
 class ProductToCart extends React.PureComponent {
     render() {
-        const {handleSubmit} = this.props;
+        const {handleSubmit, forCartData: {id, superProduct}} = this.props;
         return (
             <div>
                 <form onSubmit={handleSubmit}>
-                    {/*<Field*/}
-                    {/*name="q"*/}
-                    {/*component="input"*/}
-                    {/*type="text"*/}
-                    {/*/>*/}
-                    <button type="button">go</button>
+                    {/* <Field */}
+                    {/* name="q" */}
+                    {/* component="input" */}
+                    {/* type="text" */}
+                    {/* /> */}
+                    <ButtonCart
+                        disabled={superProduct || isNil(id)}
+                        label="Купить"
+                    />
                 </form>
             </div>
         );

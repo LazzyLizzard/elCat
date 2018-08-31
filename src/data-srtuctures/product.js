@@ -1,5 +1,6 @@
 export const PRODUCT_STATE = {
     data: null,
     loader: false,
-    error: null
+    error: null,
+    forCart: {}
 };

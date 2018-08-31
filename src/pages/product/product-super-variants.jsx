@@ -7,7 +7,8 @@ export const ProductSuperVariants = (props) => {
     const {
         descendants = [],
         itemClicHandler = noop,
-        selectedProductId = null
+        selectedProductId = null,
+        fillDataHandler
     } = props;
     if (descendants.length > 0) {
         return (
@@ -15,6 +16,7 @@ export const ProductSuperVariants = (props) => {
                 {
                     descendants.map((item) => {
                         const {
+                            superProduct,
                             info: {
                                 products_id,
                                 products_name,
@@ -24,7 +26,10 @@ export const ProductSuperVariants = (props) => {
                         } = item;
                         return (
                             <div
-                                onClick={() => itemClicHandler(products_id)}
+                                onClick={() => fillDataHandler({
+                                    id: products_id,
+                                    superProduct
+                                })}
                                 className={classNames(
                                     'product-card__option-items-item',
                                     {'product-card__option-items-item--active': selectedProductId === products_id}

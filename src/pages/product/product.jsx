@@ -4,13 +4,13 @@ import {get, isNil, isEmpty, pick} from 'lodash';
 import {ELLIPSIS} from 'constants/empty-values';
 import {ProductToCart} from 'modules/product-to-cart';
 import {NAMESPACE} from './reducer';
-import {getRootData, getProductFamily} from './selectors';
-import {getProductInfo, clearProductData, prodS} from './actions';
+import {getRootData} from './selectors';
+import {getProductInfo, clearProductData, fillCartData} from './actions';
 import {ProductFamily} from './product-family';
 import {ProductPrice} from './product-price';
 import {ProductParams} from './product-params';
 import {ProdustAncestor} from './product-ancestor';
-import {ProductCart} from './product-cart';
+import ProductCart from './product-cart';
 import {ProductSuperVariants} from './product-super-variants';
 import './product.scss';
 
@@ -29,12 +29,7 @@ const briefFields = ['info', 'priceFinal', 'superProduct'];
 class Product extends React.Component {
     state = {
         productId: null,
-        customerId: null,
-        // for superProduct only
-        selectedProductId: null,
-        selectedProductDataBrief: null,
-        superProduct: 555,
-        f: 8
+        customerId: null
     };
 
     componentWillUnmount() {
@@ -42,61 +37,30 @@ class Product extends React.Component {
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        console.log('GDSFP');
-
         const {
             location: {pathname, state},
             getProductInfo
         } = nextProps;
 
-        const productId = get(state, 'productId') ? get(state, 'productId') : getIdFromUrl(pathname);
-        console.log(productId, prevState.productId);
+        const productId = get(state, 'productId', getIdFromUrl(pathname));
 
         if (productId !== prevState.productId) {
-            console.log('fetch', productId);
             getProductInfo(productId);
             return {
-                productId,
-                superProduct: nextProps.prodS('product'),
-                x: 1
+                productId
             };
         }
 
         const customerId = get(nextProps, 'profile.customer.id', null);
-        console.log(customerId, prevState.customerId);
 
         if (customerId !== prevState.customerId) {
             getProductInfo(productId);
             return {
-                // ...prevState,
                 customerId
             };
         }
-
         return null;
     }
-
-    selectProductForSuperProduct = (productId) => {
-        console.log('selectProductForSuperProduct', productId);
-        this.setState((prevState) => {
-            if (prevState.selectedProductId !== productId) {
-                const {product: {data}} = this.props;
-                const field = data.superProduct ? 'descendants' : 'brothers';
-
-                const x = pick(data[field].find(item => item.productId === productId), briefFields);
-                console.log(x.superProduct);
-
-                return {
-                    selectedProductId: productId,
-                    // superProduct: x.superProduct,
-                    superProduct: 111,
-                    selectedProductDataBrief: x
-
-                };
-            }
-            return null;
-        });
-    };
 
     render() {
         if (isEmpty(this.props.product.data)) {
@@ -115,7 +79,8 @@ class Product extends React.Component {
                     superProduct,
                     descendantPriceRange
                 },
-                error
+                error,
+                forCart
             }
         } = this.props;
 
@@ -150,26 +115,20 @@ class Product extends React.Component {
                         />
                         <ProductPrice
                             price={priceFinal}
+                            minimalQuantity={1}
                             descendantPriceRange={descendantPriceRange}
                         />
 
-                        <ProductToCart
-                            initialValues={{
-                                q: 1,
-                                id: 555
-                            }}
-                        />
-
                         <ProductCart
-                            isSuperProduct={superProduct}
-                            selectedProductId={info.products_id}
+                            initialValues={{q: 1}}
+                            forCartData={forCart}
                             minimalQuantity={1}
                         />
 
                         {superProduct && <ProductSuperVariants
-                            selectedProductId={this.state.selectedProductId}
+                            selectedProductId={get(forCart, 'id')}
                             descendants={descendants}
-                            itemClicHandler={this.selectProductForSuperProduct}
+                            fillDataHandler={this.props.fillCartData}
                         />}
 
                         <ProductParams params={parameters} />
@@ -199,6 +158,6 @@ export default connect(
     {
         getProductInfo,
         clearProductData,
-        prodS
+        fillCartData
     }
 )(Product);
