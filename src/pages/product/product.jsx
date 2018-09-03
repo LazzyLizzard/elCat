@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {get, isNil, isEmpty, pick} from 'lodash';
 import {ELLIPSIS} from 'constants/empty-values';
-import {ProductToCart} from 'modules/product-to-cart';
+// import {ProductToCart} from 'modules/product-to-cart';
 import {NAMESPACE} from './reducer';
 import {getRootData} from './selectors';
 import {getProductInfo, clearProductData, fillCartData, addToCart} from './actions';
