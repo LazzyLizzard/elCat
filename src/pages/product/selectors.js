@@ -7,10 +7,7 @@ export const getNameSpace = nameSpace => state => state[nameSpace];
 
 export const getRootData = memoize(nameSpace => createSelector(
     getNameSpace(nameSpace),
-    (data) => {
-        console.log(data);
-        return data.product;
-    })
+    data => data.product)
 );
 
 export const getProductFamily = createSelector(

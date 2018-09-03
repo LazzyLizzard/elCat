@@ -5,7 +5,7 @@ import {ELLIPSIS} from 'constants/empty-values';
 import {ProductToCart} from 'modules/product-to-cart';
 import {NAMESPACE} from './reducer';
 import {getRootData} from './selectors';
-import {getProductInfo, clearProductData, fillCartData} from './actions';
+import {getProductInfo, clearProductData, fillCartData, addToCart} from './actions';
 import {ProductFamily} from './product-family';
 import {ProductPrice} from './product-price';
 import {ProductParams} from './product-params';
@@ -31,6 +31,11 @@ class Product extends React.Component {
         productId: null,
         customerId: null
     };
+
+    // componentDidUpdate(prevProps) {
+    // console.log(prevProps);
+    // console.log('CDU %s %s ', get(this, 'props.data.productId'), get(prevProps, 'data.productId'));
+    // }
 
     componentWillUnmount() {
         this.props.clearProductData();
@@ -113,6 +118,7 @@ class Product extends React.Component {
                             familyItems={descendants || brothers}
                             superProduct={this.state.superProduct}
                         />
+
                         <ProductPrice
                             price={priceFinal}
                             minimalQuantity={1}
@@ -120,9 +126,10 @@ class Product extends React.Component {
                         />
 
                         <ProductCart
-                            initialValues={{q: 1}}
+                            initialValues={{q: 1, id: null}}
                             forCartData={forCart}
                             minimalQuantity={1}
+                            onSubmit={this.props.addToCart}
                         />
 
                         {superProduct && <ProductSuperVariants
@@ -152,12 +159,13 @@ export default connect(
     state => ({
         [NAMESPACE]: state[NAMESPACE],
         profile: state.profile,
-        rootData: getRootData(NAMESPACE)(state),
+        rootData: getRootData(NAMESPACE)(state)
         // productFamily: getProductFamily(NAMESPACE)(state)
     }),
     {
         getProductInfo,
         clearProductData,
-        fillCartData
+        fillCartData,
+        addToCart
     }
 )(Product);

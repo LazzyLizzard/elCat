@@ -1,3 +1,4 @@
+import {change} from 'redux-form';
 import {getRequestEnvironment} from 'utils/get-request-environment';
 import {REMOTE_HTTPS} from 'constants/server-request-environment';
 import {ENDPOINT_PRODUCT} from 'constants/end-points';
@@ -54,3 +55,24 @@ export const clearProductData = () => ({
     type: PRODUCT_CLEAR,
     payload: PRODUCT_STATE
 });
+
+export const quantityButtonHandler = () => (dispatch) => {
+    dispatch(change('to-cart', 'q', Math.random()));
+};
+
+export const addToCart = (requestBody, otherArgs) => (dispatch) => {
+    console.log('addToCart', requestBody, otherArgs);
+    const {customerId} = otherArgs;
+
+    if (!customerId) {
+        // storing cart in localStorage, ids - in redux store, syncing etc
+        console.log('WLS', window.localStorage);
+    } else {
+        dispatch({
+            type: 'PRODUCT/ADD_TO_CART',
+            payload: {
+                ttt: 666
+            }
+        });
+    }
+};

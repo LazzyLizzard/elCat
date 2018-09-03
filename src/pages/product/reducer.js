@@ -19,6 +19,7 @@ export const PRODUCT_FETCH_SUCCESS = 'PRODUCT/FETCH_SUCCESS';
 export const PRODUCT_FETCH_ERROR = 'PRODUCT/FETCH_ERROR';
 export const PRODUCT_CLEAR = 'PRODUCT/CLEAR';
 export const PRODUCT_FILL_CART_DATA = 'PRODUCT/FILL_CART_DATA';
+export const PRODUCT_ADD_TO_CART = 'PRODUCT/ADD_TO_CART';
 
 export const productReducer = (state = PRODUCT_STATE, action) => {
     switch (action.type) {
@@ -26,6 +27,7 @@ export const productReducer = (state = PRODUCT_STATE, action) => {
         case PRODUCT_FETCH_ERROR:
         case PRODUCT_CLEAR:
         case PRODUCT_FILL_CART_DATA:
+        case PRODUCT_ADD_TO_CART:
             return {...state, ...action.payload};
 
         case PRODUCT_FETCH_SUCCESS:
