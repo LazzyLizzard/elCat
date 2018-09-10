@@ -49,6 +49,7 @@ export const fillCartData = cartData => (dispatch) => {
             forCart: {...cartData}
         }
     });
+    dispatch(change('to-cart', 'id', cartData.id));
 };
 
 export const clearProductData = () => ({
@@ -57,7 +58,11 @@ export const clearProductData = () => ({
 });
 
 export const quantityButtonHandler = (currentValue, action) => (dispatch) => {
-    dispatch(change('to-cart', 'q', action === 'add' ? currentValue + 1 : currentValue - 1));
+    const value = Number(currentValue);
+    dispatch(change('to-cart', 'q', action === 'add'
+        ? String(value + 1)
+        : String(value - 1)
+    ));
 };
 
 export const addToCart = (requestBody, otherArgs) => (dispatch) => {

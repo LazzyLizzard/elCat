@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {formValueSelector, reduxForm, Field} from 'redux-form';
 import {isNil} from 'lodash';
 import {ButtonCart} from 'components/button-cart';
+import {Input} from 'components/ui/input-text';
 import {quantityButtonHandler} from './actions';
 
 class ProductCart extends React.Component {
@@ -12,8 +13,9 @@ class ProductCart extends React.Component {
     // };
 
     render() {
-        const {handleSubmit, forCartData: {id, superProduct}} = this.props;
+        const {handleSubmit, submitting, forCartData: {id, superProduct}} = this.props;
         const isDisabled = superProduct || isNil(id);
+        console.log('submitting', submitting);
         return (
             <div>
                 <form
@@ -25,20 +27,21 @@ class ProductCart extends React.Component {
                 >
                     <div>
                         <button
+                            type="button"
                             onClick={() => this.props.quantityButtonHandler(this.props.filterValues, 'subtract')}
                             disabled={isDisabled}
                         >
                             -
                         </button>
                         <Field
-                            component="input"
-                            type="text"
+                            component={Input}
+                            // type="text"
                             name="q"
                             value={this.props.filterValues}
                         />
                         [{this.props.filterValues}]
                         <button
-
+                            type="button"
                             onClick={() => this.props.quantityButtonHandler(this.props.filterValues, 'add')}
                             disabled={isDisabled}
                         >
@@ -46,8 +49,9 @@ class ProductCart extends React.Component {
                         </button>
                     </div>
                     <div>
+                        {submitting && <span>subm</span>}
                         <ButtonCart
-                            disabled={isDisabled}
+                            disabled={isDisabled || submitting}
                             label="Купить"
                         />
                         {' '}

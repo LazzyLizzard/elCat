@@ -1,0 +1,8 @@
+@import "./../../../styles/constants/colors";
+@import "./../../../styles/constants/sizes";
+
+.input-text {
+  border: solid 1px $blue-ms;
+  outline: none;
+  padding: $base;
+}
