@@ -15,9 +15,12 @@ import {ProductSuperVariants} from './product-super-variants';
 import './product.scss';
 
 // const rx = /^(\w+)_(\d+).html/;
-const getIdFromUrl = productUrl => Number(productUrl.split('.')[0].split('_')[1]);
+const getProductIdFromUrl = productUrl => Number(productUrl.split('.')[0].split('_')[1]);
 const getFamilyTitle = superProduct => (superProduct === true ? 'потомки' : 'братья');
-const briefFields = ['info', 'priceFinal', 'superProduct'];
+// const propsPath = 'product.data.productId';
+const propsPath = 'location.pathname';
+// const briefFields = ['info', 'priceFinal', 'superProduct'];
+
 // const getCartButtonState = () => true;
 //
 // const ddd = field => (getState) => {
@@ -32,14 +35,35 @@ class Product extends React.Component {
         customerId: null
     };
 
-    // componentDidUpdate(prevProps) {
-    // console.log(prevProps);
-    // console.log('CDU %s %s ', get(this, 'props.data.productId'), get(prevProps, 'data.productId'));
-    // }
+    componentDidMount() {
+        const {
+            location: {pathname, state: locationState},
+            getProductInfo: g
+        } = this.props;
+        const productId = get(locationState, 'productId', getProductIdFromUrl(pathname));
+        g(productId);
+    }
+
+    componentDidUpdate(prevProps) {
+        // const {
+        //     location: {pathname, state: locationState},
+        //     getProductInfo: g
+        // } = this.props;
+        //
+        // const productId = get(locationState, 'productId', getProductIdFromUrl(pathname));
+        //
+        // if (productId !== get(prevProps, 'product.data.productId')) {
+        //     g(productId);
+        // }
+
+        console.log(prevProps);
+        console.log('CDU %s %s ', get(this.props, propsPath), get(prevProps, propsPath));
+    }
 
     componentWillUnmount() {
         this.props.clearProductData();
     }
+
 
     static getDerivedStateFromProps(nextProps, prevState) {
         const {
@@ -47,14 +71,14 @@ class Product extends React.Component {
             getProductInfo
         } = nextProps;
 
-        const productId = get(state, 'productId', getIdFromUrl(pathname));
-
-        if (productId !== prevState.productId) {
-            getProductInfo(productId);
-            return {
-                productId
-            };
-        }
+        const productId = get(state, 'productId', getProductIdFromUrl(pathname));
+        //
+        // if (productId !== prevState.productId) {
+        //     getProductInfo(productId);
+        //     return {
+        //         productId
+        //     };
+        // }
 
         const customerId = get(nextProps, 'profile.customer.id', null);
 
