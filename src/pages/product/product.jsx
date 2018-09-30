@@ -17,8 +17,8 @@ import './product.scss';
 // const rx = /^(\w+)_(\d+).html/;
 const getProductIdFromUrl = productUrl => Number(productUrl.split('.')[0].split('_')[1]);
 const getFamilyTitle = superProduct => (superProduct === true ? 'потомки' : 'братья');
-// const propsPath = 'product.data.productId';
-const propsPath = 'location.pathname';
+const propsPathLocation = 'location.pathname';
+const propsPathCustomer = 'profile.customer.id';
 // const briefFields = ['info', 'priceFinal', 'superProduct'];
 
 // const getCartButtonState = () => true;
@@ -45,50 +45,22 @@ class Product extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        // const {
-        //     location: {pathname, state: locationState},
-        //     getProductInfo: g
-        // } = this.props;
-        //
-        // const productId = get(locationState, 'productId', getProductIdFromUrl(pathname));
-        //
-        // if (productId !== get(prevProps, 'product.data.productId')) {
-        //     g(productId);
-        // }
+        const {
+            location: {pathname, state: locationState},
+            getProductInfo: g
+        } = this.props;
 
-        console.log(prevProps);
-        console.log('CDU %s %s ', get(this.props, propsPath), get(prevProps, propsPath));
+        const customerId = get(this.props, propsPathCustomer, null);
+        const productId = get(locationState, 'productId', getProductIdFromUrl(pathname));
+
+        if (get(this.props, propsPathLocation) !== get(prevProps, propsPathLocation)
+            || customerId !== get(prevProps, propsPathCustomer, null)) {
+            g(productId);
+        }
     }
 
     componentWillUnmount() {
         this.props.clearProductData();
-    }
-
-
-    static getDerivedStateFromProps(nextProps, prevState) {
-        const {
-            location: {pathname, state},
-            getProductInfo
-        } = nextProps;
-
-        const productId = get(state, 'productId', getProductIdFromUrl(pathname));
-        //
-        // if (productId !== prevState.productId) {
-        //     getProductInfo(productId);
-        //     return {
-        //         productId
-        //     };
-        // }
-
-        const customerId = get(nextProps, 'profile.customer.id', null);
-
-        if (customerId !== prevState.customerId) {
-            getProductInfo(productId);
-            return {
-                customerId
-            };
-        }
-        return null;
     }
 
     render() {
@@ -123,12 +95,6 @@ class Product extends React.Component {
                     {superProduct && ' [SUPERPROD]'}
                 </h2>
                 {error && <div>{error.message}</div>}
-                <div>
-                    <pre>
-                        {JSON.stringify(this.state, null, '  ')}
-                    </pre>
-                </div>
-                <hr />
 
                 <div className="product-card__layout">
                     <div className="product-card__layout-image">
