@@ -3,11 +3,12 @@ import classNames from 'classnames';
 import './input-text.scss';
 
 export const Input = (props) => {
-    console.log(props);
+    const {numeric, disabled} = props;
     return (
         <input
-            type="text"
+            type={numeric ? 'number' : 'text'}
             className={classNames('input-text')}
+            disabled={disabled || false}
             {...props.input}
         />
     );

@@ -52,6 +52,12 @@ export const fillCartData = cartData => (dispatch) => {
     dispatch(change('to-cart', 'id', cartData.id));
 };
 
+export const resetFormOnIdChange = productId => (dispatch) => {
+    console.log('--- productId', productId);
+    dispatch(change('to-cart', 'id', productId));
+    dispatch(change('to-cart', 'q', 1));
+};
+
 export const clearProductData = () => ({
     type: PRODUCT_CLEAR,
     payload: PRODUCT_STATE
@@ -61,8 +67,8 @@ export const quantityButtonHandler = (currentValue, action) => (dispatch) => {
     const value = Number(currentValue);
     dispatch(change('to-cart', 'q', action === 'add'
         ? String(value + 1)
-        : String(value - 1)
-    ));
+        : String(value - 1))
+    );
 };
 
 export const addToCart = (requestBody, otherArgs) => (dispatch) => {
@@ -72,7 +78,7 @@ export const addToCart = (requestBody, otherArgs) => (dispatch) => {
     if (!customerId) {
         console.log('NO CUST');
         // storing cart in localStorage, ids - in redux store, syncing etc
-        console.log('WLS', window.localStorage);
+        // console.log('WLS', window.localStorage);
     } else {
         console.log('CUST');
         dispatch({

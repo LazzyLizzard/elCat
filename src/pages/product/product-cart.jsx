@@ -15,7 +15,6 @@ class ProductCart extends React.Component {
     render() {
         const {handleSubmit, submitting, forCartData: {id, superProduct}} = this.props;
         const isDisabled = superProduct || isNil(id);
-        console.log('submitting', submitting);
         return (
             <div>
                 <form
@@ -29,13 +28,14 @@ class ProductCart extends React.Component {
                         <button
                             type="button"
                             onClick={() => this.props.quantityButtonHandler(this.props.filterValues, 'subtract')}
-                            disabled={isDisabled}
+                            disabled={isDisabled || parseInt(this.props.filterValues, 10) === 1}
                         >
                             -
                         </button>
                         <Field
                             component={Input}
-                            // type="text"
+                            // TODO [sf] 01-Oct-18 disable steps by css
+                            numeric
                             name="q"
                             value={this.props.filterValues}
                         />

@@ -5,7 +5,7 @@ import {ELLIPSIS} from 'constants/empty-values';
 // import {ProductToCart} from 'modules/product-to-cart';
 import {NAMESPACE} from './reducer';
 import {getRootData} from './selectors';
-import {getProductInfo, clearProductData, fillCartData, addToCart} from './actions';
+import {getProductInfo, clearProductData, fillCartData, addToCart, resetFormOnIdChange} from './actions';
 import {ProductFamily} from './product-family';
 import {ProductPrice} from './product-price';
 import {ProductParams} from './product-params';
@@ -29,7 +29,7 @@ const propsPathCustomer = 'profile.customer.id';
 // };
 
 
-class Product extends React.Component {
+class Product extends React.PureComponent {
     state = {
         productId: null,
         customerId: null
@@ -47,14 +47,23 @@ class Product extends React.Component {
     componentDidUpdate(prevProps) {
         const {
             location: {pathname, state: locationState},
-            getProductInfo: g
+            getProductInfo: g,
+            resetFormOnIdChange: r
         } = this.props;
 
         const customerId = get(this.props, propsPathCustomer, null);
         const productId = get(locationState, 'productId', getProductIdFromUrl(pathname));
 
-        if (get(this.props, propsPathLocation) !== get(prevProps, propsPathLocation)
-            || customerId !== get(prevProps, propsPathCustomer, null)) {
+        if (get(this.props, propsPathLocation) !== get(prevProps, propsPathLocation)) {
+            console.log('here');
+            Promise.resolve(
+                g(productId)
+            ).then(x => console.log('zz', x))
+            r(productId);
+            g(productId);
+        }
+
+        if (customerId !== get(prevProps, propsPathCustomer, null)) {
             g(productId);
         }
     }
@@ -156,6 +165,7 @@ export default connect(
         getProductInfo,
         clearProductData,
         fillCartData,
-        addToCart
+        addToCart,
+        resetFormOnIdChange
     }
 )(Product);
