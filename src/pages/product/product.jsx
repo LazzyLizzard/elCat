@@ -56,11 +56,15 @@ class Product extends React.PureComponent {
 
         if (get(this.props, propsPathLocation) !== get(prevProps, propsPathLocation)) {
             console.log('here');
+
+            // TODO [sf] 02-Oct-18 rewrite with after function
             Promise.resolve(
                 g(productId)
-            ).then(x => console.log('zz', x))
-            r(productId);
-            g(productId);
+            ).then((x) => {
+                const {payload: {data: {superProduct}}} = x;
+                console.log('zz', superProduct);
+                r(superProduct ? null : productId);
+            });
         }
 
         if (customerId !== get(prevProps, propsPathCustomer, null)) {

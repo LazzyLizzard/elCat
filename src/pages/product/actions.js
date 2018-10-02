@@ -26,16 +26,14 @@ export const getProductInfo = productId => (dispatch) => {
         {method: 'get'}
     )
         .then(response => response.json())
-        .then((json) => {
-            dispatch({
-                type: PRODUCT_FETCH_SUCCESS,
-                payload: {
-                    data: json,
-                    error: null,
-                    loader: false
-                }
-            });
-        })
+        .then(json => dispatch({
+            type: PRODUCT_FETCH_SUCCESS,
+            payload: {
+                data: json,
+                error: null,
+                loader: false
+            }
+        }))
         .catch((error) => {
             dispatch(requestError(PRODUCT_FETCH_ERROR, error));
             return error;
@@ -53,7 +51,6 @@ export const fillCartData = cartData => (dispatch) => {
 };
 
 export const resetFormOnIdChange = productId => (dispatch) => {
-    console.log('--- productId', productId);
     dispatch(change('to-cart', 'id', productId));
     dispatch(change('to-cart', 'q', 1));
 };
