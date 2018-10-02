@@ -4,8 +4,8 @@ import {get, isNil, isEmpty, pick} from 'lodash';
 import {ELLIPSIS} from 'constants/empty-values';
 // import {ProductToCart} from 'modules/product-to-cart';
 import {NAMESPACE} from './reducer';
-import {getRootData} from './selectors';
-import {getProductInfo, clearProductData, fillCartData, addToCart, resetFormOnIdChange} from './actions';
+import {getRootData, getCartQuantity, getCartProductId} from './selectors';
+import {getProductInfo, clearProductData, fillCartData, addToCart, setFormValuesOnChangeId} from './actions';
 import {ProductFamily} from './product-family';
 import {ProductPrice} from './product-price';
 import {ProductParams} from './product-params';
@@ -48,11 +48,12 @@ class Product extends React.PureComponent {
         const {
             location: {pathname, state: locationState},
             getProductInfo: g,
-            resetFormOnIdChange: r
+            setFormValuesOnChangeId: r
         } = this.props;
 
         const customerId = get(this.props, propsPathCustomer, null);
         const productId = get(locationState, 'productId', getProductIdFromUrl(pathname));
+
 
         if (get(this.props, propsPathLocation) !== get(prevProps, propsPathLocation)) {
             console.log('here');
@@ -136,7 +137,7 @@ class Product extends React.PureComponent {
                         />
 
                         {superProduct && <ProductSuperVariants
-                            selectedProductId={get(forCart, 'id')}
+                            selectedProductId={this.props.productId}
                             descendants={descendants}
                             fillDataHandler={this.props.fillCartData}
                         />}
@@ -162,14 +163,17 @@ export default connect(
     state => ({
         [NAMESPACE]: state[NAMESPACE],
         profile: state.profile,
-        rootData: getRootData(NAMESPACE)(state)
+        rootData: getRootData(NAMESPACE)(state),
         // productFamily: getProductFamily(NAMESPACE)(state)
+        cartQuantity: getCartQuantity(state),
+        productId: getCartProductId(state)
+
     }),
     {
         getProductInfo,
         clearProductData,
         fillCartData,
         addToCart,
-        resetFormOnIdChange
+        setFormValuesOnChangeId
     }
 )(Product);

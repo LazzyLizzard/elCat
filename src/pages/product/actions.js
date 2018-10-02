@@ -50,7 +50,7 @@ export const fillCartData = cartData => (dispatch) => {
     dispatch(change('to-cart', 'id', cartData.id));
 };
 
-export const resetFormOnIdChange = productId => (dispatch) => {
+export const setFormValuesOnChangeId = productId => (dispatch) => {
     dispatch(change('to-cart', 'id', productId));
     dispatch(change('to-cart', 'q', 1));
 };
