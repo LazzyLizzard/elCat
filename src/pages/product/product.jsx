@@ -29,19 +29,22 @@ const propsPathCustomer = 'profile.customer.id';
 // };
 
 
-class Product extends React.PureComponent {
-    state = {
-        productId: null,
-        customerId: null
-    };
+const xwr = (fnc, arrgs) => {
+    const productsId = get(arrgs, 'data.product.productsId');
+    const superProduct = get(arrgs, 'data.product.superProducts');
+    return fnc({productsId, superProduct});
+};
 
+class Product extends React.PureComponent {
     componentDidMount() {
         const {
             location: {pathname, state: locationState},
-            getProductInfo: g
+            getProductInfo: g,
+            setFormValuesOnChangeId: r
         } = this.props;
         const productId = get(locationState, 'productId', getProductIdFromUrl(pathname));
-        g(productId);
+        g(productId, r, productId);
+        // g(productId, xwr(r => r(x)));
     }
 
     componentDidUpdate(prevProps) {
@@ -56,16 +59,8 @@ class Product extends React.PureComponent {
 
 
         if (get(this.props, propsPathLocation) !== get(prevProps, propsPathLocation)) {
-            console.log('here');
-
-            // TODO [sf] 02-Oct-18 rewrite with after function
-            Promise.resolve(
-                g(productId)
-            ).then((x) => {
-                const {payload: {data: {superProduct}}} = x;
-                console.log('zz', superProduct);
-                r(superProduct ? null : productId);
-            });
+            // g(productId, r, productId);
+            g(productId, xwr(a => r(a)));
         }
 
         if (customerId !== get(prevProps, propsPathCustomer, null)) {
@@ -120,7 +115,6 @@ class Product extends React.PureComponent {
                         <ProdustAncestor
                             ancestorData={ancestorData}
                             familyItems={descendants || brothers}
-                            superProduct={this.state.superProduct}
                         />
 
                         <ProductPrice

@@ -1,3 +1,4 @@
+import {noop} from 'lodash';
 import {change} from 'redux-form';
 import {getRequestEnvironment} from 'utils/get-request-environment';
 import {REMOTE_HTTPS} from 'constants/server-request-environment';
@@ -14,7 +15,8 @@ import {
 
 const baseUrl = `${getRequestEnvironment(REMOTE_HTTPS)}${ENDPOINT_PRODUCT}`;
 
-export const getProductInfo = productId => (dispatch) => {
+// noinspection JSAnnotator
+export const getProductInfo = (productId, after = noop, afterArgs = null) => (dispatch) => {
     dispatch({
         type: PRODUCT_FETCH_STARTED,
         payload: {
@@ -34,6 +36,13 @@ export const getProductInfo = productId => (dispatch) => {
                 loader: false
             }
         }))
+        .then((data) => {
+            console.log(data);
+            if (typeof after === 'function') {
+                after(afterArgs);
+            }
+            return data;
+        })
         .catch((error) => {
             dispatch(requestError(PRODUCT_FETCH_ERROR, error));
             return error;
@@ -50,8 +59,8 @@ export const fillCartData = cartData => (dispatch) => {
     dispatch(change('to-cart', 'id', cartData.id));
 };
 
-export const setFormValuesOnChangeId = productId => (dispatch) => {
-    dispatch(change('to-cart', 'id', productId));
+export const setFormValuesOnChangeId = ({productId, superProduct}) => (dispatch) => {
+    dispatch(change('to-cart', 'id', superProduct ? null : productId));
     dispatch(change('to-cart', 'q', 1));
 };
 
