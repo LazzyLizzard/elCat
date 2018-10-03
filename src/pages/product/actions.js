@@ -1,7 +1,8 @@
 import {noop} from 'lodash';
 import {change} from 'redux-form';
-import {getRequestEnvironment} from 'utils/get-request-environment';
 import {REMOTE_HTTPS} from 'constants/server-request-environment';
+import {FIELD_PRICE, FIELD_PRODUCT_ID, FIELD_QUANTITY} from 'constants/form-fields-naming';
+import {getRequestEnvironment} from 'utils/get-request-environment';
 import {ENDPOINT_PRODUCT} from 'constants/end-points';
 import {requestError} from 'utils/request-steps';
 import {PRODUCT_STATE} from 'data-srtuctures/product';
@@ -9,14 +10,12 @@ import {
     PRODUCT_FETCH_STARTED,
     PRODUCT_FETCH_SUCCESS,
     PRODUCT_FETCH_ERROR,
-    PRODUCT_CLEAR,
-    PRODUCT_FILL_CART_DATA
+    PRODUCT_CLEAR
 } from './reducer';
 
 const baseUrl = `${getRequestEnvironment(REMOTE_HTTPS)}${ENDPOINT_PRODUCT}`;
 
-// noinspection JSAnnotator
-export const getProductInfo = (productId, after = noop, afterArgs = null) => (dispatch) => {
+export const getProductInfo = (productId, after = noop) => (dispatch) => {
     dispatch({
         type: PRODUCT_FETCH_STARTED,
         payload: {
@@ -37,9 +36,8 @@ export const getProductInfo = (productId, after = noop, afterArgs = null) => (di
             }
         }))
         .then((data) => {
-            console.log(data);
             if (typeof after === 'function') {
-                after(afterArgs);
+                after(data);
             }
             return data;
         })
@@ -50,18 +48,16 @@ export const getProductInfo = (productId, after = noop, afterArgs = null) => (di
 };
 
 export const fillCartData = cartData => (dispatch) => {
-    dispatch({
-        type: PRODUCT_FILL_CART_DATA,
-        payload: {
-            forCart: {...cartData}
-        }
-    });
-    dispatch(change('to-cart', 'id', cartData.id));
+    const {productId, price} = cartData;
+    dispatch(change('to-cart', FIELD_PRODUCT_ID, productId));
+    // dispatch(change('to-cart', 'price', isEmpty(price) ? null : price));
+    dispatch(change('to-cart', FIELD_PRICE, price || null));
 };
 
 export const setFormValuesOnChangeId = ({productId, superProduct}) => (dispatch) => {
-    dispatch(change('to-cart', 'id', superProduct ? null : productId));
-    dispatch(change('to-cart', 'q', 1));
+    dispatch(change('to-cart', FIELD_PRODUCT_ID, superProduct ? null : productId));
+    dispatch(change('to-cart', FIELD_QUANTITY, 1));
+    dispatch(change('to-cart', FIELD_PRICE, null));
 };
 
 export const clearProductData = () => ({
@@ -71,9 +67,9 @@ export const clearProductData = () => ({
 
 export const quantityButtonHandler = (currentValue, action) => (dispatch) => {
     const value = Number(currentValue);
-    dispatch(change('to-cart', 'q', action === 'add'
-        ? String(value + 1)
-        : String(value - 1))
+    dispatch(change('to-cart', FIELD_QUANTITY, action === 'add'
+        ? value + 1
+        : value - 1)
     );
 };
 

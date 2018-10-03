@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {formValueSelector, reduxForm, Field} from 'redux-form';
 import {isNil} from 'lodash';
+import {FIELD_PRICE, FIELD_PRODUCT_ID, FIELD_QUANTITY} from 'constants/form-fields-naming';
 import {ButtonCart} from 'components/button-cart';
 import {Input} from 'components/ui/input-text';
 import {quantityButtonHandler} from './actions';
@@ -11,10 +12,9 @@ class ProductCart extends React.Component {
     // onSubmitWithArgument = additionalArgument => function (values) {
     //     return this.props.onSubmit(values, additionalArgument);
     // };
-
     render() {
-        const {handleSubmit, submitting, forCartData: {id, superProduct}} = this.props;
-        const isDisabled = superProduct || isNil(id);
+        const {handleSubmit, submitting, productId, superProduct} = this.props;
+        const isDisabled = superProduct || isNil(productId);
         return (
             <div>
                 <form
@@ -55,7 +55,7 @@ class ProductCart extends React.Component {
                             label="Купить"
                         />
                         {' '}
-                        props selectedProductId: {id}
+                        props selectedProductId: {productId}
                     </div>
                 </form>
             </div>
@@ -64,9 +64,9 @@ class ProductCart extends React.Component {
 }
 
 export default connect(state => ({
-    filterValues: formValueSelector('to-cart')(state, 'q'),
+    filterValues: formValueSelector('to-cart')(state, FIELD_QUANTITY),
     // filterId: formValueSelector('to-cart')(state, 'id'),
-    fields: ['id', 'q']
+    fields: [FIELD_PRODUCT_ID, FIELD_QUANTITY, FIELD_PRICE]
 }), {quantityButtonHandler})(
     reduxForm({
         form: 'to-cart'

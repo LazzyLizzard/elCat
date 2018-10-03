@@ -16,9 +16,8 @@ export const ProductSuperVariants = (props) => {
                 {
                     descendants.map((item) => {
                         const {
-                            superProduct,
+                            productId,
                             info: {
-                                products_id,
                                 products_name,
                                 products_name_for_list
                             },
@@ -27,14 +26,14 @@ export const ProductSuperVariants = (props) => {
                         return (
                             <div
                                 onClick={() => fillDataHandler({
-                                    id: products_id,
-                                    superProduct
+                                    productId,
+                                    price: priceFinal.priceCustomer
                                 })}
                                 className={classNames(
                                     'product-card__option-items-item',
-                                    {'product-card__option-items-item--active': selectedProductId === products_id}
+                                    {'product-card__option-items-item--active': selectedProductId === productId}
                                 )}
-                                key={products_id}
+                                key={productId}
                                 title={`${products_name}, цена - ${priceFinal.priceCustomer}`}
                             >
                                 {products_name_for_list}

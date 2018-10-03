@@ -1,10 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {get, isNil, isEmpty, pick} from 'lodash';
+import {get, isNil, isEmpty} from 'lodash';
+import {FIELD_PRICE, FIELD_PRODUCT_ID, FIELD_QUANTITY} from 'constants/form-fields-naming';
 import {ELLIPSIS} from 'constants/empty-values';
 // import {ProductToCart} from 'modules/product-to-cart';
 import {NAMESPACE} from './reducer';
-import {getRootData, getCartQuantity, getCartProductId} from './selectors';
+import {
+    getRootData,
+    // getCartQuantity,
+    getCartProductId
+} from './selectors';
 import {getProductInfo, clearProductData, fillCartData, addToCart, setFormValuesOnChangeId} from './actions';
 import {ProductFamily} from './product-family';
 import {ProductPrice} from './product-price';
@@ -29,10 +34,10 @@ const propsPathCustomer = 'profile.customer.id';
 // };
 
 
-const xwr = (fnc, arrgs) => {
-    const productsId = get(arrgs, 'data.product.productsId');
-    const superProduct = get(arrgs, 'data.product.superProducts');
-    return fnc({productsId, superProduct});
+const setFormValuesWrapped = params => (passedFunction) => {
+    const productId = get(params, 'payload.data.productId');
+    const superProduct = get(params, 'payload.data.superProduct');
+    return passedFunction({productId, superProduct});
 };
 
 class Product extends React.PureComponent {
@@ -43,8 +48,7 @@ class Product extends React.PureComponent {
             setFormValuesOnChangeId: r
         } = this.props;
         const productId = get(locationState, 'productId', getProductIdFromUrl(pathname));
-        g(productId, r, productId);
-        // g(productId, xwr(r => r(x)));
+        g(productId, args => setFormValuesWrapped(args)(r));
     }
 
     componentDidUpdate(prevProps) {
@@ -57,10 +61,8 @@ class Product extends React.PureComponent {
         const customerId = get(this.props, propsPathCustomer, null);
         const productId = get(locationState, 'productId', getProductIdFromUrl(pathname));
 
-
         if (get(this.props, propsPathLocation) !== get(prevProps, propsPathLocation)) {
-            // g(productId, r, productId);
-            g(productId, xwr(a => r(a)));
+            g(productId, args => setFormValuesWrapped(args)(r));
         }
 
         if (customerId !== get(prevProps, propsPathCustomer, null)) {
@@ -89,8 +91,7 @@ class Product extends React.PureComponent {
                     superProduct,
                     descendantPriceRange
                 },
-                error,
-                forCart
+                error
             }
         } = this.props;
 
@@ -123,10 +124,15 @@ class Product extends React.PureComponent {
                             descendantPriceRange={descendantPriceRange}
                         />
 
+                        {/* TODO move initialValues to const */}
                         <ProductCart
-                            initialValues={{q: 1, id: null}}
-                            forCartData={forCart}
+                            initialValues={{
+                                [FIELD_PRICE]: null,
+                                [FIELD_PRODUCT_ID]: null,
+                                [FIELD_QUANTITY]: 1
+                            }}
                             minimalQuantity={1}
+                            productId={this.props.productId}
                             onSubmit={this.props.addToCart}
                         />
 
@@ -159,7 +165,6 @@ export default connect(
         profile: state.profile,
         rootData: getRootData(NAMESPACE)(state),
         // productFamily: getProductFamily(NAMESPACE)(state)
-        cartQuantity: getCartQuantity(state),
         productId: getCartProductId(state)
 
     }),
