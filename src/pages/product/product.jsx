@@ -11,19 +11,13 @@ import {
     getCartProductId
 } from './selectors';
 import {getProductInfo, clearProductData, fillCartData, addToCart, setFormValuesOnChangeId} from './actions';
-import {ProductFamily} from './product-family';
-import {ProductPrice} from './product-price';
-import {ProductParams} from './product-params';
-import {ProdustAncestor} from './product-ancestor';
+import {ProductParams, ProductPrice, ProductFamily, ProdustAncestor} from './partials';
 import ProductCart from './product-cart';
 import {ProductSuperVariants} from './product-super-variants';
+import {getProductIdFromUrl, getFamilyTitle} from './utils';
+import {propsPathCustomer, propsPathLocation} from './constants';
 import './product.scss';
 
-// const rx = /^(\w+)_(\d+).html/;
-const getProductIdFromUrl = productUrl => Number(productUrl.split('.')[0].split('_')[1]);
-const getFamilyTitle = superProduct => (superProduct === true ? 'потомки' : 'братья');
-const propsPathLocation = 'location.pathname';
-const propsPathCustomer = 'profile.customer.id';
 // const briefFields = ['info', 'priceFinal', 'superProduct'];
 
 // const getCartButtonState = () => true;

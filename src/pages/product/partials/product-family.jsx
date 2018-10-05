@@ -2,9 +2,9 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {isEmpty, chunk} from 'lodash';
-import {ProductFamilyFilter} from './product-family-filter';
-import {ProductFamilyPages} from './product-family-pages';
-import {ProductFamilyItems} from './product-family-items';
+import {ProductFamilyFilter} from '../product-family-filter';
+import {ProductFamilyPages} from '../product-family-pages';
+import {ProductFamilyItems} from '../product-family-items';
 
 export class ProductFamily extends React.PureComponent {
     state = {
