@@ -8,12 +8,12 @@ import {NAMESPACE} from './reducer';
 import {
     getRootData,
     // getCartQuantity,
-    getCartProductId
+    getCartProductId,
+    getProductCartPrice
 } from './selectors';
 import {getProductInfo, clearProductData, fillCartData, addToCart, setFormValuesOnChangeId} from './actions';
-import {ProductParams, ProductPrice, ProductFamily, ProdustAncestor} from './partials';
+import {ProductParams, ProductPrice, ProductFamily, ProdustAncestor, ProductSuperVariants} from './partials';
 import ProductCart from './product-cart';
-import {ProductSuperVariants} from './product-super-variants';
 import {getProductIdFromUrl, getFamilyTitle} from './utils';
 import {propsPathCustomer, propsPathLocation} from './constants';
 import './product.scss';
@@ -76,6 +76,7 @@ class Product extends React.PureComponent {
         const {
             product: {
                 data: {
+                    productId,
                     info,
                     descendants,
                     ancestorData,
@@ -86,7 +87,9 @@ class Product extends React.PureComponent {
                     descendantPriceRange
                 },
                 error
-            }
+            },
+            cartPrice,
+            cartProductId
         } = this.props;
 
         return (
@@ -113,7 +116,9 @@ class Product extends React.PureComponent {
                         />
 
                         <ProductPrice
-                            price={priceFinal}
+                            superProduct={superProduct}
+                            cartPrice={cartPrice}
+                            priceFinal={priceFinal}
                             minimalQuantity={1}
                             descendantPriceRange={descendantPriceRange}
                         />
@@ -126,12 +131,12 @@ class Product extends React.PureComponent {
                                 [FIELD_QUANTITY]: 1
                             }}
                             minimalQuantity={1}
-                            productId={this.props.productId}
+                            productId={productId}
                             onSubmit={this.props.addToCart}
                         />
 
                         {superProduct && <ProductSuperVariants
-                            selectedProductId={this.props.productId}
+                            selectedProductId={cartProductId}
                             descendants={descendants}
                             fillDataHandler={this.props.fillCartData}
                         />}
@@ -159,7 +164,8 @@ export default connect(
         profile: state.profile,
         rootData: getRootData(NAMESPACE)(state),
         // productFamily: getProductFamily(NAMESPACE)(state)
-        productId: getCartProductId(state)
+        cartProductId: getCartProductId(state),
+        cartPrice: getProductCartPrice(state)
 
     }),
     {

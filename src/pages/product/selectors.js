@@ -27,4 +27,4 @@ export const getCartQuantity = state => valueSelector(state, FIELD_QUANTITY);
 
 export const getCartProductId = state => valueSelector(state, FIELD_PRODUCT_ID);
 
-export const getProductPrice = state => valueSelector(state, FIELD_PRICE);
+export const getProductCartPrice = state => valueSelector(state, FIELD_PRICE);
