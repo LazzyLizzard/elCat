@@ -8,3 +8,6 @@ export const PRODUCT_FAMILY_FIELDS = {
 
 export const propsPathLocation = 'location.pathname';
 export const propsPathCustomer = 'profile.customer.id';
+
+export const STORAGE_CART_KEY = 'cart';
+export const STORAGE_CART_KEY_PRODUCTS = 'products';

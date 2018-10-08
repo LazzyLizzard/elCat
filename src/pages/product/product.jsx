@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {get, isNil, isEmpty} from 'lodash';
 import {FIELD_PRICE, FIELD_PRODUCT_ID, FIELD_QUANTITY} from 'constants/form-fields-naming';
 import {ELLIPSIS} from 'constants/empty-values';
-// import {ProductToCart} from 'modules/product-to-cart';
 import {NAMESPACE} from './reducer';
 import {
     getRootData,
