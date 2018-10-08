@@ -1,0 +1,14 @@
+@import "./../../../styles/constants/colors";
+@import "./../../../styles/constants/sizes";
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.input-text {
+  border: solid 1px $blue-ms;
+  outline: none;
+  padding: $base;
+}

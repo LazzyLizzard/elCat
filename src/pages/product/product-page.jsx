@@ -4,12 +4,12 @@ import {get, isNil, isEmpty, pick} from 'lodash';
 import {ELLIPSIS} from 'constants/empty-values';
 import {NAMESPACE} from './reducer';
 import {getProductInfo, clearProductData} from './actions';
-import {ProductFamily} from './product-family';
-import {ProductPrice} from './product-price';
-import {ProductParams} from './product-params';
-import {ProdustAncestor} from './product-ancestor';
+import {ProductFamily} from './partials/product-family';
+import {ProductPrice} from './partials/product-price/price-container';
+import {ProductParams} from './partials/product-params';
+import {ProdustAncestor} from './partials/product-ancestor';
 import {ProductCart} from './product-cart';
-import {ProductSuperVariants} from './product-super-variants';
+import {ProductSuperVariants} from './partials/product-super-variants';
 import './product.scss';
 import {ProductToCart} from "localResolve/modules/product-to-cart";
 

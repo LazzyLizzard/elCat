@@ -8,8 +8,9 @@ import './app.scss';
 const processCart = () => {
     const prodLength = localStorage.getItem('products');
     if (isEmpty(prodLength)) {
-        localStorage.setItem('products', JSON.stringify([]));
-        localStorage.setItem('money', JSON.stringify({total: null}));
+        localStorage.setItem('cart', JSON.stringify([]));
+    } else {
+
     }
 };
 

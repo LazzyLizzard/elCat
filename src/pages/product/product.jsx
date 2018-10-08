@@ -1,91 +1,72 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {get, isNil, isEmpty, pick} from 'lodash';
+import {get, isNil, isEmpty} from 'lodash';
+import {FIELD_PRICE, FIELD_PRODUCT_ID, FIELD_QUANTITY} from 'constants/form-fields-naming';
 import {ELLIPSIS} from 'constants/empty-values';
-import {ProductToCart} from 'modules/product-to-cart';
+// import {ProductToCart} from 'modules/product-to-cart';
 import {NAMESPACE} from './reducer';
-import {getProductInfo, clearProductData} from './actions';
-import {ProductFamily} from './product-family';
-import {ProductPrice} from './product-price';
-import {ProductParams} from './product-params';
-import {ProdustAncestor} from './product-ancestor';
-import {ProductCart} from './product-cart';
-import {ProductSuperVariants} from './product-super-variants';
+import {
+    getRootData,
+    // getCartQuantity,
+    getCartProductId,
+    getProductCartPrice
+} from './selectors';
+import {getProductInfo, clearProductData, fillCartData, addToCart, setFormValuesOnChangeId} from './actions';
+import {ProductParams, ProductPrice, ProductFamily, ProdustAncestor, ProductSuperVariants} from './partials';
+import ProductCart from './product-cart';
+import {getProductIdFromUrl, getFamilyTitle} from './utils';
+import {propsPathCustomer, propsPathLocation} from './constants';
 import './product.scss';
 
-// const rx = /^(\w+)_(\d+).html/;
-const getIdFromUrl = productUrl => Number(productUrl.split('.')[0].split('_')[1]);
-const getFamilyTitle = superProduct => (superProduct === true ? 'потомки' : 'братья');
-const briefFields = ['info', 'priceFinal', 'superProduct'];
-const getCartButtonState = () => true;
+// const briefFields = ['info', 'priceFinal', 'superProduct'];
+
+// const getCartButtonState = () => true;
+//
+// const ddd = field => (getState) => {
+//     console.log('**********');
+//     console.log(getState()[field]);
+// };
+
+
+const setFormValuesWrapped = params => (passedFunction) => {
+    const productId = get(params, 'payload.data.productId');
+    const superProduct = get(params, 'payload.data.superProduct');
+    return passedFunction({productId, superProduct});
+};
 
 class Product extends React.PureComponent {
-    state = {
-        productId: null,
-        customerId: null,
-        // for superProduct only
-        selectedProductId: null,
-        selectedProductDataBrief: null
-    };
+    componentDidMount() {
+        const {
+            location: {pathname, state: locationState},
+            getProductInfo: g,
+            setFormValuesOnChangeId: r
+        } = this.props;
+        const productId = get(locationState, 'productId', getProductIdFromUrl(pathname));
+        g(productId, args => setFormValuesWrapped(args)(r));
+    }
+
+    componentDidUpdate(prevProps) {
+        const {
+            location: {pathname, state: locationState},
+            getProductInfo: g,
+            setFormValuesOnChangeId: r
+        } = this.props;
+
+        const customerId = get(this.props, propsPathCustomer, null);
+        const productId = get(locationState, 'productId', getProductIdFromUrl(pathname));
+
+        if (get(this.props, propsPathLocation) !== get(prevProps, propsPathLocation)) {
+            g(productId, args => setFormValuesWrapped(args)(r));
+        }
+
+        if (customerId !== get(prevProps, propsPathCustomer, null)) {
+            g(productId);
+        }
+    }
 
     componentWillUnmount() {
         this.props.clearProductData();
     }
-
-    static getDerivedStateFromProps(nextProps, prevState) {
-        console.log('GDSFP');
-
-        const {
-            location: {pathname, state},
-            productInfo
-        } = nextProps;
-
-        const productId = get(state, 'productId') ? get(state, 'productId') : getIdFromUrl(pathname);
-        console.log(productId, prevState.productId);
-
-        if (productId !== prevState.productId) {
-            console.log('fetch', productId);
-            productInfo(productId);
-            return {
-                productId,
-                superProduct: nextProps.getZ()
-            };
-        }
-
-        const customerId = get(nextProps, 'profile.customer.id', null);
-        console.log(customerId, prevState.customerId);
-
-        if (customerId !== prevState.customerId) {
-            productInfo(productId);
-            return {
-                // ...prevState,
-                customerId
-            };
-        }
-
-        return null;
-    }
-
-    selectProductForSuperProduct = (productId) => {
-        console.log('selectProductForSuperProduct', productId);
-        this.setState((prevState) => {
-            if (prevState.selectedProductId !== productId) {
-                const {product: {data}} = this.props;
-                const field = data.superProduct ? 'descendants' : 'brothers';
-
-                const x = pick(data[field].find(item => item.productId === productId), briefFields);
-                console.log(x.superProduct);
-
-                return {
-                    selectedProductId: productId,
-                    superProduct: x.superProduct,
-                    selectedProductDataBrief: x
-
-                };
-            }
-            return null;
-        });
-    };
 
     render() {
         if (isEmpty(this.props.product.data)) {
@@ -95,6 +76,7 @@ class Product extends React.PureComponent {
         const {
             product: {
                 data: {
+                    productId,
                     info,
                     descendants,
                     ancestorData,
@@ -105,7 +87,9 @@ class Product extends React.PureComponent {
                     descendantPriceRange
                 },
                 error
-            }
+            },
+            cartPrice,
+            cartProductId
         } = this.props;
 
         return (
@@ -118,12 +102,6 @@ class Product extends React.PureComponent {
                     {superProduct && ' [SUPERPROD]'}
                 </h2>
                 {error && <div>{error.message}</div>}
-                <div>
-                    <pre>
-                        {JSON.stringify(this.state, null, '  ')}
-                    </pre>
-                </div>
-                <hr />
 
                 <div className="product-card__layout">
                     <div className="product-card__layout-image">
@@ -135,30 +113,32 @@ class Product extends React.PureComponent {
                         <ProdustAncestor
                             ancestorData={ancestorData}
                             familyItems={descendants || brothers}
-                            superProduct={this.state.superProduct}
                         />
+
                         <ProductPrice
-                            price={priceFinal}
+                            superProduct={superProduct}
+                            cartPrice={cartPrice}
+                            priceFinal={priceFinal}
+                            minimalQuantity={1}
                             descendantPriceRange={descendantPriceRange}
                         />
 
-                        <ProductToCart
-                            initialValues={{
-                                q: 1,
-                                id: 555
-                            }}
-                        />
-
+                        {/* TODO move initialValues to const */}
                         <ProductCart
-                            isSuperProduct={superProduct}
-                            selectedProductId={info.products_id}
+                            initialValues={{
+                                [FIELD_PRICE]: null,
+                                [FIELD_PRODUCT_ID]: null,
+                                [FIELD_QUANTITY]: 1
+                            }}
                             minimalQuantity={1}
+                            productId={productId}
+                            onSubmit={this.props.addToCart}
                         />
 
                         {superProduct && <ProductSuperVariants
-                            selectedProductId={this.state.selectedProductId}
+                            selectedProductId={cartProductId}
                             descendants={descendants}
-                            itemClicHandler={this.selectProductForSuperProduct}
+                            fillDataHandler={this.props.fillCartData}
                         />}
 
                         <ProductParams params={parameters} />
@@ -181,15 +161,18 @@ class Product extends React.PureComponent {
 export default connect(
     state => ({
         [NAMESPACE]: state[NAMESPACE],
-        profile: state.profile
+        profile: state.profile,
+        rootData: getRootData(NAMESPACE)(state),
+        // productFamily: getProductFamily(NAMESPACE)(state)
+        cartProductId: getCartProductId(state),
+        cartPrice: getProductCartPrice(state)
+
     }),
-    (dispatch) => ({
-        productInfo: productId => dispatch(getProductInfo(productId)),
-        clearProductData: () => dispatch(clearProductData()),
-        getZ: () => (getState) => {
-            const state = getState();
-            console.log(state);
-            return get(state, 'product.data.superProduct', 'hello');
-        }
-    })
+    {
+        getProductInfo,
+        clearProductData,
+        fillCartData,
+        addToCart,
+        setFormValuesOnChangeId
+    }
 )(Product);
