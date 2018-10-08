@@ -12,6 +12,7 @@ import {
     PRODUCT_FETCH_ERROR,
     PRODUCT_CLEAR
 } from './reducer';
+import {addToLocalCart} from './utils';
 
 const baseUrl = `${getRequestEnvironment(REMOTE_HTTPS)}${ENDPOINT_PRODUCT}`;
 
@@ -81,6 +82,7 @@ export const addToCart = (requestBody, otherArgs) => (dispatch) => {
         console.log('NO CUST');
         // storing cart in localStorage, ids - in redux store, syncing etc
         // console.log('WLS', window.localStorage);
+        addToLocalCart(requestBody);
     } else {
         console.log('CUST');
         dispatch({

@@ -11,3 +11,4 @@ export const propsPathCustomer = 'profile.customer.id';
 
 export const STORAGE_CART_KEY = 'cart';
 export const STORAGE_CART_KEY_PRODUCTS = 'products';
+export const STORAGE_CART_KEY_COST = 'cost';

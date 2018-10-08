@@ -3,14 +3,21 @@ import {Link} from 'react-router';
 import {isEmpty, get} from 'lodash';
 import customerData from 'modules/hocs/customer-data';
 import FakeAuth from 'pages/profile/fake-auth';
+import {STORAGE_CART_KEY, STORAGE_CART_KEY_PRODUCTS, STORAGE_CART_KEY_COST} from 'pages/product/constants';
 import './app.scss';
 
 const processCart = () => {
-    const prodLength = localStorage.getItem('products');
-    if (isEmpty(prodLength)) {
-        localStorage.setItem('cart', JSON.stringify([]));
-    } else {
+    const prodLength = get(
+        JSON.parse(
+            localStorage.getItem(STORAGE_CART_KEY)
+        ), STORAGE_CART_KEY_PRODUCTS, []
+    ).length;
 
+    if (isEmpty(prodLength)) {
+        localStorage.setItem(STORAGE_CART_KEY, JSON.stringify({
+            [STORAGE_CART_KEY_PRODUCTS]: [],
+            [STORAGE_CART_KEY_COST]: null
+        }));
     }
 };
 
