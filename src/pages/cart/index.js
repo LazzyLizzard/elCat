@@ -1,1 +1,1 @@
-export {Cart} from './cart';
+export {CartConnected as Cart} from './cart';

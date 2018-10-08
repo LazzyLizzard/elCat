@@ -1,6 +1,7 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
-export class Cart extends React.Component {
+class Cart extends React.Component {
     render() {
         return (
             <div>
@@ -9,3 +10,8 @@ export class Cart extends React.Component {
         );
     }
 }
+export const CartConnected = connect(
+    null,
+    null
+)(Cart);
+
