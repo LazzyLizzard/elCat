@@ -104,7 +104,7 @@ class Product extends React.PureComponent {
 
                 <div className="product-card__layout">
                     <div className="product-card__layout-image">
-                        image
+                       * image
                     </div>
                     <div className="product-card__layout-props">
 
@@ -130,7 +130,7 @@ class Product extends React.PureComponent {
                                 [FIELD_QUANTITY]: 1
                             }}
                             minimalQuantity={1}
-                            productId={productId}
+                            productId={cartProductId}
                             onSubmit={this.props.addToCart}
                         />
 

@@ -19,7 +19,5 @@ export const addToLocalCart = (productData) => {
                     [STORAGE_CART_KEY_PRODUCTS]: [...localCart[STORAGE_CART_KEY_PRODUCTS], ...[productData]]
                 }
             }));
-    } else {
-
     }
 };
