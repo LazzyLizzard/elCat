@@ -18,6 +18,7 @@ module.exports = {
     },
     entry: [
         'webpack-hot-middleware/client?path=/__webpack_hmr',
+        // 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=100',
         'babel-polyfill',
         './src/index'
     ],

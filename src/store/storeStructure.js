@@ -1,8 +1,9 @@
-const storeStructure = {
+export const storeStructure = {
     fiche: {},
     cart: [],
     product: {},
-    customer: null
+    customer: null,
+    zzz: '*'
 };
 
-export default storeStructure;
+// export default storeStructure;
