@@ -23,6 +23,16 @@ module.exports = {
         'DEBUG': false,
         'TEST': false
     },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "paths": ["src"]
+            },
+            'alias': [
+                ['src']
+            ]
+        }
+    },
     'rules': {
         'indent': ['error', 4, {'SwitchCase': 1}],
         'import/prefer-default-export': 'off',

@@ -9,15 +9,17 @@ import {
     PICK_FORM_GROUP_ID,
     PICK_FORM_FILTERS,
     PICK_FORM_MANUFACTURERS
-} from './../field-names';
-import {NAMESPACE} from './../reducer';
+} from '../field-names';
+import {NAMESPACE} from '../reducer';
 // TODO think where import below should be
 import {toggleBoxesHandler} from '../actions';
 import {valueSelector} from './selectors';
 
 class PickForm extends React.Component {
     componentDidMount() {
-        const {autoFillData, pickGroupId, autofill, pathName, onSubmit} = this.props;
+        const {
+            autoFillData, pickGroupId, autofill, pathName, onSubmit
+        } = this.props;
 
         const fData = {};
         fData[PICK_FORM_GROUP_ID] = pickGroupId;
@@ -52,7 +54,9 @@ class PickForm extends React.Component {
     };
 
     render() {
-        const {handleSubmit, pristine, reset, submitting, pickFormData, pathName = null, filterValues} = this.props;
+        const {
+            handleSubmit, pristine, reset, submitting, pickFormData, pathName = null, filterValues
+        } = this.props;
         return (
             <div>
                 <form

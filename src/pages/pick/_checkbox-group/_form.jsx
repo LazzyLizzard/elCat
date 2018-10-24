@@ -22,7 +22,12 @@ class TestForm extends React.Component {
                                             component="input"
                                             // onChange={e => e.preventDefault()}
                                         />
-                                        {list.itemName} - {list.value} |
+                                        {list.itemName}
+                                        {' '}
+-
+                                        {list.value}
+                                        {' '}
+|
                                     </span>
                                 ))}
                             </div>

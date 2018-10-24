@@ -28,8 +28,8 @@ class MakeType extends Component {
             <div>
                 <div><Link to="/">home</Link></div>
                 <h4>make type TRUE</h4>
-                {years &&
-                <YearsList yearsList={years} make={make} typeId={typeId} />
+                {years
+                && <YearsList yearsList={years} make={make} typeId={typeId} />
                 }
             </div>
         );

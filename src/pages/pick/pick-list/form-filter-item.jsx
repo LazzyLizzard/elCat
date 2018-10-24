@@ -2,7 +2,7 @@ import React from 'react';
 import {memoize} from 'lodash';
 import {CheckboxFilter} from 'components/checkbox-filter/checkbox-filter';
 import {declension} from 'utils/declension';
-import {PICK_FORM_FILTERS} from './../field-names';
+import {PICK_FORM_FILTERS} from '../field-names';
 
 // to avoid memory leaks second arg creates map key since the first one returns array that cannot be a key
 const memoizedProp = memoize(
@@ -39,29 +39,42 @@ export class FormFilterItem extends React.PureComponent {
                             disabled={checkedCount === 0}
                             onClick={() => resetFiltersGroup(prodParamsGroupId)}
                         >
-                            сбросить {checkedCount} для группы {prodParamsGroupId}
+                            сбросить
+                            {' '}
+                            {checkedCount}
+                            {' '}
+для группы
+                            {' '}
+                            {prodParamsGroupId}
                         </button>
 
                         {checkboxesNumber}
                         {' '}
                         {declension(checkboxesNumber, 'чекбокс', 'чекбокса', 'чекбоксов')}
                         {
-                            featuredNumber > 0 &&
-                            <span>, feat: {featuredNumber}</span>
+                            featuredNumber > 0
+                            && (
+                                <span>
+, feat:
+                                    {featuredNumber}
+                                </span>
+                            )
                         }
                         {',  '}
                         <span onClick={() => this.selectView()}>
                             {
-                                featuredNumber > 0 &&
-                                <React.Fragment>
+                                featuredNumber > 0
+                                && (
+                                    <React.Fragment>
                                     показать
-                                    {' '}
-                                    {
-                                        this.state.onlyFeatured === true
-                                            ? <React.Fragment>все</React.Fragment>
-                                            : <React.Fragment>featured only</React.Fragment>
-                                    }
-                                </React.Fragment>
+                                        {' '}
+                                        {
+                                            this.state.onlyFeatured === true
+                                                ? <React.Fragment>все</React.Fragment>
+                                                : <React.Fragment>featured only</React.Fragment>
+                                        }
+                                    </React.Fragment>
+                                )
                             }
                         </span>
                     </div>

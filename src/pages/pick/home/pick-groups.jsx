@@ -14,7 +14,10 @@ export const PickGroups = ({pickGroupsList}) => (
                     >
                         {group.group_name}
                     </Link>
-                    (id {group.id})
+                    (id
+                    {' '}
+                    {group.id}
+)
                 </div>
             ))
         }

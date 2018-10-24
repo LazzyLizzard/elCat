@@ -1,13 +1,14 @@
 import React from 'react';
 import {map} from 'lodash';
 import {Link} from 'react-router';
-import {NAMESPACE} from './../../fiche/model/reducer';
+import {NAMESPACE} from '../model/reducer';
 
 export class YearsList extends React.Component {
-
     onlyYear = item => (
         <span>
-            {item.year} (-)
+            {item.year}
+            {' '}
+(-)
         </span>
     );
 
@@ -18,7 +19,9 @@ export class YearsList extends React.Component {
             >
                 {item.year}
             </Link>
-            ({item.modelsNumber})
+            (
+            {item.modelsNumber}
+)
         </span>
     );
 

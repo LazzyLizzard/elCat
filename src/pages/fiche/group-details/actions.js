@@ -39,11 +39,9 @@ export const requestGroupInfo = id => (
             `${url}?async=1&action=modelGroup&groupId=${id}`, {
                 method: 'get'
                 // mode: 'cors'
-            })
-            .then(response =>
-                // console.warn(response);
-                response.json()
-            )
+            }
+        )
+            .then(response => response.json())
             .then(modelData => dispatch(groupDataSuccess(modelData)))
             .catch(error => dispatch(groupDataError(error)));
     }

@@ -58,7 +58,9 @@ class PickList extends React.Component {
     render() {
         console.log('render');
         const {
-            [NAMESPACE]: {pickListGroups, pickResult, pagination, error, pickGroupId, loader},
+            [NAMESPACE]: {
+                pickListGroups, pickResult, pagination, error, pickGroupId, loader
+            },
             ownLocation: {pathname, query}
         } = this.props;
 
@@ -71,8 +73,8 @@ class PickList extends React.Component {
                     {error && (
                         <div style={{color: '#c70000'}}>{error.message}</div>
                     )}
-                    {loader &&
-                    <div style={{color: '#009900'}}>LOADING</div>
+                    {loader
+                    && <div style={{color: '#009900'}}>LOADING</div>
                     }
                     <PickForm
                         pickGroupId={pickGroupId}
@@ -116,7 +118,8 @@ export default connect(
         pageNumberClick: (pageNumber) => {
             console.log(pageNumber);
         }
-    }))(PickList);
+    })
+)(PickList);
 
 
 PickList.propTypes = {

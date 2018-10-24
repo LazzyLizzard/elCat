@@ -63,13 +63,9 @@ export const requestModelData = id => (
             `${url}?async=1&action=model&modelId=${id}`, {
                 method: 'get'
                 // mode: 'no-cors'
-            })
-            .then(response =>
-                // console.warn(response);
-                // TODO check .status
-
-                response.json()
-            )
+            }
+        )
+            .then(response => response.json())
             .then(modelData => dispatch(modelDataSuccess(modelData)))
             .catch(error => dispatch(modelDataError(error)));
     }

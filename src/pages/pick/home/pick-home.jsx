@@ -3,8 +3,8 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
-import * as actions from './../actions';
-import {NAMESPACE} from './../reducer';
+import * as actions from '../actions';
+import {NAMESPACE} from '../reducer';
 import {PickGroups} from './pick-groups';
 
 const mapDispatchToProps = dispatch => ({
@@ -24,7 +24,9 @@ class PickHome extends React.Component {
         return (
             <div>
                 <h3>Pick</h3>
-                pick groups {pickList ? 'yes' : 'no'}
+                pick groups
+                {' '}
+                {pickList ? 'yes' : 'no'}
                 {pickList && <PickGroups pickGroupsList={pickList} />}
 
             </div>

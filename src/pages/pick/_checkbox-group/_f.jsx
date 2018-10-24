@@ -5,7 +5,7 @@ import MultiCheckboxField from './cbc';
 reduxForm({
     form: 'favouriteFruits',
     fields: ['fruits']
-})
+});
 export default class FavouriteFruitsForm extends Component {
     render() {
         const {

@@ -47,7 +47,8 @@ export const requestManufacturers = () => (
         return fetch(
             `${url}?async=1&action=getManufsAndTransport`, {
                 method: 'get'
-            })
+            }
+        )
             .then((response) => {
                 if (response.status === 200) {
                     return response.json();

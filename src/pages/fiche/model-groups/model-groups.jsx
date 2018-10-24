@@ -19,7 +19,8 @@ export const ModelGroups = ({modelGroups, modelId, onClick = noop}) => (
                             src={data.imgPath}
                             alt=""
                             key={data.group_id}
-                        />{data.group_name}
+                        />
+                        {data.group_name}
                     </Link>
                     {/* TODO [sf] 03.10.2017 realize further on server side */}
                     <div>save to favorites</div>

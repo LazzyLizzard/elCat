@@ -9,22 +9,20 @@ const displayTransportTypeName = transportTypeItem => (
         : transportTypeItem.ttype_name
 );
 
-export const ViewTransportTypes = ({transportList = []}) => {
-    return (
-        <ul>
-            {
-                transportList.map(item => (
-                    <li key={`${item.manuf_id}-${item.ttype_id}`}>
-                        <Link
-                            to={`/${NAMESPACE}/mt/${item.manuf_id}/${item.ttype_id}`}
-                        >
-                            {displayTransportTypeName(item)}
-                        </Link>
-                    </li>
-                ))
-            }
+export const ViewTransportTypes = ({transportList = []}) => (
+    <ul>
+        {
+            transportList.map(item => (
+                <li key={`${item.manuf_id}-${item.ttype_id}`}>
+                    <Link
+                        to={`/${NAMESPACE}/mt/${item.manuf_id}/${item.ttype_id}`}
+                    >
+                        {displayTransportTypeName(item)}
+                    </Link>
+                </li>
+            ))
+        }
 
-        </ul>
-    );
-};
+    </ul>
+);
 

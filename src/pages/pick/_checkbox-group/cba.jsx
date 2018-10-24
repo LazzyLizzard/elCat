@@ -13,7 +13,6 @@ export default class CheckboxGroup extends Component {
     // };
 
 
-
     field = ({input, meta, options}) => {
         const {name, onChange} = input;
         const {touched, error} = meta;

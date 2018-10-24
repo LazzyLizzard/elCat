@@ -1,7 +1,7 @@
 import {memoize} from 'lodash';
 import {createSelector} from 'reselect';
 import {formValueSelector} from 'redux-form';
-import {NAMESPACE} from './../reducer';
+import {NAMESPACE} from '../reducer';
 
 export const getNameSpace = nameSpace => state => state[nameSpace];
 
@@ -11,7 +11,7 @@ export const getSelectedPickResults = memoize(nameSpace => createSelector(
     (data) => {
         console.log(data);
         return data.pickResult;
-    })
-);
+    }
+));
 
 export const valueSelector = formValueSelector(NAMESPACE);

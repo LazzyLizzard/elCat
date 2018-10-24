@@ -11,7 +11,9 @@ export default class CheckboxGroup extends Component {
     };
 
     field = ({input, meta, options}) => {
-        const {name, onChange, onBlur, onFocus} = input;
+        const {
+            name, onChange, onBlur, onFocus
+        } = input;
         const {touched, error} = meta;
         const inputValue = input.value;
 

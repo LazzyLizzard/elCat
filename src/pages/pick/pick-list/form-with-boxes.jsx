@@ -6,7 +6,9 @@ import './form-with-boxes.scss';
 
 export class FormWithBoxes extends React.PureComponent {
     render() {
-        const {formData, boxToggleHandler = noop, filterFieldValues, resetFiltersGroup} = this.props;
+        const {
+            formData, boxToggleHandler = noop, filterFieldValues, resetFiltersGroup
+        } = this.props;
         if (isNil(formData.filters) || formData.filters.length === 0) {
             return null;
         }
