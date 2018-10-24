@@ -21,9 +21,7 @@ export const configureStore = () => {
     );
 
     if (process.env.NODE_ENV !== 'production' && module.hot) {
-        module.hot.accept('./../reducers', () =>
-            store.replaceReducer(rootReducer)
-        );
+        module.hot.accept('./../reducers', () => store.replaceReducer(rootReducer));
     }
     return store;
 };

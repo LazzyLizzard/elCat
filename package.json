@@ -8,6 +8,14 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
   },
+  "babel": {
+    "presets": [
+      "react-app"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
   "author": "lazy.lizard@yandex.ru",
   "license": "MIT",
   "devDependencies": {

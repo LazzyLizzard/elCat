@@ -7,13 +7,13 @@ import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import {configureStore} from './store/configureStore';
 import {Routes} from './routes';
-import storeStructure from './store/storeStructure';
+// import storeStructure from './store/storeStructure';
 import {rootReducer} from './reducers';
 
 // TODO [sf] 05.09.2017 rewrite completely
 const store = createStore(
     rootReducer,
-    configureStore(storeStructure)
+    configureStore()
 );
 const history = syncHistoryWithStore(browserHistory, store);
 
