@@ -1,5 +1,4 @@
 import React from 'react';
-import {map} from 'lodash';
 import {Link} from 'react-router';
 import {NAMESPACE} from 'pages/fiche/model/reducer';
 
@@ -22,7 +21,5 @@ export const ViewTransportTypes = ({transportList = []}) => (
                 </li>
             ))
         }
-
     </ul>
 );
-

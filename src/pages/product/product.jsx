@@ -10,8 +10,12 @@ import {
     getCartProductId,
     getProductCartPrice
 } from './selectors';
-import {getProductInfo, clearProductData, fillCartData, addToCart, setFormValuesOnChangeId} from './actions';
-import {ProductParams, ProductPrice, ProductFamily, ProdustAncestor, ProductSuperVariants} from './partials';
+import {
+    getProductInfo, clearProductData, fillCartData, addToCart, setFormValuesOnChangeId
+} from './actions';
+import {
+    ProductParams, ProductPrice, ProductFamily, ProdustAncestor, ProductSuperVariants
+} from './partials';
 import ProductCart from './product-cart';
 import {getProductIdFromUrl, getFamilyTitle} from './utils';
 import {propsPathCustomer, propsPathLocation} from './constants';
@@ -75,7 +79,6 @@ class Product extends React.PureComponent {
         const {
             product: {
                 data: {
-                    productId,
                     info,
                     descendants,
                     ancestorData,
@@ -104,7 +107,7 @@ class Product extends React.PureComponent {
 
                 <div className="product-card__layout">
                     <div className="product-card__layout-image">
-                        image
+                        ** image
                     </div>
                     <div className="product-card__layout-props">
 
@@ -134,11 +137,13 @@ class Product extends React.PureComponent {
                             onSubmit={this.props.addToCart}
                         />
 
-                        {superProduct && <ProductSuperVariants
-                            selectedProductId={cartProductId}
-                            descendants={descendants}
-                            fillDataHandler={this.props.fillCartData}
-                        />}
+                        {superProduct && (
+                            <ProductSuperVariants
+                                selectedProductId={cartProductId}
+                                descendants={descendants}
+                                fillDataHandler={this.props.fillCartData}
+                            />
+                        )}
 
                         <ProductParams params={parameters} />
 

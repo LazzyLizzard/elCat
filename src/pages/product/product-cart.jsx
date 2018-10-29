@@ -9,11 +9,14 @@ import {quantityButtonHandler} from './actions';
 
 class ProductCart extends React.Component {
     onSubmitWithArgument = additionalArgument => values => this.props.onSubmit(values, additionalArgument);
+
     // onSubmitWithArgument = additionalArgument => function (values) {
     //     return this.props.onSubmit(values, additionalArgument);
     // };
     render() {
-        const {handleSubmit, submitting, productId, superProduct} = this.props;
+        const {
+            handleSubmit, submitting, productId, superProduct
+        } = this.props;
         const isDisabled = superProduct || isNil(productId);
         return (
             <div>
@@ -39,7 +42,9 @@ class ProductCart extends React.Component {
                             name="q"
                             value={this.props.filterValues}
                         />
-                        [{this.props.filterValues}]
+                        [
+                        {this.props.filterValues}
+]
                         <button
                             type="button"
                             onClick={() => this.props.quantityButtonHandler(this.props.filterValues, 'add')}
@@ -55,7 +60,9 @@ class ProductCart extends React.Component {
                             label="Купить"
                         />
                         {' '}
-                        props selectedProductId: {productId}
+                        props selectedProductId:
+                        {' '}
+                        {productId}
                     </div>
                 </form>
             </div>

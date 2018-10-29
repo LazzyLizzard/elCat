@@ -23,7 +23,7 @@ class MakeType extends Component {
     }
 
     render() {
-        const {[NAMESPACE]: {loader, error, years}, routeParams: {make, typeId}} = this.props;
+        const {[NAMESPACE]: {years}, routeParams: {make, typeId}} = this.props;
         return (
             <div>
                 <div><Link to="/">home</Link></div>
@@ -38,7 +38,7 @@ class MakeType extends Component {
 
 export default connect(mapStateToProps, mapDispatchToProps)(MakeType);
 
-MakeType.PropTypes = {
+MakeType.propTypes = {
     makeId: PropTypes.number,
     yearId: PropTypes.number
 };

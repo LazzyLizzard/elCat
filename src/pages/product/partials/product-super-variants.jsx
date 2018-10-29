@@ -6,9 +6,9 @@ import classNames from 'classnames';
 export const ProductSuperVariants = (props) => {
     const {
         descendants = [],
-        itemClicHandler = noop,
+        // itemClicHandler = noop,
         selectedProductId = null,
-        fillDataHandler
+        fillDataHandler = noop
     } = props;
     if (descendants.length > 0) {
         return (
@@ -24,6 +24,7 @@ export const ProductSuperVariants = (props) => {
                             priceFinal
                         } = item;
                         return (
+                            // eslint-disable-next-line jsx-a11y/click-events-have-key-events
                             <div
                                 onClick={() => fillDataHandler({
                                     productId,

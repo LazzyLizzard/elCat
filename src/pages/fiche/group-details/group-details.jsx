@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {get} from 'lodash';
 import {Loader} from 'components/Common/loader';
 import * as actions from './actions';
-import {NAMESPACE} from './../model/reducer';
+import {NAMESPACE} from '../model/reducer';
 import {DetailsList} from './details-list';
 
 function mapDispatchToProps(dispatch) {
@@ -17,11 +17,10 @@ function mapStateToProps(state) {
 }
 
 class GroupDetails extends React.Component {
-
     componentDidMount() {
         const {routeParams: {groupId}} = this.props;
         this.props.getGroupData(groupId);
-        let x = get(this.props, 'fiche.modelData.modelInfo.model_id', 'no');
+        const x = get(this.props, 'fiche.modelData.modelInfo.model_id', 'no');
         console.log(x);
     }
 

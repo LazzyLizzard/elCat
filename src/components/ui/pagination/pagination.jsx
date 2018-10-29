@@ -40,7 +40,9 @@ export class Pagination extends React.Component {
             return null;
         }
         const {
-            pagination: {currentPage, itemsPerPage, total, pages, pagesNumber},
+            pagination: {
+                currentPage, itemsPerPage, total, pages, pagesNumber
+            },
             pageClickHandler = noop,
             baseUrl,
             pathName,
@@ -51,7 +53,8 @@ export class Pagination extends React.Component {
             <div className="pagination">
                 <div className="pagination__total-pages">
                     pagination: items found total {total}, per page {itemsPerPage},
-                    current {currentPage} of {pagesNumber}</div>
+                    current {currentPage} of {pagesNumber}
+                </div>
                 <div className="pagination__navigation">
                     {pages.map((pageItem) => {
                         const isCurrent = pageItem.current;
@@ -62,7 +65,8 @@ export class Pagination extends React.Component {
                             ? e => e.preventDefault()
                             : () => pageClickHandler(
                                 link(pageItem.pageNumber, queryParams, pickGroupId, true),
-                                pathName);
+                                pathName
+                            );
                         return (
                             /* TODO remove this crap and use classNames */
                             <Link
@@ -82,4 +86,3 @@ export class Pagination extends React.Component {
         );
     }
 }
-

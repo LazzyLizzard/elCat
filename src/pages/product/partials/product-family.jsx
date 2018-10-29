@@ -45,32 +45,38 @@ export class ProductFamily extends React.PureComponent {
                 >
                     {item.info.products_name}
                 </Link>
-                ({item.info.products_name_for_list})
+                (
+                {item.info.products_name_for_list}
+                )
             </div>
         ));
     };
 
     render() {
-        const {descendants = [], title, itemsPerBlock = 10000, allowFiltering} = this.props;
+        const {
+            descendants = [], title, itemsPerBlock = 10000, allowFiltering
+        } = this.props;
         if (isEmpty(descendants)) {
             return null;
         }
-        const familyFiltered = descendants.filter(item =>
-            item.info.products_name.toLowerCase().indexOf(this.state.filterBy.toLowerCase()) !== -1
-            // TODO add products_name_for_list to check
-            // || item.info.products_name_for_list.indexOf(this.state.filterBy.toLowerCase()) !== -1
-        );
+        const familyFiltered = descendants.filter(item => item.info.products_name
+            .toLowerCase()
+            .indexOf(this.state.filterBy.toLowerCase()) !== -1);
 
         const familyChunked = chunk(familyFiltered, itemsPerBlock);
 
         return (
             <div>
-                <h4>{title}</h4>
-                {allowFiltering && <ProductFamilyFilter
-                    onChange={this.handleChange}
-                    resetField={this.resetFitler}
-                    filterBy={this.state.filterBy}
-                />}
+                <h4>
+                    {title}
+                </h4>
+                {allowFiltering && (
+                    <ProductFamilyFilter
+                        onChange={this.handleChange}
+                        resetField={this.resetFitler}
+                        filterBy={this.state.filterBy}
+                    />
+                )}
                 <ProductFamilyPages
                     pagesNumber={familyChunked.length}
                     currentPage={this.state.groupId}

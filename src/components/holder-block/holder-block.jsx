@@ -19,13 +19,14 @@ export class HolderBlock extends Component {
         }
     }
 
-    togglerHandler = () => this.setState({
+    togglerHandler = () => this.setState(() => ({
         collapsed: !this.state.collapsed
-    });
+    }));
 
     renderToggler = collapsed => (
         <div
             onClick={() => this.togglerHandler()}
+            onKeyUp={() => this.togglerHandler()}
             className="holder-block__toggler"
         >
             {
@@ -39,16 +40,20 @@ export class HolderBlock extends Component {
         return (
             <div className="holder-block">
                 <div className="holder-block__head">
-                    <div className="holder-block__title">{title}</div>
-                    {collapsible &&
-                    this.renderToggler(this.state.collapsed)
+                    <div className="holder-block__title">
+                        {title}
+                    </div>
+                    {collapsible
+                    && this.renderToggler(this.state.collapsed)
                     }
                 </div>
                 {
-                    !this.state.collapsed &&
-                    <div className="holder-block__content">
-                        {children}
-                    </div>
+                    !this.state.collapsed
+                    && (
+                        <div className="holder-block__content">
+                            {children}
+                        </div>
+                    )
                 }
             </div>
         );

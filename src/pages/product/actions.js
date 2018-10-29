@@ -70,8 +70,7 @@ export const quantityButtonHandler = (currentValue, action) => (dispatch) => {
     const value = Number(currentValue);
     dispatch(change('to-cart', FIELD_QUANTITY, action === 'add'
         ? value + 1
-        : value - 1)
-    );
+        : value - 1));
 };
 
 export const addToCart = (requestBody, otherArgs) => (dispatch) => {

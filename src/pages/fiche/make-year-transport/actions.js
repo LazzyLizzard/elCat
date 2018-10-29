@@ -39,7 +39,8 @@ export const mtyModelData = (make, type, year) => (
             `${url}?async=1&action=getModelsByAllParams&manufId=${make}&tTypeId=${type}&year=${year}`, {
                 method: 'get'
                 // mode: 'no-cors'
-            })
+            }
+        )
             .then((response) => {
                 if (response.status === 200) {
                     return response.json();

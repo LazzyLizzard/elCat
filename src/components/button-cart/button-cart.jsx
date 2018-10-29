@@ -7,18 +7,20 @@ const CLASS_NAME = 'button-cart';
 export const ButtonCart = (props) => {
     const {
         label,
-        disabled,
-        productInCart
+        disabled
     } = props;
 
-    return (<button
-        className={classNames(
-            CLASS_NAME,
-            {[`${CLASS_NAME}--disabled`]: disabled})
-        }
-        disabled={disabled}
-        title={disabled ? 'Выберите одн из вариантов' : 'Добавить в корзину'}
-    >
-        {label}
-    </button>);
+    return (
+        <button
+            type="button"
+            className={classNames(
+                CLASS_NAME,
+                {[`${CLASS_NAME}--disabled`]: disabled}
+            )
+            }
+            disabled={disabled}
+            title={disabled ? 'Выберите одн из вариантов' : 'Добавить в корзину'}
+        >
+            {label}
+        </button>);
 };

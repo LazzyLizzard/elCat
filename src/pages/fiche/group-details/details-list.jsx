@@ -13,8 +13,5 @@ export class DetailsList extends React.Component {
                 ))}
             </div>
         );
-
     }
-
-
 }

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import * as actions from './actions';
 import {ModelsList} from './models-list';
@@ -24,7 +24,9 @@ class MakeYearTransport extends Component {
         const {fiche: {modelsList}} = this.props;
         return (
             <div>
-                <h4>make year transport</h4>
+                <h4>
+                    make year transport
+                </h4>
                 {modelsList &&
                 <ModelsList modelsList={modelsList} />
                 }
@@ -36,8 +38,8 @@ class MakeYearTransport extends Component {
 
 export default connect(mapStateToProps, mapDispatchToProps)(MakeYearTransport);
 
-MakeYearTransport.PropTypes = {
-    makeId: PropTypes.number,
-    yearId: PropTypes.number,
-    transportId: PropTypes.number
-};
+// MakeYearTransport.propTypes = {
+//     make: PropTypes.number,
+//     year: PropTypes.number,
+//     transportId: PropTypes.number
+// };

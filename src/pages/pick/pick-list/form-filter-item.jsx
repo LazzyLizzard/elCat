@@ -1,3 +1,4 @@
+/* eslint-disable react/no-access-state-in-setstate */
 import React from 'react';
 import {memoize} from 'lodash';
 import {CheckboxFilter} from 'components/checkbox-filter/checkbox-filter';
@@ -61,7 +62,10 @@ export class FormFilterItem extends React.PureComponent {
                             )
                         }
                         {',  '}
-                        <span onClick={() => this.selectView()}>
+                        <span
+                            onClick={() => this.selectView()}
+                            onKeyUp={() => this.selectView()}
+                        >
                             {
                                 featuredNumber > 0
                                 && (

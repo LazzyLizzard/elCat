@@ -29,7 +29,7 @@ module.exports = {
                 "paths": ["src"]
             },
             'alias': [
-                ['src']
+                ['src', '.src']
             ]
         }
     },
@@ -80,7 +80,27 @@ module.exports = {
                 "max": 2,
                 "maxEOF": 1
             }
-        ]
+        ],
+        "react/destructuring-assignment": [
+            "warn",
+            "always",
+            {
+                "ignoreClassFields": true
+            }
+        ],
+        "react/jsx-one-expression-per-line": [
+            "warn",
+            {"allow": "literal"}
+        ],
+        "react/no-access-state-in-setstate": false,
+        "operator-linebreak": ["error", "none", {
+            "overrides": {
+                "?": "ignore",
+                ":": "ignore",
+                "&&": "ignore"
+            }
+        }],
+        "function-paren-newline": ["error", "consistent"]
     }
 };
 

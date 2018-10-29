@@ -14,6 +14,7 @@ export const ProductFamilyPages = (props) => {
                         key={`page-${index}`}
                         className={`product-card__filter-pages-item ${index === currentPage && 'product-card__filter-pages-item--active'}`}
                         onClick={() => clickHandler(index)}
+                        onKeyUp={() => clickHandler(index)}
                     >
                         {index + 1}
                     </div>

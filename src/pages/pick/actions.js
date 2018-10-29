@@ -52,7 +52,8 @@ export const getOptionsByGroupId = pickGroupId => (dispatch) => {
     return fetch(
         `${baseUrl}${pickGroupId}/`, {
             method: 'get'
-        })
+        }
+    )
         .then(response => response.json())
         .then((pickGroupsList) => {
             dispatch({
@@ -75,7 +76,8 @@ export const requestPickList = pickGroupName => (dispatch) => {
     return fetch(
         baseUrl, {
             method: 'get'
-        })
+        }
+    )
         .then(response => response.json())
         .then((pickGroups) => {
             dispatch(requestSuccess(PICK_REQUEST_SUCCESS, 'pickList', pickGroups));
@@ -116,7 +118,8 @@ export const getPickFilters = pickGroupId => (dispatch) => {
     return fetch(
         `${baseUrl}${pickGroupId}/`, {
             method: 'get'
-        })
+        }
+    )
         .then(response => response.json())
         .then((json) => {
             dispatch({
@@ -163,7 +166,8 @@ export const getPickResults = (requestBody, pathName) => (dispatch) => {
     return fetch(
         `${baseUrl}${pickGroupId}/data/${p1}`, {
             method: 'get'
-        })
+        }
+    )
         .then(response => response.json())
         .then((json) => {
             // const {page, pagination} = json;
