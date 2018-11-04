@@ -1,18 +1,47 @@
+@import '../../../styles/index.scss';
+
 .button-checkbox {
     &__label {
-        background: #cccccc;
-        margin: 0 8px 0 0;
+        cursor: pointer;
+        font-weight: 500;
+        border-radius: 2px;
+        background: #fff;
+        color: #4e4b52;
+        margin: 0 8px 8px 0;
         padding: 10px;
+        box-shadow: 0 1px 4px 0 rgba(13, 21, 26, 0.12), 0 1px 2px 0 rgba(13, 21, 26, 0.12);
+        transition: .2s;
+        &:hover {
+            box-shadow: 0 2px 4px 0 rgba(13, 21, 26, 0.12), 0 4px 12px 0 rgba(13, 21, 26, 0.12);
+            color: #000;
+        }
+        &:last-child {
+            margin-right: 0;
+        }
         &--active {
-            background: #008A61;
+            background: $blue-ms;
+            color: $white;
+            box-shadow: 0 1px 4px 0 rgba(0, 143, 214, 0.12), 0 1px 2px 0 rgba(0, 143, 214, 0.12);
+            &:hover {
+                color: $white;
+            }
         }
         &--disabled {
-            background: #cacaac;
-            color: #cccccc;
+            cursor: default;
+            background: $white;
+            color: #bcc7cc;
+            &:hover {
+                box-shadow: 0 1px 4px 0 rgba(13, 21, 26, 0.12), 0 1px 2px 0 rgba(13, 21, 26, 0.12);
+                color: #bcc7cc;
+            }
         }
     }
     &__input {
         width: 0;
         height: 0;
+        border: none;
+        padding: 0;
+        margin: 0;
+        outline: none;
     }
 }

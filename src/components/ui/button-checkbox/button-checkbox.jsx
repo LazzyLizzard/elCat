@@ -21,8 +21,7 @@ export const ButtonCheckbox = (props) => {
                 // id={item.value}
                 disabled={disabled}
                 value={value}
-                // onClick={onClick}
-                onClick={e => console.log(e)}
+                onClick={onClick}
             />
             <span>{label}</span>
         </label>

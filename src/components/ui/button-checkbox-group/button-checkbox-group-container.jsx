@@ -2,24 +2,31 @@ import React from 'react';
 import {ButtonCheckbox} from 'components/ui/button-checkbox';
 import './button-checkbox-group.scss';
 
-const handleClick = (selected, onChange, values, multi) => {
-    console.log(selected, values);
+const handleClick = ({values, onChange, value, multi}) => {
     if (multi) {
         const newValue = [...values];
-        if (values.includes(selected)) {
-            newValue.splice(newValue.indexOf(selected), 1);
+        if (values.includes(value)) {
+            newValue.splice(newValue.indexOf(value), 1);
         } else {
-            newValue.push(selected);
+            newValue.push(value);
         }
         return onChange(newValue);
     }
 
-    return onChange(values.includes(selected) ? [] : [selected]);
+    return onChange(values.includes(value) ? [] : [value]);
 };
 
-
-export const ButtonCheckboxGroup = ({items = [], values = [], input: {onChange}, multi}) => {
-    return items.length > 0 ?
+/**
+ *
+ * @param {array} items - displayed items
+ * @param {array} values - values from form etc
+ * @param {function} onChange
+ * @param {bool} multi
+ * @returns {null}
+ * @constructor
+ */
+export const ButtonCheckboxGroup = ({items = [], values = [], input: {onChange}, multi}) => (
+    items.length > 0 ?
         <div className="button-checkbox-group">
             {items.map((item) => {
                 const {label, disabled, value} = item;
@@ -30,10 +37,14 @@ export const ButtonCheckboxGroup = ({items = [], values = [], input: {onChange},
                         disabled={disabled}
                         value={item.value}
                         active={values.includes(value)}
-                        onClick={() => handleClick(values, onChange, value, multi)}
+                        onClick={() => handleClick({
+                            values,
+                            onChange,
+                            value,
+                            multi
+                        })}
                     />
                 );
             })}
         </div>
-        : null;
-};
+        : null);

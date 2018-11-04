@@ -1,26 +1,28 @@
 import React from 'react';
+import {get} from 'lodash';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
-import {reduxForm, Field} from 'redux-form';
-import {ButtonCheckboxGroup} from 'components/ui/button-checkbox-group';
+import {reduxForm, Field, formValueSelector} from 'redux-form';
+import {ButtonCheckboxGroup} from 'components/ui';
+
+const formName = 'fff';
 
 const testItems = [
     {
         value: 'value1',
-        label: 'Значение 1',
-        disabled: true
+        label: '120/70-17',
+        featured: true
     },
     {
         value: '555',
-        label: 'hello'
+        label: '140/60-17',
+        disabled: true
     },
     {
         value: 'long',
-        label: 'Длинная стрка'
+        label: '300/55-18'
     }
 ];
-
-const xxx = e => console.log(e);
 
 class ProfilePlain extends React.Component {
     render() {
@@ -34,11 +36,13 @@ class ProfilePlain extends React.Component {
                 </div>
 
                 <div>
+                    {get(this.props, 'filterValues', []).length} of {testItems.length}
                     <Field
                         component={ButtonCheckboxGroup}
                         items={testItems}
-                        values={['555']}
+                        values={this.props.filterValues}
                         name="ppp"
+                        multi
                     />
                 </div>
             </div>
@@ -46,8 +50,10 @@ class ProfilePlain extends React.Component {
     }
 }
 
-export const Profile = connect(null, null)(
+export const Profile = connect(state => ({
+    filterValues: formValueSelector(formName)(state, 'ppp')
+}), null)(
     reduxForm({
-        form: 'fff'
+        form: formName
     })(ProfilePlain)
 );
