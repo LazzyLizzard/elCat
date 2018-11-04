@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import './button-checkbox.scss';
 
 export const ButtonCheckbox = (props) => {
-    const {disabled, active, label, value} = props;
+    const {disabled, active, label, value, onClick} = props;
     return (
         <label
             className={classNames(
@@ -21,6 +21,8 @@ export const ButtonCheckbox = (props) => {
                 // id={item.value}
                 disabled={disabled}
                 value={value}
+                // onClick={onClick}
+                onClick={e => console.log(e)}
             />
             <span>{label}</span>
         </label>

@@ -1,17 +1,18 @@
 .button-checkbox {
-  &__label {
-    background: #cccccc;
-    margin: 0 8px 0 0;
-    padding: 10px;
-    &--active {
-      background: #008A61;
+    &__label {
+        background: #cccccc;
+        margin: 0 8px 0 0;
+        padding: 10px;
+        &--active {
+            background: #008A61;
+        }
+        &--disabled {
+            background: #cacaac;
+            color: #cccccc;
+        }
     }
-    &--disabled {
-      background: #CD456B;
+    &__input {
+        width: 0;
+        height: 0;
     }
-  }
-  &__input {
-    width: 0;
-    height: 0;
-  }
 }

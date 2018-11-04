@@ -1,5 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
+import {reduxForm, Field} from 'redux-form';
 import {ButtonCheckboxGroup} from 'components/ui/button-checkbox-group';
 
 const testItems = [
@@ -18,7 +20,9 @@ const testItems = [
     }
 ];
 
-export class Profile extends React.Component {
+const xxx = e => console.log(e);
+
+class ProfilePlain extends React.Component {
     render() {
         return (
             <div>
@@ -30,10 +34,20 @@ export class Profile extends React.Component {
                 </div>
 
                 <div>
-                    <ButtonCheckboxGroup items={testItems} values={['555']} />
+                    <Field
+                        component={ButtonCheckboxGroup}
+                        items={testItems}
+                        values={['555']}
+                        name="ppp"
+                    />
                 </div>
-
             </div>
         );
     }
 }
+
+export const Profile = connect(null, null)(
+    reduxForm({
+        form: 'fff'
+    })(ProfilePlain)
+);
