@@ -56,13 +56,10 @@ class PickList extends React.Component {
     }
 
     render() {
-        console.log('render');
         const {
             [NAMESPACE]: {pickListGroups, pickResult, pagination, error, pickGroupId, loader},
             ownLocation: {pathname, query}
         } = this.props;
-
-        console.warn(this.props.selectedPickResults);
 
         if (pickListGroups) {
             return (
@@ -108,15 +105,15 @@ export default connect(
         selectedPickResults: getSelectedPickResults(NAMESPACE)(state),
         ownLocation: ownProps.location
     }),
-    dispatch => ({
-        requestPickList: pickGroupName => dispatch(requestPickList(pickGroupName)),
-        getOptionsByGroupId: id => dispatch(getOptionsByGroupId(id)),
-        resetGroupsList: () => dispatch(resetGroupsList()),
-        getPickResults: (requestBody, pathName) => dispatch(getPickResults(requestBody, pathName)),
+    {
+        requestPickList,
+        getOptionsByGroupId,
+        resetGroupsList,
+        getPickResults,
         pageNumberClick: (pageNumber) => {
             console.log(pageNumber);
         }
-    }))(PickList);
+    })(PickList);
 
 
 PickList.propTypes = {

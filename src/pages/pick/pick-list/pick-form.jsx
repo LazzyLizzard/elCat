@@ -17,30 +17,30 @@ import {valueSelector} from './selectors';
 
 class PickForm extends React.Component {
     componentDidMount() {
-        const {autoFillData, pickGroupId, autofill, pathName, onSubmit} = this.props;
-
-        const fData = {};
-        fData[PICK_FORM_GROUP_ID] = pickGroupId;
-        fData[PICK_FORM_PAGE] = 1;
-
-        let doSubmit = false;
-
-        if (get(autoFillData, PICK_FORM_FILTERS)) {
-            doSubmit = true;
-            fData[PICK_FORM_FILTERS] = autoFillData[PICK_FORM_FILTERS];
-            autofill(PICK_FORM_FILTERS, autoFillData[PICK_FORM_FILTERS]);
-        }
-        if (get(autoFillData, PICK_FORM_MANUFACTURERS)) {
-            doSubmit = true;
-            fData[PICK_FORM_MANUFACTURERS] = autoFillData[PICK_FORM_MANUFACTURERS];
-            autofill(PICK_FORM_MANUFACTURERS, autoFillData[PICK_FORM_MANUFACTURERS]);
-        }
-        console.log('DS', doSubmit);
-        console.log('fData', fData);
-
-        if (doSubmit === true) {
-            onSubmit(fData, pathName);
-        }
+        // const {autoFillData, pickGroupId, autofill, pathName, onSubmit} = this.props;
+        //
+        // const fData = {};
+        // fData[PICK_FORM_GROUP_ID] = pickGroupId;
+        // fData[PICK_FORM_PAGE] = 1;
+        //
+        // let doSubmit = false;
+        //
+        // if (get(autoFillData, PICK_FORM_FILTERS)) {
+        //     doSubmit = true;
+        //     fData[PICK_FORM_FILTERS] = autoFillData[PICK_FORM_FILTERS];
+        //     autofill(PICK_FORM_FILTERS, autoFillData[PICK_FORM_FILTERS]);
+        // }
+        // if (get(autoFillData, PICK_FORM_MANUFACTURERS)) {
+        //     doSubmit = true;
+        //     fData[PICK_FORM_MANUFACTURERS] = autoFillData[PICK_FORM_MANUFACTURERS];
+        //     autofill(PICK_FORM_MANUFACTURERS, autoFillData[PICK_FORM_MANUFACTURERS]);
+        // }
+        // console.log('DS', doSubmit);
+        // console.log('fData', fData);
+        //
+        // if (doSubmit === true) {
+        //     onSubmit(fData, pathName);
+        // }
     }
 
     onSubmitWithArgument = additionalArgument => values => this.props.onSubmit(values, additionalArgument);
@@ -58,7 +58,7 @@ class PickForm extends React.Component {
                 <form
                     onSubmit={handleSubmit(this.onSubmitWithArgument(pathName))}
                 >
-                    <ManufacturersList formData={pickFormData} />
+                    {/*<ManufacturersList formData={pickFormData} />*/}
                     <FormWithBoxes
                         formData={pickFormData}
                         boxToggleHandler={toggleBoxesHandler}

@@ -14,6 +14,10 @@ export class FormWithBoxes extends React.PureComponent {
         return (
             formData.filters.map((filterItem) => {
                 const title = `${filterItem.prodParamsGroupName} (prodParamsGroupId ${filterItem.prodParamsGroupId})`;
+                console.log('filterItem', filterItem);
+                console.log('filterFieldValues', filterFieldValues);
+                const fv = get(filterFieldValues, [[filterItem.prodParamsGroupId]], []);
+                console.log('fv', fv);
                 return (
                     <HolderBlock
                         key={filterItem.prodParamsGroupId}
@@ -23,7 +27,7 @@ export class FormWithBoxes extends React.PureComponent {
                         <FormFilterItem
                             filterData={filterItem}
                             onClickCheckbox={boxToggleHandler}
-                            filterFieldValues={get(filterFieldValues, [[filterItem.prodParamsGroupId]], [])}
+                            filterFieldValues={fv}
                             resetFiltersGroup={resetFiltersGroup}
                         />
 
