@@ -15,8 +15,7 @@ const testItems = [
     },
     {
         value: '555',
-        label: '140/60-17',
-        disabled: true
+        label: '140/60-17'
     },
     {
         value: 'long',
