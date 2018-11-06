@@ -1,8 +1,8 @@
 import React from 'react';
 import {Field} from 'redux-form';
 import {isNil} from 'lodash';
-import {HolderBlock} from 'components/holder-block';
-import {PICK_FORM_MANUFACTURERS} from './../field-names';
+import {HolderBlock} from 'components/holder-block/index';
+import {PICK_FORM_MANUFACTURERS} from '../../../field-names';
 
 export const ManufacturersList = ({formData}) => {
     const {manufList} = formData;

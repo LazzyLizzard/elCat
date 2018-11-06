@@ -1,10 +1,11 @@
 import React from 'react';
 import {isNil, noop, get} from 'lodash';
-import {HolderBlock} from 'components/holder-block';
-import {FormFilterItem} from './form-filter-item';
+import {HolderBlock} from 'components/holder-block/index';
+import {FormFilterItem} from '../filter-row-options/form-filter-item';
 import './form-with-boxes.scss';
 
-export class FormWithBoxes extends React.PureComponent {
+// TODO [sf] 06-Nov-18 rename properly
+export class FilterRow extends React.PureComponent {
     render() {
         const {formData, boxToggleHandler = noop, filterFieldValues, resetFiltersGroup} = this.props;
         if (isNil(formData.filters) || formData.filters.length === 0) {

@@ -3,8 +3,8 @@ import {memoize} from 'lodash';
 import {Field} from 'redux-form';
 import {CheckboxFilter} from 'components/checkbox-filter/checkbox-filter';
 import {declension} from 'utils/declension';
-import {ButtonCheckboxGroup} from 'components/ui';
-import {PICK_FORM_FILTERS} from './../field-names';
+import {ButtonCheckboxGroup} from 'components/ui/index';
+import {PICK_FORM_FILTERS} from '../../../field-names';
 
 // to avoid memory leaks second arg creates map key since the first one returns array that cannot be a key
 const memoizedProp = memoize(
