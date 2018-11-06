@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {NAMESPACE} from 'pages/fiche/model/reducer';
-import * as actions from './actions';
+import {requestManufacturers, setHomeViewMode} from './actions';
 import {ViewByManufacturer} from './view-by-manufacturer';
 import {ViewByTransportType} from './view-by-transport-type';
 import {ViewModes} from './view-modes';
@@ -10,18 +10,6 @@ const VIEW_MODES = [
     {id: 1, key: 'byManufacturer', text: 'производитель + тип'},
     {id: 2, key: 'byTransportType', text: 'тип + производитель'}
 ];
-
-
-function mapDispatchToProps(dispatch) {
-    return {
-        manufRequest: () => dispatch(actions.requestManufacturers()),
-        setHomeViewMode: homeViewMode => dispatch(actions.setHomeViewMode(homeViewMode))
-    };
-}
-
-function mapStateToProps(state) {
-    return state;
-}
 
 const components = {
     byManufacturer: ViewByManufacturer,
@@ -32,11 +20,11 @@ function viewMode(viewKey) {
     return components[viewKey];
 }
 
-class FicheHome extends React.Component {
+class FicheHomeComponent extends React.Component {
     componentDidMount() {
         const {[NAMESPACE]: {manufacturers}} = this.props;
         if (!manufacturers) {
-            this.props.manufRequest();
+            this.props.requestManufacturers();
         }
     }
 
@@ -53,10 +41,15 @@ class FicheHome extends React.Component {
                 />
                 <hr />
                 {manufacturers && <MyComponent data={manufacturers[homeViewMode]} />}
-
             </div>
         );
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FicheHome);
+export const FicheHome = connect(
+    state => state,
+    {
+        requestManufacturers,
+        setHomeViewMode
+    }
+)(FicheHomeComponent);

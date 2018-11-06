@@ -1,1 +1,1 @@
-export {default as FicheHome} from './home';
+export {FicheHome} from './home';
