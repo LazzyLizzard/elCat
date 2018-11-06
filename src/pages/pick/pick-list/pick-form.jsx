@@ -3,7 +3,7 @@ import {reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {get} from 'lodash';
 import {ManufacturersList} from './partials/filter-manufacturers/manufacturers-list';
-import {FilterRow} from './partials/filter-row/filter-row';
+import {FilterRows} from './partials/filter-rows/filter-rows';
 import {
     PICK_FORM_PAGE,
     PICK_FORM_GROUP_ID,
@@ -59,7 +59,7 @@ class PickForm extends React.Component {
                     onSubmit={handleSubmit(this.onSubmitWithArgument(pathName))}
                 >
                     {/*<ManufacturersList formData={pickFormData} />*/}
-                    <FilterRow
+                    <FilterRows
                         formData={pickFormData}
                         boxToggleHandler={toggleBoxesHandler}
                         filterFieldValues={filterValues}

@@ -5,7 +5,7 @@ import {FormFilterItem} from '../filter-row-options/form-filter-item';
 import './form-with-boxes.scss';
 
 // TODO [sf] 06-Nov-18 rename properly
-export class FilterRow extends React.PureComponent {
+export class FilterRows extends React.PureComponent {
     render() {
         const {formData, boxToggleHandler = noop, filterFieldValues, resetFiltersGroup} = this.props;
         if (isNil(formData.filters) || formData.filters.length === 0) {
