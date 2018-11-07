@@ -43,6 +43,11 @@ class PickForm extends React.Component {
         // }
     }
 
+    componentWillUnmount() {
+
+    }
+
+
     onSubmitWithArgument = additionalArgument => values => this.props.onSubmit(values, additionalArgument);
 
     resetFiltersGroup = (groupId) => {

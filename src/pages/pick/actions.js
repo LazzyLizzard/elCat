@@ -103,7 +103,11 @@ export const requestPickList = pickGroupName => (dispatch) => {
 export const resetGroupsList = () => ({
     type: PICK_REQUEST_LIST_RESET,
     payload: {
-        pickListGroups: null
+        pickList: null,
+        pickListGroups: null,
+        pickGroupId: null,
+        selectedPage: 1,
+        loader: false
     }
 });
 
