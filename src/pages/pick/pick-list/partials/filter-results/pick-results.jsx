@@ -3,8 +3,8 @@
  */
 import React from 'react';
 import {noop} from 'lodash';
-import {Pagination} from 'components/ui/pagination';
-import {ProductsList} from 'components/products-list';
+import {Pagination} from 'components/ui/pagination/index';
+import {ProductsList} from 'components/products-list/index';
 
 // const pageClickHandler = (pageNumber) => {
 //     console.log(pageNumber);

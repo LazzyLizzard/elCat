@@ -7,6 +7,7 @@ import {REMOTE_HTTPS} from 'constants/server-request-environment';
 import {ENDPOINT_PICK} from 'constants/end-points';
 import {filterValuesStringify, simpleFilterStringify} from 'utils/pick-from-utils';
 import {requestStart, requestError, requestSuccess} from 'utils/request-steps';
+import {PICK_STATE} from 'data-srtuctures/pick';
 import {
     PICK_FORM_PAGE,
     PICK_FORM_GROUP_ID,
@@ -97,18 +98,10 @@ export const requestPickList = pickGroupName => (dispatch) => {
         .catch(error => dispatch(requestError(PICK_REQUEST_ERROR, error)));
 };
 
-/**
- * Reset group list on unmount
- */
+// TODO [sf] 07-Nov-18 use proper const from src/data-srtuctures/pick.js
 export const resetGroupsList = () => ({
     type: PICK_REQUEST_LIST_RESET,
-    payload: {
-        pickList: null,
-        pickListGroups: null,
-        pickGroupId: null,
-        selectedPage: 1,
-        loader: false
-    }
+    payload: PICK_STATE
 });
 
 /**

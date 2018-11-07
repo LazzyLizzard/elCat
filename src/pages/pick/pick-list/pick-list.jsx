@@ -14,8 +14,8 @@ import {
     getPickResults
 } from '../actions';
 import {getNameSpace, getSelectedPickResults} from './selectors';
-import PickForm from './pick-form';
-import {PickResults} from './pick-results';
+import PickForm from './partials/filter-form/pick-form';
+import {PickResults} from './partials/filter-results/pick-results';
 import {NAMESPACE} from '../reducer';
 
 // export const getNumber = state => valueSelector(state, 'filters');
@@ -31,7 +31,7 @@ import {NAMESPACE} from '../reducer';
 //     items => items.length
 // );
 
-class PickList extends React.Component {
+class PickListComponent extends React.Component {
     componentDidMount() {
         const {
             [NAMESPACE]: {pickList},
@@ -99,7 +99,7 @@ class PickList extends React.Component {
     }
 }
 
-export default connect(
+export const PickList = connect(
     (state, ownProps) => ({
         [NAMESPACE]: getNameSpace(NAMESPACE)(state),
         selectedPickResults: getSelectedPickResults(NAMESPACE)(state),
@@ -113,10 +113,10 @@ export default connect(
         pageNumberClick: (pageNumber) => {
             console.log(pageNumber);
         }
-    })(PickList);
+    })(PickListComponent);
 
 
-PickList.propTypes = {
+PickListComponent.propTypes = {
     routeParams: PropTypes.object,
     requestPickList: PropTypes.func,
     getOptionsByGroupId: PropTypes.func,
@@ -124,7 +124,7 @@ PickList.propTypes = {
     ownLocation: PropTypes.object
 };
 
-PickList.defaultProps = {
+PickListComponent.defaultProps = {
     routeParams: {},
     requestPickList: noop,
     getOptionsByGroupId: noop,

@@ -2,18 +2,18 @@ import React from 'react';
 import {reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {get} from 'lodash';
-import {ManufacturersList} from './partials/filter-manufacturers/manufacturers-list';
-import {FilterRows} from './partials/filter-rows/filter-rows';
+import {ManufacturersList} from '../filter-manufacturers/manufacturers-list';
+import {FilterRows} from '../filter-rows/filter-rows';
 import {
     PICK_FORM_PAGE,
     PICK_FORM_GROUP_ID,
     PICK_FORM_FILTERS,
     PICK_FORM_MANUFACTURERS
-} from './../field-names';
-import {NAMESPACE} from './../reducer';
+} from '../../../field-names';
+import {NAMESPACE} from '../../../reducer';
 // TODO think where import below should be
-import {toggleBoxesHandler} from '../actions';
-import {valueSelector} from './selectors';
+import {toggleBoxesHandler} from '../../../actions';
+import {valueSelector} from '../../selectors';
 
 class PickForm extends React.Component {
     componentDidMount() {
