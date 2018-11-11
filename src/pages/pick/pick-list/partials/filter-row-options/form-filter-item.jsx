@@ -1,7 +1,6 @@
 import React from 'react';
 import {memoize} from 'lodash';
 import {Field} from 'redux-form';
-import {CheckboxFilter} from 'components/checkbox-filter/checkbox-filter';
 import {declension} from 'utils/declension';
 import {ButtonCheckboxGroup} from 'components/ui/index';
 import {PICK_FORM_FILTERS} from '../../../field-names';
@@ -34,10 +33,11 @@ export class FormFilterItem extends React.PureComponent {
     };
 
     render() {
-        const {filterFieldValues, resetFiltersGroup, filterData: {prodParamsList, prodParamsGroupId}} = this.props;
-        const checkboxesNumber = prodParamsList.length;
-        const featuredNumber = prodParamsList.filter(checkboxItem => checkboxItem.featured).length;
-        const checkedCount = filterFieldValues.filter(checked => checked === true).length;
+        const {filterFieldValues = [], resetFiltersGroup, filterData: {prodParamsList, prodParamsGroupId}} = this.props;
+        const fieldItems = convertParamsToCheckboxFormat(prodParamsList);
+        const checkboxesNumber = filterFieldValues.length;
+        const featuredNumber = fieldItems.filter(checkboxItem => checkboxItem.featured).length;
+        const checkedCount = filterFieldValues.length;
 
         return (
             <div>
@@ -78,26 +78,10 @@ export class FormFilterItem extends React.PureComponent {
                     <Field
                         component={ButtonCheckboxGroup}
                         values={filterFieldValues}
-                        items={convertParamsToCheckboxFormat(prodParamsList)}
+                        items={fieldItems}
                         name={`${PICK_FORM_FILTERS}.${prodParamsGroupId}`}
                         multi
                     />
-                    {/* <div className="form-with-boxes__boxes "> */}
-                    {/* { */}
-                    {/* this.showModeWrapper(this.state.onlyFeatured, prodParamsList).map(checkboxItem => ( */}
-                    {/* <div */}
-                    {/* className="form-with-boxes__box-item" */}
-                    {/* key={checkboxItem.valueId} */}
-                    {/* // onClick={() => onClickCheckbox(prodParamsGroupId)} */}
-                    {/* > */}
-                    {/* <CheckboxFilter */}
-                    {/* label={`${checkboxItem.parameterName} (id ${checkboxItem.valueId})`} */}
-                    {/* name={`${PICK_FORM_FILTERS}[${prodParamsGroupId}][${checkboxItem.valueId}]`} */}
-                    {/* featured={checkboxItem.featured} */}
-                    {/* /> */}
-                    {/* </div> */}
-                    {/* ))} */}
-                    {/* </div> */}
                 </div>
             </div>
         );

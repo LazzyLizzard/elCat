@@ -1,32 +1,24 @@
 import React from 'react';
 import {Field} from 'redux-form';
-import {isNil} from 'lodash';
-import {HolderBlock} from 'components/holder-block/index';
+import {HolderBlock} from 'components/holder-block';
+import {ButtonCheckboxGroup} from 'components/ui/button-checkbox-group';
 import {PICK_FORM_MANUFACTURERS} from '../../../field-names';
 
-export const ManufacturersList = ({formData}) => {
-    const {manufList} = formData;
-    if (isNil(manufList)) {
-        return null;
-    }
-    return (
-        <HolderBlock
-            title="Произвордители"
-        >
-            {
-                // TODO [sf] 17.05.2018 refactor backend code to get rid of manufacturers_id === false
-                manufList
-                    .filter(manufItem => manufItem.manufacturers_id !== false)
-                    .map(item => (
-                        <span key={item.manufacturers_id}>{item.manufacturers_name}
-                            <Field
-                                name={`${PICK_FORM_MANUFACTURERS}[${item.manufacturers_id}]`}
-                                component="input"
-                                type="checkbox"
-                            /> |
-                        </span>
-                    ))
-            }
-        </HolderBlock>
-    );
-};
+export const ManufacturersList = ({fieldValues = [], formData: {manufList}}) =>
+    manufList &&
+    <HolderBlock
+        title="Производители"
+    >
+        <Field
+            component={ButtonCheckboxGroup}
+            values={fieldValues}
+            items={manufList
+                .filter(item => item.manufacturers_id !== false)
+                .map(item => ({
+                    label: item.manufacturers_name,
+                    value: String(item.manufacturers_id)
+                }))}
+            name={PICK_FORM_MANUFACTURERS}
+            multi
+        />
+    </HolderBlock>;

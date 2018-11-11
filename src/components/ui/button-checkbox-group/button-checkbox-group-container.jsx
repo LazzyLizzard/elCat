@@ -47,4 +47,5 @@ export const ButtonCheckboxGroup = ({items = [], values = [], input: {onChange},
                 );
             })}
         </div>
-        : null);
+        : null
+);

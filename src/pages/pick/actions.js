@@ -5,7 +5,7 @@ import {stringify} from 'query-string';
 import {getRequestEnvironment} from 'utils/get-request-environment';
 import {REMOTE_HTTPS} from 'constants/server-request-environment';
 import {ENDPOINT_PICK} from 'constants/end-points';
-import {filterValuesStringify, simpleFilterStringify} from 'utils/pick-from-utils';
+import {filterValuesStringify} from 'utils/pick-from-utils';
 import {requestStart, requestError, requestSuccess} from 'utils/request-steps';
 import {PICK_STATE} from 'data-srtuctures/pick';
 import {
@@ -127,6 +127,7 @@ export const getPickFilters = pickGroupId => (dispatch) => {
         });
 };
 
+
 /**
  * Getting result by filter (thunk)
  * @param requestBody
@@ -146,7 +147,7 @@ export const getPickResults = (requestBody, pathName) => (dispatch) => {
     // TODO [sf] 19.02.2018 add check if values are empty
     const queryParams = stringify({
         [PICK_FORM_FILTERS]: filterValuesStringify(filters),
-        [PICK_FORM_MANUFACTURERS]: simpleFilterStringify(m)
+        [PICK_FORM_MANUFACTURERS]: m ? m.join(',') : null
     }, {encode: false});
     const p = `${pathName}?page=${page}&${queryParams}`;
     const p1 = `?page=${page}&${queryParams}`;
@@ -167,6 +168,7 @@ export const getPickResults = (requestBody, pathName) => (dispatch) => {
             dispatch({
                 type: PICK_REQUEST_RESULT_SUCCESS,
                 payload: {
+                    error: null,
                     pagination: json.pagination,
                     selectedPage: page,
                     loader: false,
