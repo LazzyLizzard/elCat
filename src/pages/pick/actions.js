@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 import 'whatwg-fetch';
 import {find} from 'lodash';
 import {push} from 'react-router-redux';
+import {change} from 'redux-form';
 import {stringify} from 'query-string';
 import {getRequestEnvironment} from 'utils/get-request-environment';
 import {REMOTE_HTTPS} from 'constants/server-request-environment';
@@ -191,4 +193,9 @@ export const getPickResults = (requestBody, pathName) => (dispatch) => {
  */
 export const toggleBoxesHandler = (filterGroupId) => {
     console.log(filterGroupId);
+};
+
+// TODO [sf] 12.11.2018 use external constants
+export const resetFilterField = fieldPostfix => (dispatch) => {
+    dispatch(change('pick', `filters.${fieldPostfix}`, []));
 };

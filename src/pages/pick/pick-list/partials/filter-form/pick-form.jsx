@@ -12,7 +12,7 @@ import {
 } from '../../../field-names';
 import {NAMESPACE} from '../../../reducer';
 // TODO think where import below should be
-import {toggleBoxesHandler} from '../../../actions';
+import {toggleBoxesHandler, resetFilterField} from '../../../actions';
 import {valueSelector} from '../../selectors';
 
 class PickFormClass extends React.Component {
@@ -51,12 +51,6 @@ class PickFormClass extends React.Component {
 
     onSubmitWithArgument = additionalArgument => values => this.props.onSubmit(values, additionalArgument);
 
-    resetFiltersGroup = (groupId) => {
-        // TODO [sf] 16.05.2018 think if there's less rude way to clear checkboxes array
-        const {array} = this.props;
-        array.remove('filters', groupId);
-    };
-
     render() {
         const {
             handleSubmit,
@@ -81,7 +75,7 @@ class PickFormClass extends React.Component {
                         formData={pickFormData} // store values
                         boxToggleHandler={toggleBoxesHandler}
                         filterFieldValues={filterValues}
-                        resetFiltersGroup={this.resetFiltersGroup}
+                        resetFiltersGroup={this.props.resetFilterField}
                     />
 
                     <div>
@@ -103,7 +97,9 @@ class PickFormClass extends React.Component {
 export const PickForm = connect(state => ({
     filterValues: valueSelector(state, PICK_FORM_FILTERS),
     manufacturersValues: valueSelector(state, PICK_FORM_MANUFACTURERS)
-}), null)(
+}), {
+    resetFilterField
+})(
     reduxForm({
         form: NAMESPACE
     })(PickFormClass)
