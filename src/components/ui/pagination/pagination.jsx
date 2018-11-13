@@ -2,8 +2,8 @@ import React from 'react';
 import {noop, isNil} from 'lodash';
 import {Link} from 'react-router';
 // import PropTypes from 'prop-types';
-import {prepareAutoFillData} from 'utils/pick-from-utils';
 import {stringify} from 'query-string';
+import {prepareAutoFillData} from 'pages/pick/utils';
 import './pagination.scss';
 
 // TODO [sf] 18.05.2018 rewrite this crap

@@ -5,7 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {noop, isNil, pick} from 'lodash';
-import {prepareAutoFillData} from 'utils/pick-from-utils';
+import {prepareAutoFillData} from './../utils';
 import {
     getGroupIdByName,
     requestPickList,
