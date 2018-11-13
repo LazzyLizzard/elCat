@@ -1,8 +1,9 @@
 import React from 'react';
-import {reduxForm} from 'redux-form';
+import {reduxForm, getFormValues} from 'redux-form';
 import {connect} from 'react-redux';
 import {get} from 'lodash';
 import {ManufacturersList} from '../filter-manufacturers/manufacturers-list';
+import {FilterTags} from './../../partials/filter-tags';
 import {FilterRows} from '../filter-rows/filter-rows';
 import {
     PICK_FORM_PAGE,
@@ -60,10 +61,14 @@ class PickFormClass extends React.Component {
             pickFormData,
             pathName = null,
             filterValues,
-            manufacturersValues
+            manufacturersValues,
+            formValues
         } = this.props;
         return (
             <div>
+                <FilterTags
+                    fields={formValues}
+                />
                 <form
                     onSubmit={handleSubmit(this.onSubmitWithArgument(pathName))}
                 >
@@ -96,7 +101,8 @@ class PickFormClass extends React.Component {
 
 export const PickForm = connect(state => ({
     filterValues: valueSelector(state, PICK_FORM_FILTERS),
-    manufacturersValues: valueSelector(state, PICK_FORM_MANUFACTURERS)
+    manufacturersValues: valueSelector(state, PICK_FORM_MANUFACTURERS),
+    formValues: getFormValues(NAMESPACE)(state)
 }), {
     resetFilterField
 })(

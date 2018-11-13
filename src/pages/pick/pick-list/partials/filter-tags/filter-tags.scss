@@ -1,0 +1,15 @@
+.filter-tags {
+    display: flex;
+
+    &__title {
+        display: flex;
+    }
+
+    &__tags {
+        display: flex;
+    }
+
+    &__control {
+        display: flex;
+    }
+}
