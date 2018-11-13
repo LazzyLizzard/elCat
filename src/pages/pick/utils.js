@@ -1,4 +1,17 @@
-import {isEmpty} from 'lodash';
+import {find, get, isEmpty} from 'lodash';
+
+
+/**
+ * Getting group id by group name
+ * @param {string} name
+ * @param {array} data Array of objects, list of group names
+ * @returns {null | number}
+ */
+export const getGroupIdByName = (name, data) => {
+    const result = find(data, item => item.groupNameTransformed === name);
+    return get(result, 'id', null);
+};
+
 
 /**
  * Converts form data object to queryString-like string

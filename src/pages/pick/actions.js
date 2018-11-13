@@ -9,7 +9,7 @@ import {REMOTE_HTTPS} from 'constants/server-request-environment';
 import {ENDPOINT_PICK} from 'constants/end-points';
 import {requestStart, requestError, requestSuccess} from 'utils/request-steps';
 import {PICK_STATE} from 'data-srtuctures/pick';
-import {filterValuesStringify} from './utils';
+import {filterValuesStringify, getGroupIdByName} from './utils';
 import {
     PICK_FORM_PAGE,
     PICK_FORM_GROUP_ID,
@@ -34,17 +34,6 @@ export const PICK_REQUEST_RESULT_ERROR = 'PICK/REQUEST_RESULT_ERROR';
 export const PICK_SET_PAGE_FROM_PAGINATION = 'PICK/SET_PAGE_FROM_PAGINATION';
 
 const baseUrl = `${getRequestEnvironment(REMOTE_HTTPS)}${ENDPOINT_PICK}`;
-
-/**
- * Getting group id by group name
- * @param {string} name
- * @param {array} data Array of objects, list of group names
- * @returns {null | number}
- */
-export const getGroupIdByName = (name, data) => {
-    const result = find(data, item => item.groupNameTransformed === name);
-    return get(result, 'id', null);
-};
 
 /**
  * Get groups of options by group id
