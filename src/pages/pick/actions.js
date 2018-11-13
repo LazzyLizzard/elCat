@@ -1,15 +1,15 @@
 /* eslint-disable no-unused-vars */
 import 'whatwg-fetch';
-import {find} from 'lodash';
+import {find, get} from 'lodash';
 import {push} from 'react-router-redux';
 import {change} from 'redux-form';
 import {stringify} from 'query-string';
 import {getRequestEnvironment} from 'utils/get-request-environment';
 import {REMOTE_HTTPS} from 'constants/server-request-environment';
 import {ENDPOINT_PICK} from 'constants/end-points';
-import {filterValuesStringify} from 'utils/pick-from-utils';
 import {requestStart, requestError, requestSuccess} from 'utils/request-steps';
 import {PICK_STATE} from 'data-srtuctures/pick';
+import {filterValuesStringify} from './utils';
 import {
     PICK_FORM_PAGE,
     PICK_FORM_GROUP_ID,
@@ -43,7 +43,7 @@ const baseUrl = `${getRequestEnvironment(REMOTE_HTTPS)}${ENDPOINT_PICK}`;
  */
 export const getGroupIdByName = (name, data) => {
     const result = find(data, item => item.groupNameTransformed === name);
-    return result ? result.id : null;
+    return get(result, 'id', null);
 };
 
 /**
