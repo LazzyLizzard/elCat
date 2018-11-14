@@ -64,10 +64,13 @@ class PickFormClass extends React.Component {
             manufacturersValues,
             formValues
         } = this.props;
+        // console.log('pickFormData', pickFormData);
+
         return (
             <div>
                 <FilterTags
                     fields={formValues}
+                    // filterValues={filterValues}
                 />
                 <form
                     onSubmit={handleSubmit(this.onSubmitWithArgument(pathName))}

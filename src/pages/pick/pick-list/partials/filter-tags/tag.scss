@@ -1,10 +1,16 @@
 .tag {
-    background: #cccccc;
-    color: #000;
+    background: #ebeef0;
+    color: #5d717a;
     display: flex;
+    padding: 2px 8px;
+    margin: 0 4px 0 0;
+    font-size: 14px;
+
     &__title {
         display: flex;
+        padding: 0 8px 0 0;
     }
+
     &__control {
         display: flex;
     }
