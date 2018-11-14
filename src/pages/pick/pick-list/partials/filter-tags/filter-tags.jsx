@@ -42,7 +42,7 @@ const renderTags = (filters = {}, descriptors) => {
     console.log('entries', entries);
     return entries.map((item) => {
         const [key, value] = item;
-        console.log('key. item', key, item);
+        // console.log('key. item', key, item);
         if (key === 'filters') {
             const filterKeys = filters.filters
                 .map((xitem, index) => (!isEmpty(xitem) ? String(index) : null))
