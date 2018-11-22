@@ -11,6 +11,9 @@ const FIELDS_DESCRIPTORS = {
         multi: false,
         title: 'Производители'
     },
+    708: {
+        title: 'диаметр'
+    },
     [PICK_FORM_FILTERS]: {
         multi: true,
         706: {
@@ -48,9 +51,7 @@ const renderTags = (filters = {}, descriptors) => {
                 .map((xitem, index) => (!isEmpty(xitem) ? String(index) : null))
                 .filter(v => !isEmpty(v));
             console.log('fff', filterKeys);
-            return filterKeys.map((zitem, idx) => {
-                return (<Tag key={idx} title={descriptors.filters[zitem].title} />);
-            })
+            return filterKeys.map((zitem, idx) => (<Tag key={idx} title={descriptors[zitem].title} />));
         }
         // if (get(descriptors, `[${key}].multi`)) {
         //     console.log(descriptors[key]);

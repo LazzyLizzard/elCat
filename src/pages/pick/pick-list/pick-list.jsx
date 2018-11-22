@@ -5,9 +5,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {noop, isNil, pick} from 'lodash';
-import {prepareAutoFillData} from './../utils';
+import {prepareAutoFillData, getGroupIdByName} from './../utils';
 import {
-    getGroupIdByName,
     requestPickList,
     getOptionsByGroupId,
     resetGroupsList,
