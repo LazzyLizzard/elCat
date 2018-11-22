@@ -1,0 +1,25 @@
+.filter {
+    display: flex;
+    flex-direction: column;
+
+    &-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        &__title {
+            display: flex;
+        }
+
+        &__tags {
+            display: flex;
+        }
+
+        &__control {
+            display: flex;
+        }
+    }
+    &-content {
+        background: #ccc;
+    }
+}
