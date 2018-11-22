@@ -1,14 +1,22 @@
 import React from 'react';
 import {memoize} from 'lodash';
-import {CheckboxFilter} from 'components/checkbox-filter/checkbox-filter';
+import {Field} from 'redux-form';
 import {declension} from 'utils/declension';
-import {PICK_FORM_FILTERS} from './../field-names';
+import {ButtonCheckboxGroup} from 'components/ui/index';
+import {PICK_FORM_FILTERS} from '../../../field-names';
 
 // to avoid memory leaks second arg creates map key since the first one returns array that cannot be a key
 const memoizedProp = memoize(
     needleProps => needleProps.filter(item => item.featured),
     needleProps => needleProps.map(e => e.name).join('-')
 );
+
+const convertParamsToCheckboxFormat = (prodParamsList = []) =>
+    prodParamsList.map(item => ({
+        value: String(item.valueId),
+        label: String(item.parameterName),
+        featured: item.featured
+    }));
 
 export class FormFilterItem extends React.PureComponent {
     state = {
@@ -25,10 +33,11 @@ export class FormFilterItem extends React.PureComponent {
     };
 
     render() {
-        const {filterFieldValues, resetFiltersGroup, filterData: {prodParamsList, prodParamsGroupId}} = this.props;
-        const checkboxesNumber = prodParamsList.length;
-        const featuredNumber = prodParamsList.filter(checkboxItem => checkboxItem.featured).length;
-        const checkedCount = filterFieldValues.filter(checked => checked === true).length;
+        const {filterFieldValues = [], resetFiltersGroup, filterData: {prodParamsList, prodParamsGroupId}} = this.props;
+        const fieldItems = convertParamsToCheckboxFormat(prodParamsList);
+        const checkboxesNumber = filterFieldValues.length;
+        const featuredNumber = fieldItems.filter(checkboxItem => checkboxItem.featured).length;
+        const checkedCount = filterFieldValues.length;
 
         return (
             <div>
@@ -65,22 +74,14 @@ export class FormFilterItem extends React.PureComponent {
                             }
                         </span>
                     </div>
-                    <div className="form-with-boxes__boxes ">
-                        {
-                            this.showModeWrapper(this.state.onlyFeatured, prodParamsList).map(checkboxItem => (
-                                <div
-                                    className="form-with-boxes__box-item"
-                                    key={checkboxItem.valueId}
-                                    // onClick={() => onClickCheckbox(prodParamsGroupId)}
-                                >
-                                    <CheckboxFilter
-                                        label={`${checkboxItem.parameterName} (id ${checkboxItem.valueId})`}
-                                        name={`${PICK_FORM_FILTERS}[${prodParamsGroupId}][${checkboxItem.valueId}]`}
-                                        featured={checkboxItem.featured}
-                                    />
-                                </div>
-                            ))}
-                    </div>
+
+                    <Field
+                        component={ButtonCheckboxGroup}
+                        values={filterFieldValues}
+                        items={fieldItems}
+                        name={`${PICK_FORM_FILTERS}.${prodParamsGroupId}`}
+                        multi
+                    />
                 </div>
             </div>
         );

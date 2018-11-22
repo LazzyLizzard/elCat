@@ -1,3 +1,4 @@
+/* eslint-disable react/no-did-mount-set-state */
 import React, {Component} from 'react';
 import './holder-block.scss';
 
@@ -10,12 +11,12 @@ export class HolderBlock extends Component {
         collapsed: false
     };
 
-    componentWillMount() {
+    componentDidMount() {
         const {collapsed} = this.props;
         if (collapsed) {
-            this.setState({
+            this.setState(() => ({
                 collapsed: true
-            });
+            }));
         }
     }
 

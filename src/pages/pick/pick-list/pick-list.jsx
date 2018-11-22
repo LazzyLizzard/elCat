@@ -5,17 +5,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {noop, isNil, pick} from 'lodash';
-import {prepareAutoFillData} from 'utils/pick-from-utils';
+import {prepareAutoFillData, getGroupIdByName} from './../utils';
 import {
-    getGroupIdByName,
     requestPickList,
     getOptionsByGroupId,
     resetGroupsList,
     getPickResults
 } from '../actions';
 import {getNameSpace, getSelectedPickResults} from './selectors';
-import PickForm from './pick-form';
-import {PickResults} from './pick-results';
+import {PickForm} from './partials/filter-form';
+import {PickResults} from './partials/filter-results/pick-results';
 import {NAMESPACE} from '../reducer';
 
 // export const getNumber = state => valueSelector(state, 'filters');
@@ -31,7 +30,7 @@ import {NAMESPACE} from '../reducer';
 //     items => items.length
 // );
 
-class PickList extends React.Component {
+class PickListClass extends React.Component {
     componentDidMount() {
         const {
             [NAMESPACE]: {pickList},
@@ -56,13 +55,10 @@ class PickList extends React.Component {
     }
 
     render() {
-        console.log('render');
         const {
             [NAMESPACE]: {pickListGroups, pickResult, pagination, error, pickGroupId, loader},
             ownLocation: {pathname, query}
         } = this.props;
-
-        console.warn(this.props.selectedPickResults);
 
         if (pickListGroups) {
             return (
@@ -76,7 +72,7 @@ class PickList extends React.Component {
                     }
                     <PickForm
                         pickGroupId={pickGroupId}
-                        pickFormData={pickListGroups}
+                        pickFormData={pickListGroups} // values from store
                         pathName={pathname}
                         autoFillData={this.autoFillData}
                         onSubmit={this.props.getPickResults}
@@ -102,24 +98,24 @@ class PickList extends React.Component {
     }
 }
 
-export default connect(
+export const PickList = connect(
     (state, ownProps) => ({
         [NAMESPACE]: getNameSpace(NAMESPACE)(state),
         selectedPickResults: getSelectedPickResults(NAMESPACE)(state),
         ownLocation: ownProps.location
     }),
-    dispatch => ({
-        requestPickList: pickGroupName => dispatch(requestPickList(pickGroupName)),
-        getOptionsByGroupId: id => dispatch(getOptionsByGroupId(id)),
-        resetGroupsList: () => dispatch(resetGroupsList()),
-        getPickResults: (requestBody, pathName) => dispatch(getPickResults(requestBody, pathName)),
+    {
+        requestPickList,
+        getOptionsByGroupId,
+        resetGroupsList,
+        getPickResults,
         pageNumberClick: (pageNumber) => {
             console.log(pageNumber);
         }
-    }))(PickList);
+    })(PickListClass);
 
 
-PickList.propTypes = {
+PickListClass.propTypes = {
     routeParams: PropTypes.object,
     requestPickList: PropTypes.func,
     getOptionsByGroupId: PropTypes.func,
@@ -127,7 +123,7 @@ PickList.propTypes = {
     ownLocation: PropTypes.object
 };
 
-PickList.defaultProps = {
+PickListClass.defaultProps = {
     routeParams: {},
     requestPickList: noop,
     getOptionsByGroupId: noop,

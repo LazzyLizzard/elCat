@@ -29,7 +29,7 @@ export const ButtonCheckboxGroup = ({items = [], values = [], input: {onChange},
     items.length > 0 ?
         <div className="button-checkbox-group">
             {items.map((item) => {
-                const {label, disabled, value} = item;
+                const {label, disabled, value, featured} = item;
                 return (
                     <ButtonCheckbox
                         key={value}
@@ -37,6 +37,7 @@ export const ButtonCheckboxGroup = ({items = [], values = [], input: {onChange},
                         disabled={disabled}
                         value={item.value}
                         active={values.includes(value)}
+                        featured={featured}
                         onClick={() => handleClick({
                             values,
                             onChange,
@@ -47,4 +48,5 @@ export const ButtonCheckboxGroup = ({items = [], values = [], input: {onChange},
                 );
             })}
         </div>
-        : null);
+        : null
+);

@@ -8,8 +8,9 @@ export const getNameSpace = nameSpace => state => state[nameSpace];
 // no resolver required `cos nameSpace is a string for map cache key
 export const getSelectedPickResults = memoize(nameSpace => createSelector(
     getNameSpace(nameSpace),
+    // eslint-disable-next-line arrow-body-style
     (data) => {
-        console.log(data);
+        // console.log(data);
         return data.pickResult;
     })
 );

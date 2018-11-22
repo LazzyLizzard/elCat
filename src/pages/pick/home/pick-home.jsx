@@ -3,15 +3,9 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
-import * as actions from './../actions';
+import {requestPickList} from './../actions';
 import {NAMESPACE} from './../reducer';
 import {PickGroups} from './pick-groups';
-
-const mapDispatchToProps = dispatch => ({
-    requestPickList: () => dispatch(actions.requestPickList())
-});
-
-const mapStateToProps = state => state;
 
 class PickHome extends React.Component {
     componentDidMount() {
@@ -32,5 +26,10 @@ class PickHome extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PickHome);
+export default connect(
+    state => state,
+    {
+        requestPickList
+    }
+)(PickHome);
 

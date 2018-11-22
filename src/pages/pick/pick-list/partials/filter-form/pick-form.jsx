@@ -1,21 +1,23 @@
 import React from 'react';
-import {reduxForm} from 'redux-form';
+import {reduxForm, getFormValues} from 'redux-form';
 import {connect} from 'react-redux';
 import {get} from 'lodash';
-import {ManufacturersList} from './manufacturers-list';
-import {FormWithBoxes} from './form-with-boxes';
+import {ManufacturersList} from '../filter-manufacturers/manufacturers-list';
+import {FilterTags} from './../../partials/filter-tags';
+import {FilterRows} from '../filter-rows/filter-rows';
 import {
     PICK_FORM_PAGE,
     PICK_FORM_GROUP_ID,
     PICK_FORM_FILTERS,
     PICK_FORM_MANUFACTURERS
-} from './../field-names';
-import {NAMESPACE} from './../reducer';
+} from '../../../field-names';
+import {NAMESPACE} from '../../../reducer';
 // TODO think where import below should be
-import {toggleBoxesHandler} from '../actions';
-import {valueSelector} from './selectors';
+import {toggleBoxesHandler, resetFilterField} from '../../../actions';
+import {valueSelector} from '../../selectors';
 
-class PickForm extends React.Component {
+class PickFormClass extends React.Component {
+    // TODO [sf] 11.11.2018 NEEDS REFACTOR!
     componentDidMount() {
         const {autoFillData, pickGroupId, autofill, pathName, onSubmit} = this.props;
 
@@ -43,31 +45,49 @@ class PickForm extends React.Component {
         }
     }
 
+    componentWillUnmount() {
+        // TODO [sf] 11.11.2018 add clear store fields
+    }
+
+
     onSubmitWithArgument = additionalArgument => values => this.props.onSubmit(values, additionalArgument);
 
-    resetFiltersGroup = (groupId) => {
-        // TODO [sf] 16.05.2018 think if there's less rude way to clear checkboxes array
-        const {array} = this.props;
-        array.remove('filters', groupId);
-    };
-
     render() {
-        const {handleSubmit, pristine, reset, submitting, pickFormData, pathName = null, filterValues} = this.props;
+        const {
+            handleSubmit,
+            pristine,
+            reset,
+            submitting,
+            pickFormData,
+            pathName = null,
+            filterValues,
+            manufacturersValues,
+            formValues
+        } = this.props;
+        // console.log('pickFormData', pickFormData);
+
         return (
             <div>
+                <FilterTags
+                    fields={formValues}
+                    // filterValues={filterValues}
+                />
                 <form
                     onSubmit={handleSubmit(this.onSubmitWithArgument(pathName))}
                 >
-                    <ManufacturersList formData={pickFormData} />
-                    <FormWithBoxes
+                    <ManufacturersList
                         formData={pickFormData}
+                        fieldValues={manufacturersValues}
+                    />
+                    <FilterRows
+                        formData={pickFormData} // store values
                         boxToggleHandler={toggleBoxesHandler}
                         filterFieldValues={filterValues}
-                        resetFiltersGroup={this.resetFiltersGroup}
+                        resetFiltersGroup={this.props.resetFilterField}
                     />
 
                     <div>
-                        <button type="submit" disabled={pristine || submitting}>Submit</button>
+                        <button type="submit" disabled={submitting}>Submit</button>
                         <button
                             type="button"
                             disabled={pristine || submitting}
@@ -82,10 +102,14 @@ class PickForm extends React.Component {
     }
 }
 
-export default connect(state => ({
-    filterValues: valueSelector(state, 'filters')
-}), null)(
+export const PickForm = connect(state => ({
+    filterValues: valueSelector(state, PICK_FORM_FILTERS),
+    manufacturersValues: valueSelector(state, PICK_FORM_MANUFACTURERS),
+    formValues: getFormValues(NAMESPACE)(state)
+}), {
+    resetFilterField
+})(
     reduxForm({
         form: NAMESPACE
-    })(PickForm)
+    })(PickFormClass)
 );

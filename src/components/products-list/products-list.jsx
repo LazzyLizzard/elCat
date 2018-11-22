@@ -3,7 +3,7 @@ import React from 'react';
 import {get, isNil} from 'lodash';
 import {ProductLink} from 'components/product-link';
 
-export const ProductsList = ({productsList = {}}) => {
+export const ProductsList = ({productsList = []}) => {
     const {page, data} = productsList;
     if (isNil(get(productsList, 'data'))) {
         return null;
