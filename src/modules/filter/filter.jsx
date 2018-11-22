@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
+import {get} from 'lodash';
+import {FilterComponent} from './filter-component';
+import './filter.scss';
 
 export class Filter extends Component {
-
     static defaultProps = {
         // values from redux form
         filters: {
@@ -12,11 +14,32 @@ export class Filter extends Component {
         displayData: []
     };
 
+    state = {
+        isOpen: false
+    };
+
+    componentDidMount() {
+        this.setState({
+            isOpen: get(this.props, 'isOpen', false)
+        });
+    }
+
+
+    controlClickHandler = () => {
+        this.setState(prevState => (
+            {
+                isOpen: !prevState.isOpen
+            })
+        );
+    };
+
     render() {
         return (
-            <div>
-                filter
-            </div>
+            <FilterComponent
+                isOpen={this.state.isOpen}
+                controlClickHandler={this.controlClickHandler}
+                displayData={this.props.displayData}
+            />
         );
     }
 }
