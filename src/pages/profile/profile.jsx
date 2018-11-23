@@ -41,7 +41,6 @@ class ProfilePlain extends React.Component {
                 <div>
                     <Filter
                         displayData={dispData}
-                        isOpen
                     />
                 </div>
             </div>

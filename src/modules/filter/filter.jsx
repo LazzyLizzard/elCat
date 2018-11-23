@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {get} from 'lodash';
 import {FilterComponent} from './filter-component';
-import './filter.scss';
 
 export class Filter extends Component {
     static defaultProps = {
@@ -15,12 +14,12 @@ export class Filter extends Component {
     };
 
     state = {
-        isOpen: false
+        contentOpen: false
     };
 
     componentDidMount() {
         this.setState({
-            isOpen: get(this.props, 'isOpen', false)
+            contentOpen: get(this.props, 'contentOpen', false)
         });
     }
 
@@ -28,7 +27,7 @@ export class Filter extends Component {
     controlClickHandler = () => {
         this.setState(prevState => (
             {
-                isOpen: !prevState.isOpen
+                contentOpen: !prevState.contentOpen
             })
         );
     };
@@ -36,7 +35,7 @@ export class Filter extends Component {
     render() {
         return (
             <FilterComponent
-                isOpen={this.state.isOpen}
+                contentOpen={this.state.contentOpen}
                 controlClickHandler={this.controlClickHandler}
                 displayData={this.props.displayData}
             />

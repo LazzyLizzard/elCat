@@ -1,10 +1,11 @@
 import React from 'react';
 import {FilterControl} from './partials/control';
+import {FilterContent} from './partials/content';
 import './filter.scss';
 
 export const FilterComponent = (
     {
-        isOpen,
+        contentOpen,
         controlClickHandler,
         displayData
     }
@@ -15,16 +16,14 @@ export const FilterComponent = (
             <div className="filter-header__tags">тэги</div>
             <div className="filter-header__control">
                 <FilterControl
-                    isOpen={isOpen}
+                    contentOpen={contentOpen}
                     controlClickHandler={controlClickHandler}
                 />
             </div>
         </div>
 
-        {isOpen &&
-        <div className="filter-content">
-            content
-        </div>
+        {contentOpen &&
+            <FilterContent />
         }
     </div>
 );

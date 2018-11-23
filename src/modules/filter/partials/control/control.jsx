@@ -2,7 +2,7 @@ import React from 'react';
 import {noop} from 'lodash';
 
 export const FilterControl = ({
-    isOpen = false,
+    contentOpen = false,
     controlClickHandler = noop}
 ) => (
     <div>
@@ -10,7 +10,7 @@ export const FilterControl = ({
             type="button"
             onClick={() => controlClickHandler()}
         >
-            {isOpen ? 'x' : '+'}
+            {contentOpen ? 'x' : '+'}
         </button>
     </div>
 );

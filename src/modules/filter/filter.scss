@@ -1,11 +1,15 @@
+@import "../../styles/index.scss";
+
 .filter {
     display: flex;
     flex-direction: column;
 
     &-header {
+        border-bottom: solid 1px $border-line;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        padding: $base * 2 0;
 
         &__title {
             display: flex;
@@ -19,7 +23,18 @@
             display: flex;
         }
     }
+    &-content-container {
+        background: $bg-panel;
+        border: solid 1px $border-line;
+        border-top: none;
+    }
+
     &-content {
-        background: #ccc;
+        padding: $base * 2 0;
+    }
+
+    &-footer {
+        border-top: solid 1px $border-line;
+        padding: $base 0;
     }
 }
