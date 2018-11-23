@@ -10,7 +10,8 @@ export class Filter extends Component {
             m: []
         },
         // data for form rendering, values from store
-        displayData: []
+        displayData: [],
+        maxOptionsAsButtons: 6
     };
 
     state = {
@@ -38,6 +39,7 @@ export class Filter extends Component {
                 contentOpen={this.state.contentOpen}
                 controlClickHandler={this.controlClickHandler}
                 displayData={this.props.displayData}
+                {...this.props}
             />
         );
     }

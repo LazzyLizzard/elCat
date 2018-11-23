@@ -23,7 +23,9 @@ export const FilterComponent = (
         </div>
 
         {contentOpen &&
-            <FilterContent />
+            <FilterContent
+                displayData={displayData}
+            />
         }
     </div>
 );
