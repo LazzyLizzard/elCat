@@ -1,0 +1,42 @@
+@import "../../styles/index.scss";
+
+.filter {
+    display: flex;
+    flex-direction: column;
+
+    &-header {
+        border-bottom: solid 1px $border-line;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: $base * 2 0;
+
+        &__title {
+            display: flex;
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        &__tags {
+            display: flex;
+        }
+
+        &__control {
+            display: flex;
+        }
+    }
+    &-content-container {
+        background: $bg-panel;
+        border: solid 1px $border-line;
+        border-top: none;
+    }
+
+    &-content {
+        padding: $base * 2 0;
+    }
+
+    &-footer {
+        border-top: solid 1px $border-line;
+        padding: $base 0;
+    }
+}
