@@ -14,6 +14,7 @@ import {NAMESPACE} from './../reducer';
 // TODO think where import below should be
 import {toggleBoxesHandler} from '../actions';
 import {valueSelector} from './selectors';
+import {Filter} from "localResolve/modules/filter";
 
 class PickForm extends React.Component {
     componentDidMount() {
@@ -58,6 +59,15 @@ class PickForm extends React.Component {
                 <form
                     onSubmit={handleSubmit(this.onSubmitWithArgument(pathName))}
                 >
+                    <Filter
+                        contentOpen
+                        displayData={pickFormData}
+                        fillers={null}
+                    />
+
+                    <hr />
+                    <hr />
+
                     <ManufacturersList formData={pickFormData} />
                     <FormWithBoxes
                         formData={pickFormData}

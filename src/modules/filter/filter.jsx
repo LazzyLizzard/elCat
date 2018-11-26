@@ -39,7 +39,6 @@ export class Filter extends Component {
                 contentOpen={this.state.contentOpen}
                 controlClickHandler={this.controlClickHandler}
                 displayData={this.props.displayData}
-                {...this.props}
             />
         );
     }
