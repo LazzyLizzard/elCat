@@ -56,7 +56,6 @@ class PickList extends React.Component {
     }
 
     render() {
-        console.log('render');
         const {
             [NAMESPACE]: {pickListGroups, pickResult, pagination, error, pickGroupId, loader},
             ownLocation: {pathname, query}

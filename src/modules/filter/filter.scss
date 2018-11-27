@@ -42,11 +42,13 @@
 
     &-row {
         display: flex;
+        flex-direction: row;
 
         &__title {
             display: flex;
             flex: 1 1 auto;
         }
+
         &__content {
             display: flex;
             flex: 3 1 auto;
