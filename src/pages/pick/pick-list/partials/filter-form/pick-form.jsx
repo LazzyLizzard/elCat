@@ -15,6 +15,7 @@ import {NAMESPACE} from '../../../reducer';
 // TODO think where import below should be
 import {toggleBoxesHandler, resetFilterField} from '../../../actions';
 import {valueSelector} from '../../selectors';
+import {Filter} from "localResolve/modules/filter";
 
 class PickFormClass extends React.Component {
     // TODO [sf] 11.11.2018 NEEDS REFACTOR!
@@ -75,6 +76,15 @@ class PickFormClass extends React.Component {
                 <form
                     onSubmit={handleSubmit(this.onSubmitWithArgument(pathName))}
                 >
+                    <Filter
+                        contentOpen
+                        displayData={pickFormData}
+                        fillers={null}
+                    />
+
+                    <hr />
+                    <hr />
+
                     <ManufacturersList
                         formData={pickFormData}
                         fieldValues={manufacturersValues}
