@@ -13,6 +13,8 @@ export class FilterContent extends Component {
                     <FilterRow
                         title="manuf"
                         name="m"
+                        closeMenuOnSelect={false}
+                        hideSelectedOptions={false}
                         options={
                             manufList.reduce((acc, item) =>
                                 item.manufacturers_id && [...acc, {
@@ -40,7 +42,7 @@ export class FilterContent extends Component {
 
                 </div>
                 <div className="filter-footer">
-                    buttons
+                    <button type="submit">Go</button>
                 </div>
             </div>
         );

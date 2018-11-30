@@ -1,17 +1,22 @@
 import React from 'react';
 import Select, {components} from 'react-select';
+// import r from 'assests/icons/star.svg';
 
-const MultiValueContainer = (props) => {
-    console.log('props', props);
-    return (
-        <components.MultiValueContainer {...props}>
-            {props.children}
-            {props.data.featured && <React.Fragment>FEAT</React.Fragment>}
-        </components.MultiValueContainer>
-    );
-};
+const MultiValueLabel = props => (
+    <components.MultiValueLabel {...props}>
+        {props.children}
+        {props.data.featured && <React.Fragment> FEAT </React.Fragment>}
+    </components.MultiValueLabel>
+);
 
-export const FilterRow = ({title = '', options = [], name}) => {
+const Option = props => (
+    <components.Option {...props}>
+        {props.children}
+        {props.data.featured && <React.Fragment> FEAT </React.Fragment>}
+    </components.Option>
+);
+
+export const FilterRow = ({title = '', options = [], name, closeMenuOnSelect, hideSelectedOptions}) => {
     console.log('FilterRow', options);
     return (
         <div className="filter-row">
@@ -23,10 +28,12 @@ export const FilterRow = ({title = '', options = [], name}) => {
                     <Select
                         isMulti
                         placeholder=""
-                        components={{MultiValueContainer}}
+                        components={{MultiValueLabel, Option}}
                         // defaultValue={options}
                         name={name}
                         options={options}
+                        closeMenuOnSelect={closeMenuOnSelect}
+                        hideSelectedOptions={hideSelectedOptions}
                     />
                 </div>
             </div>

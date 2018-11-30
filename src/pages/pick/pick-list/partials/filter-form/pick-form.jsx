@@ -2,6 +2,7 @@ import React from 'react';
 import {reduxForm, getFormValues} from 'redux-form';
 import {connect} from 'react-redux';
 import {get} from 'lodash';
+import {Filter} from 'modules/filter';
 import {ManufacturersList} from '../filter-manufacturers/manufacturers-list';
 import {FilterTags} from './../../partials/filter-tags';
 import {FilterRows} from '../filter-rows/filter-rows';
@@ -15,7 +16,6 @@ import {NAMESPACE} from '../../../reducer';
 // TODO think where import below should be
 import {toggleBoxesHandler, resetFilterField} from '../../../actions';
 import {valueSelector} from '../../selectors';
-import {Filter} from "localResolve/modules/filter";
 
 class PickFormClass extends React.Component {
     // TODO [sf] 11.11.2018 NEEDS REFACTOR!
@@ -69,6 +69,7 @@ class PickFormClass extends React.Component {
 
         return (
             <div>
+
                 <FilterTags
                     fields={formValues}
                     // filterValues={filterValues}
@@ -79,7 +80,7 @@ class PickFormClass extends React.Component {
                     <Filter
                         contentOpen
                         displayData={pickFormData}
-                        fillers={null}
+                        filters={formValues}
                     />
 
                     <hr />

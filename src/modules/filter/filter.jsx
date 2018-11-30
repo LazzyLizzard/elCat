@@ -19,6 +19,7 @@ export class Filter extends Component {
     };
 
     componentDidMount() {
+        // eslint-disable-next-line react/no-did-mount-set-state
         this.setState({
             contentOpen: get(this.props, 'contentOpen', false)
         });
@@ -39,6 +40,7 @@ export class Filter extends Component {
                 contentOpen={this.state.contentOpen}
                 controlClickHandler={this.controlClickHandler}
                 displayData={this.props.displayData}
+                filterValues={this.props.filters}
             />
         );
     }
