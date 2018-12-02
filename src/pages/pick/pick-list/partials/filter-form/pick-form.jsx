@@ -86,10 +86,10 @@ class PickFormClass extends React.Component {
                     <hr />
                     <hr />
 
-                    <ManufacturersList
-                        formData={pickFormData}
-                        fieldValues={manufacturersValues}
-                    />
+                    {/*<ManufacturersList*/}
+                        {/*formData={pickFormData}*/}
+                        {/*fieldValues={manufacturersValues}*/}
+                    {/*/>*/}
                     <FilterRows
                         formData={pickFormData} // store values
                         boxToggleHandler={toggleBoxesHandler}

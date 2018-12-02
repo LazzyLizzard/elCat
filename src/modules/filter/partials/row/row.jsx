@@ -1,5 +1,8 @@
 import React from 'react';
 import Select, {components} from 'react-select';
+// import {ButtonCheckboxGroup} from "localResolve/components/ui/button-checkbox-group";
+// import {PICK_FORM_FILTERS} from "localResolve/pages/pick/field-names";
+import {Field} from 'redux-form';
 // import r from 'assests/icons/star.svg';
 
 const MultiValueLabel = props => (
@@ -16,6 +19,20 @@ const Option = props => (
     </components.Option>
 );
 
+
+class CustomSelect extends React.Component {
+    render() {
+        const {options, input} = this.props;
+        return (
+            <Select
+                {...this.props}
+                onChange={event => input.onChange(event)}
+                options={options}
+            />
+        );
+    }
+}
+
 export const FilterRow = ({title = '', options = [], name, closeMenuOnSelect, hideSelectedOptions}) => {
     console.log('FilterRow', options);
     return (
@@ -25,7 +42,9 @@ export const FilterRow = ({title = '', options = [], name, closeMenuOnSelect, hi
             </div>
             <div className="filter-row__content">
                 <div style={{width: '100%'}}>
-                    <Select
+                    {/* https://github.com/erikras/redux-form/issues/82#issuecomment-384791704 */}
+                    <Field
+                        component={CustomSelect}
                         isMulti
                         placeholder=""
                         components={{MultiValueLabel, Option}}

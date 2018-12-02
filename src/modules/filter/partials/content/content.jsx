@@ -26,19 +26,19 @@ export class FilterContent extends Component {
                     />
                     }
 
-                    {filters && filters.length > 0 &&
-                        filters.map(filteItem => (
-                            <FilterRow
-                                title={filteItem.prodParamsGroupName}
-                                name={filteItem.prodParamsGroupId}
-                                options={filteItem.prodParamsList.map(item => ({
-                                    label: item.parameterName,
-                                    value: item.valueId,
-                                    featured: item.featured
-                                }))}
-                            />
-                        ))
-                    }
+                    {/*{filters && filters.length > 0 &&*/}
+                        {/*filters.map(filteItem => (*/}
+                            {/*<FilterRow*/}
+                                {/*title={filteItem.prodParamsGroupName}*/}
+                                {/*name={filteItem.prodParamsGroupId}*/}
+                                {/*options={filteItem.prodParamsList.map(item => ({*/}
+                                    {/*label: item.parameterName,*/}
+                                    {/*value: item.valueId,*/}
+                                    {/*featured: item.featured*/}
+                                {/*}))}*/}
+                            {/*/>*/}
+                        {/*))*/}
+                    {/*}*/}
 
                 </div>
                 <div className="filter-footer">
