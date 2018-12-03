@@ -22,18 +22,17 @@ const Option = props => (
 
 class CustomSelect extends React.Component {
     render() {
-        const {options, input} = this.props;
+        const {input} = this.props;
         return (
             <Select
                 {...this.props}
                 onChange={event => input.onChange(event)}
-                options={options}
             />
         );
     }
 }
 
-export const FilterRow = ({title = '', options = [], name, closeMenuOnSelect, hideSelectedOptions}) => {
+export const FilterRow = ({title = '', options = [], name, closeMenuOnSelect, hideSelectedOptions, defaultValue = []}) => {
     console.log('FilterRow', options);
     return (
         <div className="filter-row">
@@ -53,6 +52,7 @@ export const FilterRow = ({title = '', options = [], name, closeMenuOnSelect, hi
                         options={options}
                         closeMenuOnSelect={closeMenuOnSelect}
                         hideSelectedOptions={hideSelectedOptions}
+                        defaultValue={defaultValue}
                     />
                 </div>
             </div>

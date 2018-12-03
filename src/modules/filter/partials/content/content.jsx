@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
+import {get} from 'lodash';
 import {FilterRow} from './../../partials/row';
 
 export class FilterContent extends Component {
     render() {
-        const {displayData: {manufList = [], filters}} = this.props;
-        console.log(filters);
+        const {filterValues = {}, displayData: {manufList = [], filters}} = this.props;
+        console.log('filterValues', get(filterValues, 'm', []));
         return (
             <div className="filter-content-container">
                 <div className="filter-content">
@@ -15,6 +16,7 @@ export class FilterContent extends Component {
                         name="m"
                         closeMenuOnSelect={false}
                         hideSelectedOptions={false}
+                        defaultValue={get(filterValues, 'm', [])}
                         options={
                             manufList.reduce((acc, item) =>
                                 item.manufacturers_id && [...acc, {

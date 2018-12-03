@@ -2,30 +2,9 @@ import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {reduxForm, formValueSelector} from 'redux-form';
-import {Filter} from 'modules/filter';
 
 const formName = 'fff';
 
-const dispData = [{
-    filters: {
-        x: [
-            {
-                label: 'a',
-                value: '444'
-            },
-            {
-                label: 'b',
-                value: '666'
-            }
-        ],
-        700: [
-            {
-                label: 'x',
-                value: 'rrr'
-            }
-        ]
-    }
-}];
 
 class ProfilePlain extends React.Component {
     render() {
@@ -36,12 +15,6 @@ class ProfilePlain extends React.Component {
                     <Link to="/profile/personal-info/">personal info</Link> |
                     <Link to="/profile/orders/">orders</Link> |
                     <Link to="/profile/address-book/">address book</Link>
-                </div>
-
-                <div>
-                    <Filter
-                        displayData={dispData}
-                    />
                 </div>
             </div>
         );

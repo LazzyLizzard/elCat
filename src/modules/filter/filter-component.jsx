@@ -7,7 +7,8 @@ export const FilterComponent = (
     {
         contentOpen,
         controlClickHandler,
-        displayData
+        displayData,
+        filterValues
     }
 ) => (
     <div className="filter">
@@ -25,6 +26,7 @@ export const FilterComponent = (
         {contentOpen &&
             <FilterContent
                 displayData={displayData}
+                filterValues={filterValues}
             />
         }
     </div>
