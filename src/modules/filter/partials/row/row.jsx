@@ -32,7 +32,14 @@ class CustomSelect extends React.Component {
     }
 }
 
-export const FilterRow = ({title = '', options = [], name, closeMenuOnSelect, hideSelectedOptions, defaultValue = []}) => {
+export const FilterRow = ({
+    title = '',
+    options = [],
+    name,
+    closeMenuOnSelect,
+    hideSelectedOptions,
+    defaultValue
+}) => {
     console.log('FilterRow', options);
     return (
         <div className="filter-row">
@@ -47,7 +54,6 @@ export const FilterRow = ({title = '', options = [], name, closeMenuOnSelect, hi
                         isMulti
                         placeholder=""
                         components={{MultiValueLabel, Option}}
-                        // defaultValue={options}
                         name={name}
                         options={options}
                         closeMenuOnSelect={closeMenuOnSelect}
