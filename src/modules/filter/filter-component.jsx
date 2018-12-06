@@ -1,6 +1,7 @@
 import React from 'react';
 import {FilterControl} from './partials/control';
 import {FilterContent} from './partials/content';
+import {FilterTags} from './partials/tags';
 import './filter.scss';
 
 export const FilterComponent = (
@@ -14,7 +15,11 @@ export const FilterComponent = (
     <div className="filter">
         <div className="filter-header">
             <div className="filter-header__title">Фильтр</div>
-            <div className="filter-header__tags">тэги</div>
+            <div className="filter-header__tags">
+                <FilterTags
+                    filterValues={filterValues}
+                />
+            </div>
             <div className="filter-header__control">
                 <FilterControl
                     contentOpen={contentOpen}
