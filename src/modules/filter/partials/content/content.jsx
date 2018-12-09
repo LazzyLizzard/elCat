@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {get} from 'lodash';
+import {Button} from 'components/ui';
 import {FilterRow} from './../../partials/row';
 
 export class FilterContent extends Component {
@@ -46,7 +47,10 @@ export class FilterContent extends Component {
 
                 </div>
                 <div className="filter-footer">
-                    <button type="submit">Go</button>
+                    <Button
+                        label="Применить"
+                        type="submit"
+                    />
                 </div>
             </div>
         );

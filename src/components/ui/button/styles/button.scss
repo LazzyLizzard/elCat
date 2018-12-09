@@ -1,0 +1,18 @@
+@import "./../../../../styles/index";
+
+.button {
+    background: $blue-ms;
+    border: none;
+    border-radius: $border-radius;
+    color: $white;
+    cursor: pointer;
+    font-family: 'Roboto', 'Arial', sans-serif;
+    font-size: $font-size-default;
+    font-weight: 500;
+    padding: $base $base * 2;
+    outline: none;
+    transition: .25s;
+    &:hover {
+        background: darken($blue-ms, 10%);
+    }
+}
