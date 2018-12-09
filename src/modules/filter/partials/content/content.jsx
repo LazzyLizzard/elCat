@@ -11,7 +11,7 @@ export class FilterContent extends Component {
             <div className="filter-content-container">
                 <div className="filter-content">
                     {manufList &&
-                    // TODO [sf] 27-Nov-18 remove .reduce after MSBG-116
+                    // TODO [sf] 27-Nov-18 remove .filter after MSBG-116
                     <FilterRow
                         title="manuf"
                         name="m"
@@ -19,12 +19,12 @@ export class FilterContent extends Component {
                         hideSelectedOptions={false}
                         defaultValue={get(filterValues, 'm', [])}
                         options={
-                            manufList.reduce((acc, item) =>
-                                item.manufacturers_id && [...acc, {
+                            manufList
+                                .filter(item => item.manufacturers_id !== false)
+                                .map(item => ({
                                     value: item.manufacturers_id,
                                     label: item.manufacturers_name
-
-                                }], [])
+                                }))
                         }
                     />
                     }

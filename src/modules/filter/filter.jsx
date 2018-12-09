@@ -30,8 +30,8 @@ export class Filter extends Component {
         this.setState(prevState => (
             {
                 contentOpen: !prevState.contentOpen
-            })
-        );
+            }
+        ));
     };
 
     render() {
