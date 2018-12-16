@@ -33,6 +33,8 @@ export const PICK_REQUEST_RESULT_ERROR = 'PICK/REQUEST_RESULT_ERROR';
 
 export const PICK_SET_PAGE_FROM_PAGINATION = 'PICK/SET_PAGE_FROM_PAGINATION';
 
+export const PICK_SET_FILTERS_DATA = 'PICK/SET_FILTERS_DATA';
+
 const baseUrl = `${getRequestEnvironment(REMOTE_HTTPS)}${ENDPOINT_PICK}`;
 
 /**
@@ -53,7 +55,13 @@ export const getOptionsByGroupId = pickGroupId => (dispatch) => {
                     pickGroupId
                 }
             });
-            dispatch(requestSuccess(PICK_REQUEST_LIST_SUCCESS, 'pickListGroups', pickGroupsList));
+            dispatch({
+                type: PICK_REQUEST_LIST_SUCCESS,
+                payload: {
+                    pickListGroups: pickGroupsList,
+                    loader: false
+                }
+            });
         })
         .catch(error => dispatch(requestError(PICK_REQUEST_LIST_ERROR, error)));
 };
@@ -187,4 +195,13 @@ export const toggleBoxesHandler = (filterGroupId) => {
 // TODO [sf] 12.11.2018 use external constants
 export const resetFilterField = fieldPostfix => (dispatch) => {
     dispatch(change('pick', `filters.${fieldPostfix}`, []));
+};
+
+export const addFilterDataToStore = filters => (dispatch) => {
+    dispatch({
+        type: PICK_SET_FILTERS_DATA,
+        payload: {
+            filters
+        }
+    });
 };

@@ -21,6 +21,7 @@ export const PICK_STATE = {
     ...{
         loader: false,
         selectedPage: 1,
-        pagination: null
+        pagination: null,
+        filters: null
     }
 };

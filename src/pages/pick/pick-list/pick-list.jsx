@@ -10,7 +10,8 @@ import {
     requestPickList,
     getOptionsByGroupId,
     resetGroupsList,
-    getPickResults
+    getPickResults,
+    addFilterDataToStore
 } from '../actions';
 import {getNameSpace, getSelectedPickResults} from './selectors';
 import {PickForm} from './partials/filter-form';
@@ -48,7 +49,16 @@ class PickListClass extends React.Component {
         }
 
         this.autoFillData = prepareAutoFillData(query);
+
+        // TODO [sf] 17.12.2018 check the situation when pickListGroups are not loaded yet
+        this.props.addFilterDataToStore(this.autoFillData);
     }
+
+
+    // TODO [sf] 17.12.2018 check the situation when pickListGroups CHANGED
+    // componentDidUpdate(prevProps) {
+    //
+    // }
 
     componentWillUnmount() {
         this.props.resetGroupsList();
@@ -103,12 +113,14 @@ export const PickList = connect(
         [NAMESPACE]: getNameSpace(NAMESPACE)(state),
         selectedPickResults: getSelectedPickResults(NAMESPACE)(state),
         ownLocation: ownProps.location
+        // TODO [sf] 17.12.2018 add initialValues basing on filters in namespace
     }),
     {
         requestPickList,
         getOptionsByGroupId,
         resetGroupsList,
         getPickResults,
+        addFilterDataToStore,
         pageNumberClick: (pageNumber) => {
             console.log(pageNumber);
         }

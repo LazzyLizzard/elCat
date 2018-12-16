@@ -11,7 +11,8 @@ import {
     PICK_REQUEST_RESULT_SUCCESS,
     PICK_REQUEST_RESULT_ERROR,
     PICK_REQUEST_GROUP_ID,
-    PICK_SET_PAGE_FROM_PAGINATION
+    PICK_SET_PAGE_FROM_PAGINATION,
+    PICK_SET_FILTERS_DATA
 } from './actions';
 
 export const NAMESPACE = 'pick';
@@ -37,6 +38,7 @@ export const pickReducer = (state = PICK_STATE, action) => {
         case PICK_REQUEST_LIST_ERROR:
         case PICK_REQUEST_LIST_RESET:
         case PICK_REQUEST_GROUP_ID:
+        case PICK_SET_FILTERS_DATA:
             return Object.assign({}, state, action.payload);
 
         case PICK_REQUEST_RESULT_START:
