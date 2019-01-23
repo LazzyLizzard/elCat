@@ -6,8 +6,8 @@ class FakeAuth extends React.PureComponent {
     render() {
         return (
             <React.Fragment>
-                <button onClick={() => this.props.login()}>fake login</button>
-                <button onClick={() => this.props.logout()}>fake logout</button>
+                <button onClick={() => this.props.fakeLogin()}>fake login</button>
+                <button onClick={() => this.props.fakeLogout()}>fake logout</button>
             </React.Fragment>
         );
     }
@@ -16,7 +16,7 @@ class FakeAuth extends React.PureComponent {
 export default connect(state => ({
     profile: state.profile
 }),
-dispatch => ({
-    login: () => dispatch(fakeLogin()),
-    logout: () => dispatch(fakeLogout())
-}))(FakeAuth);
+{
+    fakeLogin,
+    fakeLogout
+})(FakeAuth);

@@ -3,6 +3,7 @@
 @import "constants/_colors.scss";
 
 body {
+    background: $body-bg;
     box-sizing: border-box;
     font-family: 'Roboto', 'Arial', sans-serif;
     font-size: 14px;
