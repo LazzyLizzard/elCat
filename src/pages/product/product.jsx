@@ -34,7 +34,7 @@ const setFormValuesWrapped = params => (passedFunction) => {
     return passedFunction({productId, superProduct});
 };
 
-class Product extends React.PureComponent {
+class ProductClass extends React.PureComponent {
     componentDidMount() {
         const {
             location: {pathname, state: locationState},
@@ -158,7 +158,7 @@ class Product extends React.PureComponent {
     }
 }
 
-export default connect(
+export const Product = connect(
     state => ({
         [NAMESPACE]: state[NAMESPACE],
         profile: state.profile,
@@ -175,4 +175,4 @@ export default connect(
         addToCart,
         setFormValuesOnChangeId
     }
-)(Product);
+)(ProductClass);

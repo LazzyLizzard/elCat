@@ -14,7 +14,7 @@ export const getRootData = memoize(nameSpace => createSelector(
 );
 
 export const getProductFamily = createSelector(
-    getNameSpace(),
+    getNameSpace,
     productInfo => get(productInfo, [
         PRODUCT_FAMILY_FIELDS[BROTHERS],
         PRODUCT_FAMILY_FIELDS[DESCENDANTS]

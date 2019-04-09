@@ -32,14 +32,14 @@ export class FilterContent extends Component {
                     {filters && filters.length > 0 &&
                     filters.map(filterItem => (
                         <FilterRow
-                            title={`${filterItem.prodParamsGroupName} [${filterItem.prodParamsGroupId}]`}
-                            name={filterItem.prodParamsGroupId}
+                            title={filterItem.label}
+                            name={filterItem.id}
                             closeMenuOnSelect={false}
                             hideSelectedOptions={false}
-                            defaultValue={get(filterValues, `[${filterItem.prodParamsGroupId}]`, [])}
-                            options={filterItem.prodParamsList.map(item => ({
-                                label: item.parameterName,
-                                value: item.valueId,
+                            defaultValue={get(filterValues, `[${filterItem.id}]`, [])}
+                            options={filterItem.data.map(item => ({
+                                label: item.label,
+                                value: item.value,
                                 featured: item.featured
                             }))}
                         />

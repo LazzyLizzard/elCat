@@ -90,12 +90,12 @@ class PickFormClass extends React.Component {
                         {/*formData={pickFormData}*/}
                         {/*fieldValues={manufacturersValues}*/}
                     {/*/>*/}
-                    <FilterRows
-                        formData={pickFormData} // store values
-                        boxToggleHandler={toggleBoxesHandler}
-                        filterFieldValues={filterValues}
-                        resetFiltersGroup={this.props.resetFilterField}
-                    />
+                    {/*<FilterRows*/}
+                        {/*formData={pickFormData} // store values*/}
+                        {/*boxToggleHandler={toggleBoxesHandler}*/}
+                        {/*filterFieldValues={filterValues}*/}
+                        {/*resetFiltersGroup={this.props.resetFilterField}*/}
+                    {/*/>*/}
 
                     <div>
                         <button type="submit" disabled={submitting}>Submit</button>

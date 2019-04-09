@@ -1,13 +1,12 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
-import {map} from 'lodash';
 import {Link} from 'react-router';
 import {NAMESPACE} from '../reducer';
 
-export const PickGroups = ({pickGroupsList}) => (
+export const PickGroups = ({pickGroupsList} = []) => (
     <div>
         {
-            map(pickGroupsList, group => (
+            pickGroupsList.map(group => (
                 <div key={group.groupNameTransformed}>
                     <Link
                         to={`/${NAMESPACE}/${group.groupNameTransformed}/`}
@@ -33,5 +32,5 @@ export const PickGroups = ({pickGroupsList}) => (
 // };
 
 PickGroups.defaultProps = {
-    pickGroupsList: {}
+    pickGroupsList: []
 };
