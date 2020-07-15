@@ -47,7 +47,7 @@
     "css-selector-tokenizer": "^0.7.0",
     "eslint-config-airbnb": "^15.1.0",
     "extract-text-webpack-plugin": "^3.0.2",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.19",
     "prop-types": "^15.6.0",
     "query-string": "^5.1.0",
     "react": "^16.4.0",
